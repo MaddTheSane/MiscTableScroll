@@ -38,9 +38,8 @@
 #pragma implementation
 #endif
 #include "MiscDelegateFlags.h"
-extern "Objective-C" {
 #import <Foundation/NSObject.h>
-}
+#include <cstring>
 extern "C" {
 #include <string.h>	// memset()
 }
@@ -113,49 +112,49 @@ static SEL const* const SELECTORS[ MiscDelegateFlags::MAX_DEL_ENUM ] =
 // selToObjc
 //-----------------------------------------------------------------------------
 SEL MiscDelegateFlags::selToObjc( Selector s )
-    {
+{
     return *SELECTORS[s];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // objcToSel
 //-----------------------------------------------------------------------------
 MiscDelegateFlags::Selector MiscDelegateFlags::objcToSel( SEL s )
-    {
+{
     for (unsigned int i = 0; i < MAX_DEL_ENUM; i++)
-	if (s == *SELECTORS[i])
-	    return (Selector)i;
+        if (s == *SELECTORS[i])
+            return (Selector)i;
     return BAD_DEL_ENUM;
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // setDelegate
 //-----------------------------------------------------------------------------
 void MiscDelegateFlags::setDelegate( id d )
-    {
+{
     if (d == 0)
-	memset( set, 0, SET_SIZE );
+        memset( set, 0, SET_SIZE );
     else
-	{
-	for (unsigned int i = 0; i < MAX_DEL_ENUM; i++)
-	    {
-	    unsigned char& byte = set[ BYTE_NUM(i) ];
-	    unsigned char const mask = BIT_MASK(i);
-	    if ([d respondsToSelector:(*SELECTORS[i])])
-		byte |= mask;
-	    else
-		byte &= ~mask;
-	    }
-	}
+    {
+        for (unsigned int i = 0; i < MAX_DEL_ENUM; i++)
+        {
+            unsigned char& byte = set[ BYTE_NUM(i) ];
+            unsigned char const mask = BIT_MASK(i);
+            if ([d respondsToSelector:(*SELECTORS[i])])
+                byte |= mask;
+            else
+                byte &= ~mask;
+        }
     }
+}
 
 
 //-----------------------------------------------------------------------------
 // respondsTo
 //-----------------------------------------------------------------------------
 bool MiscDelegateFlags::respondsTo( Selector s ) const
-    {
+{
     return ((set[ BYTE_NUM(s) ] & BIT_MASK(s)) != 0);
-    }
+}

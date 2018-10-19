@@ -35,8 +35,6 @@
 #import "MiscMouseTracker.h"
 
 @interface MiscRadioTracker : MiscMouseTracker
-    {
-    }
 
 - (void) mouseDown:(NSEvent*) event atPos: (MiscCoord_V) pos;
 - (void) mouseDragged:(NSEvent*) event atPos: (MiscCoord_V) pos;

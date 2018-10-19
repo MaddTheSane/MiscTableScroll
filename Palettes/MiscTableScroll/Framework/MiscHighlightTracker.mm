@@ -45,47 +45,47 @@
 // mouseDown:atPos:
 //-----------------------------------------------------------------------------
 - (void) mouseDown:(NSEvent*) event atPos:(MiscCoord_V)pos
-    {
+{
     extending = (([event modifierFlags] & NSAlternateKeyMask) != 0);
     if (extending)
-	{
-	[super mouseDown: event atPos: pos];
-	}
-    else
-	{
-	border->toggle( pos );
-	lastPos = pos;
-	}
+    {
+        [super mouseDown: event atPos: pos];
     }
+    else
+    {
+        border->toggle( pos );
+        lastPos = pos;
+    }
+}
 
 
 //-----------------------------------------------------------------------------
 // mouseDragged:atPos:
 //-----------------------------------------------------------------------------
 - (void) mouseDragged:(NSEvent*) event atPos:(MiscCoord_V)pos
-    {
+{
     if (extending)
-	{
-	[super mouseDragged: event atPos: pos];
-	}
-    else
-	{
-	if (border->goodPos( lastPos ))
-	    border->toggle( lastPos );
-	if (border->goodPos( pos ))
-	    border->toggle( pos );
-	lastPos = pos;
-	}
+    {
+        [super mouseDragged: event atPos: pos];
     }
+    else
+    {
+        if (border->goodPos( lastPos ))
+            border->toggle( lastPos );
+        if (border->goodPos( pos ))
+            border->toggle( pos );
+        lastPos = pos;
+    }
+}
 
 
 //-----------------------------------------------------------------------------
 // mouseUp:atPos:
 //-----------------------------------------------------------------------------
 - (void) mouseUp:(NSEvent*) event atPos:(MiscCoord_V)pos
-    {
+{
     if (extending)
-	[super mouseUp: event atPos: pos];
-    }
+        [super mouseUp: event atPos: pos];
+}
 
 @end

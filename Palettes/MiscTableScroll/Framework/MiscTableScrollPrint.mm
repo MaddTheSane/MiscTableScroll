@@ -40,12 +40,9 @@
 #import "MiscDelegateFlags.h"
 #import "MiscTableView.h"
 #import "MiscBorderView.h"
-
-extern "Objective-C" {
 #import	<AppKit/NSApplication.h>
 #import	<AppKit/NSPrintInfo.h>
 #import	<AppKit/NSPrintPanel.h>
-}
 
 
 //=============================================================================
@@ -64,47 +61,47 @@ extern "Objective-C" {
 // dumpPrintInfo:
 //-----------------------------------------------------------------------------
 - (void)dumpPrintInfo:(NSPrintInfo*)pinfo
-    {
+{
     fprintf( stderr, "printInfo=%p\n", pinfo );
     fprintf( stderr, "paperType:[%s]\n", [[pinfo paperName] cString] );
     fprintf( stderr, "paperSize:%s\n",
-	[NSStringFromSize([pinfo paperSize]) cString] );
+            [NSStringFromSize([pinfo paperSize]) cString] );
     fprintf( stderr, "margins: left=%g right=%g top=%g bottom=%g\n",
-	[pinfo leftMargin], [pinfo rightMargin],
-	[pinfo topMargin], [pinfo bottomMargin] );
+            [pinfo leftMargin], [pinfo rightMargin],
+            [pinfo topMargin], [pinfo bottomMargin] );
     fprintf( stderr, "scalingFactor=%g\n",
-	[[[pinfo dictionary] objectForKey:NSPrintScalingFactor] floatValue] );
+            [[[pinfo dictionary] objectForKey:NSPrintScalingFactor] floatValue] );
     fprintf( stderr, "orientation=%d\n", (int)[pinfo orientation] );
     fprintf( stderr, "isHorizontallyCentered=%d\n",
-	(int)[pinfo isHorizontallyCentered] );
+            (int)[pinfo isHorizontallyCentered] );
     fprintf( stderr, "isVerticallyCentered=%d\n",
-	(int)[pinfo isVerticallyCentered] );
+            (int)[pinfo isVerticallyCentered] );
     fprintf( stderr, "horizontalPagination=%d\n",
-	[pinfo horizontalPagination] );
+            [pinfo horizontalPagination] );
     fprintf( stderr, "verticalPagination=%d\n",
-	[pinfo verticalPagination] );
+            [pinfo verticalPagination] );
     fprintf( stderr, "isAllPages=%d\n",
-	(int)[[[pinfo dictionary] objectForKey:NSPrintAllPages] boolValue] );
+            (int)[[[pinfo dictionary] objectForKey:NSPrintAllPages] boolValue] );
     fprintf( stderr, "firstPage=%d\n",
-	[[[pinfo dictionary] objectForKey:NSPrintFirstPage] intValue] );
+            [[[pinfo dictionary] objectForKey:NSPrintFirstPage] intValue] );
     fprintf( stderr, "lastPage=%d\n",
-	[[[pinfo dictionary] objectForKey:NSPrintLastPage] intValue] );
+            [[[pinfo dictionary] objectForKey:NSPrintLastPage] intValue] );
     fprintf( stderr, "copies=%d\n",
-	[[[pinfo dictionary] objectForKey:NSPrintCopies] intValue] );
+            [[[pinfo dictionary] objectForKey:NSPrintCopies] intValue] );
     fprintf( stderr, "pagesPerSheet=%d\n",
-	[[[pinfo dictionary] objectForKey:NSPrintPagesPerSheet] intValue] );
+            [[[pinfo dictionary] objectForKey:NSPrintPagesPerSheet] intValue] );
     fprintf( stderr, "reversePageOrder=%d\n",
-	[[[pinfo dictionary] objectForKey:NSPrintReversePageOrder] boolValue]);
+            [[[pinfo dictionary] objectForKey:NSPrintReversePageOrder] boolValue]);
     // There are also job features...
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // print:
 //-----------------------------------------------------------------------------
 - (void)print:(id)sender
-    {
+{
     [tableView print:sender];
-    }
+}
 
 @end

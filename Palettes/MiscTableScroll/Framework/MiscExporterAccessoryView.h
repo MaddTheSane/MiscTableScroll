@@ -34,14 +34,12 @@
 //  Revision 1.3  97/03/10  10:28:46  sunshine
 //  v113.1: For OpenStep conformance, many 'col' methods rename to 'column'.
 //-----------------------------------------------------------------------------
-extern "Objective-C" {
 #import	<Foundation/NSObject.h>
-}
 #import <MiscTableScroll/MiscExporter.h>
 @class NSBox, NSPopUpButton, NSView, NSWindow;
 
 @interface MiscExporterAccessoryView : NSObject
-	{
+{
 	NSWindow*	window;
 	NSPopUpButton*	formatPop;
 	NSPopUpButton*	rowTitlePop;
@@ -53,7 +51,7 @@ extern "Objective-C" {
 	NSBox*		colTitleBox;
 	NSBox*		rowGridBox;
 	NSBox*		colGridBox;
-	}
+}
 
 - (MiscExporterAccessoryView*)
 	initWithFormat:(MiscExportFormat)format

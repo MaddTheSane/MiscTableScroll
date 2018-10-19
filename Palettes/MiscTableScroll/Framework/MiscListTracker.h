@@ -36,10 +36,10 @@
 #import "MiscMouseTracker.h"
 
 @interface MiscListTracker : MiscMouseTracker
-    {
+{
     MiscCoord_V anchor;
     BOOL deselecting;
-    }
+}
 
 - (void) mouseDown:(NSEvent*) event atPos: (MiscCoord_V) pos;
 - (void) mouseDragged:(NSEvent*) event atPos: (MiscCoord_V) pos;

@@ -43,7 +43,7 @@
 //  v125.9: MISC_TABLE_CELL_ICON --> MISC_TABLE_CELL_IMAGE.
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus
-# define MISC_TS_EXTERN_BEGIN(X)	extern X {
+# define MISC_TS_EXTERN_BEGIN(X)	extern "C" {
 # define MISC_TS_EXTERN_END		}
 # define MISC_TS_CLASS_DEF(X)		class X
 #else
@@ -183,10 +183,10 @@ typedef int MiscCoord_P;	// Physical coordinate.
 #define MISC_MAX_PIXELS_SIZE	((MiscPixels) 0x7FFF0000)
 
 typedef enum
-    {
+{
     MISC_COL_BORDER,
     MISC_ROW_BORDER
-    } MiscBorderType;
+} MiscBorderType;
 
 #define	MISC_MAX_BORDER	MISC_ROW_BORDER
 #define	MISC_OTHER_BORDER(B) \
@@ -194,53 +194,53 @@ typedef enum
 
 
 typedef struct
-	{
-	NSSize		page_size;	// [NSPrintInfo paperSize]
-	NSRect		print_rect;	// MiscTableView rect.
-	MiscCoord_V	first_print_row;// one's comp if started on prev page.
-	MiscCoord_V	last_print_row;	// one's comp if ends on later page.
-	MiscCoord_V	first_print_col;// one's comp if started on prev page.
-	MiscCoord_V	last_print_col;	// one's comp if ends on later page.
-	int		print_page;	// 1 <= print_page <= num_print_pages
-	int		print_row;	// 1 <= print_row <= num_print_rows
-	int		print_col;	// 1 <= print_col <= num_print_cols
-	int		num_print_pages;
-	int		num_print_rows;
-	int		num_print_cols;
-	double		scale_factor;
-	BOOL		is_scaled;
-	} MiscTablePrintInfo;
+{
+    NSSize		page_size;	// [NSPrintInfo paperSize]
+    NSRect		print_rect;	// MiscTableView rect.
+    MiscCoord_V	first_print_row;// one's comp if started on prev page.
+    MiscCoord_V	last_print_row;	// one's comp if ends on later page.
+    MiscCoord_V	first_print_col;// one's comp if started on prev page.
+    MiscCoord_V	last_print_col;	// one's comp if ends on later page.
+    int		print_page;	// 1 <= print_page <= num_print_pages
+    int		print_row;	// 1 <= print_row <= num_print_rows
+    int		print_col;	// 1 <= print_col <= num_print_cols
+    int		num_print_pages;
+    int		num_print_rows;
+    int		num_print_cols;
+    double		scale_factor;
+    BOOL		is_scaled;
+} MiscTablePrintInfo;
 
 
 typedef enum
-    {
+{
     MISC_NO_TITLE,		// No titles on row/col cells.
     MISC_NUMBER_TITLE,		// Titles are sequential numbers.
     MISC_ALPHA_TITLE,		// Titles are sequential alphabetics...
     MISC_CUSTOM_TITLE,		// Titles are user-supplied strings...
     MISC_DELEGATE_TITLE		// Ask the delegate for titles.
-    } MiscTableTitleMode;
+} MiscTableTitleMode;
 
 #define	MISC_MAX_TITLE	MISC_DELEGATE_TITLE
 
 
 typedef enum
-    {
+{
     MISC_LIST_MODE,
     MISC_RADIO_MODE,
     MISC_HIGHLIGHT_MODE
-    } MiscSelectionMode;
+} MiscSelectionMode;
 
 #define	MISC_MAX_MODE	MISC_HIGHLIGHT_MODE
 
 
 typedef enum
-    {
+{
     MISC_TABLE_CELL_TEXT,
     MISC_TABLE_CELL_IMAGE,
     MISC_TABLE_CELL_BUTTON,
     MISC_TABLE_CELL_CALLBACK
-    } MiscTableCellStyle;
+} MiscTableCellStyle;
 
 #define MISC_TABLE_CELL_MAX	MISC_TABLE_CELL_CALLBACK
 
@@ -250,31 +250,31 @@ typedef enum
 
 
 typedef enum
-    {
+{
     MISC_NUSER_NSPRINGY_SIZING,
     MISC_NUSER_SPRINGY_SIZING,
     MISC_USER_NSPRINGY_SIZING,
     MISC_USER_SPRINGY_SIZING,
-    } MiscTableSizing;
+} MiscTableSizing;
 
 #define	MISC_MAX_SIZING	MISC_USER_SPRINGY_SIZING
 
 
 typedef enum
-    {
+{
     MISC_SORT_ASCENDING,
     MISC_SORT_DESCENDING
-    } MiscSortDirection;
+} MiscSortDirection;
 
 #define	MISC_SORT_DIR_MAX	MISC_SORT_DESCENDING
 
 #define	MISC_OTHER_DIRECTION(D)\
-	((D) == MISC_SORT_DESCENDING ? \
-	MISC_SORT_ASCENDING : MISC_SORT_DESCENDING)
+((D) == MISC_SORT_DESCENDING ? \
+MISC_SORT_ASCENDING : MISC_SORT_DESCENDING)
 
 
 typedef enum				// Selector used to get data:
-    {
+{
     MISC_SORT_STRING_CASE_INSENSITIVE,	//  0 -stringValue
     MISC_SORT_STRING_CASE_SENSITIVE,	//  1 -stringValue
     MISC_SORT_INT,			//  2 -intValue
@@ -288,7 +288,7 @@ typedef enum				// Selector used to get data:
     MISC_SORT_TITLE_CASE_SENSITIVE,	// 10 -title
     MISC_SORT_STATE,			// 11 -state
     MISC_SORT_UNSIGNED_STATE,		// 12 -state
-    } MiscSortType;
+} MiscSortType;
 
 #define	MISC_SORT_TYPE_MAX	MISC_SORT_UNSIGNED_STATE
 #define	MISC_SORT_CUSTOM	((MiscSortType)(int(MISC_SORT_TYPE_MAX) + 1))
@@ -490,12 +490,12 @@ MISC_TS_TYPE_AT( double, DOUBLE )		// MISC_TS_DOUBLE_AT
 MISC_TS_TYPE_AT( NSString*, STRING )		// MISC_TS_STRING_AT
 
 typedef union
-	{
-	MISC_TS_INT_AT		i;
-	MISC_TS_FLOAT_AT	f;
-	MISC_TS_DOUBLE_AT	d;
-	MISC_TS_STRING_AT	s;
-	} MISC_TS_VAL_AT_FUNC;
+{
+    MISC_TS_INT_AT		i;
+    MISC_TS_FLOAT_AT	f;
+    MISC_TS_DOUBLE_AT	d;
+    MISC_TS_STRING_AT	s;
+} MISC_TS_VAL_AT_FUNC;
 
 
 //-----------------------------------------------------------------------------
@@ -515,12 +515,12 @@ MISC_TS_TYPE_VAL( double, DOUBLE )		// MISC_TS_DOUBLE_VAL
 MISC_TS_TYPE_VAL( NSString*, STRING )		// MISC_TS_STRING_VAL
 
 typedef union
-	{
-	MISC_TS_INT_VAL		i;
-	MISC_TS_FLOAT_VAL	f;
-	MISC_TS_DOUBLE_VAL	d;
-	MISC_TS_STRING_VAL	s;
-	} MISC_TS_VAL_FUNC;
+{
+    MISC_TS_INT_VAL		i;
+    MISC_TS_FLOAT_VAL	f;
+    MISC_TS_DOUBLE_VAL	d;
+    MISC_TS_STRING_VAL	s;
+} MISC_TS_VAL_FUNC;
 
 
 
@@ -529,30 +529,30 @@ typedef union
 // *** WARNING ***
 
 struct MiscEntrySortInfo
-	{
-	int slot;
-	int ascending;
-	MISC_TS_VAL_AT_FUNC value_func;
-	id  value_target;
-	SEL value_sel;
-	id  value_obj;
-	IMP cell_at_func;
-	id  cell_class;
-	SEL cell_sel;
-	MISC_TS_VAL_FUNC cell_func;
-	MiscSortType sort_type;
-	MiscCompareEntryFunc compare_func;
-	};
+{
+    int slot;
+    int ascending;
+    MISC_TS_VAL_AT_FUNC value_func;
+    id  value_target;
+    SEL value_sel;
+    id  value_obj;
+    IMP cell_at_func;
+    id  cell_class;
+    SEL cell_sel;
+    MISC_TS_VAL_FUNC cell_func;
+    MiscSortType sort_type;
+    MiscCompareEntryFunc compare_func;
+};
 
 
 struct MiscSlotSortInfo
-	{
-	MiscTableScroll* table_scroll;
-	NSZone* zone;
-	MiscBorderType border_type;
-	int num_entries;
-	MiscEntrySortInfo const* entry_info;
-	BOOL need_copy;
-	};
+{
+    MiscTableScroll* table_scroll;
+    NSZone* zone;
+    MiscBorderType border_type;
+    int num_entries;
+    MiscEntrySortInfo const* entry_info;
+    BOOL need_copy;
+};
 
 #endif // __MiscTableTypes_h

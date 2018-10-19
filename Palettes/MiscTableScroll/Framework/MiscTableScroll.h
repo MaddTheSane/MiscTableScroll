@@ -958,7 +958,7 @@ typedef struct MiscBorderInfo
 
 // NOTIFICATIONS --------------------------------------------------------------
 #define MISC_NOTIFICATION(Q) \
-    MISC_TABLE_SCROLL_EXTERN NSString* const MiscTableScroll##Q##Notification
+    MISC_TABLE_SCROLL_EXTERN NSNotificationName const MiscTableScroll##Q##Notification
 
 MISC_NOTIFICATION( SlotDragged );
 MISC_NOTIFICATION( SlotSortReversed );

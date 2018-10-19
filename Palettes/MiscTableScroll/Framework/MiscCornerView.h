@@ -30,15 +30,13 @@
 //  Revision 1.2  96/04/30  05:38:38  sunshine
 //  Ported to OpenStep 4.0 for Mach PR2.
 //-----------------------------------------------------------------------------
-extern "Objective-C" {
 #import <AppKit/NSView.h>
-}
 @class MiscBorderCell;
 
 @interface MiscCornerView : NSView
-    {
+{
     MiscBorderCell* theCell;
-    }
+}
 
 - (NSString*)title;
 - (void)setTitle:(NSString*)s;

@@ -36,18 +36,16 @@
 //  as one does with mouse events rather than the behavior being different
 //  for keyboard events).  Ditched -keyDown:atPos: method.
 //-----------------------------------------------------------------------------
-extern "Objective-C" {
 #import <Foundation/NSObject.h>
-}
 #import <MiscTableScroll/MiscTableTypes.h>
 
 class MiscTableBorder;
 @class NSEvent;
 
 @interface MiscMouseTracker : NSObject
-    {
+{
     MiscTableBorder* border;
-    }
+}
 
 - (id)initBorder:(MiscTableBorder*)border;
 - (void)mouseDown:(NSEvent*)event atPos:(MiscCoord_V)pos;

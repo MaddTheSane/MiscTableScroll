@@ -49,63 +49,63 @@ extern "C" {
 // Constructor
 //-----------------------------------------------------------------------------
 MiscRectColorList::MiscRectColorList()
-    {
+{
     num_rects = 0;
     max_rects = 16;				// NOTE *1*
     rects = (NSRect*) malloc( max_rects * sizeof(*rects) * 2 );
     colors = (int*) malloc( max_rects * sizeof(*colors) );
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // Destructor
 //-----------------------------------------------------------------------------
 MiscRectColorList::~MiscRectColorList()
-    {
+{
     free( rects );
     free( colors );
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // append
 //-----------------------------------------------------------------------------
 void MiscRectColorList::append( NSRect r, NSColor* c )
-    {
+{
     if (num_rects >= max_rects)
-	{
-	max_rects += max_rects;					// NOTE *1*
-	rects = (NSRect*) realloc( rects, max_rects * sizeof(*rects) * 2 );
-	colors = (int*) realloc( colors, max_rects * sizeof(*colors) );
-	}
+    {
+        max_rects += max_rects;					// NOTE *1*
+        rects = (NSRect*) realloc( rects, max_rects * sizeof(*rects) * 2 );
+        colors = (int*) realloc( colors, max_rects * sizeof(*colors) );
+    }
     rects[ num_rects ] = r;
     colors[ num_rects ] = color_list.store( c );
     num_rects++;
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // draw
 //-----------------------------------------------------------------------------
 void MiscRectColorList::draw()
-    {
+{
     int const num_colors = color_list.count();
     if (num_colors > 0)
-	{
-	NSRect* const v = rects + num_rects;	// NOTE *1*
+    {
+        NSRect* const v = rects + num_rects;	// NOTE *1*
 
-	for (int i = 0; i < num_colors; i++)
-	    {
-	    int vj = 0;
-	    
-	    for (int j = 0; j < num_rects; j++)
-		if (colors[j] == i)
-		    v[vj++] = rects[j];
+        for (int i = 0; i < num_colors; i++)
+        {
+            int vj = 0;
 
-	    [color_list[i] set];
-	    NSRectFillList( v, vj );
-	    }
+            for (int j = 0; j < num_rects; j++)
+                if (colors[j] == i)
+                    v[vj++] = rects[j];
+            
+            [color_list[i] set];
+            NSRectFillList( v, vj );
+        }
 
-	empty();
-	}
+        empty();
     }
+}

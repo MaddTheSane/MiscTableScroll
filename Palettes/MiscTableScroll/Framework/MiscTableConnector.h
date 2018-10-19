@@ -37,10 +37,10 @@
 #import	"NSNibConnector.h"
 
 @interface MiscTableConnector : NSNibControlConnector
-    {
+{
     NSString* outletName;	// Name of the "target" outlet.
     NSString* actionName;	// Name of the "action" variable.
-    }
+}
 
 - (id)initWithCoder:(NSCoder*)coder;
 - (void)dealloc;

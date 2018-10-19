@@ -43,28 +43,28 @@ extern "C" {
 // Destructor
 //-----------------------------------------------------------------------------
 MiscColorList::~MiscColorList()
-    {
+{
     [colors release];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // Constructor
 //-----------------------------------------------------------------------------
 MiscColorList::MiscColorList()
-    {
+{
     colors = [[NSMutableArray alloc] init];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // store
 //-----------------------------------------------------------------------------
 int MiscColorList::store( NSColor* c )
-    {
+{
     for (int i = count(); i-- > 0; )
-	if ([c isEqual:nth(i)])
-	    return i;
+        if ([c isEqual:nth(i)])
+            return i;
     [colors addObject:c];
     return (count() - 1);
-    }
+}

@@ -35,25 +35,25 @@
 //-----------------------------------------------------------------------------
 
 class MiscTracer
-	{
+{
 private:
-static	int TRACE_DEPTH;
-	char const* msg;
-	void dump( char const* ) const;
+    static	int TRACE_DEPTH;
+    char const* msg;
+    void dump( char const* ) const;
 public:
-	MiscTracer( char const* s ): msg(s)
-	    {
-	    dump( "->" );
-	    TRACE_DEPTH += 2;
-	    }
-	~MiscTracer()
-	    {
-	    TRACE_DEPTH -= 2;
-	    dump( "<-" );
-	    }
-	void foo() const {}	// compiler muffler
-static	int get_depth()		{ return TRACE_DEPTH; }
-	};
+    MiscTracer( char const* s ): msg(s)
+    {
+        dump( "->" );
+        TRACE_DEPTH += 2;
+    }
+    ~MiscTracer()
+    {
+        TRACE_DEPTH -= 2;
+        dump( "<-" );
+    }
+    void foo() const {}	// compiler muffler
+    static	int get_depth()		{ return TRACE_DEPTH; }
+};
 
 
 #ifdef TRACE_ON

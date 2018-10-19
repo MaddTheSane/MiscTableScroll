@@ -34,9 +34,7 @@
 //  Revision 1.8  97/03/10  10:11:39  sunshine
 //  v113.1: Added -setFrameHeight:.  Added missing (id) to -initWithFrame:.
 //-----------------------------------------------------------------------------
-extern "Objective-C" {
 #import <AppKit/NSView.h>
-}
 #import <MiscTableScroll/MiscTableTypes.h>
 class MiscSparseSet;
 class MiscTableBorder;
@@ -45,7 +43,7 @@ class MiscTableBorder;
 enum MiscBorderViewType { MISC_COL_BORDER_VIEW, MISC_ROW_BORDER_VIEW };
 
 @interface MiscBorderView : NSView
-    {
+{
     MiscTableScroll*	scroll;
     MiscTableBorder*	info;
     MiscBorderCell*	theCell;
@@ -53,7 +51,7 @@ enum MiscBorderViewType { MISC_COL_BORDER_VIEW, MISC_ROW_BORDER_VIEW };
     MiscSparseSet*	oldSel;
     MiscCoord_V		togglePos;
     BOOL		isHorz;
-    }
+}
 
 - (id)initWithFrame:(NSRect)frameRect
      scroll:(MiscTableScroll*)scroll

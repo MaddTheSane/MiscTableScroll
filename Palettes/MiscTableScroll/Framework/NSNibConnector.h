@@ -45,9 +45,7 @@
 // Revision 1.3  1997/06/18 09:53:53  sunshine
 // v125.9: Renamed: IBConnector.h --> NSIBConnector.h.  Commented & updated.
 //-----------------------------------------------------------------------------
-extern "Objective-C" {
 #import <InterfaceBuilder/InterfaceBuilder.h>
-}
 
 #if !defined(FOUNDATION_STATIC_INLINE) // Key off macro new to YellowBox.
 #define MISC_OLD_IB_CONNECTORS
@@ -62,11 +60,11 @@ extern "Objective-C" {
 #define NSNibControlConnector NSIBControlConnector
 
 @interface NSNibConnector : NSObject<IBConnectors>
-    {
+{
     id source;
     id destination;
     NSString* label;
-    }
+}
 
 - (id)initWithCoder:(NSCoder*)coder;
 - (void)encodeWithCoder:(NSCoder*)coder;

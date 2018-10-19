@@ -21,7 +21,6 @@
 		55B437A62179B2AF005ABAA2 /* MiscTracer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B437512179B2A8005ABAA2 /* MiscTracer.mm */; };
 		55B437A72179B2AF005ABAA2 /* MiscTableConnector.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B437522179B2A8005ABAA2 /* MiscTableConnector.h */; };
 		55B437A82179B2AF005ABAA2 /* MiscListTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B437532179B2A8005ABAA2 /* MiscListTracker.h */; };
-		55B437A92179B2AF005ABAA2 /* new.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B437542179B2A8005ABAA2 /* new.h */; };
 		55B437AA2179B2AF005ABAA2 /* MiscTableScrollPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B437552179B2A8005ABAA2 /* MiscTableScrollPrivate.h */; };
 		55B437AB2179B2AF005ABAA2 /* MiscExporterPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B437562179B2A8005ABAA2 /* MiscExporterPrivate.h */; };
 		55B437AC2179B2AF005ABAA2 /* MiscExporterASCII.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B437572179B2A8005ABAA2 /* MiscExporterASCII.mm */; };
@@ -48,7 +47,6 @@
 		55B437C12179B2AF005ABAA2 /* MiscCornerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B4376C2179B2AA005ABAA2 /* MiscCornerView.h */; };
 		55B437C22179B2AF005ABAA2 /* MiscSortDescendH.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55B4376D2179B2AA005ABAA2 /* MiscSortDescendH.tiff */; };
 		55B437C32179B2AF005ABAA2 /* MiscRectList.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B4376E2179B2AA005ABAA2 /* MiscRectList.h */; };
-		55B437C42179B2AF005ABAA2 /* MiscTableConnector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B4376F2179B2AA005ABAA2 /* MiscTableConnector.mm */; };
 		55B437C52179B2AF005ABAA2 /* MiscDrawList.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B437702179B2AB005ABAA2 /* MiscDrawList.mm */; };
 		55B437C62179B2AF005ABAA2 /* MiscMouseTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B437712179B2AB005ABAA2 /* MiscMouseTracker.h */; };
 		55B437C72179B2AF005ABAA2 /* MiscRectColorList.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B437722179B2AB005ABAA2 /* MiscRectColorList.mm */; };
@@ -117,7 +115,6 @@
 		55B437512179B2A8005ABAA2 /* MiscTracer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscTracer.mm; sourceTree = "<group>"; };
 		55B437522179B2A8005ABAA2 /* MiscTableConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscTableConnector.h; sourceTree = "<group>"; };
 		55B437532179B2A8005ABAA2 /* MiscListTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscListTracker.h; sourceTree = "<group>"; };
-		55B437542179B2A8005ABAA2 /* new.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = new.h; sourceTree = "<group>"; };
 		55B437552179B2A8005ABAA2 /* MiscTableScrollPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscTableScrollPrivate.h; sourceTree = "<group>"; };
 		55B437562179B2A8005ABAA2 /* MiscExporterPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscExporterPrivate.h; sourceTree = "<group>"; };
 		55B437572179B2A8005ABAA2 /* MiscExporterASCII.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscExporterASCII.mm; sourceTree = "<group>"; };
@@ -315,7 +312,6 @@
 				55B437652179B2A9005ABAA2 /* MiscTracer.h */,
 				55B437512179B2A8005ABAA2 /* MiscTracer.mm */,
 				55B4379C2179B2AF005ABAA2 /* MiscVertResizeCursor.tiff */,
-				55B437542179B2A8005ABAA2 /* new.h */,
 				55B4378A2179B2AD005ABAA2 /* NSNibConnector.h */,
 				55B4373C2179B0E4005ABAA2 /* Info.plist */,
 			);
@@ -343,7 +339,6 @@
 				55B437C62179B2AF005ABAA2 /* MiscMouseTracker.h in Headers */,
 				55B437A72179B2AF005ABAA2 /* MiscTableConnector.h in Headers */,
 				55B437ED2179B2AF005ABAA2 /* MiscTableWell.h in Headers */,
-				55B437A92179B2AF005ABAA2 /* new.h in Headers */,
 				55B437CB2179B2AF005ABAA2 /* MiscExporterAccessoryView.h in Headers */,
 				55B437BA2179B2AF005ABAA2 /* MiscTracer.h in Headers */,
 				55B4373D2179B0E4005ABAA2 /* MiscTableScroll.h in Headers */,
@@ -459,7 +454,6 @@
 				55B437CF2179B2AF005ABAA2 /* MiscRowView.mm in Sources */,
 				55B437D22179B2AF005ABAA2 /* MiscRadioTracker.mm in Sources */,
 				55B437E42179B2AF005ABAA2 /* MiscTableScrollEdit.mm in Sources */,
-				55B437C42179B2AF005ABAA2 /* MiscTableConnector.mm in Sources */,
 				55B437C52179B2AF005ABAA2 /* MiscDrawList.mm in Sources */,
 				55B437DC2179B2AF005ABAA2 /* MiscTableViewDrag.mm in Sources */,
 				55B437E22179B2AF005ABAA2 /* MiscExporter.mm in Sources */,

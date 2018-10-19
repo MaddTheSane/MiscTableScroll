@@ -28,9 +28,7 @@
 // v130.1: Selection management routines for MiscTableBorder.
 //-----------------------------------------------------------------------------
 #include "MiscTableBorder.h"
-extern "Objective-C" {
 #import <Foundation/NSArray.h>
-}
 
 //-----------------------------------------------------------------------------
 // visualToPhysical
@@ -38,17 +36,17 @@ extern "Objective-C" {
 //-----------------------------------------------------------------------------
 void MiscTableBorder::visualToPhysical( MiscSparseSet const& vset,
 					MiscSparseSet& pset ) const
-    {
+{
     pset.empty();
     unsigned int const lim = vset.numRanges();
     for (unsigned int i = 0; i < lim; i++)
-	{
-	int lo, hi;
-	vset.getRangeAt( i, lo, hi );
-	for ( ; lo <= hi; lo++)
-	    pset.add( visualToPhysical( lo ) );
-	}
+    {
+        int lo, hi;
+        vset.getRangeAt( i, lo, hi );
+        for ( ; lo <= hi; lo++)
+            pset.add( visualToPhysical( lo ) );
     }
+}
 
 
 //-----------------------------------------------------------------------------
@@ -57,119 +55,119 @@ void MiscTableBorder::visualToPhysical( MiscSparseSet const& vset,
 //-----------------------------------------------------------------------------
 void MiscTableBorder::physicalToVisual( MiscSparseSet const& pset,
 					MiscSparseSet& vset ) const
-    {
+{
     vset.empty();
     unsigned int const lim = pset.numRanges();
     for (unsigned int i = 0; i < lim; i++)
-	{
-	int lo, hi;
-	pset.getRangeAt( i, lo, hi );
-	for ( ; lo <= hi; lo++)
-	    vset.add( physicalToVisual( lo ) );
-	}
+    {
+        int lo, hi;
+        pset.getRangeAt( i, lo, hi );
+        for ( ; lo <= hi; lo++)
+            vset.add( physicalToVisual( lo ) );
     }
+}
 
 
 //-----------------------------------------------------------------------------
 // hasMultipleSelection
 //-----------------------------------------------------------------------------
 bool MiscTableBorder::hasMultipleSelection() const
-    {
+{
     MiscCoord_V lo, hi;
     selection.getTotalRange( lo, hi );
     return hi > lo;
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // selected_slots
 //-----------------------------------------------------------------------------
 NSArray* MiscTableBorder::selected_slots( bool do_tags ) const
-    {
+{
     NSMutableArray* array = [NSMutableArray array];
     for (unsigned int i = 0, lim = selection.numRanges(); i < lim; i++)
-	{
-	MiscCoord_V lo, hi;
-	selection.getRangeAt( i, lo, hi );
-	for ( ; lo <= hi; lo++)
-	    {
-	    int n = (do_tags ? getTag(lo) : visualToPhysical(lo));
-	    [array addObject:[NSNumber numberWithInt:n]];
-	    }
-	}
-    return array;
+    {
+        MiscCoord_V lo, hi;
+        selection.getRangeAt( i, lo, hi );
+        for ( ; lo <= hi; lo++)
+        {
+            int n = (do_tags ? getTag(lo) : visualToPhysical(lo));
+            [array addObject:[NSNumber numberWithInt:n]];
+        }
     }
+    return array;
+}
 
 
 //-----------------------------------------------------------------------------
 // select_slots
 //-----------------------------------------------------------------------------
 void MiscTableBorder::select_slots( NSArray* list, bool clear, bool set )
-    {
+{
     if (clear)
-	selectNone();
+        selectNone();
     int const lim = [list count];
     if (lim > 0)
-	{
-	MiscCoord_V last_selected = -1;
-	for (int i = lim; i-- > 0; )
-	    {
-	    MiscCoord_P const p_slot = [[list objectAtIndex:i] intValue];
-	    if (goodPos( p_slot ))
-		{
-		MiscCoord_V const v_slot = physicalToVisual( p_slot );
-		if (v_slot > last_selected) last_selected = v_slot;
-		if (set)
-		    selection.add( v_slot );
-		else
-		    selection.remove( v_slot );
-		}
-	    }
-	if (set && last_selected != -1)
-	    setSelectedSlot( last_selected );
-	else
-	    fixSelectedSlot();
-	}
+    {
+        MiscCoord_V last_selected = -1;
+        for (int i = lim; i-- > 0; )
+        {
+            MiscCoord_P const p_slot = [[list objectAtIndex:i] intValue];
+            if (goodPos( p_slot ))
+            {
+                MiscCoord_V const v_slot = physicalToVisual( p_slot );
+                if (v_slot > last_selected) last_selected = v_slot;
+                if (set)
+                    selection.add( v_slot );
+                else
+                    selection.remove( v_slot );
+            }
+        }
+        if (set && last_selected != -1)
+            setSelectedSlot( last_selected );
+        else
+            fixSelectedSlot();
     }
+}
 
 
 //-----------------------------------------------------------------------------
 // select_tags
 //-----------------------------------------------------------------------------
 void MiscTableBorder::select_tags( NSArray* list, bool clear, bool set )
-    {
+{
     if (clear)
-	selectNone();
+        selectNone();
     unsigned int const M = [list count];
     if (M > 0)
-	{
-	MiscCoord_V last_selected = -1;
-	unsigned int i;
-	int* const v0 = (int*)malloc( M * sizeof(*v0) );
-	int const* const vM = v0 + M;
+    {
+        MiscCoord_V last_selected = -1;
+        unsigned int i;
+        int* const v0 = (int*)malloc( M * sizeof(*v0) );
+        int const* const vM = v0 + M;
 
-	for (i = 0; i < M; i++)
-	    v0[i] = [[list objectAtIndex:i] intValue];
-	
-	unsigned int const N = count();
-	for (i = 0; i < N; i++)
-	    {
-	    int const t = getTag(i);		// MiscCoord_V
-	    for (int const* v = v0; v < vM; v++)
-		if (*v == t)
-		    {
-		    if (int(i) > last_selected) last_selected = (MiscCoord_V)i;
-		    if (set)
-			selection.add(i);
-		    else
-			selection.remove(i);
-		    break;
-		    }
-	    }
-	free( v0 );
-	if (set && last_selected != -1)
-	    setSelectedSlot( last_selected );
-	else
-	    fixSelectedSlot();
-	}
+        for (i = 0; i < M; i++)
+            v0[i] = [[list objectAtIndex:i] intValue];
+
+        unsigned int const N = count();
+        for (i = 0; i < N; i++)
+        {
+            int const t = getTag(i);		// MiscCoord_V
+            for (int const* v = v0; v < vM; v++)
+                if (*v == t)
+                {
+                    if (int(i) > last_selected) last_selected = (MiscCoord_V)i;
+                    if (set)
+                        selection.add(i);
+                    else
+                        selection.remove(i);
+                    break;
+                }
+        }
+        free( v0 );
+        if (set && last_selected != -1)
+            setSelectedSlot( last_selected );
+        else
+            fixSelectedSlot();
     }
+}

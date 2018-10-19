@@ -33,10 +33,8 @@
 //  v130.1: Added MISC_ENUM_CHECK.
 //-----------------------------------------------------------------------------
 #include <MiscTableScroll/MiscTableTypes.h>
-#include "bool.h"
-extern "Objective-C" {
+#include <stdbool.h>
 #import <Foundation/NSException.h>
-}
 
 inline MiscBorderType otherBorder( MiscBorderType t )
     { return (t == MISC_COL_BORDER) ? MISC_ROW_BORDER : MISC_COL_BORDER; }

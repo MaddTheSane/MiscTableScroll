@@ -36,28 +36,26 @@
 // An extensible array of specifications for drawing cell contents.
 //-----------------------------------------------------------------------------
 #include "MiscColorList.h"
-#include <bool.h>
-extern "Objective-C" {
+#include <stdbool.h>
 #import <Foundation/NSGeometry.h>
-}
 @class NSColor, NSFont, NSImage;
 class MiscLineWrapper;
 
 struct MiscDrawList
-	{
+{
 public:
 	struct Rec
-		{
+    {
 		NSRect    text_rect;
 		NSRect    image_rect;
 		NSString* text;
 		NSFont*   font;
 		NSImage*  image;
 		int       text_color;
-		int       flags;	// (alignment << 1) | (char_wrap)
+		NSUInteger flags;	// (alignment << 1) | (char_wrap)
 		void      draw_image();
 		void      draw_text( MiscLineWrapper& ) const;
-		};
+    };
 private:
 	MiscColorList color_list;
 	int num_recs;
@@ -79,6 +77,6 @@ public:
 			NSColor* default_text_color,
 			NSFont* default_font );
 	void draw();
-	};
+};
 
 #endif // __MiscDrawList_h

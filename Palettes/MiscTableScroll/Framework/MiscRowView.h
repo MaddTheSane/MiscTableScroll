@@ -30,8 +30,6 @@
 #import "MiscBorderView.h"
 
 @interface MiscRowView : MiscBorderView
-    {
-    }
 
 - initWithFrame: (NSRect) frameRect
      scroll: (MiscTableScroll*) scroll

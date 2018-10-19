@@ -34,13 +34,11 @@
 // Revision 1.1  96/08/30  14:51:51  sunshine
 // Extensible array of colors acting as a color palette.
 //-----------------------------------------------------------------------------
-extern "Objective-C" {
 #import <AppKit/NSColor.h>
-}
 @class NSMutableArray;
 
 struct MiscColorList
-	{
+{
 private:
 	NSMutableArray* colors;
 	MiscColorList( MiscColorList const& ) {}	// No copy constructor.
@@ -53,6 +51,6 @@ public:
 	NSColor* nth( int n ) const	{ return [colors objectAtIndex:n]; }
 	NSColor* operator[]( int n ) const { return nth(n); }
 	int store( NSColor* );
-	};
+};
 
 #endif // __MiscColorList_h

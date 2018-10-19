@@ -42,20 +42,20 @@
 // MiscPoint_O
 //-----------------------------------------------------------------------------
 MiscPoint_O::MiscPoint_O( bool is_horz, NSPoint p ) :
-    MiscOrientation(is_horz),x(MiscPixels(p.x)),y(MiscPixels(p.y)) {}
+MiscOrientation(is_horz),x(MiscPixels(p.x)),y(MiscPixels(p.y)) {}
 MiscPoint_O::MiscPoint_O( MiscBorderType b, NSPoint p ) :
-    MiscOrientation(b),x(MiscPixels(p.x)),y(MiscPixels(p.y)) {}
+MiscOrientation(b),x(MiscPixels(p.x)),y(MiscPixels(p.y)) {}
 MiscPoint_O& MiscPoint_O::operator=( NSPoint p )
-	{ x = MiscPixels( p.x ); y = MiscPixels( p.y ); return *this; }
+{ x = MiscPixels( p.x ); y = MiscPixels( p.y ); return *this; }
 
 
 //-----------------------------------------------------------------------------
 // MiscSize_O
 //-----------------------------------------------------------------------------
 MiscSize_O::MiscSize_O( bool is_horz, NSSize p ) : MiscOrientation(is_horz),
-    width(MiscPixels(p.width)),height(MiscPixels(p.height)) {}
+width(MiscPixels(p.width)),height(MiscPixels(p.height)) {}
 MiscSize_O::MiscSize_O( MiscBorderType b, NSSize p ) : MiscOrientation(b),
-    width(MiscPixels(p.width)),height(MiscPixels(p.height)) {}
+width(MiscPixels(p.width)),height(MiscPixels(p.height)) {}
 MiscSize_O& MiscSize_O::operator=( NSSize s )
-    { width = MiscPixels( s.width ); height = MiscPixels( s.height );
-		return *this; }
+{ width = MiscPixels( s.width ); height = MiscPixels( s.height );
+    return *this; }

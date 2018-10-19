@@ -36,15 +36,9 @@
 //-----------------------------------------------------------------------------
 #import <MiscTableScroll/MiscExporter.h>
 #import	<MiscTableScroll/MiscTableScroll.h>
-
-extern "Objective-C" {
 #import	<AppKit/NSCell.h>
-}
-
-extern "C" {
-#import	<stdio.h>
-#import	<string.h>
-}
+#include <cstdio>
+#include <cstring>
 
 
 @interface MiscExporter(Private)
@@ -66,61 +60,61 @@ extern "C" {
 // safe_strlen
 //-----------------------------------------------------------------------------
 inline static int safe_strlen( NSString* s )
-    {
+{
     return (s != 0 ? [s length] : 0);
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // safe_strlen
 //-----------------------------------------------------------------------------
 inline static int safe_strlen( char const* s )
-    {
+{
     return (s != 0 ? strlen(s) : 0);
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // repchar
 //-----------------------------------------------------------------------------
 inline static void repchar( int rep, char c, FILE* fp )
-    {
+{
     for (int i = 0; i < rep; i++)
-	fputc( c, fp );
-    }
+        fputc( c, fp );
+}
 
 
 //-----------------------------------------------------------------------------
 // pad
 //-----------------------------------------------------------------------------
 inline static void pad( int len, FILE* fp )
-    {
+{
     repchar( len, ' ', fp );
-    }
+}
 
 
 inline static int row_at( int visual_pos, id obj )
-    { return [obj rowAtPosition:visual_pos]; }
+{ return [obj rowAtPosition:visual_pos]; }
 
 
 inline static int col_at( int visual_pos, id obj )
-    { return [obj columnAtPosition:visual_pos]; }
+{ return [obj columnAtPosition:visual_pos]; }
 
 
 inline static id cell_at( int r, int c, id obj )
-    { return [obj cellAtRow:r column:c]; }
+{ return [obj cellAtRow:r column:c]; }
 
 
 inline static NSString* str_at( int r, int c, id obj )
-    { return [obj stringValueAtRow:r column:c]; }
+{ return [obj stringValueAtRow:r column:c]; }
 
 
 inline static NSString* col_title( int c, id obj )
-    { return [obj columnTitle:c]; }
+{ return [obj columnTitle:c]; }
 
 
 inline static NSString* row_title( int r, id obj )
-    { return [obj rowTitle:r]; }
+{ return [obj rowTitle:r]; }
 
 
 #endif // __MiscExporterPrivate_h

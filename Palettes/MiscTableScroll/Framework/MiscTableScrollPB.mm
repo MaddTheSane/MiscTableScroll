@@ -36,12 +36,9 @@
 //-----------------------------------------------------------------------------
 #import <MiscTableScroll/MiscTableScroll.h>
 #import "MiscTableScrollPrivate.h"
-
-extern "Objective-C" {
 #import <AppKit/NSApplication.h>
 #import <AppKit/NSCell.h>
 #import <AppKit/NSPasteboard.h>
-}
 
 #define	MISC_PB_FIELD_SEPARATOR		@"\t"
 #define	MISC_PB_RECORD_TERMINATOR	@"\n"
@@ -52,11 +49,11 @@ extern "Objective-C" {
 // - sortSel:border:
 //-----------------------------------------------------------------------------
 - (NSArray*)sortSel:(NSArray*)sel_list border:(MiscBorderType)b
-    {
+{
     return [self border:b visualToPhysical:
-		[[self border:b physicalToVisual:sel_list]
-		sortedArrayUsingSelector:@selector(compare:)]];
-    }
+            [[self border:b physicalToVisual:sel_list]
+             sortedArrayUsingSelector:@selector(compare:)]];
+}
 
 
 
@@ -69,12 +66,12 @@ extern "Objective-C" {
 //	returnTypes[*] = NSColorPboardType
 //-----------------------------------------------------------------------------
 - (void)builtinRegisterServicesTypes
-    {
+{
     NSArray* sendTypes = [NSArray arrayWithObjects:
-		NSTabularTextPboardType, NSStringPboardType, 0];
+                          NSTabularTextPboardType, NSStringPboardType, 0];
     NSArray* returnTypes = [NSArray array];
     [NSApp registerServicesMenuSendTypes:sendTypes returnTypes:returnTypes];
-    }
+}
 
 
 
@@ -82,14 +79,14 @@ extern "Objective-C" {
 // - registerServicesTypes
 //-----------------------------------------------------------------------------
 - (void)registerServicesTypes
-    {
+{
     id del = [self responsibleDelegate:
-			MiscDelegateFlags::DEL_REGISTER_SERVICE_TYPES];
+                     MiscDelegateFlags::DEL_REGISTER_SERVICE_TYPES];
     if (del != 0)
-	[del tableScrollRegisterServicesTypes:self];
+        [del tableScrollRegisterServicesTypes:self];
     else
-	[self builtinRegisterServicesTypes];
-    }
+        [self builtinRegisterServicesTypes];
+}
 
 
 
@@ -97,270 +94,270 @@ extern "Objective-C" {
 // - builtinValidRequestorForSendType:returnType:
 //-----------------------------------------------------------------------------
 - (id)builtinValidRequestorForSendType:(NSString*)t_send
-    returnType:(NSString*)t_return
-    {
+                            returnType:(NSString*)t_return
+{
     if (t_return == 0 &&	// We only send stuff, we never take stuff.
-	([t_send isEqualToString:NSTabularTextPboardType] ||
-	 [t_send isEqualToString:NSStringPboardType]) &&
-	([self hasRowSelection] || [self hasColumnSelection]))
-	return self;
+        ([t_send isEqualToString:NSTabularTextPboardType] ||
+         [t_send isEqualToString:NSStringPboardType]) &&
+        ([self hasRowSelection] || [self hasColumnSelection]))
+        return self;
 
     return [self superValidRequestorForSendType:t_send returnType:t_return];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - validRequestorForSendType:returnType:
 //-----------------------------------------------------------------------------
 - (id)validRequestorForSendType:(NSString*)t_send
-    returnType:(NSString*)t_return
-    {
+                     returnType:(NSString*)t_return
+{
     id del = [self responsibleDelegate:MiscDelegateFlags::DEL_VALID_REQUESTOR];
     if (del != 0)
-	return [del tableScroll:self
-		validRequestorForSendType:t_send returnType:t_return];
+        return [del tableScroll:self
+      validRequestorForSendType:t_send returnType:t_return];
 
     return [self builtinValidRequestorForSendType:t_send returnType:t_return];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - builtinReadSelectionFromPasteboard:
 //-----------------------------------------------------------------------------
 - (BOOL)builtinReadSelectionFromPasteboard:(NSPasteboard*)pboard
-    {
+{
     return NO;
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - readSelectionFromPasteboard:
 //-----------------------------------------------------------------------------
 - (BOOL)readSelectionFromPasteboard:(NSPasteboard*)pb
-    {
+{
     id del = [self responsibleDelegate:
-			MiscDelegateFlags::DEL_READ_SEL_FROM_PB];
+                     MiscDelegateFlags::DEL_READ_SEL_FROM_PB];
     if (del != 0)
-	return [del tableScroll:self readSelectionFromPasteboard:pb];
+        return [del tableScroll:self readSelectionFromPasteboard:pb];
 
     return [self builtinReadSelectionFromPasteboard:pb];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - builtinCanWritePboardType:
 //-----------------------------------------------------------------------------
 - (BOOL)builtinCanWritePboardType:(NSString*)type
-    {
+{
     return ([type isEqualToString:NSStringPboardType] ||
-	    [type isEqualToString:NSTabularTextPboardType]);
-    }
+            [type isEqualToString:NSTabularTextPboardType]);
+}
 
 
 //-----------------------------------------------------------------------------
 // - canWritePboardType:
 //-----------------------------------------------------------------------------
 - (BOOL)canWritePboardType:(NSString*)type
-    {
+{
     id del = [self responsibleDelegate:
-			MiscDelegateFlags::DEL_CAN_WRITE_PB_TYPE];
+                     MiscDelegateFlags::DEL_CAN_WRITE_PB_TYPE];
     if (del != 0)
-	return [del tableScroll:self canWritePboardType:type];
+        return [del tableScroll:self canWritePboardType:type];
 
     return [self builtinCanWritePboardType:type];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - stringForNSStringPboardTypeAtRow:column:
 //-----------------------------------------------------------------------------
 - (NSString*)stringForNSStringPboardTypeAtRow:(int)row column:(int)col
-    {
+{
     NSString* s = 0;
     id cell = [self cellAtRow:row column:col];
-
+    
     if (cell != 0)
-	{
-	if ([cell respondsToSelector:@selector(title)])
-	    s = [cell title];
-	else if ([cell respondsToSelector:@selector(stringValue)])
-	    s = [cell stringValue];
-	}
+    {
+        if ([cell respondsToSelector:@selector(title)])
+            s = [cell title];
+        else if ([cell respondsToSelector:@selector(stringValue)])
+            s = [cell stringValue];
+    }
 
     if (s == 0)
-	s = @"";
+        s = @"";
     else
-	{
-	NSRange r = { 0, 0 };
-	NSMutableString* ms = [[s mutableCopy] autorelease];
-	for (;;)
-	    {
-	    r = [ms rangeOfString:MISC_PB_FIELD_SEPARATOR options:0
-		range:(NSRange){ r.location, [s length] - r.location }];
-	    if (r.length == 0)
-		break;
-	    else
-		[ms replaceCharactersInRange:r withString:@" "];
-	    }
-	s = ms;
-	}
+    {
+        NSRange r = { 0, 0 };
+        NSMutableString* ms = [[s mutableCopy] autorelease];
+        for (;;)
+        {
+            r = [ms rangeOfString:MISC_PB_FIELD_SEPARATOR options:0
+                            range:(NSRange){ r.location, [s length] - r.location }];
+            if (r.length == 0)
+                break;
+            else
+                [ms replaceCharactersInRange:r withString:@" "];
+        }
+        s = ms;
+    }
 
     return s;
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - stringForNSStringPboardType
 //-----------------------------------------------------------------------------
 - (NSString*)stringForNSStringPboardType
-    {
+{
     NSMutableString* s =
-	[[[NSMutableString allocWithZone:[self zone]] init] autorelease];
+    [[[NSMutableString allocWithZone:[self zone]] init] autorelease];
     unsigned int i, i_lim;
     MiscCoord_V j, j_lim;
     MiscCoord_P row, col;
 
     if ([self numberOfSelectedRows] > 0)
-	{
-	NSArray* sel_list =
-		[self sortSel:[self selectedRows] border:MISC_ROW_BORDER];
-	i_lim = [sel_list count];
-	j_lim = (MiscCoord_V) [self numberOfColumns];
-	for (i = 0;  i < i_lim;  i++)
-	    {
-	    row = (MiscCoord_P) [[sel_list objectAtIndex:i] intValue];
-	    for (j = 0;  j < j_lim;  j++)
-		{
-		if (j > 0) [s appendString:MISC_PB_FIELD_SEPARATOR];
-		col = [self columnAtPosition:j];
-		[s appendString:
-		    [self stringForNSStringPboardTypeAtRow:row column:col]];
-		}
-	    [s appendString:MISC_PB_RECORD_TERMINATOR];
-	    }
-	}
-    else if ([self numberOfSelectedColumns] > 0)
-	{
-	NSArray* sel_list =
-		[self sortSel:[self selectedColumns] border:MISC_COL_BORDER];
-	i_lim = [sel_list count];
-	j_lim = (MiscCoord_V) [self numberOfRows];
-	for (j = 0;  j < j_lim;  j++)
-	    {
-	    row = [self rowAtPosition:j];
-	    for (i = 0;  i < i_lim;  i++)
-		{
-		if (i > 0) [s appendString:MISC_PB_FIELD_SEPARATOR];
-		col = (MiscCoord_P) [[sel_list objectAtIndex:i] intValue];
-		[s appendString:
-		    [self stringForNSStringPboardTypeAtRow:row column:col]];
-		}
-	    [s appendString:MISC_PB_RECORD_TERMINATOR];
-	    }
-	}
-    return s;
+    {
+        NSArray* sel_list =
+        [self sortSel:[self selectedRows] border:MISC_ROW_BORDER];
+        i_lim = [sel_list count];
+        j_lim = (MiscCoord_V) [self numberOfColumns];
+        for (i = 0;  i < i_lim;  i++)
+        {
+            row = (MiscCoord_P) [[sel_list objectAtIndex:i] intValue];
+            for (j = 0;  j < j_lim;  j++)
+            {
+                if (j > 0) [s appendString:MISC_PB_FIELD_SEPARATOR];
+                col = [self columnAtPosition:j];
+                [s appendString:
+                 [self stringForNSStringPboardTypeAtRow:row column:col]];
+            }
+            [s appendString:MISC_PB_RECORD_TERMINATOR];
+        }
     }
+    else if ([self numberOfSelectedColumns] > 0)
+    {
+        NSArray* sel_list =
+        [self sortSel:[self selectedColumns] border:MISC_COL_BORDER];
+        i_lim = [sel_list count];
+        j_lim = (MiscCoord_V) [self numberOfRows];
+        for (j = 0;  j < j_lim;  j++)
+        {
+            row = [self rowAtPosition:j];
+            for (i = 0;  i < i_lim;  i++)
+            {
+                if (i > 0) [s appendString:MISC_PB_FIELD_SEPARATOR];
+                col = (MiscCoord_P) [[sel_list objectAtIndex:i] intValue];
+                [s appendString:
+                 [self stringForNSStringPboardTypeAtRow:row column:col]];
+            }
+            [s appendString:MISC_PB_RECORD_TERMINATOR];
+        }
+    }
+    return s;
+}
 
 
 //-----------------------------------------------------------------------------
 // - stringForNSTabularTextPboardType
 //-----------------------------------------------------------------------------
 - (NSString*)stringForNSTabularTextPboardType
-    {
+{
     return [self stringForNSStringPboardType];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - builtinStringForPboardType:
 //-----------------------------------------------------------------------------
 - (NSString*)builtinStringForPboardType:(NSString*)type
-    {
+{
     NSString* s = @"";
     if ([type isEqualToString:NSStringPboardType])
-	s = [self stringForNSStringPboardType];
+        s = [self stringForNSStringPboardType];
     else if ([type isEqualToString:NSTabularTextPboardType])
-	s = [self stringForNSTabularTextPboardType];
+        s = [self stringForNSTabularTextPboardType];
     return s;
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - stringForPboardType:
 //-----------------------------------------------------------------------------
 - (NSString*)stringForPboardType:(NSString*)t
-    {
+{
     id del = [self responsibleDelegate:
-			MiscDelegateFlags::DEL_STRING_FOR_PB_TYPE];
+                     MiscDelegateFlags::DEL_STRING_FOR_PB_TYPE];
     if (del != 0)
-	return [del tableScroll:self stringForPboardType:t];
+        return [del tableScroll:self stringForPboardType:t];
     else
-	return [self builtinStringForPboardType:t];
-    }
+        return [self builtinStringForPboardType:t];
+}
 
 
 //-----------------------------------------------------------------------------
 // - builtinWriteSelectionToPasteboard:types:
 //-----------------------------------------------------------------------------
 - (BOOL)builtinWriteSelectionToPasteboard:(NSPasteboard*)pboard
-    types:(NSArray*)original_types
-    {
+                                    types:(NSArray*)original_types
+{
     BOOL result = NO;
     NSMutableArray* types = [NSMutableArray array];
 
     if (original_types != 0)
-	{
-	for (unsigned int i = 0, lim = [original_types count]; i < lim; i++)
-	    {
-	    id t = [original_types objectAtIndex:i];
-	    if ([self canWritePboardType:t])
-		[types addObject:t];
-	    }
-	}
+    {
+        for (unsigned int i = 0, lim = [original_types count]; i < lim; i++)
+        {
+            id t = [original_types objectAtIndex:i];
+            if ([self canWritePboardType:t])
+                [types addObject:t];
+        }
+    }
 
     unsigned int const nTypes = [types count];
     if (nTypes > 0 && ([self hasRowSelection] || [self hasColumnSelection]))
-	{
-	[pboard declareTypes:types owner:0];
-
-	for (unsigned int i = 0;  i < nTypes;  i++)
-	    {
-	    NSString* s = [types objectAtIndex:i];
-	    [pboard setString:[self stringForPboardType:s] forType:s];
-	    }
-
-	result = YES;
-	}
+    {
+        [pboard declareTypes:types owner:0];
+        
+        for (unsigned int i = 0;  i < nTypes;  i++)
+        {
+            NSString* s = [types objectAtIndex:i];
+            [pboard setString:[self stringForPboardType:s] forType:s];
+        }
+        
+        result = YES;
+    }
 
     return result;
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - writeSelectionToPasteboard:types:
 //-----------------------------------------------------------------------------
 - (BOOL)writeSelectionToPasteboard:(NSPasteboard*)pboard types:(NSArray*)types
-    {
+{
     id del = [self responsibleDelegate:
-			MiscDelegateFlags::DEL_WRITE_SEL_TO_PB_TYPES];
+                     MiscDelegateFlags::DEL_WRITE_SEL_TO_PB_TYPES];
     if (del != 0)
-	return [del tableScroll:self
-		writeSelectionToPasteboard:pboard types:types];
+        return [del tableScroll:self
+     writeSelectionToPasteboard:pboard types:types];
 
     return [self builtinWriteSelectionToPasteboard:pboard types:types];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - copy:
 //-----------------------------------------------------------------------------
 - (void)copy:(id)sender
-    {
+{
     NSArray* types = [NSArray arrayWithObjects:
-			NSTabularTextPboardType, NSStringPboardType, 0];
+                      NSTabularTextPboardType, NSStringPboardType, 0];
     [self writeSelectionToPasteboard:[NSPasteboard generalPasteboard]
-			types:types];
-    }
+                               types:types];
+}
 
 
 
@@ -368,8 +365,8 @@ extern "Objective-C" {
 // - cut:
 //-----------------------------------------------------------------------------
 - (void)cut:(id)sender
-    {
+{
     [self copy:sender];
-    }
+}
 
 @end

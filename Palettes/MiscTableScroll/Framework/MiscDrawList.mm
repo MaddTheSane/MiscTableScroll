@@ -36,18 +36,13 @@
 #include "MiscDrawList.h"
 #include "MiscLineWrapper.h"
 #include <MiscTableScroll/MiscTableCell.h>
-
-extern "Objective-C" {
 #import	<AppKit/NSCell.h>
 #import	<AppKit/NSFont.h>
 #import	<AppKit/NSImage.h>
 #import	<AppKit/NSText.h>	// NSLeftTextAlignment
-}
-
-extern "C" {
-#include <math.h>
-#include <stdlib.h>
-}
+#import <AppKit/NSGraphicsContext.h>
+#include <cmath>
+#include <cstdlib>
 
 //-----------------------------------------------------------------------------
 // get_char_wrap
@@ -59,87 +54,87 @@ inline static bool get_char_wrap( id cell ) { return ![cell wraps]; }
 // append
 //-----------------------------------------------------------------------------
 void MiscDrawList::append( NSRect frame_rect, id cell, BOOL lit,
-			   NSColor* default_text_color, NSFont* default_font )
-    {
+                          NSColor* default_text_color, NSFont* default_font )
+{
     NSString* txt = 0;
     NSImage* img = 0;
 
     if (cell != 0)
-	{
-	if ([cell respondsToSelector:@selector(image)])
-	    img = [cell image];
+    {
+        if ([cell respondsToSelector:@selector(image)])
+            img = [cell image];
 
-	if (img == 0)
-	    if ([cell respondsToSelector:@selector(title)])
-		txt = [cell title];
-	    else if ([cell respondsToSelector:@selector(stringValue)])
-		txt = [cell stringValue];
+        if (img == 0)
+            if ([cell respondsToSelector:@selector(title)])
+                txt = [cell title];
+            else if ([cell respondsToSelector:@selector(stringValue)])
+                txt = [cell stringValue];
 
-	if (img != 0 || (txt != 0 && [txt length] != 0))
-	    {
-	    if (num_recs >= max_recs)
-		{
-		max_recs += max_recs;
-		recs = (Rec*) realloc( recs, max_recs * sizeof(*recs) );
-		}
-	    Rec& r = recs[ num_recs++ ];
+        if (img != 0 || (txt != 0 && [txt length] != 0))
+        {
+            if (num_recs >= max_recs)
+            {
+                max_recs += max_recs;
+                recs = (Rec*) realloc( recs, max_recs * sizeof(*recs) );
+            }
+            Rec& r = recs[ num_recs++ ];
+            
+            if (img != 0)
+            {
+                r.image = [img retain];
+                r.image_rect = [cell imageRectForBounds:frame_rect];
+            }
+            else
+                r.image = 0;
 
-	    if (img != 0)
-		{
-		r.image = [img retain];
-		r.image_rect = [cell imageRectForBounds:frame_rect];
-		}
-	    else
-		r.image = 0;
+            if (txt != 0 && [txt length] != 0)
+            {
+                r.text = [txt copy];
+                r.text_rect = [cell titleRectForBounds:frame_rect];
 
-	    if (txt != 0 && [txt length] != 0)
-		{
-		r.text = [txt copy];
-		r.text_rect = [cell titleRectForBounds:frame_rect];
+                r.font = 0;
+                if ([cell respondsToSelector:@selector(font)])
+                    r.font = [cell font];
+                if (r.font == 0)
+                    r.font = default_font;
+                [r.font retain];
 
-		r.font = 0;
-		if ([cell respondsToSelector:@selector(font)])
-		    r.font = [cell font];
-		if (r.font == 0)
-		    r.font = default_font;
-		[r.font retain];
+                NSColor* color;
+                if (lit &&
+                    [cell respondsToSelector:@selector(selectedTextColor)])
+                    color = [cell selectedTextColor];
+                else if ([cell respondsToSelector:@selector(textColor)])
+                    color = [cell textColor];
+                else
+                    color = default_text_color;
 
-		NSColor* color;
-		if (lit &&
-		    [cell respondsToSelector:@selector(selectedTextColor)])
-		    color = [cell selectedTextColor];
-		else if ([cell respondsToSelector:@selector(textColor)])
-		    color = [cell textColor];
-		else
-		    color = default_text_color;
+                r.text_color = color_list.store( color );
 
-		r.text_color = color_list.store( color );
-
-		int flags;
-		if ([cell respondsToSelector:@selector(alignment)])
-		    flags = ([cell alignment] << 1);
-		else
-		    flags = (NSLeftTextAlignment << 1);
-		if (get_char_wrap( cell ))
-		    flags |= 1;
-		r.flags = flags;
-		}
-	    else
-		{
-		r.text = 0;
-		r.font = 0;
-		r.text_color = -1;
-		}
-	    }
-	}
+                NSUInteger flags;
+                if ([cell respondsToSelector:@selector(alignment)])
+                    flags = ([cell alignment] << 1);
+                else
+                    flags = (NSLeftTextAlignment << 1);
+                if (get_char_wrap( cell ))
+                    flags |= 1;
+                r.flags = flags;
+            }
+            else
+            {
+                r.text = 0;
+                r.font = 0;
+                r.text_color = -1;
+            }
+        }
     }
+}
 
 
 //-----------------------------------------------------------------------------
 // Rec::draw_image
 //-----------------------------------------------------------------------------
 void MiscDrawList::Rec::draw_image()
-    {
+{
     NSPoint p;
     p.x = image_rect.origin.x;
     p.y = image_rect.origin.y + image_rect.size.height;
@@ -151,143 +146,143 @@ void MiscDrawList::Rec::draw_image()
 
     float const dx = image_rect.size.width - r.size.width;
     if (dx < 0)
-	r.size.width = image_rect.size.width;
+        r.size.width = image_rect.size.width;
     else if (dx > 0)
-	p.x = floor( p.x + dx / 2 );
+        p.x = floor( p.x + dx / 2 );
 
     float const dy = image_rect.size.height - r.size.height;
     if (dy < 0)
-	r.size.height = image_rect.size.height;
+        r.size.height = image_rect.size.height;
     else if (dy > 0)
-	p.y = floor( p.y - dy / 2 );
+        p.y = floor( p.y - dy / 2 );
 
     [image compositeToPoint:p fromRect:r operation:NSCompositeSourceOver];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // Rec::draw_text
 //-----------------------------------------------------------------------------
 void MiscDrawList::Rec::draw_text( MiscLineWrapper& lw ) const
-    {
+{
     lw.setText( text );
     lw.setRect( text_rect );
     lw.setCharWrap( flags & 1 );
-    lw.setAlignment( flags >> 1 );
+    lw.setAlignment( NSTextAlignment(flags >> 1) );
     lw.draw();
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // draw_images
 //-----------------------------------------------------------------------------
 void MiscDrawList::draw_images()
-    {
+{
     for (int i = 0; i < num_recs; i++)
-	{
-	Rec& r = recs[i];
-	if (r.image != 0)
-	    r.draw_image();
-	}
+    {
+        Rec& r = recs[i];
+        if (r.image != 0)
+            r.draw_image();
     }
+}
 
 
 //-----------------------------------------------------------------------------
 // draw_text
 //-----------------------------------------------------------------------------
 void MiscDrawList::draw_text()
-    {
+{
     MiscLineWrapper lw;
     lw.setNoPartialLines( !draw_clipped_text );
     for (int i = 0; i < num_recs; i++)		// For each font...
-	{
-	if (recs[i].font != 0)
-	    {
-	    NSFont* const font = recs[i].font;
-	    NSFont* screenFont = 0;
-	    if ([[NSDPSContext currentContext] isDrawingToScreen] &&
-		(screenFont = [font screenFont]) != 0)
-		{
-		[screenFont set];
-		lw.setFont( screenFont );
-		}
-	    else
-		{
-		[font set];
-		lw.setFont( font );
-		}
+    {
+        if (recs[i].font != 0)
+        {
+            NSFont* const font = recs[i].font;
+            NSFont* screenFont = 0;
+            if ([[NSGraphicsContext currentContext] isDrawingToScreen] &&
+                (screenFont = [font screenFont]) != 0)
+            {
+                [screenFont set];
+                lw.setFont( screenFont );
+            }
+            else
+            {
+                [font set];
+                lw.setFont( font );
+            }
 
-	    for (int j = i; j < num_recs; j++)	// For each font-color pair...
-		{
-		if (recs[j].text_color >= 0)
-		    {
-		    int const color_id = recs[j].text_color;
-		    [color_list[ color_id ] set];
-
-		    for (int k = j; k < num_recs; k++)	// For each record...
-			{
-			Rec& r = recs[k];
-			if (r.font == font && r.text_color == color_id)
-			    {
-			    r.font = 0;			// Mark record "used".
-			    r.text_color = -1;
-			    r.draw_text( lw );
-			    }
-			}
-		    }
-		}
-	    }
-	}
+            for (int j = i; j < num_recs; j++)	// For each font-color pair...
+            {
+                if (recs[j].text_color >= 0)
+                {
+                    int const color_id = recs[j].text_color;
+                    [color_list[ color_id ] set];
+                    
+                    for (int k = j; k < num_recs; k++)	// For each record...
+                    {
+                        Rec& r = recs[k];
+                        if (r.font == font && r.text_color == color_id)
+                        {
+                            r.font = 0;			// Mark record "used".
+                            r.text_color = -1;
+                            r.draw_text( lw );
+                        }
+                    }
+                }
+            }
+        }
     }
+}
 
 
 //-----------------------------------------------------------------------------
 // draw
 //-----------------------------------------------------------------------------
 void MiscDrawList::draw()
-    {
+{
     if (num_recs > 0)
-	{
-	draw_images();
-	draw_text();
-	empty();
-	}
+    {
+        draw_images();
+        draw_text();
+        empty();
     }
+}
 
 
 //-----------------------------------------------------------------------------
 // empty
 //-----------------------------------------------------------------------------
 void MiscDrawList::empty()
-    {
+{
     for (int i = 0; i < num_recs; i++)
-	{
-	Rec const& r = recs[i];
-	if (r.text  != 0) [r.text  release];
-	if (r.font  != 0) [r.font  release];
-	if (r.image != 0) [r.image release];
-	}
-    num_recs = 0;
+    {
+        Rec const& r = recs[i];
+        if (r.text  != 0) [r.text  release];
+        if (r.font  != 0) [r.font  release];
+        if (r.image != 0) [r.image release];
     }
+    num_recs = 0;
+}
 
 
 //-----------------------------------------------------------------------------
 // Destructor
 //-----------------------------------------------------------------------------
 MiscDrawList::~MiscDrawList()
-    {
+{
     empty();
     free( recs );
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // Constructor
 //-----------------------------------------------------------------------------
 MiscDrawList::MiscDrawList( bool b )
-    {
+{
     num_recs = 0;
     max_recs = 16;
     recs = (Rec*) malloc( max_recs * sizeof( *recs ) );
     draw_clipped_text = b;
-    }
+}

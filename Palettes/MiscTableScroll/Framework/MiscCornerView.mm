@@ -30,10 +30,7 @@
 //-----------------------------------------------------------------------------
 #import "MiscCornerView.h"
 #import "MiscBorderCell.h"
-
-extern "Objective-C" {
 #import <AppKit/NSGraphics.h>
-}
 
 @implementation MiscCornerView
 
@@ -46,29 +43,29 @@ extern "Objective-C" {
 // - initWithFrame:
 //-----------------------------------------------------------------------------
 - (id)initWithFrame:(NSRect)frameRect
-    {
+{
     [super initWithFrame:frameRect];
     theCell = [[MiscBorderCell allocWithZone:[self zone]] initTextCell:@""];
     return self;
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - dealloc
 //-----------------------------------------------------------------------------
 - (void)dealloc
-    {
+{
     [theCell release];
     [super dealloc];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - drawRect:
 //-----------------------------------------------------------------------------
 - (void)drawRect:(NSRect)rect
-    {
+{
     [theCell drawWithFrame:[self bounds] inView:self];
-    }
+}
 
 @end

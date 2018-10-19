@@ -33,56 +33,52 @@
 #pragma implementation
 #endif
 #include "MiscRectList.h"
-extern "Objective-C" {
 #import <AppKit/NSColor.h>
-}
-extern "C" {
-#include <stdlib.h>	// malloc(), realloc(), free()
-}
+#include <cstdlib> // malloc(), realloc(), free()
 
 //-----------------------------------------------------------------------------
 // Constructor
 //-----------------------------------------------------------------------------
 MiscRectList::MiscRectList()
-    {
+{
     num_rects = 0;
     max_rects = 16;
     rects = (NSRect*) malloc( max_rects * sizeof(*rects) );
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // Destructor
 //-----------------------------------------------------------------------------
 MiscRectList::~MiscRectList()
-    {
+{
     free( rects );
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // append
 //-----------------------------------------------------------------------------
 void MiscRectList::append( NSRect r )
-    {
+{
     if (num_rects >= max_rects)
-	{
-	max_rects += max_rects;
-	rects = (NSRect*) realloc( rects, max_rects * sizeof(*rects) );
-	}
-    rects[ num_rects++ ] = r;
+    {
+        max_rects += max_rects;
+        rects = (NSRect*) realloc( rects, max_rects * sizeof(*rects) );
     }
+    rects[ num_rects++ ] = r;
+}
 
 
 //-----------------------------------------------------------------------------
 // draw
 //-----------------------------------------------------------------------------
 void MiscRectList::draw( NSColor* c )
-    {
+{
     if (num_rects > 0)
-	{
-	[c set];
-	NSRectFillList( rects, num_rects );
-	empty();
-	}
+    {
+        [c set];
+        NSRectFillList( rects, num_rects );
+        empty();
     }
+}

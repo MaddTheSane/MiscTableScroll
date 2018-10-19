@@ -44,48 +44,48 @@
 // initBorder:
 //-----------------------------------------------------------------------------
 - (id) initBorder:(MiscTableBorder*)b
-    {
+{
     [super init];
     border = b;
     border->selectNone();
     return self;
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // subclassResponsibility:
 //-----------------------------------------------------------------------------
 - (void) subclassResponsibility:(SEL)s
-    {
+{
     [NSException raise:NSInvalidArgumentException
-		format:@"*** Subclass responsibility: %s", sel_getName(s)];
-    }
+                format:@"*** Subclass responsibility: %s", sel_getName(s)];
+}
 
 
 //-----------------------------------------------------------------------------
 // mouseDown:atPos:
 //-----------------------------------------------------------------------------
 - (void) mouseDown:(NSEvent*) event atPos:(MiscCoord_V)pos
-    {
+{
     [self subclassResponsibility:_cmd];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // mouseDragged:atPos:
 //-----------------------------------------------------------------------------
 - (void) mouseDragged:(NSEvent*) event atPos:(MiscCoord_V)pos
-    {
+{
     [self subclassResponsibility:_cmd];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // mouseUp:atPos:
 //-----------------------------------------------------------------------------
 - (void) mouseUp:(NSEvent*) event atPos:(MiscCoord_V)pos
-    {
+{
     [self subclassResponsibility:_cmd];
-    }
+}
 
 @end

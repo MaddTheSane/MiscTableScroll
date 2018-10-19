@@ -35,10 +35,10 @@
 #import "MiscListTracker.h"
 
 @interface MiscHighlightTracker : MiscListTracker
-    {
+{
     BOOL extending;
     MiscCoord_V lastPos;
-    }
+}
 
 - (void) mouseDown:(NSEvent*) event atPos: (MiscCoord_V) pos;
 - (void) mouseDragged:(NSEvent*) event atPos: (MiscCoord_V) pos;

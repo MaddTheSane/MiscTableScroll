@@ -35,19 +35,17 @@
 //  v108: Ported to OPENSTEP 4.1 (gamma).
 //-----------------------------------------------------------------------------
 #import <MiscTableScroll/MiscTableTypes.h>
-MISC_TS_EXTERN_BEGIN( "Objective-C" )
 #import <Foundation/NSObject.h>
-MISC_TS_EXTERN_END
 
 @class MiscTableScroll;
 
 typedef enum
-	{
-	MISC_EXPORT_ASCII_FIXED,
-	MISC_EXPORT_ASCII_TAB,
-	MISC_EXPORT_ASCII_DELIMITED,
-	MISC_EXPORT_DBF
-	} MiscExportFormat;
+{
+    MISC_EXPORT_ASCII_FIXED,
+    MISC_EXPORT_ASCII_TAB,
+    MISC_EXPORT_ASCII_DELIMITED,
+    MISC_EXPORT_DBF
+} MiscExportFormat;
 
 #define	MISC_EXPORT_FORMAT_FIRST	MISC_EXPORT_ASCII_FIXED
 #define	MISC_EXPORT_FORMAT_LAST		MISC_EXPORT_DBF
@@ -55,12 +53,12 @@ typedef enum
 
 
 typedef enum				// For ASCII formats only.
-	{
-	MISC_EXPORT_TITLES_OFF,		// No titles.
-	MISC_EXPORT_TITLES_ON,		// Full width, expand column if needed.
-	MISC_EXPORT_TITLES_WRAP,	// Wrap titles within data width.
-	MISC_EXPORT_TITLES_TRUNCATE,	// Truncate titles to data width.
-	} MiscExportTitleMode;
+{
+    MISC_EXPORT_TITLES_OFF,		// No titles.
+    MISC_EXPORT_TITLES_ON,		// Full width, expand column if needed.
+    MISC_EXPORT_TITLES_WRAP,	// Wrap titles within data width.
+    MISC_EXPORT_TITLES_TRUNCATE,	// Truncate titles to data width.
+} MiscExportTitleMode;
 
 #define	MISC_EXPORT_TITLES_FIRST	MISC_EXPORT_TITLES_OFF
 #define	MISC_EXPORT_TITLES_LAST		MISC_EXPORT_TITLES_TRUNCATE
@@ -69,11 +67,11 @@ typedef enum				// For ASCII formats only.
 
 
 typedef enum
-	{
-	MISC_EXPORT_GRID_OFF,		// No grid
-	MISC_EXPORT_GRID_LINE,		// Lines, col-grid='|', row-grid='-'
-	MISC_EXPORT_GRID_SPACE,		// Spaces col-grid=' ', row-grid=' '
-	} MiscExportGridMode;
+{
+    MISC_EXPORT_GRID_OFF,		// No grid
+    MISC_EXPORT_GRID_LINE,		// Lines, col-grid='|', row-grid='-'
+    MISC_EXPORT_GRID_SPACE,		// Spaces col-grid=' ', row-grid=' '
+} MiscExportGridMode;
 
 #define	MISC_EXPORT_GRID_FIRST		MISC_EXPORT_GRID_OFF
 #define	MISC_EXPORT_GRID_LAST		MISC_EXPORT_GRID_SPACE
@@ -82,14 +80,14 @@ typedef enum
 
 
 @interface MiscExporter : NSObject
-	{
-	MiscTableScroll*	tableScroll;	// Defaults
-	MiscExportFormat	exportFormat;	// MISC_EXPORT_ASCII_FIXED
-	MiscExportTitleMode	rowTitleMode;	// MISC_EXPORT_TITLES_OFF
-	MiscExportTitleMode	columnTitleMode;// MISC_EXPORT_TITLES_ON
-	MiscExportGridMode	rowGrid;	// MISC_EXPORT_GRID_OFF
-	MiscExportGridMode	columnGrid;	// MISC_EXPORT_GRID_LINE
-	}
+{
+    MiscTableScroll*	tableScroll;	// Defaults
+    MiscExportFormat	exportFormat;	// MISC_EXPORT_ASCII_FIXED
+    MiscExportTitleMode	rowTitleMode;	// MISC_EXPORT_TITLES_OFF
+    MiscExportTitleMode	columnTitleMode;// MISC_EXPORT_TITLES_ON
+    MiscExportGridMode	rowGrid;	// MISC_EXPORT_GRID_OFF
+    MiscExportGridMode	columnGrid;	// MISC_EXPORT_GRID_LINE
+}
 
 - (id)init;
 

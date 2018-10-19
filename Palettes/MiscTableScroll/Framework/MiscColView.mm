@@ -35,10 +35,10 @@
 - initWithFrame: (NSRect) frameRect
      scroll: (MiscTableScroll*) i_scroll
        info: (MiscTableBorder*) i_info
-    {
+{
     [super initWithFrame:frameRect scroll:i_scroll info:i_info
-			type:MISC_COL_BORDER_VIEW];
+                    type:MISC_COL_BORDER_VIEW];
     return self;
-    }
+}
 
 @end

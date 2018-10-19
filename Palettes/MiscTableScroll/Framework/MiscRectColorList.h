@@ -36,27 +36,25 @@
 //-----------------------------------------------------------------------------
 #include "MiscColorList.h"
 
-extern "Objective-C" {
 #import	<Foundation/NSGeometry.h>	// NSRect
-}
 
 struct MiscRectColorList
-	{
+{
 private:
-	MiscColorList color_list;
-	int num_rects;
-	int max_rects;
-	NSRect*	rects;
-	int*	colors;
-	MiscRectColorList( MiscRectColorList const& ) {} // No copy constructor
-	void operator=( MiscRectColorList const& ) {}	 // No assign operator
+    MiscColorList color_list;
+    int num_rects;
+    int max_rects;
+    NSRect*	rects;
+    int*	colors;
+    MiscRectColorList( MiscRectColorList const& ) {} // No copy constructor
+    void operator=( MiscRectColorList const& ) {}	 // No assign operator
 public:
-	MiscRectColorList();
-	~MiscRectColorList();
-	int count() const	{ return num_rects; }
-	void empty()		{ color_list.empty(); num_rects = 0; }
-	void append( NSRect r, NSColor* c );
-	void draw();
-	};
+    MiscRectColorList();
+    ~MiscRectColorList();
+    int count() const	{ return num_rects; }
+    void empty()		{ color_list.empty(); num_rects = 0; }
+    void append( NSRect r, NSColor* c );
+    void draw();
+};
 
 #endif // __MiscRectColorList_h

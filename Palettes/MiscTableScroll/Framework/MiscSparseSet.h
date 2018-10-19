@@ -47,57 +47,57 @@
 //  Revision 1.3  96/04/30  05:38:43  sunshine
 //  Ported to OpenStep 4.0 for Mach PR2.
 //-----------------------------------------------------------------------------
-#include "bool.h"
+#include <stdbool.h>
 
 class MiscSparseSet
-	{
+{
 private:
-	struct Range
-	    {
-	    int lo;
-	    int hi;
-	    };
+    struct Range
+    {
+        int lo;
+        int hi;
+    };
 
-	unsigned int num_ranges;
-	unsigned int max_ranges;
-	Range* ranges;
-
-	void expand( unsigned int new_capacity );
-	void expand();
-	int bsearch( int x ) const;
-	void insertAt( unsigned int i, int lo, int hi );
-	void deleteAt( unsigned int i, unsigned int n );
+    unsigned int num_ranges;
+    unsigned int max_ranges;
+    Range* ranges;
+    
+    void expand( unsigned int new_capacity );
+    void expand();
+    int bsearch( int x ) const;
+    void insertAt( unsigned int i, int lo, int hi );
+    void deleteAt( unsigned int i, unsigned int n );
 
 public:
-	MiscSparseSet():num_ranges(0),max_ranges(0),ranges(0){}
-	MiscSparseSet( MiscSparseSet const& );
-	~MiscSparseSet();
+    MiscSparseSet():num_ranges(0),max_ranges(0),ranges(0){}
+    MiscSparseSet( MiscSparseSet const& );
+    ~MiscSparseSet();
 
-	MiscSparseSet& operator=( MiscSparseSet const& );
-	bool operator==( MiscSparseSet const& ) const;
-	bool operator!=( MiscSparseSet const& s ) const
-					{ return !operator==(s); }
+    MiscSparseSet& operator=( MiscSparseSet const& );
+    bool operator==( MiscSparseSet const& ) const;
+    bool operator!=( MiscSparseSet const& s ) const
+    { return !operator==(s); }
 
-	bool contains( int x ) const	{ return (bsearch( x ) >= 0); }
-	bool isEmpty() const		{ return (num_ranges == 0); }
-	void empty()			{ num_ranges = 0; }
-	unsigned int count() const;	// # elments in set
+    bool contains( int x ) const	{ return (bsearch( x ) >= 0); }
+    bool isEmpty() const		{ return (num_ranges == 0); }
+    void empty()			{ num_ranges = 0; }
+    unsigned int count() const;	// # elments in set
 
-	void add( int lo, int hi );	// add a range
-	void add( int x );
-	void remove( int lo, int hi );	// remove a range
-	void remove( int x );
-	void toggle( int x );
-	void shiftUpAt( int x );
-	void shiftDownAt( int x );
+    void add( int lo, int hi );	// add a range
+    void add( int x );
+    void remove( int lo, int hi );	// remove a range
+    void remove( int x );
+    void toggle( int x );
+    void shiftUpAt( int x );
+    void shiftDownAt( int x );
 
-	int coerce( int x ) const;	// NOTE *1*
+    int coerce( int x ) const;	// NOTE *1*
 
-	unsigned int numRanges() const	{ return num_ranges; }
-	void getRangeAt( unsigned int i, int& lo, int& hi ) const;
-	void getTotalRange( int& lo, int& hi ) const;
+    unsigned int numRanges() const	{ return num_ranges; }
+    void getRangeAt( unsigned int i, int& lo, int& hi ) const;
+    void getTotalRange( int& lo, int& hi ) const;
 
-	void dump( char const* msg ) const;
-	};
+    void dump( char const* msg ) const;
+};
 
 #endif // __MiscSparseSet_h

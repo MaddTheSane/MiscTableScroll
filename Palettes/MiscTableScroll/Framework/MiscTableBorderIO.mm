@@ -43,89 +43,89 @@
 // decode_bool
 //-----------------------------------------------------------------------------
 static inline bool decode_bool( NSCoder* coder )
-    {
+{
     char c;
     [coder decodeValueOfObjCType:@encode(char) at:&c];
     return bool(c);
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // encode_bool
 //-----------------------------------------------------------------------------
 static inline void encode_bool( NSCoder* coder, bool b )
-    {
+{
     char const c = b;
     [coder encodeValueOfObjCType:@encode(char) at:&c];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // decode_string
 //-----------------------------------------------------------------------------
 static NSString* decode_string( NSCoder* coder, bool isCString )
-    {
+{
     NSString* s = @"";
     if (!isCString)
-	s = [coder decodeObject];
+        s = [coder decodeObject];
     else
-	{
-	char* cstr = 0;
-	[coder decodeValueOfObjCType:@encode(char*) at:&cstr];
-	if (cstr != 0)
-	    {
-	    s = [NSString stringWithCString:cstr];
-	    NSZoneFree( [coder objectZone], cstr );
-	    }
-	}
-    return s;
+    {
+        char* cstr = 0;
+        [coder decodeValueOfObjCType:@encode(char*) at:&cstr];
+        if (cstr != 0)
+        {
+            s = [NSString stringWithCString:cstr];
+            NSZoneFree( [coder objectZone], cstr );
+        }
     }
+    return s;
+}
 
 
 //-----------------------------------------------------------------------------
 // decode_strings
 //-----------------------------------------------------------------------------
 static void decode_strings( NSCoder* coder, NSString** strings, int n )
-    {
+{
     for (int i = 0; i < n; i++)
-	strings[i] = [[coder decodeObject] retain];
-    }
+        strings[i] = [[coder decodeObject] retain];
+}
 
 
 //-----------------------------------------------------------------------------
 // decode_c_string_array
 //-----------------------------------------------------------------------------
 static void decode_c_string_array( NSCoder* coder, NSString** strings, int n )
-    {
+{
     NSZone* const z = [coder objectZone];
     char** cstrings = (char**)malloc( sizeof(char*) * n );
     [coder decodeArrayOfObjCType:@encode(char*) count:n at:cstrings];
     for (int i = 0; i < n; i++)
-	{
-	strings[i] = [[NSString allocWithZone:z] initWithCString:cstrings[i]];
-	NSZoneFree( z, cstrings[i] );
-	}
-    free( cstrings );
+    {
+        strings[i] = [[NSString allocWithZone:z] initWithCString:cstrings[i]];
+        NSZoneFree( z, cstrings[i] );
     }
+    free( cstrings );
+}
 
 
 //-----------------------------------------------------------------------------
 // MiscTableSlot::encodeWithCoder
 //-----------------------------------------------------------------------------
 void MiscTableSlot::encodeWithCoder( NSCoder* coder )
-    {
+{
     [coder encodeValueOfObjCType:@encode(MiscPixels) at:&size];
     [coder encodeValueOfObjCType:@encode(MiscPixels) at:&min_size];
     [coder encodeValueOfObjCType:@encode(MiscPixels) at:&max_size];
     [coder encodeValueOfObjCType:@encode(MiscTableSizing) at:&sizing];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // encodeWithCoder
 //-----------------------------------------------------------------------------
 void MiscTableBorder::encodeWithCoder( NSCoder* coder )
-    {
+{
     int i;
     register unsigned int m = 0;
     m = (m << 1) | (rep_objs != 0);
@@ -157,40 +157,40 @@ void MiscTableBorder::encodeWithCoder( NSCoder* coder )
     [coder encodeValueOfObjCType:@encode(int) at:&num_slots];
 
     if (slots != 0)
-	for (i = 0; i < num_slots; i++)
-	    slots[i].encodeWithCoder(coder);
+        for (i = 0; i < num_slots; i++)
+            slots[i].encodeWithCoder(coder);
 
     if (p2v != 0)
-	[coder encodeArrayOfObjCType:@encode(MiscCoord_V)
-		count:num_slots at:p2v];
+        [coder encodeArrayOfObjCType:@encode(MiscCoord_V)
+                               count:num_slots at:p2v];
 
     if (sort_info != 0)
-	[coder encodeArrayOfObjCType:@encode(int)
-		count:num_slots at:sort_info];
+        [coder encodeArrayOfObjCType:@encode(int)
+                               count:num_slots at:sort_info];
 
     if (tags != 0)
-	[coder encodeArrayOfObjCType:@encode(int) count:num_slots at:tags];
+        [coder encodeArrayOfObjCType:@encode(int) count:num_slots at:tags];
 
     if (styles != 0)
-	[coder encodeArrayOfObjCType:@encode(MiscTableCellStyle)
-		count:num_slots at:styles];
+        [coder encodeArrayOfObjCType:@encode(MiscTableCellStyle)
+                               count:num_slots at:styles];
 
     if (titles != 0)
-	for (i = 0; i < num_slots; i++)
-	    [coder encodeObject:titles[i]];
+        for (i = 0; i < num_slots; i++)
+            [coder encodeObject:titles[i]];
 
     if (prototypes != 0)
-	for (i = 0; i < num_slots; i++)
-	    [coder encodeObject:prototypes[i]];
+        for (i = 0; i < num_slots; i++)
+            [coder encodeObject:prototypes[i]];
 
     if (rep_objs != 0)
-	for (i = 0; i < num_slots; i++)
-	    {
-	    id const r = rep_objs[i];
-	    [coder encodeObject:
-		r != 0 && [r conformsToProtocol:@protocol(NSCoding)] ? r : 0];
-	    }
-    }
+        for (i = 0; i < num_slots; i++)
+        {
+            id const r = rep_objs[i];
+            [coder encodeObject:
+             r != 0 && [r conformsToProtocol:@protocol(NSCoding)] ? r : 0];
+        }
+}
 
 
 //-----------------------------------------------------------------------------
@@ -210,36 +210,36 @@ void MiscTableBorder::initWithCoder( NSCoder* coder, int ver )
 // MiscTableSlot::initWithCoder
 //-----------------------------------------------------------------------------
 void MiscTableSlot::initWithCoder( NSCoder* coder, int ver )
-    {
+{
     [coder decodeValueOfObjCType:@encode(MiscPixels) at:&size];
     [coder decodeValueOfObjCType:@encode(MiscPixels) at:&min_size];
     [coder decodeValueOfObjCType:@encode(MiscPixels) at:&max_size];
     if (ver < MISC_TS_VERSION_2 || (ver >= MISC_TS_VERSION_1000 &&
-	ver < MISC_TS_VERSION_1002))
-	{
-	MiscPixels data_size;
-	unsigned int x;
-	[coder decodeValueOfObjCType:@encode(MiscPixels) at:&data_size];
-	[coder decodeValueOfObjCType:@encode(MiscTableSizing) at:&x];
-	sizing = MiscTableSizing( (x & 1) | ((x & 4) >> 1) );
-	}
+                                    ver < MISC_TS_VERSION_1002))
+    {
+        MiscPixels data_size;
+        unsigned int x;
+        [coder decodeValueOfObjCType:@encode(MiscPixels) at:&data_size];
+        [coder decodeValueOfObjCType:@encode(MiscTableSizing) at:&x];
+        sizing = MiscTableSizing( (x & 1) | ((x & 4) >> 1) );
+    }
     else
-	[coder decodeValueOfObjCType:@encode(MiscTableSizing) at:&sizing];
+        [coder decodeValueOfObjCType:@encode(MiscTableSizing) at:&sizing];
     MISC_ENUM_CHECK( sizing, MISC_MAX_SIZING );
     offset = 0;
     adj_size = size;
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // initWithCoder_v2
 //-----------------------------------------------------------------------------
 void MiscTableBorder::initWithCoder_v2( NSCoder* coder, int ver )
-    {
+{
     emptyAndFree();
-
+    
     sort_funcs = 0;	// Can't archive function addresses.
-
+    
     unsigned int mbuff;
     [coder decodeValueOfObjCType:@encode(unsigned int) at:&mbuff];
     register unsigned int m = mbuff;
@@ -264,76 +264,76 @@ void MiscTableBorder::initWithCoder_v2( NSCoder* coder, int ver )
     max_slots = num_slots;
 
     if ((m >>= 1) & 1)
-	{
-	alloc_slots();
-	for (int i = 0; i < num_slots; i++)
-	    slots[i].initWithCoder( coder, ver );
-	}
+    {
+        alloc_slots();
+        for (int i = 0; i < num_slots; i++)
+            slots[i].initWithCoder( coder, ver );
+    }
 
     if ((m >>= 1) & 1)
-	{
-	alloc_vmap();
-	[coder decodeArrayOfObjCType:@encode(MiscCoord_V)
-		count:num_slots at:p2v];
-	for (int i = 0; i < num_slots; i++)
-	    v2p[ p2v[i] ] = i;
-	}
+    {
+        alloc_vmap();
+        [coder decodeArrayOfObjCType:@encode(MiscCoord_V)
+                               count:num_slots at:p2v];
+        for (int i = 0; i < num_slots; i++)
+            v2p[ p2v[i] ] = i;
+    }
 
     if ((m >>= 1) & 1)
-	{
-	alloc_sort_info();
-	[coder decodeArrayOfObjCType:@encode(int)
-		count:num_slots at:sort_info];
-	}
+    {
+        alloc_sort_info();
+        [coder decodeArrayOfObjCType:@encode(int)
+                               count:num_slots at:sort_info];
+    }
 
     if ((m >>= 1) & 1)
-	{
-	alloc_tags();
-	[coder decodeArrayOfObjCType:@encode(int) count:num_slots at:tags];
-	}
+    {
+        alloc_tags();
+        [coder decodeArrayOfObjCType:@encode(int) count:num_slots at:tags];
+    }
 
     if ((m >>= 1) & 1)
-	{
-	alloc_styles();
-	[coder decodeArrayOfObjCType:@encode(MiscTableCellStyle)
-		count:num_slots at:styles];
-	}
+    {
+        alloc_styles();
+        [coder decodeArrayOfObjCType:@encode(MiscTableCellStyle)
+                               count:num_slots at:styles];
+    }
 
     if ((m >>= 1) & 1)
-	{
-	alloc_titles();
-	if (ver < MISC_TS_VERSION_1000)
-	    decode_c_string_array( coder, titles, num_slots );
-	else
-	    decode_strings( coder, titles, num_slots );
-	}
+    {
+        alloc_titles();
+        if (ver < MISC_TS_VERSION_1000)
+            decode_c_string_array( coder, titles, num_slots );
+        else
+            decode_strings( coder, titles, num_slots );
+    }
 
     if ((m >>= 1) & 1)
-	{
-	alloc_prototypes();
-	for (int i = 0;	 i < num_slots;	 i++)
-	    prototypes[i] = [[coder decodeObject] retain];
-	}
+    {
+        alloc_prototypes();
+        for (int i = 0;	 i < num_slots;	 i++)
+            prototypes[i] = [[coder decodeObject] retain];
+    }
 
     if ((m >>= 1) & 1)
-	{
-	alloc_represented_objects();
-	for (int i = 0;	 i < num_slots;	 i++)
-	    rep_objs[i] = [[coder decodeObject] retain];
-	}
+    {
+        alloc_represented_objects();
+        for (int i = 0;	 i < num_slots;	 i++)
+            rep_objs[i] = [[coder decodeObject] retain];
+    }
 
     needs_recalc = true;
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // initWithCoder_v1
 //-----------------------------------------------------------------------------
 void MiscTableBorder::initWithCoder_v1( NSCoder* coder, int ver )
-    {
+{
     int n;
     emptyAndFree();
-
+    
     [coder decodeValueOfObjCType:@encode(MiscBorderType) at:&type];
     MISC_ENUM_CHECK( type, MISC_MAX_BORDER );
     owner = [coder decodeObject];
@@ -343,33 +343,33 @@ void MiscTableBorder::initWithCoder_v1( NSCoder* coder, int ver )
 
     [coder decodeValueOfObjCType:@encode(int) at:&n];
     if (n != 0)
-	{
-	alloc_slots();
-	for (int i = 0;	 i < num_slots;	 i++)
-	    slots[i].initWithCoder( coder, ver );
-	}
+    {
+        alloc_slots();
+        for (int i = 0;	 i < num_slots;	 i++)
+            slots[i].initWithCoder( coder, ver );
+    }
 
     [coder decodeValueOfObjCType:@encode(int) at:&n];
     if (n != 0)
-	{
-	alloc_vmap();
-	for (int i = 0;	 i < num_slots;	 i++)
-	    [coder decodeValueOfObjCType:@encode(MiscCoord_P) at:&(v2p[i])];
-	for (int j = 0;	 j < num_slots;	 j++)
-	    [coder decodeValueOfObjCType:@encode(MiscCoord_V) at:&(p2v[j])];
-	}
+    {
+        alloc_vmap();
+        for (int i = 0;	 i < num_slots;	 i++)
+            [coder decodeValueOfObjCType:@encode(MiscCoord_P) at:&(v2p[i])];
+        for (int j = 0;	 j < num_slots;	 j++)
+            [coder decodeValueOfObjCType:@encode(MiscCoord_V) at:&(p2v[j])];
+    }
 
     [coder decodeValueOfObjCType:@encode(int) at:&def_tag];
     [coder decodeValueOfObjCType:@encode(int) at:&n];
     if (n != 0)
-	{
-	alloc_tags();
-	for (int i = 0;	 i < num_slots;	 i++)
-	    {
-	    int const j = visualToPhysical(i);
-	    [coder decodeValueOfObjCType:@encode(int) at:&(tags[j])];
-	    }
-	}
+    {
+        alloc_tags();
+        for (int i = 0;	 i < num_slots;	 i++)
+        {
+            int const j = visualToPhysical(i);
+            [coder decodeValueOfObjCType:@encode(int) at:&(tags[j])];
+        }
+    }
 
     [coder decodeValueOfObjCType:@encode(MiscPixels) at:&uniform_size];
     [coder decodeValueOfObjCType:@encode(MiscPixels) at:&min_total_size];
@@ -381,82 +381,82 @@ void MiscTableBorder::initWithCoder_v1( NSCoder* coder, int ver )
 
     [coder decodeValueOfObjCType:@encode(int) at:&n];
     if (n != 0)
-	{
-	bool const isCString = (ver < MISC_TS_VERSION_1000);
-	alloc_titles();
-	for (int i = 0;	 i < num_slots;	 i++)
-	    {
-	    int const j = visualToPhysical(i);
-	    titles[j] = [decode_string( coder, isCString ) retain];
-	    }
-	}
+    {
+        bool const isCString = (ver < MISC_TS_VERSION_1000);
+        alloc_titles();
+        for (int i = 0;	 i < num_slots;	 i++)
+        {
+            int const j = visualToPhysical(i);
+            titles[j] = [decode_string( coder, isCString ) retain];
+        }
+    }
 
     [coder decodeValueOfObjCType:@encode(MiscTableCellStyle) at:&def_style];
     MISC_ENUM_CHECK( def_style, MISC_TABLE_CELL_MAX );
 
     [coder decodeValueOfObjCType:@encode(int) at:&n];
     if (n != 0)
-	{
-	alloc_styles();
-	for (int i = 0;	 i < num_slots;	 i++)
-	    {
-	    int const j = visualToPhysical(i);
-	    [coder decodeValueOfObjCType:@encode(MiscTableCellStyle)
-		at:&(styles[j])];
-	    MISC_ENUM_CHECK( styles[i], MISC_TABLE_CELL_MAX );
-	    }
-	}
+    {
+        alloc_styles();
+        for (int i = 0;	 i < num_slots;	 i++)
+        {
+            int const j = visualToPhysical(i);
+            [coder decodeValueOfObjCType:@encode(MiscTableCellStyle)
+                                      at:&(styles[j])];
+            MISC_ENUM_CHECK( styles[i], MISC_TABLE_CELL_MAX );
+        }
+    }
 
     [coder decodeValueOfObjCType:@encode(int) at:&n];
     if (n != 0)
-	{
-	alloc_prototypes();
-	for (int i = 0;	 i < num_slots;	 i++)
-	    {
-	    int const j = visualToPhysical(i);
-	    prototypes[j] = [[coder decodeObject] retain];
-	    }
-	}
+    {
+        alloc_prototypes();
+        for (int i = 0;	 i < num_slots;	 i++)
+        {
+            int const j = visualToPhysical(i);
+            prototypes[j] = [[coder decodeObject] retain];
+        }
+    }
 
     sort_funcs = 0;	// Can't archive function addresses.
 
     [coder decodeValueOfObjCType:@encode(int) at:&n];
     if (n != 0)
-	{
-	alloc_sort_info();
-	for (int i = 0;	 i < num_slots;	 i++)
-	    {
-	    int const j = visualToPhysical(i);
-	    MiscSortDirection x;
-	    [coder decodeValueOfObjCType:@encode(MiscSortDirection) at:&x];
-	    MISC_ENUM_CHECK( x, MISC_SORT_DIR_MAX );
-	    int const z = sort_info[j];
-	    sort_info[j] = ((z & ~1) | (x & 1));
-	    }
-	}
+    {
+        alloc_sort_info();
+        for (int i = 0;	 i < num_slots;	 i++)
+        {
+            int const j = visualToPhysical(i);
+            MiscSortDirection x;
+            [coder decodeValueOfObjCType:@encode(MiscSortDirection) at:&x];
+            MISC_ENUM_CHECK( x, MISC_SORT_DIR_MAX );
+            int const z = sort_info[j];
+            sort_info[j] = ((z & ~1) | (x & 1));
+        }
+    }
 
     [coder decodeValueOfObjCType:@encode(int) at:&n];
     if (n != 0)
-	{
-	if (sort_info == 0)
-	    alloc_sort_info();
-	for (int i = 0;	 i < num_slots;	 i++)
-	    {
-	    int const j = visualToPhysical(i);
-	    MiscSortType x;
-	    [coder decodeValueOfObjCType:@encode(MiscSortType) at:&x];
-	    MISC_ENUM_CHECK( x, MISC_SORT_TYPE_MAX );
-	    int const z = sort_info[j];
-	    sort_info[j] = ((x << 1) | (z & 1));
-	    }
-	}
+    {
+        if (sort_info == 0)
+            alloc_sort_info();
+        for (int i = 0;	 i < num_slots;	 i++)
+        {
+            int const j = visualToPhysical(i);
+            MiscSortType x;
+            [coder decodeValueOfObjCType:@encode(MiscSortType) at:&x];
+            MISC_ENUM_CHECK( x, MISC_SORT_TYPE_MAX );
+            int const z = sort_info[j];
+            sort_info[j] = ((x << 1) | (z & 1));
+        }
+    }
 
     selectable	  = decode_bool( coder );
     sizeable	  = decode_bool( coder );
     draggable	  = decode_bool( coder );
     modifier_drag = decode_bool( coder );
-
+    
     min_uniform_size = MISC_MIN_PIXELS_SIZE;
     max_uniform_size = MISC_MAX_PIXELS_SIZE;
     needs_recalc = true;
-    }
+}

@@ -67,12 +67,12 @@ MISC_TS_EXTERN_END
 #define	MISC_TC1_LAST_BIT			(1 << 7)
 
 @interface MiscTableCell : NSCell <NSCopying,NSCoding>
-    {
+{
     id owner;
     int tag;
     unsigned int tc1_flags;
     void* tc1_data;
-    }
+}
 
 - (id)initTextCell:(NSString*)s;
 - (id)initImageCell:(NSImage*)s;

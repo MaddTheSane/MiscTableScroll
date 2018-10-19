@@ -46,59 +46,59 @@
 // mouseDown:atPos:
 //-----------------------------------------------------------------------------
 - (void) mouseDown:(NSEvent*) event atPos:(MiscCoord_V)pos
-    {
+{
     deselecting = NO;
     if ([event modifierFlags] & NSShiftKeyMask)
-	{
-	deselecting = border->isSelected( pos );
-	border->toggle( pos );
-	anchor = pos;
-	}
-    else if ([event modifierFlags] & NSAlternateKeyMask)
-	{
-	int selected_slot = border->selectedSlot();
-	if (!border->goodPos( selected_slot ))
-	    selected_slot = pos;
-	border->select( selected_slot, pos );
-	anchor = selected_slot;
-	border->setSelectedSlot( pos );
-	}
-    else
-	{
-	border->selectOne( pos );
-	anchor = pos;
-	}
+    {
+        deselecting = border->isSelected( pos );
+        border->toggle( pos );
+        anchor = pos;
     }
+    else if ([event modifierFlags] & NSAlternateKeyMask)
+    {
+        int selected_slot = border->selectedSlot();
+        if (!border->goodPos( selected_slot ))
+            selected_slot = pos;
+        border->select( selected_slot, pos );
+        anchor = selected_slot;
+        border->setSelectedSlot( pos );
+    }
+    else
+    {
+        border->selectOne( pos );
+        anchor = pos;
+    }
+}
 
 
 //-----------------------------------------------------------------------------
 // mouseDragged:atPos:
 //-----------------------------------------------------------------------------
 - (void) mouseDragged:(NSEvent*) event atPos:(MiscCoord_V)pos
-    {
+{
     if (pos < 0) pos = 0;
     if (pos >= border->count()) pos = border->count() - 1;
 
     if (deselecting)
-	border->unselect( anchor, pos );
+        border->unselect( anchor, pos );
     else
-	{
-	int selected_slot = border->selectedSlot();
-	if (pos != selected_slot)
-	    {
-	    border->unselect( anchor, selected_slot );
-	    border->select( anchor, pos );
-	    }
-	}
-    border->setSelectedSlot( pos );
+    {
+        int selected_slot = border->selectedSlot();
+        if (pos != selected_slot)
+        {
+            border->unselect( anchor, selected_slot );
+            border->select( anchor, pos );
+        }
     }
+    border->setSelectedSlot( pos );
+}
 
 
 //-----------------------------------------------------------------------------
 // mouseUp:atPos:
 //-----------------------------------------------------------------------------
 - (void) mouseUp:(NSEvent*) event atPos:(MiscCoord_V)pos
-    {
-    }
+{
+}
 
 @end

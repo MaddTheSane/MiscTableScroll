@@ -32,10 +32,8 @@
 #pragma implementation
 #endif
 #include "MiscTracer.h"
-extern "Objective-C" {
 #include <Foundation/NSAutoreleasePool.h>
-#include <Foundation/NSUtilities.h>
-}
+#include <Foundation/Foundation.h>
 
 int MiscTracer::TRACE_DEPTH = 0;
 
@@ -43,11 +41,11 @@ int MiscTracer::TRACE_DEPTH = 0;
 // dump
 //-----------------------------------------------------------------------------
 void MiscTracer::dump( char const* s ) const
-    {
+{
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     NSMutableString* pad = [NSMutableString string];
     for (int i = 0; i < TRACE_DEPTH; i++)
-	[pad appendString:@" "];
+        [pad appendString:@" "];
     NSLog( @"%@%s %s", pad, s, msg );
     [pool release];
-    }
+}

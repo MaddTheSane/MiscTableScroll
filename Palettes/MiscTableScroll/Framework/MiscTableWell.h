@@ -28,13 +28,9 @@
 // Ported to OpenStep 4.0 for Mach PR2.
 // 
 //-----------------------------------------------------------------------------
-extern "Objective-C" {
 #import <AppKit/NSView.h>
-}
 
 @interface MiscTableWell : NSView
-    {
-    }
 
 - initWithFrame:(NSRect)frameRect;
 - (BOOL) isOpaque;

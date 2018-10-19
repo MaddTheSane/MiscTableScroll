@@ -41,14 +41,13 @@
 #import "MiscTableViewPrivate.h"
 #import "MiscTableBorder.h"
 #import "MiscMouseTracker.h"
-
-extern "Objective-C" {
 #import <AppKit/NSFontManager.h>
-}
+#import <AppKit/NSWindow.h>
+
 extern "C" {
-#import "MiscTableViewPS.h"
-#import <math.h>	// floor()
+//#import "MiscTableViewPS.h"
 }
+#include <cmath>
 
 int const NUM_EDGES = 4;	// 4 edges to draw per focus rectangle
 int const NUM_COORDS = 4;	// 4 coords per rectangle (x,y,w,h)
@@ -58,14 +57,14 @@ int const MAX_COORDS = NUM_EDGES * NUM_COORDS;	// 16 coords per 4 rects
 // init_pswrap
 //-----------------------------------------------------------------------------
 static inline void init_pswrap()
-    {
-    static initialized = NO;
+{
+    static BOOL initialized = NO;
     if (!initialized)
-	{
-	initialized = YES;
-	MISC_TV_initps();
-	}
+    {
+        initialized = YES;
+        MISC_TV_initps();
     }
+}
 
 
 @implementation MiscTableView(Cursor)
@@ -81,53 +80,53 @@ static inline void init_pswrap()
 // - shouldDrawCursor
 //-----------------------------------------------------------------------------
 - (BOOL)shouldDrawCursor
-    {
+{
     NSWindow* w = [self window];
     return ([self isCursorEnabled] && [self canDraw] && [w isKeyWindow] &&
-		[w firstResponder] == self);
-    }
+            [w firstResponder] == self);
+}
 
 
 //-----------------------------------------------------------------------------
 // - getCursorSlot
 //-----------------------------------------------------------------------------
 - (MiscCoord_V)getCursorSlot
-    {
+{
     MiscTableBorder* const b = [self borderFor:trackerBorder];
     MiscCoord_V vslot = b->getCursor();
     int const lim = b->count();
     if (lim > 0 && (vslot < 0 || vslot >= lim))
-	{
-	vslot = b->selectedSlot();
-	if (vslot < 0)
-	    vslot = b->physicalToVisual([self firstVisibleSlot:trackerBorder]);
-	NSParameterAssert( 0 <= vslot );
-	NSParameterAssert( vslot < lim );
-	b->setCursor( vslot );
-	}
-    return vslot;
+    {
+        vslot = b->selectedSlot();
+        if (vslot < 0)
+            vslot = b->physicalToVisual([self firstVisibleSlot:trackerBorder]);
+        NSParameterAssert( 0 <= vslot );
+        NSParameterAssert( vslot < lim );
+        b->setCursor( vslot );
     }
+    return vslot;
+}
 
 
 //-----------------------------------------------------------------------------
 // - getCursorFrame:
 //-----------------------------------------------------------------------------
 - (NSRect)getCursorFrame:(NSRect)clip
-    {
+{
     NSRect ret = NSZeroRect;
     if (rowBorder->count() > 0 && colBorder->count() > 0)
-	{
-	MiscTableBorder* const b = [self borderFor:trackerBorder];
-	MiscCoord_P const pslot = b->visualToPhysical( [self getCursorSlot] );
-	if (pslot >= 0)
-	    {
-	    NSRect r = [self getSlotInsideAt:pslot from:trackerBorder];
-	    if (NSIntersectsRect( r, clip ))
-		ret = r;
-	    }
-	}
-    return ret;
+    {
+        MiscTableBorder* const b = [self borderFor:trackerBorder];
+        MiscCoord_P const pslot = b->visualToPhysical( [self getCursorSlot] );
+        if (pslot >= 0)
+        {
+            NSRect r = [self getSlotInsideAt:pslot from:trackerBorder];
+            if (NSIntersectsRect( r, clip ))
+                ret = r;
+        }
     }
+    return ret;
+}
 
 
 //-----------------------------------------------------------------------------
@@ -138,239 +137,239 @@ static inline void init_pswrap()
 //	possibly including its: X, Y, MAXX, MAXY.
 //-----------------------------------------------------------------------------
 - (int)getCursorEdges:(NSRect*)edges clipTo:(NSRect)clip
-    {
+{
     struct TV_Lines { char xs, maxxs, xc, ys, maxys, yc, ws, wc, hs, hc; };
     static TV_Lines const LINES[ NUM_EDGES ] =
-	{
-	    { 1, 0,  0, 1, 0,  0, 1,  0, 0,  1 }, // top
-	    { 1, 0,  0, 0, 1, -1, 1,  0, 0,  1 }, // bottom
-	    { 1, 0,  0, 1, 0,  1, 0,  1, 1, -2 }, // left
-	    { 0, 1, -1, 1, 0,  1, 0,  1, 1, -2 }, // right
-	};
+    {
+        { 1, 0,  0, 1, 0,  0, 1,  0, 0,  1 }, // top
+        { 1, 0,  0, 0, 1, -1, 1,  0, 0,  1 }, // bottom
+        { 1, 0,  0, 1, 0,  1, 0,  1, 1, -2 }, // left
+        { 0, 1, -1, 1, 0,  1, 0,  1, 1, -2 }, // right
+    };
 
     NSRect* edge = edges;
     NSRect rCursor = [self getCursorFrame:clip];
     if (!NSIsEmptyRect( rCursor ))
-	{
-	for (int i = 0; i < NUM_EDGES; i++)
-	    {
-	    TV_Lines const& l = LINES[i];
-	    NSRect r = NSMakeRect(
-		    l.xs * NSMinX(rCursor) + l.maxxs * NSMaxX(rCursor) + l.xc,
-		    l.ys * NSMinY(rCursor) + l.maxys * NSMaxY(rCursor) + l.yc,
-		    l.ws * NSWidth(rCursor) + l.wc,
-		    l.hs * NSHeight(rCursor) + l.hc );
-	    r = NSIntersectionRect( clip, r );
-	    if (!NSIsEmptyRect(r))
-		*edge++ = r;
-	    }
-	}
-    return (edge - edges);
+    {
+        for (int i = 0; i < NUM_EDGES; i++)
+        {
+            TV_Lines const& l = LINES[i];
+            NSRect r = NSMakeRect(
+                                  l.xs * NSMinX(rCursor) + l.maxxs * NSMaxX(rCursor) + l.xc,
+                                  l.ys * NSMinY(rCursor) + l.maxys * NSMaxY(rCursor) + l.yc,
+                                  l.ws * NSWidth(rCursor) + l.wc,
+                                  l.hs * NSHeight(rCursor) + l.hc );
+            r = NSIntersectionRect( clip, r );
+            if (!NSIsEmptyRect(r))
+                *edge++ = r;
+        }
     }
+    return (edge - edges);
+}
 
 
 //-----------------------------------------------------------------------------
 // - getCursorCoords:clipTo:
 //-----------------------------------------------------------------------------
 - (int)getCursorCoords:(float*)coords clipTo:(NSRect)in_clip
-    {
+{
     int num_coords = 0;
 
     NSRect clip;
     if (NSIsEmptyRect( in_clip ))
-	clip = [self visibleRect];
+        clip = [self visibleRect];
     else
-	clip = in_clip;
+        clip = in_clip;
 
     NSRect edges[ NUM_EDGES ];
     int const num_edges = [self getCursorEdges:edges clipTo:clip];
     if (num_edges > 0)
-	{
-	float* p = coords;
-	for (int i = 0; i < num_edges; i++)
-	    {
-	    NSRect const& edge = edges[i];
-	    *p++ = NSMinX( edge );
-	    *p++ = NSMinY( edge );
-	    *p++ = NSWidth( edge );
-	    *p++ = NSHeight( edge );
-	    }
-	num_coords = num_edges * NUM_COORDS;
-	}
-    return num_coords;
+    {
+        float* p = coords;
+        for (int i = 0; i < num_edges; i++)
+        {
+            NSRect const& edge = edges[i];
+            *p++ = NSMinX( edge );
+            *p++ = NSMinY( edge );
+            *p++ = NSWidth( edge );
+            *p++ = NSHeight( edge );
+        }
+        num_coords = num_edges * NUM_COORDS;
     }
+    return num_coords;
+}
 
 
 //-----------------------------------------------------------------------------
 // - drawCursorCoords:count:
 //-----------------------------------------------------------------------------
 - (void)drawCursorCoords:(float const*)coords count:(int)n
-    {
+{
     init_pswrap();
     BOOL needsFocus = ([NSView focusView] != self);
     if (needsFocus) [self lockFocus];
     MISC_TV_dashedrects( coords, n );
     if (needsFocus) [self unlockFocus];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - drawCursorClipTo:
 //-----------------------------------------------------------------------------
 - (void)drawCursorClipTo:(NSRect)clip
-    {
+{
     if ([self isCursorEnabled])
-	{
-	float coords[ MAX_COORDS ];
-	int const num_coords = [self getCursorCoords:coords clipTo:clip];
-	if (num_coords > 0)
-	    {
-	    [self drawCursorCoords:coords count:num_coords];
-	    cursorSlot = [self borderFor:trackerBorder]->getCursor();
-	    }
-	}
+    {
+        float coords[ MAX_COORDS ];
+        int const num_coords = [self getCursorCoords:coords clipTo:clip];
+        if (num_coords > 0)
+        {
+            [self drawCursorCoords:coords count:num_coords];
+            cursorSlot = [self borderFor:trackerBorder]->getCursor();
+        }
     }
+}
 
 
 //-----------------------------------------------------------------------------
 // - drawCursor
 //-----------------------------------------------------------------------------
 - (void)drawCursor
-    {
+{
     [self drawCursorClipTo:NSZeroRect];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - eraseCursor
 //-----------------------------------------------------------------------------
 - (void)eraseCursor
-    {
+{
     if ([self isCursorEnabled])
-	{
-	MiscTableBorder* const b = [self borderFor:trackerBorder];
-	if (cursorSlot >= 0 && cursorSlot < b->count())
-	    {
-	    [self disableCursor];
+    {
+        MiscTableBorder* const b = [self borderFor:trackerBorder];
+        if (cursorSlot >= 0 && cursorSlot < b->count())
+        {
+            [self disableCursor];
 
-	    MiscCoord_P s = b->visualToPhysical( cursorSlot );
-	    if (trackerBorder == MISC_COL_BORDER)
-		[self drawColumn:s];
-	    else
-		[self drawRow:s];
+            MiscCoord_P s = b->visualToPhysical( cursorSlot );
+            if (trackerBorder == MISC_COL_BORDER)
+                [self drawColumn:s];
+            else
+                [self drawRow:s];
 
-	    [self enableCursor];
-	    cursorSlot = -1;
-	    }
-	}
+            [self enableCursor];
+            cursorSlot = -1;
+        }
     }
+}
 
 
 //-----------------------------------------------------------------------------
 // - becomeFirstResponder
 //-----------------------------------------------------------------------------
 - (BOOL)becomeFirstResponder
-    {
+{
     NSWindow* win = [self window];
     if (win && [win isKeyWindow])
-	{
-	if ([self shouldDrawCursor])
-	    {
-	    [self drawCursor];
-	    [win flushWindow];
-	    }
-	[[self scroll] didBecomeFirstResponder];
-	}
-    return YES;
+    {
+        if ([self shouldDrawCursor])
+        {
+            [self drawCursor];
+            [win flushWindow];
+        }
+        [[self scroll] didBecomeFirstResponder];
     }
+    return YES;
+}
 
 
 //-----------------------------------------------------------------------------
 // - resignFirstResponder
 //-----------------------------------------------------------------------------
 - (BOOL)resignFirstResponder
-    {
+{
     [self eraseCursor];
     [[self window] flushWindow];
     [[self scroll] didResignFirstResponder];
     return YES;
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - becomeKeyWindow
 //-----------------------------------------------------------------------------
 - (void)becomeKeyWindow
-    {
+{
     if ([self shouldDrawCursor])
-	{
-	[self drawCursor];
-	[[self window] flushWindow];
-	}
-    [[NSFontManager sharedFontManager]
-    		setSelectedFont:[[self scroll] font] isMultiple:NO];
+    {
+        [self drawCursor];
+        [[self window] flushWindow];
     }
+    [[NSFontManager sharedFontManager]
+     setSelectedFont:[[self scroll] font] isMultiple:NO];
+}
 
 
 //-----------------------------------------------------------------------------
 // - resignKeyWindow
 //-----------------------------------------------------------------------------
 - (void)resignKeyWindow
-    {
+{
     [self eraseCursor];
     [[self window] flushWindow];
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // - reflectCursor
 //-----------------------------------------------------------------------------
 - (void)reflectCursor
-    {
+{
     if ([self shouldDrawCursor])
-	{
-	NSWindow* w = [self window];
-	[w disableFlushWindow];
-	[self eraseCursor];
-	[self drawCursor];
-	[w enableFlushWindow];
-	[w flushWindow];
-	}
+    {
+        NSWindow* w = [self window];
+        [w disableFlushWindow];
+        [self eraseCursor];
+        [self drawCursor];
+        [w enableFlushWindow];
+        [w flushWindow];
     }
+}
 
 
 //-----------------------------------------------------------------------------
 // - moveCursorBy:
 //-----------------------------------------------------------------------------
 - (void)moveCursorBy:(int)delta
-    {
+{
     MiscTableBorder* const b = [self borderFor:trackerBorder];
     int const lim = b->count();
     if (lim > 0)
-	{
-	MiscCoord_V slot = b->getCursor() + delta;
-	if (slot < 0)
-	    slot = lim - 1;
-	else if (slot >= lim)
-	    slot = 0;
-	b->setCursor( slot );
+    {
+        MiscCoord_V slot = b->getCursor() + delta;
+        if (slot < 0)
+            slot = lim - 1;
+        else if (slot >= lim)
+            slot = 0;
+        b->setCursor( slot );
 
-	NSWindow* const w = [self window];
-	[w disableFlushWindow];
-	[self reflectCursor];
-	[self border:trackerBorder scrollToVisible:b->visualToPhysical(slot)];
-	[w enableFlushWindow];
-	[w flushWindow];
-	}
+        NSWindow* const w = [self window];
+        [w disableFlushWindow];
+        [self reflectCursor];
+        [self border:trackerBorder scrollToVisible:b->visualToPhysical(slot)];
+        [w enableFlushWindow];
+        [w flushWindow];
     }
+}
 
 
 //-----------------------------------------------------------------------------
 // - keyboardSelect:
 //-----------------------------------------------------------------------------
 - (void)keyboardSelect:(NSEvent*)p 
-    {
+{
     [tracker mouseDown:p atPos:[self borderFor:trackerBorder]->getCursor()];
-    }
+}
 
 @end
