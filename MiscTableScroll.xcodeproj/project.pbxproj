@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		55B4373D2179B0E4005ABAA2 /* MiscTableScroll.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B4373B2179B0E4005ABAA2 /* MiscTableScroll.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55B437472179B27E005ABAA2 /* MiscExporterAccessoryView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 55B437432179B27D005ABAA2 /* MiscExporterAccessoryView.nib */; };
-		55B437482179B27E005ABAA2 /* MiscExporterAccessoryView-macintosh.nib in Resources */ = {isa = PBXBuildFile; fileRef = 55B437452179B27D005ABAA2 /* MiscExporterAccessoryView-macintosh.nib */; };
+		55B437482179B27E005ABAA2 /* MiscExporterAccessoryView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 55B437452179B27D005ABAA2 /* MiscExporterAccessoryView.nib */; };
 		55B4379E2179B2AF005ABAA2 /* MiscListTracker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B437492179B2A7005ABAA2 /* MiscListTracker.mm */; };
 		55B4379F2179B2AF005ABAA2 /* MiscColView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B4374A2179B2A7005ABAA2 /* MiscColView.mm */; };
 		55B437A02179B2AF005ABAA2 /* MiscTableScrollIO.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B4374B2179B2A7005ABAA2 /* MiscTableScrollIO.mm */; };
@@ -102,8 +101,7 @@
 		55B437382179B0E4005ABAA2 /* MiscTableScroll.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MiscTableScroll.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B4373B2179B0E4005ABAA2 /* MiscTableScroll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MiscTableScroll.h; sourceTree = "<group>"; };
 		55B4373C2179B0E4005ABAA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55B437442179B27D005ABAA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MiscExporterAccessoryView.nib; sourceTree = "<group>"; };
-		55B437462179B27D005ABAA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = "English.lproj/MiscExporterAccessoryView-macintosh.nib"; sourceTree = "<group>"; };
+		55B437462179B27D005ABAA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MiscExporterAccessoryView.nib; sourceTree = "<group>"; };
 		55B437492179B2A7005ABAA2 /* MiscListTracker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscListTracker.mm; sourceTree = "<group>"; };
 		55B4374A2179B2A7005ABAA2 /* MiscColView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscColView.mm; sourceTree = "<group>"; };
 		55B4374B2179B2A7005ABAA2 /* MiscTableScrollIO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscTableScrollIO.mm; sourceTree = "<group>"; };
@@ -242,10 +240,9 @@
 				55B437702179B2AB005ABAA2 /* MiscDrawList.mm */,
 				55B4374D2179B2A7005ABAA2 /* MiscExporter.h */,
 				55B4378D2179B2AD005ABAA2 /* MiscExporter.mm */,
-				55B437452179B27D005ABAA2 /* MiscExporterAccessoryView-macintosh.nib */,
+				55B437452179B27D005ABAA2 /* MiscExporterAccessoryView.nib */,
 				55B437762179B2AB005ABAA2 /* MiscExporterAccessoryView.h */,
 				55B437622179B2A9005ABAA2 /* MiscExporterAccessoryView.mm */,
-				55B437432179B27D005ABAA2 /* MiscExporterAccessoryView.nib */,
 				55B437572179B2A8005ABAA2 /* MiscExporterASCII.mm */,
 				55B437882179B2AD005ABAA2 /* MiscExporterDBF.mm */,
 				55B437562179B2A8005ABAA2 /* MiscExporterPrivate.h */,
@@ -424,10 +421,9 @@
 				55B437F62179B34B005ABAA2 /* License_Notes.rtf in Resources */,
 				55B437EC2179B2AF005ABAA2 /* MiscSortAscend.tiff in Resources */,
 				55B437F82179B35A005ABAA2 /* README.rtf in Resources */,
-				55B437472179B27E005ABAA2 /* MiscExporterAccessoryView.nib in Resources */,
 				55B437B62179B2AF005ABAA2 /* MiscSortAscendH.tiff in Resources */,
 				55B437A52179B2AF005ABAA2 /* MiscTableViewPS.psw in Resources */,
-				55B437482179B27E005ABAA2 /* MiscExporterAccessoryView-macintosh.nib in Resources */,
+				55B437482179B27E005ABAA2 /* MiscExporterAccessoryView.nib in Resources */,
 				55B437A32179B2AF005ABAA2 /* MiscTableScroll-3.3-4.x.tops in Resources */,
 				55B437F52179B34B005ABAA2 /* License.rtf in Resources */,
 				55B437D82179B2AF005ABAA2 /* MiscSortDescend.tiff in Resources */,
@@ -492,20 +488,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		55B437432179B27D005ABAA2 /* MiscExporterAccessoryView.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55B437442179B27D005ABAA2 /* English */,
-			);
-			name = MiscExporterAccessoryView.nib;
-			sourceTree = "<group>";
-		};
-		55B437452179B27D005ABAA2 /* MiscExporterAccessoryView-macintosh.nib */ = {
+		55B437452179B27D005ABAA2 /* MiscExporterAccessoryView.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				55B437462179B27D005ABAA2 /* English */,
 			);
-			name = "MiscExporterAccessoryView-macintosh.nib";
+			name = MiscExporterAccessoryView.nib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
