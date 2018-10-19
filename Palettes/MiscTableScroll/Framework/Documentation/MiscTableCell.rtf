@@ -1,127 +1,167 @@
-{\rtf0\ansi{\fonttbl\f0\fnil Times-Roman;\f1\ftech Symbol;\f2\fswiss Helvetica;\f3\fmodern Courier;\f4\fmodern Ohlfs;}
-\paperw16220
-\paperh9600
-\margl120
-\margr0
-{\colortbl;\red0\green0\blue0;}
-\f0\b0\i0\ulnone\ql\fs24\fi0\li0\gray0\fc0\cf0\up0\dn0 Version 2.0, Copyright 
-\f1 ã
+{\rtf1\ansi\ansicpg1252\cocoartf1671
+\cocoascreenfonts1{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\fnil\fcharset0 LucidaGrande;\f2\fswiss\fcharset0 Helvetica-Bold;
+\f3\froman\fcharset0 Times-Italic;\f4\fmodern\fcharset0 Courier;\f5\froman\fcharset0 Times-Bold;
+\f6\fswiss\fcharset0 Helvetica;\f7\froman\fcharset0 Times-BoldItalic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl120\margr0\vieww15980\viewh9600\viewkind0
+\pard\partightenfactor0
+
+\f0\fs24 \cf0 Version 2.0, Copyright 
+\f1 \'a9
 \f0 1995, 1996, 1997, 1999 by Paul S. McCarthy and Eric Sunshine.  All Rights Reserved.\
 Paul S. McCarthy and Eric Sunshine  --  May 3, 1999\
 \
+\pard\li1460\partightenfactor0
 
-\f2\b\fs52\li1460\fc1\cf1 MiscTableCell
-\fs56\fc0\cf0 \
+\f2\b\fs52 \cf0 MiscTableCell
+\fs56 \
+\pard\tx4880\li1460\partightenfactor0
 
-\pard\tx4880\fs80\li1460\fc0\cf0 \
+\fs80 \cf0 \
+\pard\tx4220\li4220\fi-2720\partightenfactor0
 
-\pard\tx4220\fs24\fi-2720\li4220\fc0\cf0 Inherits From:	
+\fs24 \cf0 Inherits From:	
 \f0\b0\fs28 NSCell : NSObject\
 
 \fs20 \
+\pard\tx4220\li4220\fi-2740\partightenfactor0
 
-\f2\b\fs24\fi-2740 Conforms To:	
+\f2\b\fs24 \cf0 Conforms To:	
 \f0\b0\fs28 NSCoding (NSObject), \
-
-\fi0 NSCopying (NSObject),\
+\pard\tx4220\li4220\partightenfactor0
+\cf0 NSCopying (NSObject),\
 NSObject (NSObject)\
 
 \fs20 \
+\pard\tx4220\li4220\fi-2740\partightenfactor0
 
-\f2\b\fs24\fi-2740 Declared In:	
+\f2\b\fs24 \cf0 Declared In:	
 \f0\b0\fs28 MiscTableCell.h\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx4220\li4220\fi-2740\partightenfactor0
 
-\pard\tx4220\f2\b\fs24\fi-2740\li4220\fc0\cf0 Java Class:	
+\f2\b\fs24 \cf0 Java Class:	
 \f0\b0\fs28 org.misckit.yellow.application.TableScroll.Cell\
+\pard\li1360\partightenfactor0
 
-\pard\f2\b\fs16\li1360\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
+\pard\li1200\fi-1020\partightenfactor0
 
-\fs28\fi-1020\li1200\fc1\cf1 Class Description\
+\fs28 \cf0 Class Description\
+\pard\li1360\partightenfactor0
 
-\fs16\fi0\li1360\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\f0\b0\fs28\li1500\fc0\cf0 This is the cell class used by MiscTableScroll to display either text or an image.  This class provides a tag and separate text and background colors for normal and selected states.  Finally, it supports the concept of an 
-\i owner
-\i0 , and inherited font and color values.\
+\f0\b0\fs28 \cf0 This is the cell class used by MiscTableScroll to display either text or an image.  This class provides a tag and separate text and background colors for normal and selected states.  Finally, it supports the concept of an 
+\f3\i owner
+\f0\i0 , and inherited font and color values.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
 \
+\pard\tx2480\tx2860\tx3240\li1500\partightenfactor0
 
-\f2\b\fs24\li1500\fc1\cf1 Owner and Inheritence of Colors and Font\
+\f2\b\fs24 \cf0 Owner and Inheritence of Colors and Font\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\f0\b0\fs16\li2100\fc0\cf0 \
+\f0\b0\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 This class implements the concept of an 
-\i owner
-\i0 .  An owner provides the default font and colors used by the cells that it owns.  This makes it fast and easy to change the appearance of an entire table: set the font and colors of the owner, and all of the cells that it owns automatically inherit the new font and colors.  However, you can also set font and color values for individual cells.  Values that you explicitly set supercede values implicitly inherited from the owner.  You can use this feature to emphasize special cells while still using inherited values for normal cells.\
+\fs28 \cf0 This class implements the concept of an 
+\f3\i owner
+\f0\i0 .  An owner provides the default font and colors used by the cells that it owns.  This makes it fast and easy to change the appearance of an entire table: set the font and colors of the owner, and all of the cells that it owns automatically inherit the new font and colors.  However, you can also set font and color values for individual cells.  Values that you explicitly set supercede values implicitly inherited from the owner.  You can use this feature to emphasize special cells while still using inherited values for normal cells.\
+\pard\tx2480\tx2860\tx3240\li1360\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\f2\b\fs16\li1360\fc0\cf0 \
+\f2\b\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\f0\b0\fs28\li1500\fc0\cf0 Another benefit of inherited values is reduced memory usage.  Inherited values don't have to be stored in the individual cells.  They just ask their owner for the current value whenever it is needed.  This can lead to significant savings in large tables. \
+\f0\b0\fs28 \cf0 Another benefit of inherited values is reduced memory usage.  Inherited values don't have to be stored in the individual cells.  They just ask their owner for the current value whenever it is needed.  This can lead to significant savings in large tables. \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
+\cf0 \
+\pard\tx2480\tx2860\tx3240\li1360\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\li2100\fc0\cf0 \
+\f2\b\fs16 \cf0 \
+\pard\tx2480\tx2860\tx3240\li1500\partightenfactor0
 
-\f2\b\fs16\li1360 \
+\fs24 \cf0 Owner drawing\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs24\li1500\fc1\cf1 Owner drawing\
+\f0\b0\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\f0\b0\fs16\li2100\fc0\cf0 \
-
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc1\cf1 This class also supports a specialized concept of delegated drawing.  The MiscTableScroll class will draw cells that respond with YES to the 
-\f3\fs24 -ownerDraw
+\fs28 \cf0 This class also supports a specialized concept of delegated drawing.  The MiscTableScroll class will draw cells that respond with YES to the 
+\f4\fs24 -ownerDraw
 \f0\fs28  message.  This enables the MiscTableScroll object to eliminate many redundant font and color setting operations, greatly improving drawing performance.  See the description of owner drawing in MiscTableScroll for a more detailed discussion.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
+\cf0 \
+\pard\tx2480\tx2860\tx3240\li1360\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\li2100\fc0\cf0 \
+\f2\b\fs16 \cf0 \
+\pard\tx2480\tx2860\tx3240\li1500\partightenfactor0
 
-\f2\b\fs16\li1360 \
+\fs24 \cf0 Extensible Memory Management\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs24\li1500\fc1\cf1 Extensible Memory Management\
+\f0\b0\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\f0\b0\fs16\li2100\fc0\cf0 \
+\fs28 \cf0 To minimize memory usage, storage for optional items is allocated on an as-needed basis.  Memory is allocated only for the values that are actually set.  If no optional items are set, then no extra memory at all is allocated.\
+\pard\tx2480\tx2860\tx3240\li1360\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 To minimize memory usage, storage for optional items is allocated on an as-needed basis.  Memory is allocated only for the values that are actually set.  If no optional items are set, then no extra memory at all is allocated.\
+\f2\b\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\f2\b\fs16\li1360\fc0\cf0 \
+\f0\b0\fs28 \cf0 The optional allocation scheme is extensible.  Subclasses of MiscTableCell can extend this allocation scheme by appending their own dynamic variables to the end of the list used by this class.  There is a strict ordering for the information stored in the variable length data.  This ordering is enumerated by the 
+\f3\i tc1_flags
+\f0\i0 .  Subclasses should append their data after the last of the information stored by this class.  Methods are provided to determine whether or not a piece of information is stored in the data field as well as for finding its address.  Convenience methods for extracting a given piece of information complete the interface.\
+\pard\tx2480\tx2860\tx3240\li1360\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\f0\b0\fs28\li1500\fc0\cf0 The optional allocation scheme is extensible.  Subclasses of MiscTableCell can extend this allocation scheme by appending their own dynamic variables to the end of the list used by this class.  There is a strict ordering for the information stored in the variable length data.  This ordering is enumerated by the 
-\i tc1_flags
-\i0 .  Subclasses should append their data after the last of the information stored by this class.  Methods are provided to determine whether or not a piece of information is stored in the data field as well as for finding its address.  Convenience methods for extracting a given piece of information complete the interface.\
+\f2\b\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\f2\b\fs16\li1360\fc0\cf0 \
+\f0\b0\fs28 \cf0 The methods which return the address of the piece of data in 
+\f3\i tc1_data
+\f0\i0  are dynamic in nature.  For instance, text color is stored prior to background color in 
+\f3\i tc1_data
+\f0\i0  so if both text color and background color have been set then the address of the storage for the background color will follow the text color.  However, if text color is never set \'96 that is it is inherited from the owner \'96 and the background color has been set then the address of the background color will be at a different location.  If text color gets set later then the storage for background color is shifted up to make room for the text color.  Ergo, the strict ordering is maintained.\
+\pard\tx2480\tx2860\tx3240\li1360\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\f0\b0\fs28\li1500\fc0\cf0 The methods which return the address of the piece of data in 
-\i tc1_data
-\i0  are dynamic in nature.  For instance, text color is stored prior to background color in 
-\i tc1_data
-\i0  so if both text color and background color have been set then the address of the storage for the background color will follow the text color.  However, if text color is never set ± that is it is inherited from the owner ± and the background color has been set then the address of the background color will be at a different location.  If text color gets set later then the storage for background color is shifted up to make room for the text color.  Ergo, the strict ordering is maintained.\
+\f2\b\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\f2\b\fs16\li1360\fc0\cf0 \
+\f0\b0\fs28 \cf0 For example, code to locate the address of  the selected background color is stored in the cell would look like this:\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\f0\b0\fs28\li1500\fc0\cf0 For example, code to locate the address of  the selected background color is stored in the cell would look like this:\
+\fs16 \cf0 \
+\pard\tx2880\tx3240\li2520\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
-
-\pard\tx2880\tx3240\f3\fs24\li2520\fc1\cf1 - (unsigned int)tc1SelectBackgroundColorPos\
+\f4\fs24 \cf0 - (unsigned int)tc1SelectBackgroundColorPos\
 	\{\
 	unsigned int pos = [self tc1SelectedTextColorPos];\
 	if (tc1_flags & MISC_TC1_SELF_TEXT_COLOR_H)\
 		pos += [self tc1SelectedTextColorLen];\
 	return pos;\
 	\}\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\f0\fs16\li2100\fc0\cf0 \
+\f0\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc1\cf1 Since the selected background color is stored following the selected text color it first determines the location of the selected text color then adds the length of the selected text color to that address if the selected text color is in fact being stored locally.  The actual shifting of the dynamic memory is done in the 
-\f3\fs24 -setUseOwner
+\fs28 \cf0 Since the selected background color is stored following the selected text color it first determines the location of the selected text color then adds the length of the selected text color to that address if the selected text color is in fact being stored locally.  The actual shifting of the dynamic memory is done in the 
+\f4\fs24 -setUseOwner
 \f0\fs28 ... methods.  For instance:\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2160\tx2520\tx2880\tx3240\li1800\partightenfactor0
 
-\pard\tx2160\tx2520\tx2880\tx3240\f3\fs24\li1800\fc1\cf1 - (void)setUseOwnerSelectedBackgroundColor:(BOOL)flag\
+\f4\fs24 \cf0 - (void)setUseOwnerSelectedBackgroundColor:(BOOL)flag\
 	\{\
 	if ([self useOwnerSelectedBackgroundColor] != flag)\
 		\{\
@@ -141,16 +181,20 @@ NSObject (NSObject)\
 			\}\
 		\}\
 	\}\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\f0\fs16\li2100\fc0\cf0 \
+\f0\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc1\cf1 Finally, the 
-\f3\fs24 -setSelectedBackgroundColor:
+\fs28 \cf0 Finally, the 
+\f4\fs24 -setSelectedBackgroundColor:
 \f0\fs28  method makes room for the data and then stores it:\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2160\tx2520\tx2880\tx3240\li1800\partightenfactor0
 
-\pard\tx2160\tx2520\tx2880\tx3240\f3\fs24\li1800\fc1\cf1 - (void)setSelectedBackgroundColor:(NSColor*)c\
+\f4\fs24 \cf0 - (void)setSelectedBackgroundColor:(NSColor*)c\
 	\{\
 	NSColor** p;\
 	[self setUseOwnerSelectedBackgroundColor:NO];\
@@ -158,49 +202,57 @@ NSObject (NSObject)\
 	[*p autorelease];\
 	*p = [c retain];\
 	\}\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\f0\fs16\li2100\fc0\cf0 \
+\f0\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc1\cf1 A subclass adding more data to the end of 
-\i tc1_data
-\i0  would provide similar methods.  Its counterpart to 
-\f3\fs24 -tc1SelectedBackgroundColorPos
-\f0\i\fs28  
-\i0 would first call 
-\f3\fs24 -tc1SelectedBackgroundColorPos
-\f0\i\fs28  
-\i0 to determine its address and then add the correct offset returned by 
-\f3\fs24 -tc1SelectedBackgroundColorLen
+\fs28 \cf0 A subclass adding more data to the end of 
+\f3\i tc1_data
+\f0\i0  would provide similar methods.  Its counterpart to 
+\f4\fs24 -tc1SelectedBackgroundColorPos
+\f3\i\fs28  
+\f0\i0 would first call 
+\f4\fs24 -tc1SelectedBackgroundColorPos
+\f3\i\fs28  
+\f0\i0 to determine its address and then add the correct offset returned by 
+\f4\fs24 -tc1SelectedBackgroundColorLen
 \f0\fs28  as appropriate.\
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\fs14\fc0\cf0 \
+\fs14 \cf0 \
 
 \fs56 \
+\pard\li1200\fi-1020\partightenfactor0
 
-\pard\f2\b\fs28\fi-1020\li1200\fc1\cf1 Instance Variables
-\f0\b0\fs24\fc0\cf0   [Objective-C]
-\f2\b\fs28\fc1\cf1 \
+\f2\b\fs28 \cf0 Instance Variables
+\f0\b0\fs24   [Objective-C]
+\f2\b\fs28 \
+\pard\li1360\partightenfactor0
 
-\fs16\fi0\li1360\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\f0\b0\fs28\li1500\fc0\cf0 id 
-\b owner
-\b0 ;\
+\f0\b0\fs28 \cf0 id 
+\f5\b owner
+\f0\b0 ;\
 int 
-\b tag
-\b0 ;\
+\f5\b tag
+\f0\b0 ;\
 unsigned 
-\b tc1_flags
-\b0 ;\
+\f5\b tc1_flags
+\f0\b0 ;\
 void* 
-\b tc1_data
-\b0 ;\
+\f5\b tc1_data
+\f0\b0 ;\
+\pard\tx6140\tx9660\tx10180\li6140\fi-4040\partightenfactor0
 
-\pard\tx6140\tx9660\tx10180\fs16\fi-4040\li6140\fc0\cf0 \
+\fs16 \cf0 \
 \
 \
+\pard\tx4320\li1500\partightenfactor0
 
-\pard\tx4320\fs28\li1500\fc0\cf0 owner	The owner of this cell; queried for font and color information.\
+\fs28 \cf0 owner	The owner of this cell; queried for font and color information.\
 
 \fs16 \
 
@@ -209,1868 +261,2183 @@ void*
 \fs16 \
 
 \fs28 tc1_flags	Bit flags describing the contents of 
-\i tc1_data
-\i0 .\
+\f3\i tc1_data
+\f0\i0 .\
 
 \fs16 \
 
 \fs28 tc1_data	Variable length data which is allocated only as needed for storage of color values.\
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs14\li1500\fc0\cf0 \
+\fs14 \cf0 \
 
 \fs56 \
+\pard\li1200\fi-1020\partightenfactor0
 
-\pard\f2\b\fs28\fi-1020\li1200\fc1\cf1 Method Types\
+\f2\b\fs28 \cf0 Method Types\
+\pard\li1360\partightenfactor0
 
-\fs16\fi0\li1360\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx6080\tx11280\li6320\fi-4840\partightenfactor0
 
-\pard\tx6080\tx11280\f0\b0\fs28\fi-4840\li6320\fc1\cf1 Initializing, freeing, and copying	± initImageCell:\
+\f0\b0\fs28 \cf0 Initializing, freeing, and copying	\'96 initImageCell:\
+\pard\tx11280\li6320\fi-240\partightenfactor0
+\cf0 \'96 initTextCell:\
+\'96 dealloc\
+\'96 copyWithZone:\
+\pard\tx6140\tx9660\tx10180\li1360\partightenfactor0
 
-\pard\tx11280\fi-240\li6320\fc1\cf1 ± initTextCell:\
-± dealloc\
-± copyWithZone:\
+\f2\b\fs16 \cf0 \
+\pard\tx6080\tx11280\li6320\fi-4840\partightenfactor0
 
-\pard\tx6140\tx9660\tx10180\f2\b\fs16\li1360\fc0\cf0 \
+\f0\b0\fs28 \cf0 Drawing	\'96 drawInteriorWithFrame:inView:\
+\pard\tx11280\li6320\fi-240\partightenfactor0
+\cf0 \'96 drawWithFrame:inView:\
+\'96 isOpaque\
+\'96 bgColor\
+\'96 fgColor\
+\'96 setSelected:\
+\'96 isSelected\
+\'96 ownerDraw\
+\'96 setOwnerDraw:\
+\pard\tx6140\tx9660\tx10180\li1360\partightenfactor0
 
-\pard\tx6080\tx11280\f0\b0\fs28\fi-4840\li6320\fc1\cf1 Drawing	± drawInteriorWithFrame:inView:\
+\f2\b\fs16 \cf0 \
+\pard\tx6080\tx11280\li6320\fi-4840\partightenfactor0
 
-\pard\tx11280\fi-240\li6320\fc1\cf1 ± drawWithFrame:inView:\
-± isOpaque\
-± bgColor\
-± fgColor\
-± setSelected:\
-± isSelected\
-± ownerDraw\
-± setOwnerDraw:\
+\f0\b0\fs28 \cf0 Tag manipulation	\'96 setTag:\
+\pard\tx11280\li6320\fi-240\partightenfactor0
+\cf0 \'96 tag\
+\pard\tx6140\tx9660\tx10180\li1360\partightenfactor0
 
-\pard\tx6140\tx9660\tx10180\f2\b\fs16\li1360\fc0\cf0 \
+\f2\b\fs16 \cf0 \
+\pard\tx6080\tx11280\li6320\fi-4840\partightenfactor0
 
-\pard\tx6080\tx11280\f0\b0\fs28\fi-4840\li6320\fc1\cf1 Tag manipulation	± setTag:\
+\f0\b0\fs28 \cf0 Font manipulation	\'96 font\
+\pard\tx11280\li6320\fi-240\partightenfactor0
+\cf0 \'96 setFont:\
+\pard\tx6140\tx9660\tx10180\li1360\partightenfactor0
 
-\pard\tx11280\fi-240\li6320\fc1\cf1 ± tag\
+\f2\b\fs16 \cf0 \
+\pard\tx6080\tx11280\li6320\fi-4840\partightenfactor0
 
-\pard\tx6140\tx9660\tx10180\f2\b\fs16\li1360\fc0\cf0 \
-
-\pard\tx6080\tx11280\f0\b0\fs28\fi-4840\li6320\fc1\cf1 Font manipulation	± font\
-
-\pard\tx11280\fi-240\li6320\fc1\cf1 ± setFont:\
-
-\pard\tx6140\tx9660\tx10180\f2\b\fs16\li1360\fc0\cf0 \
-
-\pard\tx6080\tx11280\f0\b0\fs28\fi-4840\li6320\fc1\cf1 Setting and querying colors	+ defaultBackgroundColor\
-
-\pard\tx11280\fi-240\li6320\fc1\cf1 + defaultFont\
+\f0\b0\fs28 \cf0 Setting and querying colors	+ defaultBackgroundColor\
+\pard\tx11280\li6320\fi-240\partightenfactor0
+\cf0 + defaultFont\
 + defaultSelectedBackgroundColor\
 + defaultSelectedTextColor\
 + defaultTextColor\
-± backgroundColor\
-± selectedBackgroundColor\
-± selectedTextColor\
-± setBackgroundColor:\
-± setSelectedBackgroundColor:\
-± setSelectedTextColor:\
-± setTextColor:\
-± textColor\
+\'96 backgroundColor\
+\'96 selectedBackgroundColor\
+\'96 selectedTextColor\
+\'96 setBackgroundColor:\
+\'96 setSelectedBackgroundColor:\
+\'96 setSelectedTextColor:\
+\'96 setTextColor:\
+\'96 textColor\
+\pard\tx6140\tx9660\tx10180\li1360\partightenfactor0
 
-\pard\tx6140\tx9660\tx10180\f2\b\fs16\li1360\fc0\cf0 \
+\f2\b\fs16 \cf0 \
+\pard\tx6080\tx11280\li6320\fi-4840\partightenfactor0
 
-\pard\tx6080\tx11280\f0\b0\fs28\fi-4840\li6320\fc1\cf1 Setting and querying owner	± owner\
+\f0\b0\fs28 \cf0 Setting and querying owner	\'96 owner\
+\pard\tx11280\li6320\fi-240\partightenfactor0
+\cf0 \'96 setOwner:\
+\pard\tx6140\tx9660\tx10180\li1360\partightenfactor0
 
-\pard\tx11280\fi-240\li6320\fc1\cf1 ± setOwner:\
+\f2\b\fs16 \cf0 \
+\pard\tx6080\tx11280\li6320\fi-4840\partightenfactor0
 
-\pard\tx6140\tx9660\tx10180\f2\b\fs16\li1360\fc0\cf0 \
+\f0\b0\fs28 \cf0 Colors and owner inheritence	\'96 setOwnerBackgroundColor:\
+\pard\tx11280\li6320\fi-240\partightenfactor0
+\cf0 \'96 setOwnerFont:\
+\'96 setOwnerSelectedBackgroundColor:\
+\'96 setOwnerSelectedTextColor:\
+\'96 setOwnerTextColor:\
+\'96 setUseOwnerBackgroundColor:\
+\'96 setUseOwnerFont:\
+\'96 setUseOwnerSelectedBackgroundColor:\
+\'96 setUseOwnerSelectedTextColor:\
+\'96 setUseOwnerTextColor:\
+\'96 useOwnerBackgroundColor\
+\'96 useOwnerFont\
+\'96 useOwnerSelectedBackgroundColor\
+\'96 useOwnerSelectedTextColor\
+\'96 useOwnerTextColor\
+\pard\tx6140\tx9660\tx10180\li1360\partightenfactor0
 
-\pard\tx6080\tx11280\f0\b0\fs28\fi-4840\li6320\fc1\cf1 Colors and owner inheritence	± setOwnerBackgroundColor:\
+\f2\b\fs16 \cf0 \
+\pard\tx6080\tx11280\li6320\fi-4840\partightenfactor0
 
-\pard\tx11280\fi-240\li6320\fc1\cf1 ± setOwnerFont:\
-± setOwnerSelectedBackgroundColor:\
-± setOwnerSelectedTextColor:\
-± setOwnerTextColor:\
-± setUseOwnerBackgroundColor:\
-± setUseOwnerFont:\
-± setUseOwnerSelectedBackgroundColor:\
-± setUseOwnerSelectedTextColor:\
-± setUseOwnerTextColor:\
-± useOwnerBackgroundColor\
-± useOwnerFont\
-± useOwnerSelectedBackgroundColor\
-± useOwnerSelectedTextColor\
-± useOwnerTextColor\
+\f0\b0\fs28 \cf0 Archiving	\'96 initWithCoder:\
+\pard\tx11280\li6320\fi-240\partightenfactor0
+\cf0 \'96 encodeWithCoder:\
+\pard\tx6140\tx9660\tx10180\li1360\partightenfactor0
 
-\pard\tx6140\tx9660\tx10180\f2\b\fs16\li1360\fc0\cf0 \
+\f2\b\fs16 \cf0 \
+\pard\tx6080\tx11280\li6320\fi-4840\partightenfactor0
 
-\pard\tx6080\tx11280\f0\b0\fs28\fi-4840\li6320\fc1\cf1 Archiving	± initWithCoder:\
+\f0\b0\fs28 \cf0 Extensible conditional allocations	\'96 tc1BackgroundColorLen\
+\pard\tx11280\li6320\fi-240\partightenfactor0
+\cf0 \'96 tc1BackgroundColorPos\
+\'96 tc1BackgroundColorPtr\
+\'96 tc1DataSize\
+\'96 tc1DeleteDataPos:len:\
+\'96 tc1DestroyData\
+\'96 tc1Flags\
+\'96 tc1SelectedBackgroundColorLen\
+\'96 tc1SelectedBackgroundColorPos\
+\'96 tc1SelectedBackgroundColorPtr\
+\'96 tc1SelectedTextColorLen\
+\'96 tc1SelectedTextColorPos\
+\'96 tc1SelectedTextColorPtr\
+\'96 tc1InsertData:pos:len:\
+\'96 tc1TextColorLen\
+\'96 tc1TextColorPos\
+\'96 tc1TextColorPtr\
+\pard\tx11280\li6320\fi-240\partightenfactor0
 
-\pard\tx11280\fi-240\li6320\fc1\cf1 ± encodeWithCoder:\
+\fs70 \cf0 \
+\pard\li1200\fi-1020\partightenfactor0
 
-\pard\tx6140\tx9660\tx10180\f2\b\fs16\li1360\fc0\cf0 \
+\f2\b\fs28 \cf0 Class Methods\
+\pard\li1360\partightenfactor0
 
-\pard\tx6080\tx11280\f0\b0\fs28\fi-4840\li6320\fc1\cf1 Extensible conditional allocations	± tc1BackgroundColorLen\
+\fs16 \cf0 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx11280\fi-240\li6320\fc1\cf1 ± tc1BackgroundColorPos\
-± tc1BackgroundColorPtr\
-± tc1DataSize\
-± tc1DeleteDataPos:len:\
-± tc1DestroyData\
-± tc1Flags\
-± tc1SelectedBackgroundColorLen\
-± tc1SelectedBackgroundColorPos\
-± tc1SelectedBackgroundColorPtr\
-± tc1SelectedTextColorLen\
-± tc1SelectedTextColorPos\
-± tc1SelectedTextColorPtr\
-± tc1InsertData:pos:len:\
-± tc1TextColorLen\
-± tc1TextColorPos\
-± tc1TextColorPtr\
+\fs28 \cf0 defaultBackgroundColor\
+\pard\li2520\fi-620\partightenfactor0
 
-\fs70\fc0\cf0 \
-
-\pard\f2\b\fs28\fi-1020\li1200\fc1\cf1 Class Methods\
-
-\fs16\fi0\li1360\fc0\cf0 \
-
-\pard\tx8260\fs28\li1500\fc0\cf0 defaultBackgroundColor\
-
-\pard\f0\b0\fi-620\li2520\fc0\cf0 + (NSColor*)
-\b defaultBackgroundColor
-\b0\fs24   [Objective-C]
+\f0\b0 \cf0 + (NSColor*)
+\f5\b defaultBackgroundColor
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 static NSColor 
-\b defaultBackgroundColor
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 static NSColor 
+\f5\b defaultBackgroundColor
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns 
-\f3\fs24\fc1\cf1 [NSColor controlBackgroundColor]
-\f0\fs28\fc0\cf0  as the default background color.  This is the color which is returned by 
-\f3\fs24\fc1\cf1 -backgroundColor
-\f0\fs28\fc0\cf0  if a custom color has not been set for this cell and no owner has been set or the owner does not respond to the 
-\f3\fs24\fc1\cf1 -backgroundColor
-\f0\fs28\fc0\cf0  message.  This is also the color used upon receipt of a 
-\f3\fs24\fc1\cf1 -setUseOwnerBackgroundColor:NO
-\f0\b\fs28\fc0\cf0  
-\b0 message.  Subclasses should override this method if this color is inappropriate.\
+\fs28 \cf0 Returns 
+\f4\fs24 [NSColor controlBackgroundColor]
+\f0\fs28  as the default background color.  This is the color which is returned by 
+\f4\fs24 -backgroundColor
+\f0\fs28  if a custom color has not been set for this cell and no owner has been set or the owner does not respond to the 
+\f4\fs24 -backgroundColor
+\f0\fs28  message.  This is also the color used upon receipt of a 
+\f4\fs24 -setUseOwnerBackgroundColor:NO
+\f5\b\fs28  
+\f0\b0 message.  Subclasses should override this method if this color is inappropriate.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:	
-\f0\fs28 ± backgroundColor, + defaultSelectedBackgroundColor, + defaultSelectedTextColor, +€defaultTextColor, ± setBackgroundColor:, ± setUseOwnerBackgroundColor:
-\b0\fs16\fc0\cf0 \
+\f2\b\fs24 \cf0 See also:	
+\f5\fs28 \'96 backgroundColor, + defaultSelectedBackgroundColor, + defaultSelectedTextColor, +\'a0defaultTextColor, \'96 setBackgroundColor:, \'96 setUseOwnerBackgroundColor:
+\f0\b0\fs16 \
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fi-380\li2480\fc0\cf0 \
+\f2\b \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 defaultFont\
+\fs28 \cf0 defaultFont\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f0\b0\fi-620\li2520\fc0\cf0 + (NSFont*)
-\b defaultFont
-\b0\fs24   [Objective-C]
+\f0\b0 \cf0 + (NSFont*)
+\f5\b defaultFont
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 static NSFont 
-\b defaultFont
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 static NSFont 
+\f5\b defaultFont
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the user-font at point-size 12.0 as the default font.  This is the font which is used when initializing the cell as a text cell with 
-\b ±
-\f3\b0\fs24\fc1\cf1 initTextCell:
-\f0\fs28\fc0\cf0 .  Subclasses should override this method if this value is inappropriate.\
+\fs28 \cf0 Returns the user-font at point-size 12.0 as the default font.  This is the font which is used when initializing the cell as a text cell with 
+\f5\b \'96
+\f4\b0\fs24 initTextCell:
+\f0\fs28 .  Subclasses should override this method if this value is inappropriate.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0   
-\f0\fc1\cf1 ± font, ± initTextCell:, ± setFont:
-\b0\fs16\fc0\cf0 \
+\f2\b\fs24 \cf0 See also:
+\fs28   
+\f5 \'96 font, \'96 initTextCell:, \'96 setFont:
+\f0\b0\fs16 \
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fi-380\li2480\fc0\cf0 \
+\f2\b \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 defaultSelectedBackgroundColor\
+\fs28 \cf0 defaultSelectedBackgroundColor\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f0\b0\fi-620\li2520\fc0\cf0 + (NSColor*)
-\b defaultSelectedBackgroundColor
-\b0\fs24   [Objective-C]
+\f0\b0 \cf0 + (NSColor*)
+\f5\b defaultSelectedBackgroundColor
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 static NSColor 
-\b defaultSelectedBackgroundColor
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 static NSColor 
+\f5\b defaultSelectedBackgroundColor
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns 
-\f3\fs24\fc1\cf1 [NSColor selectedControlColor]
-\f0\fs28\fc0\cf0  as the default selected background color.  This is the color which is returned by 
-\f3\fs24\fc1\cf1 -selectedBackgroundColor
-\f0\fs28\fc0\cf0  if a custom color has not been set for this cell and no owner has been set or the owner does not respond to the 
-\f3\fs24\fc1\cf1 -selectedBackgroundColor
-\f0\fs28\fc0\cf0  message.  This is also the color used upon receipt of a 
-\f3\fs24\fc1\cf1 -setUseOwnerSelectedBackgroundColor:NO
-\f0\b\fs28\fc0\cf0  
-\b0 message.  Subclasses should override this method if this color is inappropriate.\
+\fs28 \cf0 Returns 
+\f4\fs24 [NSColor selectedControlColor]
+\f0\fs28  as the default selected background color.  This is the color which is returned by 
+\f4\fs24 -selectedBackgroundColor
+\f0\fs28  if a custom color has not been set for this cell and no owner has been set or the owner does not respond to the 
+\f4\fs24 -selectedBackgroundColor
+\f0\fs28  message.  This is also the color used upon receipt of a 
+\f4\fs24 -setUseOwnerSelectedBackgroundColor:NO
+\f5\b\fs28  
+\f0\b0 message.  Subclasses should override this method if this color is inappropriate.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 + defaultBackgroundColor, + defaultSelectedTextColor, + defaultTextColor, ±€selectedBackgroundColor, ± setSelectedBackgroundColor:, ±€setUseOwnerSelectedBackgroundColor:
-\b0\fs16\fc0\cf0 \
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 + defaultBackgroundColor, + defaultSelectedTextColor, + defaultTextColor, \'96\'a0selectedBackgroundColor, \'96 setSelectedBackgroundColor:, \'96\'a0setUseOwnerSelectedBackgroundColor:
+\f0\b0\fs16 \
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fi-380\li2480\fc0\cf0 \
+\f2\b \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 defaultSelectedTextColor\
+\fs28 \cf0 defaultSelectedTextColor\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f0\b0\fi-620\li2520\fc0\cf0 + (NSColor*)
-\b defaultSelectedTextColor
-\b0\fs24   [Objective-C]
+\f0\b0 \cf0 + (NSColor*)
+\f5\b defaultSelectedTextColor
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 static NSColor 
-\b defaultSelectedTextColor
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 static NSColor 
+\f5\b defaultSelectedTextColor
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns 
-\f3\fs24\fc1\cf1 [NSColor selectedControlTextColor]
-\f0\fs28\fc0\cf0  as the default selected text color.  This is the color which is returned by 
-\f3\fs24\fc1\cf1 -selectedTextColor
-\f0\fs28\fc0\cf0  if a custom color has not been set for this cell and no owner has been set or the owner does not respond to the 
-\f3\fs24\fc1\cf1 -selectedTextColor
-\f0\fs28\fc0\cf0  message.  This is also the color used upon receipt of a 
-\f3\fs24\fc1\cf1 -setUseOwnerSelectedTextColor:NO
-\f0\b\fs28\fc0\cf0  
-\b0 message.  Subclasses should override this method if this color is inappropriate.\
+\fs28 \cf0 Returns 
+\f4\fs24 [NSColor selectedControlTextColor]
+\f0\fs28  as the default selected text color.  This is the color which is returned by 
+\f4\fs24 -selectedTextColor
+\f0\fs28  if a custom color has not been set for this cell and no owner has been set or the owner does not respond to the 
+\f4\fs24 -selectedTextColor
+\f0\fs28  message.  This is also the color used upon receipt of a 
+\f4\fs24 -setUseOwnerSelectedTextColor:NO
+\f5\b\fs28  
+\f0\b0 message.  Subclasses should override this method if this color is inappropriate.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 + defaultBackgroundColor, + defaultSelectedBackgroundColor, + defaultTextColor, ±selectedTextColor, ± setSelectedBackgroundColor:, ± setUseOwnerSelectedBackgroundColor:\
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 + defaultBackgroundColor, + defaultSelectedBackgroundColor, + defaultTextColor, \'96selectedTextColor, \'96 setSelectedBackgroundColor:, \'96 setUseOwnerSelectedBackgroundColor:\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\fs16\fi-380\li2480\fc0\cf0 \
+\f2\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 defaultTextColor\
+\fs28 \cf0 defaultTextColor\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f0\b0\fi-620\li2520\fc0\cf0 + (NSColor*)
-\b defaultTextColor
-\b0\fs24   [Objective-C]
+\f0\b0 \cf0 + (NSColor*)
+\f5\b defaultTextColor
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 static NSColor 
-\b defaultTextColor
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 static NSColor 
+\f5\b defaultTextColor
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns 
-\f3\fs24\fc1\cf1 [NSColor controlTextColor]
-\f0\fs28\fc0\cf0  as the default text color.  This is the color which is returned by 
-\f3\fs24\fc1\cf1 -textColor
-\f0\fs28\fc0\cf0  if a custom color has not been set for this cell and no owner has been set or the owner does not respond to the 
-\f3\fs24\fc1\cf1 -textColor
-\f0\fs28\fc0\cf0  message.  This is also the color used upon receipt of a 
-\f3\fs24\fc1\cf1 -setUseOwnerTextColor:NO
-\f0\b\fs28\fc0\cf0  
-\b0 message.  Subclasses should override this method if this color is inappropriate.\
+\fs28 \cf0 Returns 
+\f4\fs24 [NSColor controlTextColor]
+\f0\fs28  as the default text color.  This is the color which is returned by 
+\f4\fs24 -textColor
+\f0\fs28  if a custom color has not been set for this cell and no owner has been set or the owner does not respond to the 
+\f4\fs24 -textColor
+\f0\fs28  message.  This is also the color used upon receipt of a 
+\f4\fs24 -setUseOwnerTextColor:NO
+\f5\b\fs28  
+\f0\b0 message.  Subclasses should override this method if this color is inappropriate.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 + defaultBackgroundColor, +€defaultSelectedBackgroundColor, + defaultSelectedTextColor, ±€setSelectedBackgroundColor:, ±€setUseOwnerSelectedBackgroundColor:, ± textColor\
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 + defaultBackgroundColor, +\'a0defaultSelectedBackgroundColor, + defaultSelectedTextColor, \'96\'a0setSelectedBackgroundColor:, \'96\'a0setUseOwnerSelectedBackgroundColor:, \'96 textColor\
+\pard\tx11280\li6320\fi-240\partightenfactor0
 
-\pard\tx11280\b0\fs70\fi-240\li6320\fc0\cf0 \
+\f0\b0\fs70 \cf0 \
+\pard\li1200\fi-1020\partightenfactor0
 
-\pard\f2\b\fs28\fi-1020\li1200\fc1\cf1 Instance Methods\
+\f2\b\fs28 \cf0 Instance Methods\
+\pard\li1360\partightenfactor0
 
-\fs16\fi0\li1360\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 backgroundColor\
+\fs28 \cf0 backgroundColor\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (NSColor*)
-\b backgroundColor
-\b0\fs24   [Objective-C]
+\f5\b backgroundColor
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 NSColor 
-\b backgroundColor
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 NSColor 
+\f5\b backgroundColor
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the color that is used to draw the background of the cell in its normal (unselected) state.  This is the color which has been set with 
-\b ±
-\f3\b0\fs24\fc1\cf1 setBackgroundColor:
-\f0\fs28\fc0\cf0  if it was ever called.  If not, and the owner has been set and responds to 
-\b ±
-\f3\b0\fs24\fc1\cf1 backgroundColor
-\f0\fs28\fc0\cf0  then it is queried and that color is returned.  If both of the above fail then the value from 
-\b +
-\f3\b0\fs24\fc1\cf1 defaultBackgroundColor
-\f0\fs28\fc0\cf0  is returned.\
+\fs28 \cf0 Returns the color that is used to draw the background of the cell in its normal (unselected) state.  This is the color which has been set with 
+\f5\b \'96
+\f4\b0\fs24 setBackgroundColor:
+\f0\fs28  if it was ever called.  If not, and the owner has been set and responds to 
+\f5\b \'96
+\f4\b0\fs24 backgroundColor
+\f0\fs28  then it is queried and that color is returned.  If both of the above fail then the value from 
+\f5\b +
+\f4\b0\fs24 defaultBackgroundColor
+\f0\fs28  is returned.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 + defaultBackgroundColor, ± selectedBackgroundColor, ± selectedTextColor, ± setBackgroundColor:, ±€textColor\
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 + defaultBackgroundColor, \'96 selectedBackgroundColor, \'96 selectedTextColor, \'96 setBackgroundColor:, \'96\'a0textColor\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\fs16\fi-380\li2480\fc0\cf0 \
+\f2\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 bgColor\
+\fs28 \cf0 bgColor\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (NSColor*)
-\b bgColor
-\b0\fs24   [Objective-C]
+\f5\b bgColor
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 protected NSColor 
-\b bgColor
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 protected NSColor 
+\f5\b bgColor
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 This method is used by cells that draw themselves rather than letting the owner draw them.  It returns the color that is used to fill the background of the cell during drawing.  If the cell 
-\f3\fs24\fc1\cf1 -isSelected
-\f0\fs28\fc0\cf0 , then this method returns the value from 
-\f3\fs24\fc1\cf1 -selectedBackgroundColor
-\f0\fs28\fc0\cf0 , otherwise it returns the value from 
-\f3\fs24\fc1\cf1 -backgroundColor
-\f0\fs28\fc0\cf0 .  Subclasses should override this method if they have different criteria for determining the cell's background color during drawing.\
+\fs28 \cf0 This method is used by cells that draw themselves rather than letting the owner draw them.  It returns the color that is used to fill the background of the cell during drawing.  If the cell 
+\f4\fs24 -isSelected
+\f0\fs28 , then this method returns the value from 
+\f4\fs24 -selectedBackgroundColor
+\f0\fs28 , otherwise it returns the value from 
+\f4\fs24 -backgroundColor
+\f0\fs28 .  Subclasses should override this method if they have different criteria for determining the cell's background color during drawing.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 ± backgroundColor, ± fgColor, ± selectedBackgroundColor, ± isSelected\
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 \'96 backgroundColor, \'96 fgColor, \'96 selectedBackgroundColor, \'96 isSelected\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\fs16\fi-380\li2480\fc0\cf0 \
+\f2\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 copyWithZone:\
+\fs28 \cf0 copyWithZone:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (id)
-\b copyWithZone:
-\b0 (NSZone*)
-\i zone
-\i0\fs24   [Objective-C]
+\f5\b copyWithZone:
+\f0\b0 (NSZone*)
+\f3\i zone
+\f0\i0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Allocates, initializes, and returns a copy of the receiving cell.  The copy is allocated from 
-\i zone
-\i0  and is assigned the same contents as the receiver.\
+\fs28 \cf0 Allocates, initializes, and returns a copy of the receiving cell.  The copy is allocated from 
+\f3\i zone
+\f0\i0  and is assigned the same contents as the receiver.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 ± copyWithZone: 
-\b0 (NSCopying)
-\b , ± initImageCell:, ± initTextCell:\
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 \'96 copyWithZone: 
+\f0\b0 (NSCopying)
+\f5\b , \'96 initImageCell:, \'96 initTextCell:\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\fs16\fi-380\li2480\fc0\cf0 \
+\f2\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 dealloc\
+\fs28 \cf0 dealloc\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b dealloc
-\b0\fs24   [Objective-C]
+\f5\b dealloc
+\f0\b0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Frees the memory used by the cell.\
+\fs28 \cf0 Frees the memory used by the cell.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 ± copyWithZone:, ± initImageCell:, ± initTextCell:\
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 \'96 copyWithZone:, \'96 initImageCell:, \'96 initTextCell:\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\fs16\fi-380\li2480\fc0\cf0 \
+\f2\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 drawInteriorWithFrame:inView:\
+\fs28 \cf0 drawInteriorWithFrame:inView:\
+\pard\li2520\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b drawInteriorWithFrame:
-\b0 (NSRect)
-\i cellFrame
-\i0  
-\b\fi0 inView:
-\b0 (NSView*)
-\i controlView
-\i0\fs24\fi-620   [Objective-C]
-\fs28\fi0 \
+\f5\b drawInteriorWithFrame:
+\f0\b0 (NSRect)
+\f3\i cellFrame
+\f0\i0  
+\f5\b inView:
+\f0\b0 (NSView*)
+\f3\i controlView
+\f0\i0\fs24   [Objective-C]
+\fs28 \
+\pard\tx2480\tx2860\tx3240\li2520\partightenfactor0
+\cf0 void 
+\f5\b drawInteriorWithFrameInView
+\f0\b0 (NSRect 
+\f3\i cellFrame
+\f0\i0 , NSView 
+\f3\i controlView
+\f0\i0 )
+\fs24   [Java]
+\fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b drawInteriorWithFrameInView
-\b0 (NSRect 
-\i cellFrame
-\i0\fc1\cf1 , 
-\fi0\fc0\cf0 NSView
-\fi-620  
-\i\fi0 controlView
-\i0\fi-620\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
-\fs28\fi0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\fs16\li2100 \
+\fs28 \cf0 Draws the inside of the cell, but not the border, in 
+\f3\i cellFrame
+\f0\i0  within 
+\f3\i controlView
+\f0\i0 .  
+\f3\i cellFrame
+\f0\i0  should be the same rectangle passed to 
+\f4\fs24 -drawWithFrame:inView:
+\f0\fs28 .  The PostScript focus must be locked on 
+\f3\i controlView
+\f0\i0  when this message is sent.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Draws the inside of the cell, but not the border, in 
-\i cellFrame
-\i0  within 
-\i controlView
-\i0 .  
-\i cellFrame
-\i0  should be the same rectangle passed to 
-\f3\fs24\fc1\cf1 -drawWithFrame:inView:
-\f0\fs28\fc0\cf0 .  The PostScript focus must be locked on 
-\i controlView
-\i0  when this message is sent.\
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
-
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 - 
-\f2\fc0\cf0 drawInteriorWithFrame
-\f0\fc1\cf1 :inView:
-\fc0\cf0  
-\b0 (NSCell), 
-\b\fc1\cf1 - 
-\fc0\cf0 drawWithFrame
-\fc1\cf1 :inView:, - lockFocus 
-\b0\fc0\cf0 (NSView)
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 - 
+\f2 drawInteriorWithFrame
+\f5 :inView: 
+\f0\b0 (NSCell), 
+\f5\b - drawWithFrame:inView:, - lockFocus 
+\f0\b0 (NSView)
 \fs16 \
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fi-380\li2480\fc0\cf0 \
+\f2\b \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\f0\fs28\li1500\fc0\cf0 drawWithFrame
+\f5\fs28 \cf0 drawWithFrame
 \f2 :inView:\
+\pard\li2520\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b drawWithFrame:
-\b0 (NSRect)
-\i cellFrame
-\i0  
-\b\fi0 inView:
-\b0 (NSView*)
-\i controlView
-\i0\fs24\fi-620   [Objective-C]
-\fs28\fi0 \
+\f5\b drawWithFrame:
+\f0\b0 (NSRect)
+\f3\i cellFrame
+\f0\i0  
+\f5\b inView:
+\f0\b0 (NSView*)
+\f3\i controlView
+\f0\i0\fs24   [Objective-C]
+\fs28 \
+\pard\tx2480\tx2860\tx3240\li2520\partightenfactor0
+\cf0 void 
+\f5\b drawWithFrameInView
+\f0\b0 (NSRect 
+\f3\i cellFrame
+\f0\i0 , NSView 
+\f3\i controlView
+\f0\i0 )
+\fs24   [Java]
+\fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b drawWithFrameInView
-\b0 (NSRect 
-\i cellFrame
-\i0\fc1\cf1 , 
-\fi0 N
-\fc0\cf0 SView
-\fi-620  
-\i\fi0 controlView
-\i0\fi-620\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
-\fs28\fi0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\fs16\li2100 \
+\fs28 \cf0 Displays the cell in 
+\f3\i cellFrame
+\f0\i0  within 
+\f3\i controlView
+\f0\i0 .  The PostScript focus must be locked on 
+\f3\i controlView
+\f0\i0  when this message is sent.  Draws the border of the cell, then invokes 
+\f4\fs24 \'96drawInteriorWithFrame:inView:
+\f0\fs28 .\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Displays the cell in 
-\i cellFrame
-\i0  within 
-\i controlView
-\i0 .  The PostScript focus must be locked on 
-\i controlView
-\i0  when this message is sent.  Draws the border of the cell, then invokes 
-\f3\fs24\fc1\cf1 ±drawInteriorWithFrame:inView:
-\f0\fs28\fc0\cf0 .\
+\fs14 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs14\li2100\fc0\cf0 \
-
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0   
+\f2\b\fs24 \cf0 See also:
+\fs28   
 \f1\b0 -
 \f0  
-\b drawInteriorWithFrame:inView:
-\b0 , ±
-\b  drawWithFrame:inView:
-\b0  
-\fc1\cf1 (NSCell)
-\fc0\cf0 , 
+\f5\b drawInteriorWithFrame:inView:
+\f0\b0 , \'96
+\f5\b  drawWithFrame:inView:
+\f0\b0  (NSCell), 
 \f1 -
 \f0  
-\b lockFocus
-\b0  (NSView)\
+\f5\b lockFocus
+\f0\b0  (NSView)\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 encodeWithCoder:\
+\fs28 \cf0 encodeWithCoder:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b encodeWithCoder:
-\b0 (NSCoder€*)
-\i encoder
-\i0\fs24   [Objective-C]
+\f5\b encodeWithCoder:
+\f0\b0 (NSCoder\'a0*)
+\f3\i encoder
+\f0\i0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Encodes the receiver using 
-\i encoder
-\i0 .\
+\fs28 \cf0 Encodes the receiver using 
+\f3\i encoder
+\f0\i0 .\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 fgColor\
+\fs28 \cf0 fgColor\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (NSColor*)
-\b fgColor
-\b0\fs24   [Objective-C]
+\f5\b fgColor
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 protected NSColor 
-\b fgColor
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 protected NSColor 
+\f5\b fgColor
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 This method is used by cells that draw themselves rather than letting the owner draw them.  It returns the color that is used for the text in the cell during drawing.  If the cell 
-\f3\fs24\fc1\cf1 -isSelected
+\fs28 \cf0 This method is used by cells that draw themselves rather than letting the owner draw them.  It returns the color that is used for the text in the cell during drawing.  If the cell 
+\f4\fs24 -isSelected
 \f0\fs28 , then this method returns the value from 
-\f3\fs24 -selectedTextColor
+\f4\fs24 -selectedTextColor
 \f0\fs28 , otherwise it returns the value from 
-\f3\fs24 -textColor
-\f0\fs28 .  
-\fc0\cf0 Subclasses should override this method if they have different criteria for determining the cell's text color during drawing.\
+\f4\fs24 -textColor
+\f0\fs28 .  Subclasses should override this method if they have different criteria for determining the cell's text color during drawing.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 ± bgColor, ± selectedTextColor, ± isSelected, ± textColor\
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 \'96 bgColor, \'96 selectedTextColor, \'96 isSelected, \'96 textColor\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\fs16\fi-380\li2480\fc0\cf0 \
+\f2\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 font\
+\fs28 \cf0 font\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (NSFont*)
-\b font
-\b0\fs24   [Objective-C]
+\f5\b font
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 NSFont 
-\b font
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 NSFont 
+\f5\b font
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the Font used to display text in the cell.  Returns 
-\b nil
-\b0  if the receiver isn't a text-type cell.\
+\fs28 \cf0 Returns the Font used to display text in the cell.  Returns 
+\f5\b nil
+\f0\b0  if the receiver isn't a text-type cell.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 + defaultFont, ± setFont:\
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 + defaultFont, \'96 setFont:\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\fs16\fi-380\li2480\fc0\cf0 \
+\f2\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 initImageCell:\
+\fs28 \cf0 initImageCell:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (id)
-\b initImageCell:
-\b0 (NSImage*)
-\i image
-\i0\fs24   [Objective-C]
+\f5\b initImageCell:
+\f0\b0 (NSImage*)
+\f3\i image
+\f0\i0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\b\fi-620\li2520\fc0\cf0 Cell
-\b0 (NSImage 
-\i\fc1\cf1 image
-\i0 )
-\fs24\fc0\cf0   [Java constructor]
+\f5\b \cf0 Cell
+\f0\b0 (NSImage 
+\f3\i image
+\f0\i0 )
+\fs24   [Java constructor]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Prepare a newly allocated cell that will display 
-\i image
-\i0 .  Returns 
-\b self
-\b0 .\
+\fs28 \cf0 Prepare a newly allocated cell that will display 
+\f3\i image
+\f0\i0 .  Returns 
+\f5\b self
+\f0\b0 .\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 initTextCell:\
+\fs28 \cf0 initTextCell:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (id)
-\b initTextCell:
-\b0 (NSString*)
-\i text
-\i0\fs24   [Objective-C]
+\f5\b initTextCell:
+\f0\b0 (NSString*)
+\f3\i text
+\f0\i0\fs24   [Objective-C]
 \fs28 \
+\pard\tx7140\li2520\fi-620\partightenfactor0
 
-\pard\tx7140\b\fi-620\li2520\fc0\cf0 Cell
-\b0 (String 
-\i text
-\i0\fc1\cf1 ) 
-\fs24\fc0\cf0  [Java constructor]
+\f5\b \cf0 Cell
+\f0\b0 (String 
+\f3\i text
+\f0\i0 ) 
+\fs24  [Java constructor]
 \fs28 \
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\fs16\fi-380\li2480 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Prepare a newly allocated cell that will display 
-\i text
-\i0 .  The font and colors will use inherited or default values until explicitly set.  Returns 
-\b self
-\b0 .\
+\fs28 \cf0 Prepare a newly allocated cell that will display 
+\f3\i text
+\f0\i0 .  The font and colors will use inherited or default values until explicitly set.  Returns 
+\f5\b self
+\f0\b0 .\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 initWithCoder:\
+\fs28 \cf0 initWithCoder:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (id)
-\b initWithCoder:
-\b0 (NSCoder*)
-\i decoder
-\i0\fs24   [Objective-C]
+\f5\b initWithCoder:
+\f0\b0 (NSCoder*)
+\f3\i decoder
+\f0\i0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Initializes a newly allocated instance from data in 
-\i decoder
-\i0 . Returns 
-\b self
-\b0 .\
+\fs28 \cf0 Initializes a newly allocated instance from data in 
+\f3\i decoder
+\f0\i0 . Returns 
+\f5\b self
+\f0\b0 .\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 isOpaque\
+\fs28 \cf0 isOpaque\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (BOOL)
-\b isOpaque
-\b0\fs24   [Objective-C]
+\f5\b isOpaque
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc1\cf1 boolean 
-\b\fc0\cf0 isOpaque
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 boolean 
+\f5\b isOpaque
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns NO if the cell uses the owner's background color, or YES if it does not.\
+\fs28 \cf0 Returns NO if the cell uses the owner's background color, or YES if it does not.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 isSelected\
+\fs28 \cf0 isSelected\
+\pard\tx7140\li2520\fi-620\partightenfactor0
 
-\pard\tx7140\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (BOOL)
-\b isSelected
-\b0\fs24   [Objective-C]
+\f5\b isSelected
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc1\cf1 boolean 
-\pard\tx7140\b\fi-620\li2520\fc0\cf0 isSelected
-\pard\tx2480\tx2860\tx3240\b0\fi-620\li2520\fc1\cf1 ()
-\pard\tx7140\fs24\fi-620\li2520\fc0\cf0   [Java]
+boolean 
+\f5\b isSelected
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the cell's MISC_TC1_IS_SELECTED flag.\
+\fs28 \cf0 Returns the cell's MISC_TC1_IS_SELECTED flag.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 ± bgColor
-\f2\b0\fc0\cf0 ,
-\f0\b\fc1\cf1  ± fgColor, ± setSelected:
-\b0\fs16\fc0\cf0 \
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 \'96 bgColor
+\f6\b0 ,
+\f5\b  \'96 fgColor, \'96 setSelected:
+\f0\b0\fs16 \
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fi-380\li2480\fc0\cf0 \
+\f2\b \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 owner\
+\fs28 \cf0 owner\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (id)
-\b owner
-\b0\fs24   [Objective-C]
+\f5\b owner
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 Object 
-\b owner
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 Object 
+\f5\b owner
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the 
-\i owner
-\i0  of the cell, or 
-\b nil
-\b0  if there is none.\
+\fs28 \cf0 Returns the 
+\f3\i owner
+\f0\i0  of the cell, or 
+\f5\b nil
+\f0\b0  if there is none.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-{\pard\tx8260\fs28\li1500\fc1\cf1{\NeXTHelpMarker15337 \markername ownerDraw;}
-¬}\pard\tx8260\f2\b\i0\ulnone\fs28\li1500\fc1\cf1 ownerDraw\
+\fs28 \cf0 \pard\tx8260\li1500\partightenfactor0
+\cf0 ownerDraw\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (BOOL)
-\b ownerDraw
-\b0\fs24   [Objective-C]
+\f5\b ownerDraw
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc1\cf1 boolean 
-\b\fc0\cf0 ownerDraw
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 boolean 
+\f5\b ownerDraw
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc1\cf1 Returns YES if the owner should perform the actual drawing for this cell, otherwise NO.\
+\fs28 \cf0 Returns YES if the owner should perform the actual drawing for this cell, otherwise NO.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 selectedBackgroundColor\
+\fs28 \cf0 selectedBackgroundColor\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (NSColor*)
-\b selectedBackgroundColor
-\b0\fs24   [Objective-C]
+\f5\b selectedBackgroundColor
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 NSColor 
-\b selectedBackgroundColor
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 NSColor 
+\f5\b selectedBackgroundColor
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the color that is used to draw the background of the cell in its selected state.  This is the color which has been set with 
-\b ±
-\f3\b0\fs24\fc1\cf1 setSelectedBackgroundColor:
-\f0\fs28\fc0\cf0  if it was ever called.  If not, and the owner has been set and responds to 
-\b ±
-\f3\b0\fs24\fc1\cf1 selectedBackgroundColor
-\f0\fs28\fc0\cf0  then it is queried and that color is returned.  If both of the above fail then the value from 
-\f3\fs24\fc1\cf1 +defaultSelectedBackgroundColor
-\f0\fs28\fc0\cf0  is returned.\
+\fs28 \cf0 Returns the color that is used to draw the background of the cell in its selected state.  This is the color which has been set with 
+\f5\b \'96
+\f4\b0\fs24 setSelectedBackgroundColor:
+\f0\fs28  if it was ever called.  If not, and the owner has been set and responds to 
+\f5\b \'96
+\f4\b0\fs24 selectedBackgroundColor
+\f0\fs28  then it is queried and that color is returned.  If both of the above fail then the value from 
+\f4\fs24 +defaultSelectedBackgroundColor
+\f0\fs28  is returned.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 ± backgroundColor, + defaultSelectedBackgroundColor, ± selectedTextColor, ±€setSelectedBackgroundColor:, ± textColor
-\b0\fs16\fc0\cf0 \
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 \'96 backgroundColor, + defaultSelectedBackgroundColor, \'96 selectedTextColor, \'96\'a0setSelectedBackgroundColor:, \'96 textColor
+\f0\b0\fs16 \
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fi-380\li2480\fc0\cf0 \
+\f2\b \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 selectedTextColor\
+\fs28 \cf0 selectedTextColor\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (NSColor*)
-\b selectedTextColor
-\b0\fs24   [Objective-C]
+\f5\b selectedTextColor
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 NSColor 
-\b selectedTextColor
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 NSColor 
+\f5\b selectedTextColor
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the color that is used to draw the text in the cell in its selected state.  This is the color which has been set with 
-\b ±
-\f3\b0\fs24\fc1\cf1 setSelectedTextColor:
-\f0\fs28\fc0\cf0  if it was ever called.  If not, and the owner has been set and responds to 
-\b ±
-\f3\b0\fs24\fc1\cf1 selectedTextColor
-\f0\fs28\fc0\cf0  then it is queried and that color is returned.  If both of the above fail then the value from 
-\f3\fs24\fc1\cf1 +defaultSelectedTextColor
-\f0\fs28\fc0\cf0  is returned.\
+\fs28 \cf0 Returns the color that is used to draw the text in the cell in its selected state.  This is the color which has been set with 
+\f5\b \'96
+\f4\b0\fs24 setSelectedTextColor:
+\f0\fs28  if it was ever called.  If not, and the owner has been set and responds to 
+\f5\b \'96
+\f4\b0\fs24 selectedTextColor
+\f0\fs28  then it is queried and that color is returned.  If both of the above fail then the value from 
+\f4\fs24 +defaultSelectedTextColor
+\f0\fs28  is returned.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\f0\fs28 	± backgroundColor, + defaultSelectedTextColor, ± selectedBackgroundColor, ± setSelectedTextColor:, ± textColor
-\b0\fs16\fc0\cf0 \
+\f2\b\fs24 \cf0 See also:
+\f5\fs28 	\'96 backgroundColor, + defaultSelectedTextColor, \'96 selectedBackgroundColor, \'96 setSelectedTextColor:, \'96 textColor
+\f0\b0\fs16 \
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fi-380\li2480\fc0\cf0 \
+\f2\b \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setBackgroundColor:\
+\fs28 \cf0 setBackgroundColor:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setBackgroundColor:
-\b0 (NSColor*)
-\i c
-\i0\fs24   [Objective-C]
+\f5\b setBackgroundColor:
+\f0\b0 (NSColor*)
+\f3\i c
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setBackgroundColor
-\b0 (NSColor 
-\i c
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setBackgroundColor
+\f0\b0 (NSColor 
+\f3\i c
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Sets the color that the cell will use to fill its background.  This color will override any inherited value.\
+\fs28 \cf0 Sets the color that the cell will use to fill its background.  This color will override any inherited value.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setFont:\
+\fs28 \cf0 setFont:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setFont:
-\b0 (NSFont*)
-\i font
-\i0\fs24   [Objective-C]
+\f5\b setFont:
+\f0\b0 (NSFont*)
+\f3\i font
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setFont
-\b0 (NSFont 
-\i font
-\i0\fc1\cf1 ) 
-\fs24\fc0\cf0  [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setFont
+\f0\b0 (NSFont 
+\f3\i font
+\f0\i0 ) 
+\fs24  [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Sets the font of a text cell to 
-\i font
-\i0 .  This will override any inherited value.\
+\fs28 \cf0 Sets the font of a text cell to 
+\f3\i font
+\f0\i0 .  This will override any inherited value.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setOwner:\
+\fs28 \cf0 setOwner:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setOwner:
-\b0 (id)
-\i obj
-\i0\fs24   [Objective-C]
+\f5\b setOwner:
+\f0\b0 (id)
+\f3\i obj
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setOwner
-\b0 (Object 
-\i obj
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setOwner
+\f0\b0 (Object 
+\f3\i obj
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Sets the 
-\i owner
-\i0  of the cell to 
-\i obj
-\i0 .  The cell will inherit font and color values from 
-\i obj
-\i0 .\
+\fs28 \cf0 Sets the 
+\f3\i owner
+\f0\i0  of the cell to 
+\f3\i obj
+\f0\i0 .  The cell will inherit font and color values from 
+\f3\i obj
+\f0\i0 .\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setOwnerBackgroundColor:\
+\fs28 \cf0 setOwnerBackgroundColor:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setOwnerBackgroundColor:
-\b0 (NSColor*)
-\i c
-\i0\fs24   [Objective-C]
+\f5\b setOwnerBackgroundColor:
+\f0\b0 (NSColor*)
+\f3\i c
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setOwnerBackgroundColor
-\b0 (NSColor 
-\i c
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setOwnerBackgroundColor
+\f0\b0 (NSColor 
+\f3\i c
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Informs the cell that the owner's 
-\i backgroundColor
-\i0  value has changed to 
-\i c
-\b .  
-\b0\i0 The current implementation does nothing, since inherited owner values are not stored in the cells.  However, the MiscTableScroll class tests for, and sends this message in preference to the 
-\f3\fs24\fc1\cf1 -setBackgroundColor:
-\f0\fs28\fc0\cf0  message when the table distributes colors to the cells, so that cells can distinguish between cell-specific color assignments and global color assignments.\
+\fs28 \cf0 Informs the cell that the owner's 
+\f3\i backgroundColor
+\f0\i0  value has changed to 
+\f3\i c
+\f7\b .  
+\f0\i0\b0 The current implementation does nothing, since inherited owner values are not stored in the cells.  However, the MiscTableScroll class tests for, and sends this message in preference to the 
+\f4\fs24 -setBackgroundColor:
+\f0\fs28  message when the table distributes colors to the cells, so that cells can distinguish between cell-specific color assignments and global color assignments.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-{\pard\tx8260\fs28\li1500\fc1\cf1{\NeXTHelpMarker17922 \markername setOwnerDraw;}
-¬}\pard\tx8260\f2\b\i0\ulnone\fs28\li1500\fc1\cf1 setOwnerDraw:\
+\fs28 \cf0 \pard\tx8260\li1500\partightenfactor0
+\cf0 setOwnerDraw:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setOwnerDraw:
-\b0 (BOOL)
-\i flag
-\i0\fs24   [Objective-C]
+\f5\b setOwnerDraw:
+\f0\b0 (BOOL)
+\f3\i flag
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setOwnerDraw
-\b0 (boolean 
-\i flag
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setOwnerDraw
+\f0\b0 (boolean 
+\f3\i flag
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc1\cf1 Sets a flag indicating whether or not the owner should perform the drawing for this object.  The default value for MiscTableCell objects is YES.\
+\fs28 \cf0 Sets a flag indicating whether or not the owner should perform the drawing for this object.  The default value for MiscTableCell objects is YES.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setOwnerFont:\
+\fs28 \cf0 setOwnerFont:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setOwnerFont:
-\b0 (NSFont*)
-\i font
-\i0\fs24   [Objective-C]
+\f5\b setOwnerFont:
+\f0\b0 (NSFont*)
+\f3\i font
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setOwnerFont
-\b0 (NSFont 
-\i font
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setOwnerFont
+\f0\b0 (NSFont 
+\f3\i font
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Informs the cell that the owner's 
-\i font
-\i0  value has changed to 
-\i font
-\i0 .  If the cell is using the font value inherited from its 
-\i owner
-\i0 , it will change its font in response to this message.  Otherwise, it will ignore the message.  The MiscTableScroll class tests for, and sends this message in preference to the 
-\f3\fs24\fc1\cf1 -setFont:
-\f0\fs28\fc0\cf0  message when the table distributes fonts to the cells, so that cells can distinguish between cell-specific font assignments and global font assignments.\
+\fs28 \cf0 Informs the cell that the owner's 
+\f3\i font
+\f0\i0  value has changed to 
+\f3\i font
+\f0\i0 .  If the cell is using the font value inherited from its 
+\f3\i owner
+\f0\i0 , it will change its font in response to this message.  Otherwise, it will ignore the message.  The MiscTableScroll class tests for, and sends this message in preference to the 
+\f4\fs24 -setFont:
+\f0\fs28  message when the table distributes fonts to the cells, so that cells can distinguish between cell-specific font assignments and global font assignments.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setOwnerSelectedBackgroundColor:\
+\fs28 \cf0 setOwnerSelectedBackgroundColor:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setOwnerSelectedBackgroundColor:
-\b0 (NSColor*)
-\i c
-\i0\fs24   [Objective-C]
+\f5\b setOwnerSelectedBackgroundColor:
+\f0\b0 (NSColor*)
+\f3\i c
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setOwnerSelectedBackgroundColor
-\b0 (NSColor 
-\i c
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setOwnerSelectedBackgroundColor
+\f0\b0 (NSColor 
+\f3\i c
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Informs the cell that the owner's 
-\i selectedBackgroundColor
-\i0  value has changed to 
-\i c
-\b .  
-\b0\i0 The current implementation does nothing, since inherited owner values are not stored in the cells.  However, the MiscTableScroll class tests for, and sends this message in preference to the 
-\f3\fs24\fc1\cf1 -setSelectedBackgroundColor:
-\f0\fs28\fc0\cf0  message when the table distributes colors to the cells, so that cells can distinguish between cell-specific color assignments and global color assignments.\
+\fs28 \cf0 Informs the cell that the owner's 
+\f3\i selectedBackgroundColor
+\f0\i0  value has changed to 
+\f3\i c
+\f7\b .  
+\f0\i0\b0 The current implementation does nothing, since inherited owner values are not stored in the cells.  However, the MiscTableScroll class tests for, and sends this message in preference to the 
+\f4\fs24 -setSelectedBackgroundColor:
+\f0\fs28  message when the table distributes colors to the cells, so that cells can distinguish between cell-specific color assignments and global color assignments.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setOwnerSelectedTextColor:\
+\fs28 \cf0 setOwnerSelectedTextColor:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setOwnerSelectedTextColor:
-\b0 (NSColor*)
-\i c
-\i0\fs24   [Objective-C]
+\f5\b setOwnerSelectedTextColor:
+\f0\b0 (NSColor*)
+\f3\i c
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setOwnerSelectedTextColor
-\b0 (NSColor 
-\i c
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setOwnerSelectedTextColor
+\f0\b0 (NSColor 
+\f3\i c
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Informs the cell that the owner's 
-\i\fc1\cf1 selectedTextColor
-\i0\fc0\cf0  value has changed to 
-\i c
-\b .  
-\b0\i0 The current implementation does nothing, since inherited owner values are not stored in the cells.  However, the MiscTableScroll class tests for, and sends this message in preference to the 
-\f3\fs24\fc1\cf1 -setSelectedTextColor:
-\f0\fs28\fc0\cf0  message when the table distributes colors to the cells, so that cells can distinguish between cell-specific color assignments and global color assignments.\
+\fs28 \cf0 Informs the cell that the owner's 
+\f3\i selectedTextColor
+\f0\i0  value has changed to 
+\f3\i c
+\f7\b .  
+\f0\i0\b0 The current implementation does nothing, since inherited owner values are not stored in the cells.  However, the MiscTableScroll class tests for, and sends this message in preference to the 
+\f4\fs24 -setSelectedTextColor:
+\f0\fs28  message when the table distributes colors to the cells, so that cells can distinguish between cell-specific color assignments and global color assignments.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setOwnerTextColor:\
+\fs28 \cf0 setOwnerTextColor:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setOwnerTextColor:
-\b0 (NSColor*)
-\i c
-\i0\fs24   [Objective-C]
+\f5\b setOwnerTextColor:
+\f0\b0 (NSColor*)
+\f3\i c
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setOwnerTextColor:
-\b0 (NSColor 
-\i c
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setOwnerTextColor:
+\f0\b0 (NSColor 
+\f3\i c
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Informs the cell that the owner's 
-\i textColor
-\i0  value has changed to 
-\i c
-\b .  
-\b0\i0 The current implementation does nothing, since inherited owner values are not stored in the cells.  However, the MiscTableScroll class tests for, and sends this message in preference to the 
-\f3\fs24\fc1\cf1 -setTextColor:
-\f0\fs28\fc0\cf0  message when the table distributes colors to the cells, so that cells can distinguish between cell-specific color assignments and global color assignments.\
+\fs28 \cf0 Informs the cell that the owner's 
+\f3\i textColor
+\f0\i0  value has changed to 
+\f3\i c
+\f7\b .  
+\f0\i0\b0 The current implementation does nothing, since inherited owner values are not stored in the cells.  However, the MiscTableScroll class tests for, and sends this message in preference to the 
+\f4\fs24 -setTextColor:
+\f0\fs28  message when the table distributes colors to the cells, so that cells can distinguish between cell-specific color assignments and global color assignments.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setSelected:\
+\fs28 \cf0 setSelected:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setSelected:
-\b0 (BOOL)
-\i flag
-\i0\fs24   [Objective-C]
+\f5\b setSelected:
+\f0\b0 (BOOL)
+\f3\i flag
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setSelected
-\b0 (boolean 
-\i flag
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setSelected
+\f0\b0 (boolean 
+\f3\i flag
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Sets the cell's MISC_TC1_IS_SELECTED flag.\
+\fs28 \cf0 Sets the cell's MISC_TC1_IS_SELECTED flag.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 ± bgColor
-\f2\b0\fc0\cf0 ,
-\f0\b\fc1\cf1  ± fgColor, ± isSelected
-\b0\fs16\fc0\cf0 \
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 \'96 bgColor
+\f6\b0 ,
+\f5\b  \'96 fgColor, \'96 isSelected
+\f0\b0\fs16 \
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fi-380\li2480\fc0\cf0 \
+\f2\b \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setSelectedBackgroundColor:\
+\fs28 \cf0 setSelectedBackgroundColor:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setSelectedBackgroundColor:
-\b0 (NSColor*)
-\i c
-\i0\fs24   [Objective-C]
+\f5\b setSelectedBackgroundColor:
+\f0\b0 (NSColor*)
+\f3\i c
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setSelectedBackgroundColor
-\b0 (NSColor 
-\i c
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setSelectedBackgroundColor
+\f0\b0 (NSColor 
+\f3\i c
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Sets the color that will be used to fill the background of a text cell when the cell is selected.  This will override any inherited value.\
+\fs28 \cf0 Sets the color that will be used to fill the background of a text cell when the cell is selected.  This will override any inherited value.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setSelectedTextColor:\
+\fs28 \cf0 setSelectedTextColor:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setSelectedTextColor:
-\b0 (NSColor*)
-\i c
-\i0\fs24   [Objective-C]
+\f5\b setSelectedTextColor:
+\f0\b0 (NSColor*)
+\f3\i c
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setSelectedTextColor
-\b0 (NSColor 
-\i c
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setSelectedTextColor
+\f0\b0 (NSColor 
+\f3\i c
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Sets the color that will be used to draw the text of a text cell.  This will override any inherited value.\
+\fs28 \cf0 Sets the color that will be used to draw the text of a text cell.  This will override any inherited value.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setTag:\
+\fs28 \cf0 setTag:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setTag:
-\b0 (int)
-\i x
-\i0\fs24   [Objective-C]
+\f5\b setTag:
+\f0\b0 (int)
+\f3\i x
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setTag
-\b0 (int 
-\i x
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setTag
+\f0\b0 (int 
+\f3\i x
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Sets the cell's 
-\i tag
-\i0  value to 
-\i x
-\i0 .\
+\fs28 \cf0 Sets the cell's 
+\f3\i tag
+\f0\i0  value to 
+\f3\i x
+\f0\i0 .\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\f0\fs28 	± tag\
+\f2\b\fs24 \cf0 See also:
+\f5\fs28 	\'96 tag\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\fs16\fi-380\li2480\fc0\cf0 \
+\f2\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setTextColor:\
+\fs28 \cf0 setTextColor:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setTextColor:
-\b0 (NSColor*)
-\i c
-\i0\fs24   [Objective-C]
+\f5\b setTextColor:
+\f0\b0 (NSColor*)
+\f3\i c
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setTextColor
-\b0 (NSColor 
-\i c
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setTextColor
+\f0\b0 (NSColor 
+\f3\i c
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Causes the cell to render its text with the color, 
-\i c
-\i0 .  This overrides any 
-\i textColor
-\i0  value inherited from the 
-\i owner
-\i0 .\
+\fs28 \cf0 Causes the cell to render its text with the color, 
+\f3\i c
+\f0\i0 .  This overrides any 
+\f3\i textColor
+\f0\i0  value inherited from the 
+\f3\i owner
+\f0\i0 .\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setUseOwnerBackgroundColor:\
+\fs28 \cf0 setUseOwnerBackgroundColor:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setUseOwnerBackgroundColor:
-\b0 (BOOL)
-\i flag
-\i0\fs24   [Objective-C]
+\f5\b setUseOwnerBackgroundColor:
+\f0\b0 (BOOL)
+\f3\i flag
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setUseOwnerBackgroundColor
-\b0 (boolean 
-\i flag
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setUseOwnerBackgroundColor
+\f0\b0 (boolean 
+\f3\i flag
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 If 
-\i flag
-\i0  is YES, the cell will discard any 
-\i backgroundColor
-\i0  value that it is currently storing, and begin using the backgroundColor value provided by the 
-\i owner
-\i0 .  If the owner has not been set, or the owner does not respond to the 
-\f3\fs24\fc1\cf1 -backgroundColor
-\f0\fs28\fc0\cf0  message, then the value returned by 
-\f3\fs24\fc1\cf1 +defaultBackgroundColor
-\f0\fs28\fc0\cf0  will be used.  If 
-\i flag
-\i0  is NO, the cell will make room to store a 
-\i backgroundColor
-\i0  value, and initialize it to the value returned by the 
-\f3\fs24\fc1\cf1 +defaultBackgroundColor
-\f0\fs28\fc0\cf0  method.\
+\fs28 \cf0 If 
+\f3\i flag
+\f0\i0  is YES, the cell will discard any 
+\f3\i backgroundColor
+\f0\i0  value that it is currently storing, and begin using the backgroundColor value provided by the 
+\f3\i owner
+\f0\i0 .  If the owner has not been set, or the owner does not respond to the 
+\f4\fs24 -backgroundColor
+\f0\fs28  message, then the value returned by 
+\f4\fs24 +defaultBackgroundColor
+\f0\fs28  will be used.  If 
+\f3\i flag
+\f0\i0  is NO, the cell will make room to store a 
+\f3\i backgroundColor
+\f0\i0  value, and initialize it to the value returned by the 
+\f4\fs24 +defaultBackgroundColor
+\f0\fs28  method.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setUseOwnerFont:\
+\fs28 \cf0 setUseOwnerFont:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setUseOwnerFont:
-\b0 (BOOL)
-\i flag
-\i0\fs24   [Objective-C]
+\f5\b setUseOwnerFont:
+\f0\b0 (BOOL)
+\f3\i flag
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setUseOwnerFont
-\b0 (boolean 
-\i flag
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setUseOwnerFont
+\f0\b0 (boolean 
+\f3\i flag
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 If 
-\i flag
-\i0  is YES, the cell will use the 
-\i font
-\i0  value inherited from its 
-\i owner
-\i0 .  If 
-\i flag
-\i0  is NO, the cell will continue using its current font, or fonts set via the 
-\f3\fs24\fc1\cf1 -setFont:
-\f0\fs28\fc0\cf0  message rather than the font inherited from the owner.  This method also updates the 
-\f3\fs24\fc1\cf1 MISC_TC1_SELF_FONT
-\f0\fs28\fc0\cf0  bit of the 
-\i tc1_flags
-\i0  bit mask.\
+\fs28 \cf0 If 
+\f3\i flag
+\f0\i0  is YES, the cell will use the 
+\f3\i font
+\f0\i0  value inherited from its 
+\f3\i owner
+\f0\i0 .  If 
+\f3\i flag
+\f0\i0  is NO, the cell will continue using its current font, or fonts set via the 
+\f4\fs24 -setFont:
+\f0\fs28  message rather than the font inherited from the owner.  This method also updates the 
+\f4\fs24 MISC_TC1_SELF_FONT
+\f0\fs28  bit of the 
+\f3\i tc1_flags
+\f0\i0  bit mask.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setUseOwnerSelectedBackgroundColor:\
+\fs28 \cf0 setUseOwnerSelectedBackgroundColor:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setUseOwnerSelectedBackgroundColor:
-\b0 (BOOL)
-\i flag
-\i0\fs24   [Objective-C]
+\f5\b setUseOwnerSelectedBackgroundColor:
+\f0\b0 (BOOL)
+\f3\i flag
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setUseOwnerSelectedBackgroundColor
-\b0\fc1\cf1 (boolean 
-\i\fc0\cf0 flag
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setUseOwnerSelectedBackgroundColor
+\f0\b0 (boolean 
+\f3\i flag
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 If 
-\i flag
-\i0  is YES, the cell will discard any 
-\i selectedBackgroundColor
-\i0  value that it is currently storing, and begin using the 
-\i selectedBackgroundColor
-\i0  value provided by the 
-\i owner
-\i0 .  If the owner has not been set, or the owner does not respond to the 
-\f3\fs24\fc1\cf1 -selectedBackgroundColor
-\f0\fs28\fc0\cf0  message, then the value returned by 
-\f3\fs24\fc1\cf1 +defaultSelectedBackgroundColor
-\f0\fs28\fc0\cf0  will be used.  If 
-\i flag
-\i0  is NO, the cell will make room to store a 
-\i selectedBackgroundColor
-\i0  value, and initialize it to the value returned by the 
-\f3\fs24\fc1\cf1 +defaultSelectedBackgroundColor
-\f0\fs28\fc0\cf0  method.\
+\fs28 \cf0 If 
+\f3\i flag
+\f0\i0  is YES, the cell will discard any 
+\f3\i selectedBackgroundColor
+\f0\i0  value that it is currently storing, and begin using the 
+\f3\i selectedBackgroundColor
+\f0\i0  value provided by the 
+\f3\i owner
+\f0\i0 .  If the owner has not been set, or the owner does not respond to the 
+\f4\fs24 -selectedBackgroundColor
+\f0\fs28  message, then the value returned by 
+\f4\fs24 +defaultSelectedBackgroundColor
+\f0\fs28  will be used.  If 
+\f3\i flag
+\f0\i0  is NO, the cell will make room to store a 
+\f3\i selectedBackgroundColor
+\f0\i0  value, and initialize it to the value returned by the 
+\f4\fs24 +defaultSelectedBackgroundColor
+\f0\fs28  method.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setUseOwnerSelectedTextColor:\
+\fs28 \cf0 setUseOwnerSelectedTextColor:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setUseOwnerSelectedTextColor:
-\b0 (BOOL)
-\i flag
-\i0\fs24   [Objective-C]
+\f5\b setUseOwnerSelectedTextColor:
+\f0\b0 (BOOL)
+\f3\i flag
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setUseOwnerSelectedTextColor
-\b0 (boolean 
-\i flag
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setUseOwnerSelectedTextColor
+\f0\b0 (boolean 
+\f3\i flag
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 If 
-\i flag
-\i0  is YES, the cell will discard any 
-\i selectedTextColor
-\i0  value that it is currently storing, and begin using the 
-\i selectedTextColor
-\i0  value provided by the 
-\i owner
-\i0 .  If the owner has not been set, or the owner does not respond to the 
-\f3\fs24\fc1\cf1 -selectedTextColor
-\f0\fs28\fc0\cf0  message, then the value returned by 
-\f3\fs24\fc1\cf1 +defaultSelectedTextColor
-\f0\fs28\fc0\cf0  will be used.  If 
-\i flag
-\i0  is NO, the cell will make room to store a 
-\i selectedTextColor
-\i0  value, and initialize it to the value returned by the 
-\f3\fs24\fc1\cf1 +defaultSelectedTextColor
-\f0\fs28\fc0\cf0  method.\
+\fs28 \cf0 If 
+\f3\i flag
+\f0\i0  is YES, the cell will discard any 
+\f3\i selectedTextColor
+\f0\i0  value that it is currently storing, and begin using the 
+\f3\i selectedTextColor
+\f0\i0  value provided by the 
+\f3\i owner
+\f0\i0 .  If the owner has not been set, or the owner does not respond to the 
+\f4\fs24 -selectedTextColor
+\f0\fs28  message, then the value returned by 
+\f4\fs24 +defaultSelectedTextColor
+\f0\fs28  will be used.  If 
+\f3\i flag
+\f0\i0  is NO, the cell will make room to store a 
+\f3\i selectedTextColor
+\f0\i0  value, and initialize it to the value returned by the 
+\f4\fs24 +defaultSelectedTextColor
+\f0\fs28  method.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 setUseOwnerTextColor:\
+\fs28 \cf0 setUseOwnerTextColor:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b setUseOwnerTextColor:
-\b0 (BOOL)
-\i flag
-\i0\fs24   [Objective-C]
+\f5\b setUseOwnerTextColor:
+\f0\b0 (BOOL)
+\f3\i flag
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 void 
-\b setUseOwnerTextColor
-\b0 (boolean 
-\i flag
-\i0\fc1\cf1 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 void 
+\f5\b setUseOwnerTextColor
+\f0\b0 (boolean 
+\f3\i flag
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 If 
-\i flag
-\i0  is YES, the cell will discard any 
-\i textColor
-\i0  value that it is currently storing, and begin using the 
-\i textColor
-\i0  value provided by the 
-\i owner
-\i0 .  If the owner has not been set, or the owner does not respond to the 
-\f3\fs24\fc1\cf1 -textColor
-\f0\fs28\fc0\cf0  message, then the value returned by 
-\f3\fs24\fc1\cf1 +defaultTextColor
-\f0\fs28\fc0\cf0  will be used.  If 
-\i flag
-\i0  is NO, the cell will make room to store a 
-\i textColor
-\i0  value, and initialize it to the value returned by the 
-\f3\fs24\fc1\cf1 +defaultTextColor
-\f0\fs28\fc0\cf0  method.\
+\fs28 \cf0 If 
+\f3\i flag
+\f0\i0  is YES, the cell will discard any 
+\f3\i textColor
+\f0\i0  value that it is currently storing, and begin using the 
+\f3\i textColor
+\f0\i0  value provided by the 
+\f3\i owner
+\f0\i0 .  If the owner has not been set, or the owner does not respond to the 
+\f4\fs24 -textColor
+\f0\fs28  message, then the value returned by 
+\f4\fs24 +defaultTextColor
+\f0\fs28  will be used.  If 
+\f3\i flag
+\f0\i0  is NO, the cell will make room to store a 
+\f3\i textColor
+\f0\i0  value, and initialize it to the value returned by the 
+\f4\fs24 +defaultTextColor
+\f0\fs28  method.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc1\cf1 tableScroll:retireAtRow:column:
-\fc0\cf0 \
+\fs28 \cf0 tableScroll:retireAtRow:column:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (id)
-\b tableScroll:
-\b0\fc1\cf1 (MiscTableScroll*)
-\i scroll
-\b\i0\fc0\cf0  retireAtRow:
-\b0\fc1\cf1 (int)
-\i row
-\b\i0\fc0\cf0  column:
-\b0\fc1\cf1 (int)
-\i col
-\i0\fs24\fc0\cf0   [Objective-C]
+\f5\b tableScroll:
+\f0\b0 (MiscTableScroll*)
+\f3\i scroll
+\f5\i0\b  retireAtRow:
+\f0\b0 (int)
+\f3\i row
+\f5\i0\b  column:
+\f0\b0 (int)
+\f3\i col
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 NSCell 
-\b tableScrollRetireAtLocation
-\b0\fc1\cf1 (TableScroll 
-\i scroll
-\i0 , int 
-\i row
-\i0 , int 
-\i col
-\i0 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 NSCell 
+\f5\b tableScrollRetireAtLocation
+\f0\b0 (TableScroll 
+\f3\i scroll
+\f0\i0 , int 
+\f3\i row
+\f0\i0 , int 
+\f3\i col
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 MiscTableCell's implementation of the MiscTableScroll call-back method.  This method is called whenever the cell is removed from active use by the MiscTableScroll as the result of any of the methods that reduce the number of active rows (ex: 
-\f3\fs24\fc1\cf1 -renewRows:
-\f0\fs28\fc0\cf0 , 
-\f3\fs24\fc1\cf1 -empty
-\f0\fs28\fc0\cf0 , etc.).  The current implementation clears the string value of the cell.  Unfortunately, since the overhead of performing these reset operations is quite high, the behavior of this method might change in the future.  Returns 
-\b self
-\b0 .\
+\fs28 \cf0 MiscTableCell's implementation of the MiscTableScroll call-back method.  This method is called whenever the cell is removed from active use by the MiscTableScroll as the result of any of the methods that reduce the number of active rows (ex: 
+\f4\fs24 -renewRows:
+\f0\fs28 , 
+\f4\fs24 -empty
+\f0\fs28 , etc.).  The current implementation clears the string value of the cell.  Unfortunately, since the overhead of performing these reset operations is quite high, the behavior of this method might change in the future.  Returns 
+\f5\b self
+\f0\b0 .\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc1\cf1 tableScroll:reviveAtRow:column:
-\fc0\cf0 \
+\fs28 \cf0 tableScroll:reviveAtRow:column:\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (id)
-\b tableScroll:
-\b0\fc1\cf1 (MiscTableScroll*)
-\i scroll
-\b\i0\fc0\cf0  reviveAtRow:
-\b0\fc1\cf1 (int)
-\i row
-\b\i0\fc0\cf0  column:
-\b0\fc1\cf1 (int)
-\i col
-\i0\fs24\fc0\cf0   [Objective-C]
+\f5\b tableScroll:
+\f0\b0 (MiscTableScroll*)
+\f3\i scroll
+\f5\i0\b  reviveAtRow:
+\f0\b0 (int)
+\f3\i row
+\f5\i0\b  column:
+\f0\b0 (int)
+\f3\i col
+\f0\i0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 NSCell 
-\b tableScrollReviveAtLocation
-\b0\fc1\cf1 (TableScroll 
-\i scroll
-\i0 , int 
-\i row
-\i0 , int 
-\i col
-\i0 )
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 NSCell 
+\f5\b tableScrollReviveAtLocation
+\f0\b0 (TableScroll 
+\f3\i scroll
+\f0\i0 , int 
+\f3\i row
+\f0\i0 , int 
+\f3\i col
+\f0\i0 )
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 MiscTableCell's implementation of the MiscTableScroll call-back method.  This method is called whenever the cell is brought into active use by the MiscTableScroll as the result of any of the methods that expand the number of active rows (ex: 
-\f3\fs24\fc1\cf1 -renewRows:
-\f0\fs28\fc0\cf0 , 
-\f3\fs24\fc1\cf1 -addRow
-\f0\fs28\fc0\cf0 , etc.).  This method sets 
-\i scroll
-\i0  as the 
-\i owner
-\i0  of the cell, then ensures that all attributes are set to the 
-\i use-owner
-\i0  values.  Unfortunately, since the overhead of performing these initializations is quite high, the behavior of this method might change in the future.  Returns 
-\b self
-\b0 .\
+\fs28 \cf0 MiscTableCell's implementation of the MiscTableScroll call-back method.  This method is called whenever the cell is brought into active use by the MiscTableScroll as the result of any of the methods that expand the number of active rows (ex: 
+\f4\fs24 -renewRows:
+\f0\fs28 , 
+\f4\fs24 -addRow
+\f0\fs28 , etc.).  This method sets 
+\f3\i scroll
+\f0\i0  as the 
+\f3\i owner
+\f0\i0  of the cell, then ensures that all attributes are set to the 
+\f3\i use-owner
+\f0\i0  values.  Unfortunately, since the overhead of performing these initializations is quite high, the behavior of this method might change in the future.  Returns 
+\f5\b self
+\f0\b0 .\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tag\
+\fs28 \cf0 tag\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (int)
-\b tag
-\b0\fs24   [Objective-C]
+\f5\b tag
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 int 
-\b tag
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 int 
+\f5\b tag
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the cell's 
-\i tag
-\i0  value.\
+\fs28 \cf0 Returns the cell's 
+\f3\i tag
+\f0\i0  value.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 ± setTag:\
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 \'96 setTag:\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\fs16\fi-380\li2480\fc0\cf0 \
+\f2\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1BackgroundColorLen\
+\fs28 \cf0 tc1BackgroundColorLen\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (unsigned int)
-\b tc1BackgroundColorLen
-\b0\fs24   [Objective-C]
+\f5\b tc1BackgroundColorLen
+\f0\b0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the length of the 
-\i backgroundColor
-\i0  value in the variable-length 
-\i tc1_data
-\i0  field.  This is currently sizeof(NSColor*).\
+\fs28 \cf0 Returns the length of the 
+\f3\i backgroundColor
+\f0\i0  value in the variable-length 
+\f3\i tc1_data
+\f0\i0  field.  This is currently sizeof(NSColor*).\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1BackgroundColorPos\
+\fs28 \cf0 tc1BackgroundColorPos\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (unsigned int)
-\b tc1BackgroundColorPos
-\b0\fs24   [Objective-C]
+\f5\b tc1BackgroundColorPos
+\f0\b0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the current offset of the 
-\i backgroundColor
-\i0  value in the variable-length 
-\i tc1_data
-\i0  field.  This value changes whenever preceeding values are added or removed.\
+\fs28 \cf0 Returns the current offset of the 
+\f3\i backgroundColor
+\f0\i0  value in the variable-length 
+\f3\i tc1_data
+\f0\i0  field.  This value changes whenever preceeding values are added or removed.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1BackgroundColorPtr\
+\fs28 \cf0 tc1BackgroundColorPtr\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (NSColor**)
-\b tc1BackgroundColorPtr
-\b0\fs24   [Objective-C]
+\f5\b tc1BackgroundColorPtr
+\f0\b0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns a pointer to the 
-\i backgroundColor
-\i0  value in the variable-length 
-\i tc1_data
-\i0  field which is, itself, an NSColor*.  The value returned is only valid if 
-\f3\fs24\fc1\cf1 -useOwnerBackgroundColor
-\f0\fs28\fc0\cf0  returns NO.\
+\fs28 \cf0 Returns a pointer to the 
+\f3\i backgroundColor
+\f0\i0  value in the variable-length 
+\f3\i tc1_data
+\f0\i0  field which is, itself, an NSColor*.  The value returned is only valid if 
+\f4\fs24 -useOwnerBackgroundColor
+\f0\fs28  returns NO.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1DataSize\
+\fs28 \cf0 tc1DataSize\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (unsigned int)
-\b tc1DataSize
-\b0\fs24   [Objective-C]
+\f5\b tc1DataSize
+\f0\b0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the current total size of the variable-length 
-\i tc1_data
-\i0  field.  This value changes as optional values are added and removed.\
+\fs28 \cf0 Returns the current total size of the variable-length 
+\f3\i tc1_data
+\f0\i0  field.  This value changes as optional values are added and removed.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1DeleteDataPos:len:\
+\fs28 \cf0 tc1DeleteDataPos:len:\
+\pard\li2520\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b tc1DeleteDataPos:
-\b0 (unsigned int)
-\i pos
-\i0  
-\b\fi0 len:
-\b0 (unsigned int)
-\i len
-\i0\fs24\fi-620   [Objective-C]
-\fs28\fi0 \
-
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
-
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Deletes 
-\i len
-\i0  bytes at offset 
-\i pos
-\i0  from the variable-length 
-\i tc1_data
-\i0  field.  All following data is shifted down by 
-\i len
-\i0  bytes.  This method is called internally whenever an optional value no longer needs to be stored because the inherited value from the owner is going to be used.\
-
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
-
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\f0\fs28 	± tc1InsertData:pos:len:
-\b0\fs16\fc0\cf0 \
-
-\pard\tx7140\f2\b\fi-380\li2480\fc0\cf0 \
-\
-\
-\
-
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1DestroyData\
-
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
-\f0   (void)
-\b tc1DestroyData
-\b0\fs24   [Objective-C]
+\f5\b tc1DeleteDataPos:
+\f0\b0 (unsigned int)
+\f3\i pos
+\f0\i0  
+\f5\b len:
+\f0\b0 (unsigned int)
+\f3\i len
+\f0\i0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 This method is provided as a hook for subclasses that need to perform special actions (destructors) before the variable-length 
-\i tc1_data
-\i0  field is freed.  The MiscTableCell implementation of this class clears the 
-\i tc1_flags
-\i0  bit mask to zero.\
+\fs28 \cf0 Deletes 
+\f3\i len
+\f0\i0  bytes at offset 
+\f3\i pos
+\f0\i0  from the variable-length 
+\f3\i tc1_data
+\f0\i0  field.  All following data is shifted down by 
+\f3\i len
+\f0\i0  bytes.  This method is called internally whenever an optional value no longer needs to be stored because the inherited value from the owner is going to be used.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 ± tc1FreeData\
+\f2\b\fs24 \cf0 See also:
+\f5\fs28 	\'96 tc1InsertData:pos:len:
+\f0\b0\fs16 \
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1Flags\
+\fs28 \cf0 tc1DestroyData\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
+\f0   (void)
+\f5\b tc1DestroyData
+\f0\b0\fs24   [Objective-C]
+\fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
+
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
+
+\fs28 \cf0 This method is provided as a hook for subclasses that need to perform special actions (destructors) before the variable-length 
+\f3\i tc1_data
+\f0\i0  field is freed.  The MiscTableCell implementation of this class clears the 
+\f3\i tc1_flags
+\f0\i0  bit mask to zero.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
+
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
+
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 \'96 tc1FreeData\
+\pard\tx7140\li2480\fi-380\partightenfactor0
+
+\f2\fs16 \cf0 \
+\
+\
+\
+\pard\tx8260\li1500\partightenfactor0
+
+\fs28 \cf0 tc1Flags\
+\pard\li2520\fi-620\partightenfactor0
+
+\f1\b0 \cf0 -
 \f0   (unsigned int)
-\b tc1Flags
-\b0\fs24   [Objective-C]
+\f5\b tc1Flags
+\f0\b0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the current value of the 
-\i tc1_flags
-\i0  field.  This is a bit-mask indicating which optional values are currently stored in the variable-length 
-\i tc1_data
-\i0  field.  The flags also indicate whether or not the corresponding values inherited from the owner are used, since any value that has been set (and stored) in the cell overrides the inherited value.  The values of the individual bits are declared in 
-\f3\fs24\fc1\cf1 MiscTableCell.h
-\f0\fs28\fc0\cf0  as follows:\
+\fs28 \cf0 Returns the current value of the 
+\f3\i tc1_flags
+\f0\i0  field.  This is a bit-mask indicating which optional values are currently stored in the variable-length 
+\f3\i tc1_data
+\f0\i0  field.  The flags also indicate whether or not the corresponding values inherited from the owner are used, since any value that has been set (and stored) in the cell overrides the inherited value.  The values of the individual bits are declared in 
+\f4\fs24 MiscTableCell.h
+\f0\fs28  as follows:\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
+\cf0 \
+\pard\tx7920\tx9520\li4320\fi-2420\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\li2100\fc0\cf0 \
-
-\pard\tx7920\tx9520\f3\fs24\fi-2420\li4320\fc1\cf1 #define MISC_TC1_HAS_TAG	(1 << 0)  /* obsolete */\
+\f4\fs24 \cf0 #define MISC_TC1_HAS_TAG	(1 << 0)  /* obsolete */\
 #define MISC_TC1_SELF_FONT	(1 << 1)\
 #define MISC_TC1_SELF_TEXT_COLOR	(1 << 2)\
 #define MISC_TC1_SELF_BACKGROUND_COLOR	(1 << 3)\
@@ -2079,479 +2446,584 @@ void*
 #define MISC_TC1_IS_SELECTED	(1 << 6)\
 #define MISC_TC1_SELF_DRAW	(1 << 7)  /* !ownerDraw */\
 #define MISC_TC1_LAST_BIT	(1 << 7)\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1FreeData\
+\fs28 \cf0 tc1FreeData\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void)
-\b tc1FreeData
-\b0\fs24   [Objective-C]
+\f5\b tc1FreeData
+\f0\b0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Frees the variable-length 
-\i tc1_data
-\i0  variable.  This method is invoked from within the 
-\f3\fs24\fc1\cf1 -dealloc
-\f0\fs28\fc0\cf0  method, and also within the 
-\f3\fs24\fc1\cf1 -initWithCoder:
-\f0\fs28\fc0\cf0  method.\
+\fs28 \cf0 Frees the variable-length 
+\f3\i tc1_data
+\f0\i0  variable.  This method is invoked from within the 
+\f4\fs24 -dealloc
+\f0\fs28  method, and also within the 
+\f4\fs24 -initWithCoder:
+\f0\fs28  method.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\f0\fs28 	± tc1DestroyData
-\b0\fs16\fc0\cf0 \
+\f2\b\fs24 \cf0 See also:
+\f5\fs28 	\'96 tc1DestroyData
+\f0\b0\fs16 \
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fi-380\li2480\fc0\cf0 \
+\f2\b \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1InsertData:pos:len:\
+\fs28 \cf0 tc1InsertData:pos:len:\
+\pard\li2520\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (void*)
-\b tc1InsertData:
-\b0 (void const*)
-\i data
-\i0  
-\b\fi0 pos:
-\b0 (unsigned int)
-\i pos
-\i0  
-\b len:
-\b0 (unsigned int)
-\i len
-\i0\fs24\fi-620   [Objective-C]
-\fs28\fi0 \
-
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
-
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Inserts 
-\i data
-\i0  at offset 
-\i pos
-\i0  in the variable-length 
-\i tc1_data
-\i0  field, shifting all following data by 
-\i len
-\i0  bytes.  This method is used internally to allocate the storage for optional values that do not already have storage allocated.\
-
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
-
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\f0\fs28 	± tc1DeleteDataPos:len:
-\b0\fs16\fc0\cf0 \
-
-\pard\tx7140\f2\b\fi-380\li2480\fc0\cf0 \
-\
-\
-\
-
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1SelectedBackgroundColorLen\
-
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
-\f0   (unsigned int)
-\b tc1SelectedBackgroundColorLen
-\b0\fs24   [Objective-C]
+\f5\b tc1InsertData:
+\f0\b0 (void const*)
+\f3\i data
+\f0\i0  
+\f5\b pos:
+\f0\b0 (unsigned int)
+\f3\i pos
+\f0\i0  
+\f5\b len:
+\f0\b0 (unsigned int)
+\f3\i len
+\f0\i0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the length of the 
-\i selectedBackgroundColor
-\i0  value in the variable-length 
-\i tc1_data
-\i0  field.  This is currently sizeof(NSColor*).\
+\fs28 \cf0 Inserts 
+\f3\i data
+\f0\i0  at offset 
+\f3\i pos
+\f0\i0  in the variable-length 
+\f3\i tc1_data
+\f0\i0  field, shifting all following data by 
+\f3\i len
+\f0\i0  bytes.  This method is used internally to allocate the storage for optional values that do not already have storage allocated.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
+
+\f2\b\fs24 \cf0 See also:
+\f5\fs28 	\'96 tc1DeleteDataPos:len:
+\f0\b0\fs16 \
+\pard\tx7140\li2480\fi-380\partightenfactor0
+
+\f2\b \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1SelectedBackgroundColorPos\
+\fs28 \cf0 tc1SelectedBackgroundColorLen\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (unsigned int)
-\b tc1SelectedBackgroundColorPos
-\b0\fs24   [Objective-C]
+\f5\b tc1SelectedBackgroundColorLen
+\f0\b0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the current offset of the 
-\i selectedBackgroundColor
-\i0  value in the variable-length 
-\i tc1_data
-\i0  field.  This value changes whenever preceeding values are added or removed.\
+\fs28 \cf0 Returns the length of the 
+\f3\i selectedBackgroundColor
+\f0\i0  value in the variable-length 
+\f3\i tc1_data
+\f0\i0  field.  This is currently sizeof(NSColor*).\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1SelectedBackgroundColorPtr\
+\fs28 \cf0 tc1SelectedBackgroundColorPos\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
+\f0   (unsigned int)
+\f5\b tc1SelectedBackgroundColorPos
+\f0\b0\fs24   [Objective-C]
+\fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
+
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
+
+\fs28 \cf0 Returns the current offset of the 
+\f3\i selectedBackgroundColor
+\f0\i0  value in the variable-length 
+\f3\i tc1_data
+\f0\i0  field.  This value changes whenever preceeding values are added or removed.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
+
+\f2\b\fs16 \cf0 \
+\
+\
+\
+\pard\tx8260\li1500\partightenfactor0
+
+\fs28 \cf0 tc1SelectedBackgroundColorPtr\
+\pard\li2520\fi-620\partightenfactor0
+
+\f1\b0 \cf0 -
 \f0   (NSColor**)
-\b tc1SelectedBackgroundColorPtr
-\b0\fs24   [Objective-C]
+\f5\b tc1SelectedBackgroundColorPtr
+\f0\b0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns a pointer to the 
-\i selectedBackgroundColor
-\i0  value in the variable-length 
-\i tc1_data
-\i0  field which is, itself, an NSColor*.  The value returned is only valid if 
-\f3\fs24\fc1\cf1 -useOwnerSelectedBackgroundColor
-\f0\fs28\fc0\cf0  returns NO.\
+\fs28 \cf0 Returns a pointer to the 
+\f3\i selectedBackgroundColor
+\f0\i0  value in the variable-length 
+\f3\i tc1_data
+\f0\i0  field which is, itself, an NSColor*.  The value returned is only valid if 
+\f4\fs24 -useOwnerSelectedBackgroundColor
+\f0\fs28  returns NO.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1SelectedTextColorLen\
+\fs28 \cf0 tc1SelectedTextColorLen\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (unsigned int)
-\b tc1SelectedTextColorLen
-\b0\fs24   [Objective-C]
+\f5\b tc1SelectedTextColorLen
+\f0\b0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the length of the 
-\i selectedTextColor
-\i0  value in the variable-length 
-\i tc1_data
-\i0  field.  This is currently sizeof(NSColor*).\
+\fs28 \cf0 Returns the length of the 
+\f3\i selectedTextColor
+\f0\i0  value in the variable-length 
+\f3\i tc1_data
+\f0\i0  field.  This is currently sizeof(NSColor*).\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1SelectedTextColorPos\
+\fs28 \cf0 tc1SelectedTextColorPos\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (unsigned int)
-\b tc1SelectedTextColorPos
-\b0\fs24   [Objective-C]
+\f5\b tc1SelectedTextColorPos
+\f0\b0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the current offset of the 
-\i selectedTextColor
-\i0  value in the variable-length 
-\i tc1_data
-\i0  field.  This value changes whenever preceeding values are added or removed.\
+\fs28 \cf0 Returns the current offset of the 
+\f3\i selectedTextColor
+\f0\i0  value in the variable-length 
+\f3\i tc1_data
+\f0\i0  field.  This value changes whenever preceeding values are added or removed.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1SelectedTextColorPtr\
+\fs28 \cf0 tc1SelectedTextColorPtr\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (NSColor**)
-\b tc1SelectedTextColorPtr
-\b0\fs24   [Objective-C]
+\f5\b tc1SelectedTextColorPtr
+\f0\b0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns a pointer to the 
-\i selectedTextColor
-\i0  value in the variable-length 
-\i tc1_data
-\i0  field which is, itself, an NSColor*.  The value returned is only valid if 
-\f3\fs24\fc1\cf1 -useOwnerSelectedTextColor
-\f0\fs28\fc0\cf0  returns NO.\
+\fs28 \cf0 Returns a pointer to the 
+\f3\i selectedTextColor
+\f0\i0  value in the variable-length 
+\f3\i tc1_data
+\f0\i0  field which is, itself, an NSColor*.  The value returned is only valid if 
+\f4\fs24 -useOwnerSelectedTextColor
+\f0\fs28  returns NO.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1TextColorLen\
+\fs28 \cf0 tc1TextColorLen\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (unsigned int)
-\b tc1TextColorLen
-\b0\fs24   [Objective-C]
+\f5\b tc1TextColorLen
+\f0\b0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the length of the 
-\i textColor
-\i0  value in the variable-length 
-\i tc1_data
-\i0  field.  This is currently sizeof(NSColor*).\
+\fs28 \cf0 Returns the length of the 
+\f3\i textColor
+\f0\i0  value in the variable-length 
+\f3\i tc1_data
+\f0\i0  field.  This is currently sizeof(NSColor*).\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1TextColorPos\
+\fs28 \cf0 tc1TextColorPos\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (unsigned int)
-\b tc1TextColorPos
-\b0\fs24   [Objective-C]
+\f5\b tc1TextColorPos
+\f0\b0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the current offset of the 
-\i textColor
-\i0  value in the variable-length 
-\i tc1_data
-\i0  field.  This offset changes as other values are set or cleared.\
+\fs28 \cf0 Returns the current offset of the 
+\f3\i textColor
+\f0\i0  value in the variable-length 
+\f3\i tc1_data
+\f0\i0  field.  This offset changes as other values are set or cleared.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 tc1TextColorPtr\
+\fs28 \cf0 tc1TextColorPtr\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (NSColor**)
-\b tc1TextColorPtr
-\b0\fs24   [Objective-C]
+\f5\b tc1TextColorPtr
+\f0\b0\fs24   [Objective-C]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns a pointer to the location of the 
-\i textColor
-\i0  value stored in the variable-length 
-\i tc1_data
-\i0  field which is, itself, an NSColor*.  The value returned is only valid if 
-\f3\fs24\fc1\cf1 -useOwnerTextColor
-\f0\fs28\fc0\cf0  returns NO.\
+\fs28 \cf0 Returns a pointer to the location of the 
+\f3\i textColor
+\f0\i0  value stored in the variable-length 
+\f3\i tc1_data
+\f0\i0  field which is, itself, an NSColor*.  The value returned is only valid if 
+\f4\fs24 -useOwnerTextColor
+\f0\fs28  returns NO.\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\b\fs16\fi-380\li2480\fc0\cf0 \
+\f2\b\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 textColor\
+\fs28 \cf0 textColor\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (NSColor*)
-\b textColor
-\b0\fs24   [Objective-C]
+\f5\b textColor
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc0\cf0 NSColor 
-\b textColor
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 NSColor 
+\f5\b textColor
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns the color that is used to draw the text in the cell in its normal (unselected) state.  This is the color which has been set with 
-\b ±
-\f3\b0\fs24\fc1\cf1 setTextColor:
-\f0\fs28\fc0\cf0  if it was ever called.  If not, and the owner has been set and responds to 
-\b ±
-\f3\b0\fs24\fc1\cf1 textColor
-\f0\fs28\fc0\cf0  then it is queried and that color is returned.  If both of the above fail then the value from 
-\f3\fs24\fc1\cf1 +defaultTextColor
-\f0\fs28\fc0\cf0  is returned.\
+\fs28 \cf0 Returns the color that is used to draw the text in the cell in its normal (unselected) state.  This is the color which has been set with 
+\f5\b \'96
+\f4\b0\fs24 setTextColor:
+\f0\fs28  if it was ever called.  If not, and the owner has been set and responds to 
+\f5\b \'96
+\f4\b0\fs24 textColor
+\f0\fs28  then it is queried and that color is returned.  If both of the above fail then the value from 
+\f4\fs24 +defaultTextColor
+\f0\fs28  is returned.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 ± backgroundColor, + defaultTextColor, ± selectedBackgroundColor, ± selectedTextColor, ±€setTextColor:\
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 \'96 backgroundColor, + defaultTextColor, \'96 selectedBackgroundColor, \'96 selectedTextColor, \'96\'a0setTextColor:\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\fs16\fi-380\li2480\fc0\cf0 \
+\f2\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 useOwnerBackgroundColor\
+\fs28 \cf0 useOwnerBackgroundColor\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (BOOL)
-\b useOwnerBackgroundColor
-\b0\fs24   [Objective-C]
+\f5\b useOwnerBackgroundColor
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc1\cf1 boolean 
-\b\fc0\cf0 useOwnerBackgroundColor
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 boolean 
+\f5\b useOwnerBackgroundColor
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns YES if the cell uses the 
-\i backgroundColor
-\i0  inherited from its 
-\i owner
-\i0 , otherwise NO.\
+\fs28 \cf0 Returns YES if the cell uses the 
+\f3\i backgroundColor
+\f0\i0  inherited from its 
+\f3\i owner
+\f0\i0 , otherwise NO.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\f0\fs28 	±€setBackgroundColor:, ± setUseOwnerBackgroundColor:\
+\f2\b\fs24 \cf0 See also:
+\f5\fs28 	\'96\'a0setBackgroundColor:, \'96 setUseOwnerBackgroundColor:\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\fs16\fi-380\li2480\fc0\cf0 \
+\f2\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 useOwnerFont\
+\fs28 \cf0 useOwnerFont\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (BOOL)
-\b useOwnerFont
-\b0\fs24   [Objective-C]
+\f5\b useOwnerFont
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc1\cf1 boolean 
-\b\fc0\cf0 useOwnerFont
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 boolean 
+\f5\b useOwnerFont
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns YES if the cell uses the 
-\i font
-\i0  inherited from its 
-\i owner
-\i0 , otherwise NO.\
+\fs28 \cf0 Returns YES if the cell uses the 
+\f3\i font
+\f0\i0  inherited from its 
+\f3\i owner
+\f0\i0 , otherwise NO.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\fs28\fc0\cf0 	
-\f0\fc1\cf1 ± setFont:, ± setUseOwnerFont:\
+\f2\b\fs24 \cf0 See also:
+\fs28 	
+\f5 \'96 setFont:, \'96 setUseOwnerFont:\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\fs16\fi-380\li2480\fc0\cf0 \
+\f2\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 useOwnerSelectedBackgroundColor\
+\fs28 \cf0 useOwnerSelectedBackgroundColor\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (BOOL)
-\b useOwnerSelectedBackgroundColor
-\b0\fs24   [Objective-C]
+\f5\b useOwnerSelectedBackgroundColor
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc1\cf1 boolean 
-\b\fc0\cf0 useOwnerSelectedBackgroundColor
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 boolean 
+\f5\b useOwnerSelectedBackgroundColor
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns YES if the cell uses the 
-\i selectedBackgroundColor
-\i0  inherited from its 
-\i owner
-\i0 , otherwise NO.\
+\fs28 \cf0 Returns YES if the cell uses the 
+\f3\i selectedBackgroundColor
+\f0\i0  inherited from its 
+\f3\i owner
+\f0\i0 , otherwise NO.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\f0\fs28 	± setSelectedBackgroundColor:, ± setUseOwnerSelectedBackgroundColor:\
+\f2\b\fs24 \cf0 See also:
+\f5\fs28 	\'96 setSelectedBackgroundColor:, \'96 setUseOwnerSelectedBackgroundColor:\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\fs16\fi-380\li2480\fc0\cf0 \
+\f2\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 useOwnerSelectedTextColor\
+\fs28 \cf0 useOwnerSelectedTextColor\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (BOOL)
-\b useOwnerSelectedTextColor
-\b0\fs24   [Objective-C]
+\f5\b useOwnerSelectedTextColor
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc1\cf1 boolean 
-\b\fc0\cf0 useOwnerSelectedTextColor
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 boolean 
+\f5\b useOwnerSelectedTextColor
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns YES if the cell uses the 
-\i selectedTextColor
-\i0  inherited from its 
-\i owner
-\i0 , otherwise NO.\
+\fs28 \cf0 Returns YES if the cell uses the 
+\f3\i selectedTextColor
+\f0\i0  inherited from its 
+\f3\i owner
+\f0\i0 , otherwise NO.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\f0\fs28 	±€setSelectedTextColor:, ± setUseOwnerSelectedTextColor:\
+\f2\b\fs24 \cf0 See also:
+\f5\fs28 	\'96\'a0setSelectedTextColor:, \'96 setUseOwnerSelectedTextColor:\
+\pard\tx7140\li2480\fi-380\partightenfactor0
 
-\pard\tx7140\f2\fs16\fi-380\li2480\fc0\cf0 \
+\f2\fs16 \cf0 \
 \
 \
 \
+\pard\tx8260\li1500\partightenfactor0
 
-\pard\tx8260\fs28\li1500\fc0\cf0 useOwnerTextColor\
+\fs28 \cf0 useOwnerTextColor\
+\pard\li2520\fi-620\partightenfactor0
 
-\pard\f1\b0\fi-620\li2520\fc0\cf0 -
+\f1\b0 \cf0 -
 \f0   (BOOL)
-\b useOwnerTextColor
-\b0\fs24   [Objective-C]
+\f5\b useOwnerTextColor
+\f0\b0\fs24   [Objective-C]
 \fs28 \
-
-\pard\tx2480\tx2860\tx3240\fi-620\li2520\fc1\cf1 boolean 
-\b\fc0\cf0 useOwnerTextColor
-\b0\fc1\cf1 ()
-\fs24\fc0\cf0   [Java]
+\pard\tx2480\tx2860\tx3240\li2520\fi-620\partightenfactor0
+\cf0 boolean 
+\f5\b useOwnerTextColor
+\f0\b0 ()
+\fs24   [Java]
 \fs28 \
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\fs16\fi0\li2100 \
+\fs16 \cf0 \
+\pard\tx3600\tx3980\tx4340\li1500\partightenfactor0
 
-\pard\tx3600\tx3980\tx4340\fs28\li1500\fc0\cf0 Returns YES if the cell uses the 
-\i textColor
-\i0  value inherited from its 
-\i owner
-\i0 , otherwise NO.\
+\fs28 \cf0 Returns YES if the cell uses the 
+\f3\i textColor
+\f0\i0  value inherited from its 
+\f3\i owner
+\f0\i0 , otherwise NO.\
+\pard\tx2480\tx2860\tx3240\li2100\partightenfactor0
 
-\pard\tx2480\tx2860\tx3240\fs16\li2100\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx2780\tx3280\tx3760\li2800\fi-1300\partightenfactor0
 
-\pard\tx2780\tx3280\tx3760\f2\b\fs24\fi-1300\li2800\fc1\cf1 See also:
-\f0\fs28 	± setTextColor:, ± setUseOwnerTextColor:\
+\f2\b\fs24 \cf0 See also:
+\f5\fs28 	\'96 setTextColor:, \'96 setUseOwnerTextColor:\
+\pard\tx11280\li6320\fi-240\partightenfactor0
 
-\pard\tx11280\b0\fs70\fi-240\li6320\fc0\cf0 \
+\f0\b0\fs70 \cf0 \
+\pard\li1200\fi-1020\partightenfactor0
 
-\pard\f2\b\fs28\fi-1020\li1200\fc1\cf1 Constants and Defined Types
-\f0\b0\fs24\fc0\cf0   [Objective-C]
-\f2\b\fs28\fc1\cf1 \
+\f2\b\fs28 \cf0 Constants and Defined Types
+\f0\b0\fs24   [Objective-C]
+\f2\b\fs28 \
+\pard\li1360\partightenfactor0
 
-\fs16\fi0\li1360\fc0\cf0 \
+\fs16 \cf0 \
+\pard\tx7560\li1500\partightenfactor0
 
-\pard\tx7560\f3\b0\fs24\li1500\fc1\cf1 #define MISC_TC1_HAS_TAG	(1 << 0)  /* obsolete */\
+\f4\b0\fs24 \cf0 #define MISC_TC1_HAS_TAG	(1 << 0)  /* obsolete */\
 #define MISC_TC1_SELF_FONT	(1 << 1)\
 #define MISC_TC1_SELF_TEXT_COLOR	(1 << 2)\
 #define MISC_TC1_SELF_BACKGROUND_COLOR	(1 << 3)\
@@ -2560,5 +3032,4 @@ void*
 #define MISC_TC1_IS_SELECTED	(1 << 6)\
 #define MISC_TC1_SELF_DRAW	(1 << 7)  /* !ownerDraw */\
 #define MISC_TC1_LAST_BIT	(1 << 7)\
-
 }
