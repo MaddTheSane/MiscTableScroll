@@ -1,0 +1,154 @@
+//-----------------------------------------------------------------------------
+// MiscTableScroll OPENSTEP TODO
+// $Id: OPENSTEP-TODO.txt,v 1.11 99/06/18 20:09:01 sunshine Exp $
+//-----------------------------------------------------------------------------
+
+TODO:
+----
+- Ditch use of PS-wrap on MacOS/X Server if possible since DisplayPostScript
+    is deprecated.   Instead use NSDottedFrameRect().  Note that this function
+    is available as of OpenStep 4.2, but not earlier.
+
+- Ditch use of all other direct PostScript calls on MacOS/X Server if possible.
+    This will affect MiscLineWrapper, MiscTableView, MiscTableViewPrint at
+    minimum.
+
+- Write 3.3 -> 4.x porting document.  Describe changes between the versions.
+    Describe major gotchas.  Describe tops script.
+
+- MISC_FRAME_HEIGHT should be derived at run-time from the height of
+    an MiscBorderCell rather than being hard-coded at compile-time.  There
+    is no guarantee that the hard-coded value will be the correct for any
+    given platform.
+
+- All of the exporters are merely taking -lossyCString.  This may be suitable
+    for ASCII and DBF, but it needs to be reviewed and probably use NSString
+    methods for doing as much of the work as possible.
+
+- Exporters are allocating arrays of integers.  Should probably upgrade to
+    NSArray of NSNumber.
+
+- Rewrite the pasteboard code.  Apparently I broke the "subclassibility" when
+    I ported it.  Paul says that the methods should be writing to something
+    like an NSData object rather than returning strings so that subclasses
+    can write whatever appropriate data types they may have.  Don't just
+    limit it to strings.
+
+- Consider making all instance variables completely private by hiding them
+    behind a single _priv instance variable as is done with some of the
+    Foundation and AppKit objects.  Now that TableScroll is a framework, this
+    could prevent potential problems with subclasses if/when we need to add
+    or remove instance variables.
+
+
+DONE:
+----
+v140.1
+- Port to MacOS/X Server DR2.
+- Update all nib files to conform to new UI guidelines; example programs too.
+- Fix compilation using ProjectUnity so that project compiles on OpenStep 4.2
+    as well as MacOS/X Server for Mach and Windows.
+- Expose MiscTableScroll, MiscTableCell, and MiscExporter to Java.
+- Turn notification-style delegate messages into real notifications in order to
+    be more OPENSTEP compliant and flexible.  (Obviously this can't be done for
+    methods which return a value, but it can be done for the others.)
+    Automatically register the delegates as recipients of the new
+    notifications.
+- Update 'tops' script to reflect delegate messsages which now receive
+    NSNotification.
+- Ensure that file owner and permissions are correct on all nib files after
+    editing them to conform to latest UI guidelines.
+- For Java consistency, move notification-style delegate messages into a
+    Notifications category/interface.
+- Document new notifications.  Fix delegate method documentation to indicate
+    that delegate now recieves NSNotifcation for specific messages.
+- Rename NSIBConnector.h to NSNibConnector.h.
+- For better OpenStep conformance, rename these methods.  Also update 'tops'
+    script, 'jobs' script, and documentation to reflect the changes.
+    border:slotDraggedFrom:to:	--> border:slotDragged:toSlot:
+    border:selectSlot:byExtension:
+		--> border:selectSlot:byExtendingSelection:
+    border:selectSlots:byExtension
+		--> border:selectSlots:byExtendingSelection:
+    border:selectSlotTags:	--> border:selectSlotsWithTags:
+    border:selectSlotTags:byExtension
+		--> border:selectSlotsWithTags:byExtendingSelection:
+    border:deselectSlotTags:	--> border:deselectSlotsWithTags:
+    selectRow:byExtension:	--> selectRow:byExtendingSelection:
+    selectRows:byExtension:	--> selectRows:byExtendingSelection:
+    selectRowTags:		--> selectRowsWithTags:
+    selectRowTags:byExtension:
+		--> selectRowsWithTags:byExtendingSelection:
+    deselectRowTags:		--> deselectRowsWithTags:
+    selectColumn:byExtension:	--> selectColumn:byExtendingSelection:
+    selectColumns:byExtension:	--> selectColumns:byExtendingSelection:
+    selectColumnTags:		--> selectColumnsWithTags:
+    selectColumnTags:byExtension:
+		--> selectColumnsWithTags:byExtendingSelection:
+    deselectColumnTags:		--> deselectColumnsWithTags:
+    drawClippedText		--> drawsClippedText
+    setDrawClippedText:		--> setDrawsClippedText:
+    trackingBy			--> selectsByRows
+    trackBy:			--> setSelectsByRows:
+    tracking			--> isTrackingMouse
+    stringForNSTabularTextPBoardType
+		--> stringForNSTabularTextPboardType
+    getISearchColumn:		--> getIncrementalSearchColumn:
+    doGetISearchColumn:		--> doGetIncrementalSearchColumn:
+    tableScroll:getISearchColumn:
+		--> tableScroll:getIncrementalSearchColumn:
+- Add "Using TableScroll from Java" section to MiscTableScroll.rtf.
+- Add support for setting of "represented object".  Client should be able to
+    set represented object for the entire TableScroll as well as for each
+    slot.  Retain the represented object when set and release it when cleared.
+    Also release it when storage for the represented object array in the
+    border is freed.  To be consistent with the AppKit, must also save and
+    restore the represented object during archiving and unarchiving.  Add new
+    methods to Java 'jobs' file.  Document new methods, and document the fact
+    that the represented object is retained, released, and archived.  Add "See
+    Also" entries to -tag and -setTag: which refer to the represented object.
+    Likewise, refer to -tag and -setTag: from the represented object methods.
+- Verify that new notification variables are properly exported on Windows.
+- Fix platform.make in all projects.  It incorrectly prefixes Windows variables
+    with $(NEXT_ROOT) even though the "real" YellowBox makefiles do not.
+    Also add $(NEXT_ROOT) to all installation directories as appropriate in
+    project files.
+- Blast the unused & invalid PrivateHeaders link in the installed framework.
+- Fix README to take directory structure differences into account between
+    MacOS/X Server and OpenStep.  Also document new Java exposure.
+- Before generating final package, fix permissions on *.sh and RCS/*.sh,v
+    files since the execute-bit keeps getting clobbered by Windows.
+- Remove unused functions from mcgh2misc.sh: SETUP_DOCS(), SETUP_HEADERS().
+- Update mcgh2misc scripts to handle new Java exposure.  At minimum, need to
+    add "jobs" file to list of files to convert.  Also need to include new
+    platform.make and make.sh.  Take extra special care with make.sh since
+    normally all *.sh files are blasted by the script.  Also convert Java
+    package name from org.misckit to org.misckit.  Convert .sed script and
+    .java files inside new Java subproject as well.
+- Fix mcgh2misc to filter output of Emacs batch processing so that only
+    important messages are displayed.
+- Fix mcgh2misc to accept source and target directories on the command line.
+    If not specified, use "." for source and "$(HOME)" for target.  Remove
+    requirement that script must be run from within MiscTableScroll directory.
+- Fix mcgh2misc so that it checks out files from source RCS directly into
+    target directories instead of first copying RCS directories to target
+    and only then performing check out.  Should be able to remove the copy
+    step altogether.
+- Fix mcgh2misc to automatically copy MiscKit license files into package.
+
+v138.1
+- Honor the user's color preferences by taking advantage of the new
+    NSColor "system" color methods.
+- Change MiscBorderCell so that it more closely matches NSTableHeaderCell
+    aesthetically.
+
+v133.1
+- Update all -makeCellsPerform: methods to -makeCellsPerformSelector:.  Also
+    fix 'tops' script accordingly.
+
+v128.1
+- Fix mcgh2misc scripts to handle new framework/palette structure as soon as
+    I hear back from Mr. MiscKit about the organization he requires for
+    MiscKit 2.0.  [07/07/97 - He has failed to answer the two letters I sent
+    him about this.  I'm just going to organize it the way I feel like
+    organizing it.]

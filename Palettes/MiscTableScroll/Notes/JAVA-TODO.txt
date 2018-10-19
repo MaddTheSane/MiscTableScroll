@@ -1,0 +1,65 @@
+//-----------------------------------------------------------------------------
+// MiscTableScroll Java TODO
+// $Id: JAVA-TODO.txt,v 1.1 99/06/14 18:26:56 sunshine Exp $
+//-----------------------------------------------------------------------------
+
+TODO:
+----
+- Expose the ISearch column queries.  They return a BOOL and an int (byref).
+    This should be simple to fix for -getISearchColumn: & -doGetISearchColumn:.
+    A false return value can be encoded as -1 in place of a search column.
+    Introduce a constant on the Java side to represent -1, such as
+    NO_ISEARCH_COLUMN.  Fixing -tableScroll:getISearchColumn: is a problem,
+    though.  It is not immediately clear as to how this should be handled
+    since the Objective-C code knows nothing about Java, and the delegate
+    might be a Java object.  Perhaps the correct solution is to generalize
+    all the methods so that they have a single return value in which
+    NO_ISEARCH_COLUMN encodes a false return.  Document this method when it
+    is finally implemented.
+- Expose sort-info functionality to Java.  This will require wrapping the
+    MiscEntrySortInfo & MiscSlotSortInfo structures in a Java object.  Then
+    expose these related methods in an appropriate fashion: -sortInfoDone:,
+    -sortInfoInit:border:, -border:compareSlots::info:,
+    -compareColumns::info:, -compareRows::info:.
+- Expose sort-function functionality to Java.  This will require wrapping the
+    MiscCompareEntryFunc function pointer.  Then expose these related methods
+    in an appropriate fashion: -compareSlotFunction, -setCompareSlotFunction:,
+    -border:setSlotFunction:, -border:setSlot:sortFunction:,
+    -columnSortFunction:, -setColumn:sortFunction:, -rowSortFunction:,
+    -setRow:sortFunction:
+
+
+DONE:
+----
+v140.1
+- Verify that exported method names match AppKit names where applicable.  This
+    is a requirement of the Java bridge since ObjC selectors are not scoped.
+- Add DataSource Java interface to TableScroll by moving the data-specific
+    methods into an Objective-C category called "DataSource".
+- It would be best to locate the compiled java code and the java dyld directly
+    in the installed framework, rather than scattered around the filesystem.
+    Figure out the best way to do this while minimizing the work required by
+    client programs to support the configuration.
+- Expose print-info functionality to Java.  This will require wrapping the
+    MiscTablePrintInfo structure in a Java object.  Then expose these related
+    methods in an appropriate fashion: -getPrintInfo,
+    -tableScroll:willPrintPageHeader:info:,
+    -tableScroll:willPrintPageFooter:info:.
+    [Instead, I turned the delegate messages into notifications. The printInfo
+    structure is now passed as a series of values in the notification's
+    userInfo dictionary.  The delegate can query these as needed when it
+    receives the message.]
+- Change default behavior of static initializer.  Do *not* automatically
+    install null security manager or patch library search list unless client
+    explicitly requests it in CustomInfo.plist.
+- Update documentation (.rtf) to mention Java.
+- Can probably expose -makeCellsPerform: and variations using NSSelector.
+    Document it.
+- Instead of looking up environment variables NEXT_ROOT or APPLE_ROOT for
+    registering common search directories for Java-glue library inside of
+    MiscTableScroll.framework, use NSSearchPathForDirectoriesInDomains() to
+    determine the correct list of library directories.
+- Expose the new TableScroll notifications to Java.
+- Verify return type of all -validRequestor... variations for documentation.
+- Verify return type of TableScroll.action() for documentation.
+- Verify argument types of -sendAction: variations for documentation.

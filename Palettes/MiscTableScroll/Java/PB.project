@@ -1,0 +1,38 @@
+{
+    CURRENTLY_ACTIVE_VERSION = YES; 
+    DEPLOY_WITH_VERSION_NAME = A; 
+    DYNAMIC_CODE_GEN = YES; 
+    FILESTABLE = {
+        CLASSES = (MiscTableScrollJava.m); 
+        FRAMEWORKS = (AppKit.framework, Foundation.framework, MiscTableScroll.framework); 
+        FRAMEWORKSEARCH = (); 
+        H_FILES = (MiscTableScrollJava.h); 
+        OTHER_LIBS = (AppKitJava, FoundationJava); 
+        OTHER_LINKED = (MiscTableScrollJava.jobs); 
+        OTHER_RESOURCES = (); 
+        OTHER_SOURCES = (Makefile, Makefile.postamble, Makefile.preamble, MiscTableScrollJava.sed); 
+    }; 
+    LANGUAGE = English; 
+    LOCALIZABLE_FILES = {}; 
+    MAKEFILEDIR = "$(MAKEFILEPATH)/pb_makefiles"; 
+    NEXTSTEP_BUILDTOOL = /bin/gnumake; 
+    NEXTSTEP_COMPILEROPTIONS = "-Werror"; 
+    NEXTSTEP_INSTALLDIR = "$(LOCAL_LIBRARY_DIR)/Frameworks/MiscTableScroll.framework/Resources"; 
+    NEXTSTEP_JAVA_COMPILER = /usr/bin/javac; 
+    NEXTSTEP_OBJCPLUS_COMPILER = /usr/bin/cc; 
+    NEXTSTEP_PUBLICHEADERSDIR = "$(LOCAL_LIBRARY_DIR)/Frameworks/MiscTableScroll.framework/Headers"; 
+    PDO_UNIX_BUILDTOOL = $NEXT_ROOT/Developer/bin/make; 
+    PDO_UNIX_INSTALLDIR = /usr/local/lib; 
+    PDO_UNIX_JAVA_COMPILER = "$(NEXTDEV_BIN)/javac"; 
+    PDO_UNIX_OBJCPLUS_COMPILER = "$(NEXTDEV_BIN)/gcc"; 
+    PDO_UNIX_PUBLICHEADERSDIR = "$(LOCAL_DEVELOPER_DIR)/Headers/$(NAME)"; 
+    PROJECTNAME = Java; 
+    PROJECTTYPE = "Java Wrapper"; 
+    PROJECTVERSION = 2.7; 
+    WINDOWS_BUILDTOOL = $NEXT_ROOT/Developer/Executables/make; 
+    WINDOWS_COMPILEROPTIONS = "-Werror"; 
+    WINDOWS_INSTALLDIR = "$(NEXT_ROOT)$(LOCAL_LIBRARY_DIR)/Frameworks/MiscTableScroll.framework/Resources"; 
+    WINDOWS_JAVA_COMPILER = "$(JDKBINDIR)/javac.exe"; 
+    WINDOWS_OBJCPLUS_COMPILER = "$(DEVDIR)/gcc"; 
+    WINDOWS_PUBLICHEADERSDIR = "$(NEXT_ROOT)$(LOCAL_LIBRARY_DIR)/Frameworks/MiscTableScroll.framework/Headers"; 
+}

@@ -1,0 +1,27 @@
+"DirWindow" = {
+    ACTIONS = {
+        "autoSortClick:" = id; 
+        "cdPressed:" = id; 
+        "dragUnscaledClick:" = id; 
+        "hiddenFilesClick:" = id; 
+        "highlightClick:" = id; 
+        "refreshPressed:" = id; 
+        "rowNumbersClick:" = id; 
+        "scrollClick:" = id; 
+        "scrollDoubleClick:" = id; 
+    }; 
+    OUTLETS = {
+        autoSortSwitch = id; 
+        cdButton = id; 
+        countField = id; 
+        dragUnscaledSwitch = id; 
+        hiddenFilesSwitch = id; 
+        highlightSwitch = id; 
+        refreshButton = id; 
+        rowNumbersSwitch = id; 
+        scroll = id; 
+        window = id; 
+    }; 
+    SUPERCLASS = NSObject; 
+};
+"FirstResponder" = {ACTIONS = {}; OUTLETS = {}; SUPERCLASS = NSObject; };

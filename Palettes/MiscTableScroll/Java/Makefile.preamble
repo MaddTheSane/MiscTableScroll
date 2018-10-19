@@ -1,0 +1,120 @@
+#==============================================================================
+#
+#	Copyright (C) 1999 by Paul S. McCarthy and Eric Sunshine.
+#		Written by Paul S. McCarthy and Eric Sunshine.
+#			    All Rights Reserved.
+#
+#	This notice may not be removed from this source code.
+#
+#	This object is included in the MiscKit by permission from the authors
+#	and its use is governed by the MiscKit license, found in the file
+#	"License.rtf" in the MiscKit distribution.  Please refer to that file
+#	for a list of all applicable permissions and restrictions.
+#
+#==============================================================================
+#------------------------------------------------------------------------------
+# Makefile.preamble
+# $Id: Makefile.preamble,v 1.1 99/06/14 18:55:17 sunshine Exp $
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Subclassers of MiscTableScroll may want to enable INSTALL_JOBS_FILE and
+# INSTALL_OBJCJAVA_HEADERS in order to expose the subclass to Java.  By default
+# these are not installed.  All Java-related resources are installed within
+# the framework's Resource directory, except for the DLL file on Windows, which
+# is placed in the standard Executables directory along with other DLL files
+# from other frameworks, since this directory is likely to be named in the
+# user's PATH.
+#------------------------------------------------------------------------------
+
+INSTALL_JOBS_FILE = NO
+INSTALL_OBJCJAVA_HEADERS = NO
+JAVA_INSTALL_DIR = $(INSTALLDIR)/Java
+LIBRARY_LIB_INSTALLDIR = $(INSTALLDIR)
+LIBRARY_DLL_INSTALLDIR = $(INSTALLDIR)/../../../Executables
+
+
+#------------------------------------------------------------------------------
+# The Java wrapper makefile has a bug where it unnecessarily copies the Java
+# .class file hierarchy into the main source directory during installation.
+# The "clean" target also fails to remove this rogue directory.  Work around
+# the problem by faking it into invoking a do-nothing target instead.  See
+# Makefile.postamble for the other half of this work-around.
+#------------------------------------------------------------------------------
+
+COPY_JAVA_CLASSES = table-scroll-do-not-copy-java-classes
+
+
+#------------------------------------------------------------------------------
+# The "bridget" tool does not provide an opportunity for us to perform
+# necessary initialization prior to its attempt to load the generated dynamic
+# library at run-time.  To work around this limitation and allow us to perform
+# our initialization at an appropriate time, we perform a superclass
+# redefinitiion hack by defining MISC_BRIDGET_COMPILE.  See
+# MiscTableScrollJava.h for full details.
+#------------------------------------------------------------------------------
+
+OTHER_BRIDGET_FLAGS += -DMISC_BRIDGET_COMPILE
+
+
+#------------------------------------------------------------------------------
+# The "bridget" tool which uses a built-in C-preprocessor (cpp) to parse
+# header files neglects to provide an architecture definition (one of
+# __i386__, __ppc__, __m68k__, etc.).  This results in a series of warnings
+# from header files which require knowledge of the architecture.  To work
+# around this problem, we use $(ARCH_CMD) to generate a definition.  Note that
+# this may return an incorrect value during cross-compilation, but it should
+# not adversely affect bridget since it is only interested in high-level class
+# interfaces, rather than low-level system implementation details.
+#------------------------------------------------------------------------------
+
+OTHER_BRIDGET_FLAGS += -D__$(shell $(ARCH_CMD))__
+
+
+#------------------------------------------------------------------------------
+# Wrapped Objective-C methods which use (double) values invoke the macro
+# NSJVM_INVOKE_DOUBLE from the Apple Java headers.  This macro then invokes
+# SET_DOUBLE from within the Sun JavaVM headers.  The SET_DOUBLE macro comes
+# in two flavors: one for platforms which require doubleword alignment, and
+# those which do not.  Platforms, such as Intel, which do not require
+# doubleword alignment invoke the second flavor of the macro.  Unfortunately,
+# this flavor generates an unused variable warning.  To work around this
+# problem we define HAVE_ALIGNED_DOUBLES which forces use of the version of
+# SET_DOUBLE which does not generate a warning.  Fortunately it is safe to use
+# doubleword alignment even on platforms which do not require it.
+#------------------------------------------------------------------------------
+
+OTHER_CFLAGS += -DHAVE_ALIGNED_DOUBLES
+
+
+#------------------------------------------------------------------------------
+# Under Windows, relocate the DLL to the standard Executables directory which
+# contains DLL files from other frameworks, since this directory is likely to
+# be named in the user's PATH.  See Makefile.postamble also.
+#------------------------------------------------------------------------------
+
+ifeq "WINDOWS" "$(OS)"
+AFTER_INSTALL += table-scroll-relocate-dll
+endif
+
+
+#------------------------------------------------------------------------------
+# Under Yellow Box DR2 for Windows, when libtool builds the library, it fails
+# to locate AppKitJava.h, so we manually tell it where to find the header.
+# This problem does not exist under MacOS/X Server DR2.
+#------------------------------------------------------------------------------
+
+ifeq "WINDOWS" "$(OS)"
+OTHER_LDFLAGS += -I$(NEXT_ROOT)$(SYSTEM_DEVELOPER_DIR)/Java/Headers \
+	$(VM_INCLUDE_CFLAGS)
+endif
+
+
+#------------------------------------------------------------------------------
+# The javawrapper.make makefile is buggy under YellowBox DR2 for Windows.  It
+# fails to clean up the .lib file which it creates.
+#------------------------------------------------------------------------------
+
+ifeq "WINDOWS" "$(OS)"
+OTHER_GARBAGE += $(basename $(notdir $(PRODUCT))).lib
+endif

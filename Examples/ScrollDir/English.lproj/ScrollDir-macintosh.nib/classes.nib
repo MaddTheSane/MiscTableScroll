@@ -1,0 +1,17 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {info = id; openDirectory = id; runPageLayout = id; }; 
+            CLASS = DirController; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {destroy = id; export = id; openSelected = id; printDirectory = id; }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}

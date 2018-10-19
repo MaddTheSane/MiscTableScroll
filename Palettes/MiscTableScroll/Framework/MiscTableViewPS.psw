@@ -1,0 +1,51 @@
+//=============================================================================
+//
+//	Copyright (C) 1995-1996 by Paul S. McCarthy and Eric Sunshine.
+//		Written by Paul S. McCarthy and Eric Sunshine.
+//			    All Rights Reserved.
+//
+//	This notice may not be removed from this source code.
+//
+//	This object is included in the MiscKit by permission from the authors
+//	and its use is governed by the MiscKit license, found in the file
+//	"License.rtf" in the MiscKit distribution.  Please refer to that file
+//	for a list of all applicable permissions and restrictions.
+//	
+//=============================================================================
+//-----------------------------------------------------------------------------
+// MiscTableViewPS.psw
+//
+//	Fill rectangles with a "dash" pattern.  Useful for drawing dotted
+//	outlines which frame focused cells.
+//
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+// MISC_TV_initps
+//-----------------------------------------------------------------------------
+defineps MISC_TV_initps()
+    7 dict
+    dup begin
+	/PatternType 1 def
+	/PaintType 1 def
+	/TilingType 1 def
+	/BBox [0 0 2 2] def
+	/XStep 2 def
+	/YStep 2 def
+	/PaintProc
+	    { begin 0 setgray 0 0 1 1 rectfill 1 1 1 1 rectfill end } def
+    end
+    matrix makepattern
+    userdict exch /MISC_TV_dottedpattern exch put
+endps
+
+
+//-----------------------------------------------------------------------------
+// MISC_TV_dashedrects
+//-----------------------------------------------------------------------------
+defineps MISC_TV_dashedrects( float rects[n]; int n )
+    gsave
+    MISC_TV_dottedpattern setpattern
+    rects rectfill
+    grestore
+endps

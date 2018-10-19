@@ -1,0 +1,46 @@
+//-----------------------------------------------------------------------------
+// JavaScrollDir BUGS
+// $Id: BUGS.txt,v 1.2 99/06/30 09:29:20 sunshine Exp $
+//-----------------------------------------------------------------------------
+
+BUGS:
+----
+- Formatted file modification date is two hours earlier than actual date (at
+    least in the Eastern time zone).
+- Each time a new window is opened on MacOS/X Server DR2 for Mach or YellowBox
+    DR2 for Windows, it is taller than the size set with -setFrame:display: by
+    the height of the menu bar.  This is an AppKit bug which was introduced in
+    DR2.
+
+
+FIXED:
+-----
+v1.1
+- File attributes displayed for ".." are actually those for ".".
+- JavaScrollDir crashes with message sent to freed object.  The example
+    program launches, loads, and displays a directory window correctly but
+    crashes upon activation of the window.  The crash results from an attempt
+    by the AppKit to dispatch -respondsToSelector: to a freed object.  This
+    crash does not occur on DR2.  [While researching the problem, I ran across
+    an item in the latest Java release notes on the Apple web site which
+    mentioned that the behavior of the Objective-C to Java bridge changed with
+    regards to pure Java objects which have only a "weak" reference on the
+    Objective-C side.  As of MacOS/X Server, the bridge now deallocates the
+    Objective-C proxy object of weakly referenced pure Java objects if the
+    object's proxy has not been retained on the Objective-C side.  Weakly
+    referenced objects are actually a common occurrence.  For instance a pure
+    Java object as an NSWindow's delegate, is one example.  The NSWindow
+    merely maintains a pointer to the Java object's Objective-C proxy, but
+    does not retain it.  Consequently the bridge thinks that the proxy is
+    unused and should be deallocated.  On DR2, these weakly referenced proxy
+    objects were merely leaked.  In the case of JavaScrollDir, DirWindow is a
+    pure Java object which is both the NSWindow's and MiscTableScroll's
+    delegate.  Consequently, DirWindow's Objective-C proxy gets freed by the
+    bridge even though NSWindow and MiscTableScroll are still pointing at it.
+    To fix the problem some entity on the Objective-C side needs to retain
+    DirWindow's Objective-C proxy object.  A simple way to do this is to store
+    a reference to the DirWindow in an NSArray.  As it turns out, DirWindow
+    already maintains a list of active DirWindow objects, named OPEN_DIRS, in
+    a Java Vector object.  Simply converting OPEN_DIRS from a Vector to an
+    NSArray fixes the problem by creating a strong reference on the
+    Objective-C side.]

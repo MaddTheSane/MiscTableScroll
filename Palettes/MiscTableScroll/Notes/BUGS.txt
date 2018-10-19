@@ -1,0 +1,115 @@
+//-----------------------------------------------------------------------------
+// MiscTableScroll BUGS
+// $Id: BUGS.txt,v 1.50 99/06/29 07:12:08 sunshine Exp $
+//-----------------------------------------------------------------------------
+
+BUGS:
+----
+- MiscTableScroll's -sizeToFit does not correctly compute sizes for larger or
+    non-standard fonts (probably fonts and sizes which do not have bitmap
+    representations).  The size that it computes is usually too short and
+    sometimes too narrow.  When it is too narrow, characters get clipped from
+    the right edge of the text.  When it is too short the line isn't drawn at
+    all on account of the fact that, by default, TableScroll does not draw
+    partial lines.  This is a particularly serious problem.  It affects both
+    the NextStep and OpenStep TableScrolls, though the OpenStep version is
+    even more seriously affected since the size returned by -[NSCell cellSize]
+    has even less tolerance than that returned by NextStep's -[Cell
+    calcCellSize:].  This problem essentially makes -sizeToFit a complete
+    washout in any application where the user has control over the font.
+
+- When cell editing is in progress in an autosized column, if the window is
+    resized then the column may change size along with it, but the field
+    editor remains at the old size.  We forgot to handle this case even though
+    we correctly handle the case where the column is resized manually by the
+    user during editing.
+
+- While editing is in progress, if you drag the column being edited, the
+    behavior is inconsistent:
+
+    1) If the column was entirely on-screen when the dragging commenced, then
+       the column which you drag around displays the "new" value.
+    2) If the column was only partially visible when dragging commenced, then
+       the column which you drag around displays the "old" value.
+
+    This is a consequence of the dragging code which grabs the on-screen image
+    if the column was wholly visible, else draws the slot into the drag cache
+    if it wasn't wholly visible.
+
+    I (Eric) am not sure as to the correct way to fix this problem.  It would
+    be nicest if the "new" value was displayed in the dragged column, however
+    the architecture of TableScroll makes this pretty difficult to achieve.
+
+    It is also worth noting that the OPENSTEP version has this problem
+    (dragging the "old" value around) in both cases (at least in eager mode).
+
+- Text on row titles is still getting clipped when dragged if the row wasn't
+    entirely visible when dragging was initiated.
+
+- Incorrect coordinate transformations
+    draw_view() in MiscTableView is *not* transforming the PostScript
+    graphics state.  It is doing the appropriate transformation calculations,
+    but never actually applies them to the gstate.
+
+    Eric took a different approach to drawing a slot for the drag-cache than
+    Pawl's draw_view().  Eric tried using -copyPSCodeInside:to: to create the
+    drag cache.  It automatically includes all the subviews (good) and
+    doesn't have the problem with row title-cell text being clipped which
+    draw_view() has (good).  However, it thinks it is creating PostScript
+    code for a printer, so it uses printer fonts instead of screen fonts
+    (bad), and it doesn't draw images with alpha (transparency) because it
+    thinks it's going to a printer (bad).
+
+- Problems with dragging columns
+    zarnuk says: Dropping a column in the same location that it was dragged
+    out of causes the column to be re-drawn, but does not draw the subviews.
+
+- Auto-scrolling broken.
+    Eric broke auto-scrolling during mouse tracking by giving the cell a
+    chance to track the mouse first.  Apparently one should be clipping the
+    tracking rect to the visible rect so that the cell's tracking loop exits
+    if the mouse is dragged past the edge of the visible rect.  This way
+    TableView will be able to scroll the view as appropriate.  (I have
+    noticed this same bug in other classes in the AppKit.)
+
+- Resizing 'autosize' slots generates truly bizarre behavior.  Needs to be
+    fixed.
+
+- TableCell's "extra" data may have alignment problems on HPPA and Sparc.
+
+FIXED:
+-----
+v140
+- As implemented, MiscTableBorder::clearCursor() is ineffectual.  It sends -1
+    to setCursor() which ignores the invalid (-1) value.
+
+v139
+- Fixed v1 bug: MiscTableBorder.cc:1094: failed assertion `0 <= x'
+- Fixed v1 bug: MiscTableBorder.cc:1094: failed assertion `x < num_slots'
+    The AppKit supports up to 3 pixels of slop on a mouseDown event when
+    deciding whether to make it a multi-click event -- even when that is
+    outside the bounds of the receiving view.  Our code assumed that a
+    mouseDown event had to be inside the bounds of the view.  This bug
+    corrupted the selection set by placing out-of-range values in the
+    selection set.
+
+v138
+- Calling -lockFocus inappropriately:
+    TableScroll calls -lockFocus in a number of places without first checking
+    -canDraw.  This is a bug.  My (Eric) very brief inspection located three
+    instances (-drawCellAt::, drawRow:, drawCol:).  I suspect that there are
+    more.  We need to examine each case individually and fix the broken ones.
+    This is a crasher.
+- Error "lockFocus sent to a view which is not in a window".
+    Very simple to reproduce:
+    1) Inspect a table scroll in IB.
+    2) Type in a column/row title and press tab/enter.
+    Eric sez: This is also caused by using -lockFocus without checking
+    -canDraw.
+
+v135
+- Fixed v130 bug: The up/down arrow buttons on the inspector were broken.
+
+v134
+- Current editing updates are lost if the user resizes or drags a column
+    while editing is in progress.

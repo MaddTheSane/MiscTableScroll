@@ -1,0 +1,143 @@
+{
+    CURRENTLY_ACTIVE_VERSION = YES; 
+    DEPLOY_WITH_VERSION_NAME = B; 
+    DYNAMIC_CODE_GEN = YES; 
+    FILESTABLE = {
+        BUNDLES = (); 
+        CLASSES = (
+            MiscBorderCell.M, 
+            MiscBorderView.M, 
+            MiscColorList.cc, 
+            MiscColView.M, 
+            MiscCornerView.M, 
+            MiscDelegateFlags.cc, 
+            MiscDrawList.cc, 
+            MiscExporter.M, 
+            MiscExporterAccessoryView.M, 
+            MiscExporterASCII.M, 
+            MiscExporterDBF.M, 
+            MiscGeometry.cc, 
+            MiscHighlightTracker.M, 
+            MiscLineWrapper.cc, 
+            MiscListTracker.M, 
+            MiscMouseTracker.M, 
+            MiscRadioTracker.M, 
+            MiscRectColorList.cc, 
+            MiscRectList.cc, 
+            MiscRowView.M, 
+            MiscSparseSet.cc, 
+            MiscTableBorder.cc, 
+            MiscTableBorderIO.cc, 
+            MiscTableBorderSel.cc, 
+            MiscTableCell.M, 
+            MiscTableConnector.M, 
+            MiscTableScroll.M, 
+            MiscTableScrollData.M, 
+            MiscTableScrollEdit.M, 
+            MiscTableScrollIO.M, 
+            MiscTableScrollISearch.M, 
+            MiscTableScrollKB.M, 
+            MiscTableScrollPB.M, 
+            MiscTableScrollPrint.M, 
+            MiscTableScrollSel.M, 
+            MiscTableScrollSort.M, 
+            MiscTableScrollSymbols.M, 
+            MiscTableView.M, 
+            MiscTableViewCursor.M, 
+            MiscTableViewDrag.M, 
+            MiscTableViewPrint.M, 
+            MiscTableWell.M, 
+            MiscTracer.cc
+        ); 
+        C_FILES = (); 
+        DOCUMENTATION = (); 
+        FRAMEWORKS = (AppKit.framework, Foundation.framework); 
+        FRAMEWORKSEARCH = (); 
+        HEADERSEARCH = (); 
+        H_FILES = (
+            bool.h, 
+            MiscBorderCell.h, 
+            MiscBorderView.h, 
+            MiscColorList.h, 
+            MiscColView.h, 
+            MiscCornerView.h, 
+            MiscDelegateFlags.h, 
+            MiscDrawList.h, 
+            MiscExporter.h, 
+            MiscExporterAccessoryView.h, 
+            MiscExporterPrivate.h, 
+            MiscGeometry.h, 
+            MiscHighlightTracker.h, 
+            MiscLineWrapper.h, 
+            MiscListTracker.h, 
+            MiscMouseTracker.h, 
+            MiscRadioTracker.h, 
+            MiscRectColorList.h, 
+            MiscRectList.h, 
+            MiscRowView.h, 
+            MiscSparseSet.h, 
+            MiscTableBorder.h, 
+            MiscTableCell.h, 
+            MiscTableConnector.h, 
+            MiscTableScroll.h, 
+            MiscTableScrollPrivate.h, 
+            MiscTableTypes.h, 
+            MiscTableUtil.h, 
+            MiscTableView.h, 
+            MiscTableViewPrivate.h, 
+            MiscTableWell.h, 
+            MiscTracer.h, 
+            new.h, 
+            NSNibConnector.h
+        ); 
+        IMAGES = (
+            MiscHorzResizeCursor.tiff, 
+            MiscReverseCursor.tiff, 
+            MiscSlotDragCursor.tiff, 
+            MiscSortAscend.tiff, 
+            MiscSortAscendH.tiff, 
+            MiscSortDescend.tiff, 
+            MiscSortDescendH.tiff, 
+            MiscVertResizeCursor.tiff
+        ); 
+        INTERFACES = ("MiscExporterAccessoryView-macintosh.nib", MiscExporterAccessoryView.nib); 
+        LIBS = (); 
+        M_FILES = (); 
+        OTHER_LINKED = (MiscTableViewPS.psw); 
+        OTHER_RESOURCES = (Documentation, "MiscTableScroll-3.3-4.x.tops"); 
+        OTHER_SOURCES = (Makefile.preamble, Makefile, Makefile.postamble); 
+        PROJECT_HEADERS = (
+            MiscExporter.h, 
+            MiscTableCell.h, 
+            MiscTableScroll.h, 
+            MiscTableTypes.h, 
+            MiscTableBorder.h, 
+            MiscTableConnector.h
+        ); 
+        PUBLIC_HEADERS = (MiscExporter.h, MiscTableCell.h, MiscTableScroll.h, MiscTableTypes.h); 
+        SUBPROJECTS = (); 
+        TOOLS = (); 
+    }; 
+    LANGUAGE = English; 
+    LOCALIZABLE_FILES = {
+        "MiscExporterAccessoryView-macintosh.nib" = "MiscExporterAccessoryView-macintosh.nib"; 
+        MiscExporterAccessoryView.nib = MiscExporterAccessoryView.nib; 
+    }; 
+    MAKEFILEDIR = "$(NEXT_ROOT)/NextDeveloper/Makefiles/pb_makefiles"; 
+    NEXTSTEP_BUILDTOOL = /bin/gnumake; 
+    NEXTSTEP_COMPILEROPTIONS = "-DMISC_TABLE_SCROLL_BUILDING -Werror -Wwrite-strings"; 
+    NEXTSTEP_INSTALLDIR = "$(NEXT_ROOT)$(LOCAL_LIBRARY_DIR)/Frameworks"; 
+    NEXTSTEP_JAVA_COMPILER = /usr/bin/javac; 
+    NEXTSTEP_OBJCPLUS_COMPILER = /usr/bin/cc; 
+    PDO_UNIX_BUILDTOOL = $NEXT_ROOT/NextDeveloper/bin/make; 
+    PDO_UNIX_JAVA_COMPILER = "$(NEXTDEV_BIN)/javac"; 
+    PDO_UNIX_OBJCPLUS_COMPILER = "$(NEXTDEV_BIN)/gcc"; 
+    PROJECTNAME = MiscTableScroll; 
+    PROJECTTYPE = Framework; 
+    PROJECTVERSION = 2.7; 
+    WINDOWS_BUILDTOOL = ./make.sh; 
+    WINDOWS_COMPILEROPTIONS = "-DMISC_TABLE_SCROLL_BUILDING -Werror -Wwrite-strings"; 
+    WINDOWS_INSTALLDIR = "$(NEXT_ROOT)$(LOCAL_LIBRARY_DIR)/Frameworks"; 
+    WINDOWS_JAVA_COMPILER = "$(JDKBINDIR)/javac.exe"; 
+    WINDOWS_OBJCPLUS_COMPILER = "$(DEVDIR)/gcc"; 
+}

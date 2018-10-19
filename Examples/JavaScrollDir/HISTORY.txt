@@ -1,0 +1,39 @@
+//-----------------------------------------------------------------------------
+// JavaScrollDir HISTORY
+// $Id: HISTORY.txt,v 1.2 99/06/30 09:29:02 sunshine Exp $
+//-----------------------------------------------------------------------------
+
+v1.1 1999/06/14 15:35 EDT sunshine@sunshineco.com
+    Created.  This project is based on ScrollDir v35.1; translated to Java.
+    Worked around problem with message being sent to freed object when run on
+	MacOS/X Server.  This problem did not occur on DR2.  It turns out that
+	the behavior of the Objective-C to Java bridge changed with regards to
+	weakly-referenced pure-Java objects.  Such objects are freed
+	automatically in MacOS/X Server, but were not freed in DR2.  DirWindow
+	is just such an object, and was thus being freed unexpectedly.  The
+	problem was fixed by creating a strong reference to each DirWindow by
+	converting the list of active DirWindow objects, OPEN_DIRS, from a
+	Java Vector to an NSArray.  The NSArray retains each DirWindow on the
+	Objective-C side, thus creating a strong reference.
+
+    Changed Files:
+    + Align.{HCentered|HLeft}.{VCentered|VTop}.tiff
+    + CustomInfo.plist
+    + Defaults.java
+    + DirController.java
+    + DirWindow.{java|nib}
+    + Info.nib
+    + JavaScrollDir.{ico|iconheader|nib|tiff}
+    + JavaScrollDir-windows.nib
+    + JavaScrollDir_main.m
+    + Lock.{secure|insecure}.tiff
+    + Makefile
+    + Makefile.{preamble|postamble}
+    + pack.sh
+    + pack_binaries.sh
+    + Pagination.{HAuto|HClip|HFit}.{VAuto|VClip|VFit}.tiff
+    + PB.project
+    + README.rtf
+    + SD_PageLayout.{pjava|nib}
+    + unpack.sh
+    + unpack_binaries.sh

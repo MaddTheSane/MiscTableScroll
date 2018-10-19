@@ -1,0 +1,41 @@
+//-----------------------------------------------------------------------------
+// LazyScrollDir BUGS
+// $Id: OPENSTEP-BUGS.txt,v 1.2 99/06/14 17:27:48 sunshine Exp $
+//-----------------------------------------------------------------------------
+
+BUGS:
+----
+- Each time a new window is opened on MacOS/X Server DR2 for Mach or YellowBox
+    DR2 for Windows, it is taller than the size set with -setFrame:display: by
+    the height of the menu bar.  This is an AppKit bug which was introduced in
+    DR2.
+
+
+NeXT BUGS:
+---------
+- Saving font default doesn't work (can't serialize point size error).  [I was
+    storing an NSNumber in a dictionary which got saved to defaults.  I worked
+    around this bug by storing a string representation of the number in the
+    dictionary instead.]
+- Info panel not loading README.  [I worked around this by explicitly asking
+    for an "rtf" file then an "rtfd" file (if the "rtf" wasn't found).
+    NSBundle is not working as advertised where it says that if you pass nil
+    for the "extension", then it will find the first file with the "name"
+    regardless of the "extension".]
+- When browsing /LocalApps, the icons are all the same (and they are the icon
+    for MallocDebug.app which isn't even in that directory)!  The
+    MallocDebug.app icon shows up as the icon for *ALL* ".app" directories
+    rather than the icon of the executable inside.  I tracked this down to
+    MallocDebug's Info.plist:
+	NSExtensions = {app = {NSIcon = Leak.tiff; NSIsPrimary = NO; }; };
+    [I worked around this problem by explicitly checking for the "app"
+    extension and asking for the icon of the contained executable.]
+    [03/21/97 -- this bug is finally "fixed" in OPENSTEP 4.1 (gamma)]
+
+
+FIXED:
+-----
+v19.1
+- File attributes displayed for ".." are actually those for ".".
+- Double-clicking on ".." does not open the parent directory.  It does
+    nothing.  Note that using the "Traverse" button does work.

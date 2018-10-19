@@ -1,0 +1,50 @@
+SELECTION-NOTES
+
+GOAL:
+    Cell-wise and slot-wise selection.
+
+
+STRATEGIES:
+
+SparseSet2D
+  PRO
+    + Assuming that the selection is usually a reasonably small number of
+      contiguous regions, this should have considerable storage savings.
+  CON
+    - Complicated.
+
+
+Bit Map
+  PRO
+    + Simple.
+  CON
+    - Storage grows linearly with table size.  Can get quite large for
+      large tables.  Even though lazy-mode might be able to handle a
+      table with a million rows, the storage requirements for the selection
+      might make it infeasible.
+    - Could be quite slow to initialize / clear when it gets big.
+    - Inserting and deleting rows/cols will be tricky and slow.
+
+
+Use "state" in Cells.
+  PRO
+    + Simple.
+    + More like Matrix.
+    + Storage is already taken care of.
+    + Cells know their own state, so know how to draw themselves.
+  CON
+    - Lazy mode is problematic.  Client needs to manage storage for selection.
+    - erik hatez it.
+
+
+SparseSet
+    o One per column 
+    o One per row
+    o One for entire grid (index = ((row * NCOLS) + col))
+  PRO
+    + Use existing code.
+  CON
+    - These techniques can easily get hammered by a single "select column" 
+      (or "select row") which results in huge amounts of space being used to 
+      store the selection in large tables, thus defeating the entire reason 
+      for using them.  

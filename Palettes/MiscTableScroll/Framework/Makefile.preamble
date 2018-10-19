@@ -1,0 +1,54 @@
+#==============================================================================
+#
+#	Copyright (C) 1995-1999 by Paul S. McCarthy and Eric Sunshine.
+#		Written by Paul S. McCarthy and Eric Sunshine.
+#			    All Rights Reserved.
+#
+#	This notice may not be removed from this source code.
+#
+#	This object is included in the MiscKit by permission from the authors
+#	and its use is governed by the MiscKit license, found in the file
+#	"License.rtf" in the MiscKit distribution.  Please refer to that file
+#	for a list of all applicable permissions and restrictions.
+#
+#==============================================================================
+#------------------------------------------------------------------------------
+# Makefile.preamble
+# $Id: Makefile.preamble,v 1.16 99/08/20 06:08:39 sunshine Exp $
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Perform post-build & post-installation finalization of the framework.  See
+# Makefile.postamble for the other half of this step.
+#------------------------------------------------------------------------------
+
+AFTER_BUILD += table-scroll-finalize-build
+AFTER_INSTALL += table-scroll-finalize-install
+
+
+#------------------------------------------------------------------------------
+# Under 4.1 & 4.2 although PB defines CCFILES, CPPFILES, and CXXFILES in the
+# Makefile, SRCFILES does not actually references them, so the C++ files
+# don't get compiled.  This is patched by assigning them to OTHER_SOURCEFILES
+# which does get referenced.
+#
+# Under 4.1 & 4.2 (prerelease) OFILES does not include any of the C++ object
+# files, so we manually add them to OTHER_OFILES.  Under 4.2 (final), OFILES
+# *does* refer to them, so we must remove the duplicates lest the linker
+# complains about linking the same files twice.  This is done in the
+# Makefile.postamble.
+#
+# Under 4.1 & 4.2 implicitrules.make neglects to mention the .cpp suffix.
+#------------------------------------------------------------------------------
+
+.SUFFIXES: .cpp
+OTHER_SOURCEFILES += $(CCFILES) $(CPPFILES) $(CXXFILES)
+OTHER_OFILES += $(CCFILES:.cc=.o) $(CPPFILES:.cpp=.o) $(CXXFILES:.cxx=.o)
+
+
+#------------------------------------------------------------------------------
+# As of OpenStep 4.2, the compiler (gcc 2.7.2.1) does not accept Objective-C
+# code in cc files, so we have to force ObjC++ mode manually.
+#------------------------------------------------------------------------------
+
+OTHER_CCFLAGS += -ObjC++

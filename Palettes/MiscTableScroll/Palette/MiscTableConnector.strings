@@ -1,0 +1,14 @@
+//-----------------------------------------------------------------------------
+// MiscTableConnector.strings
+//
+//	Describes which outlet names have "action" variables associated with
+//	them.  This tells the MiscTableConnector and MiscTableConnInspector
+//	classes which outlets should be handled like the "target" outlets are
+//	handled by the standard IB connection inspector.
+//
+//-----------------------------------------------------------------------------
+
+{
+target = "action";
+doubleTarget = "doubleAction";
+}

@@ -1,0 +1,18 @@
+"FirstResponder" = {ACTIONS = {}; OUTLETS = {}; SUPERCLASS = NSObject; };
+"MiscExporterAccessoryView" = {
+    ACTIONS = {}; 
+    OUTLETS = {
+        colGridBox = id; 
+        colGridPop = id; 
+        colTitleBox = id; 
+        colTitlePop = id; 
+        formatBox = id; 
+        formatPop = id; 
+        rowGridBox = id; 
+        rowGridPop = id; 
+        rowTitleBox = id; 
+        rowTitlePop = id; 
+        window = id; 
+    }; 
+    SUPERCLASS = NSObject; 
+};

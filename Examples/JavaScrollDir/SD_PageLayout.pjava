@@ -1,0 +1,167 @@
+//=============================================================================
+//
+//	Copyright (C) 1999 by Paul S. McCarthy and Eric Sunshine.
+//		Written by Paul S. McCarthy and Eric Sunshine.
+//			    All Rights Reserved.
+//
+//	This notice may not be removed from this source code.
+//
+//	This object is included in the MiscKit by permission from the authors
+//	and its use is governed by the MiscKit license, found in the file
+//	"License.rtf" in the MiscKit distribution.  Please refer to that file
+//	for a list of all applicable permissions and restrictions.
+//
+//=============================================================================
+//-----------------------------------------------------------------------------
+// SD_PageLayout.java
+//
+//	Custom subclass of AppKit's NSPageLayout panel that adds controls for
+//	margins, pagination, & centering.
+//
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+// $Id: SD_PageLayout.pjava,v 1.1 99/06/14 15:30:21 sunshine Exp $
+// $Log:	SD_PageLayout.pjava,v $
+// Revision 1.1  99/06/14  15:30:21  sunshine
+// v1.1: Page layout panel.  Makefile runs this .pjava file through
+// C-preprocessor to choose portions specific to Windows or Mach.
+// 
+//-----------------------------------------------------------------------------
+import com.apple.yellow.foundation.*;
+import com.apple.yellow.application.*;
+
+class SD_PageLayout extends NSPageLayout {
+
+#ifndef __WIN32__
+
+    private static SD_PageLayout staticInstance = null;
+    NSWindow accessoryWindow;
+    NSTextField leftMarginField;
+    NSTextField topMarginField;
+    NSTextField rightMarginField;
+    NSTextField bottomMarginField;
+    NSMatrix centerMatrix;
+    NSMatrix paginationMatrix;
+
+//-----------------------------------------------------------------------------
+// sharedInstance
+//-----------------------------------------------------------------------------
+public static NSPageLayout sharedInstance() {
+    if (staticInstance == null)
+	staticInstance = new SD_PageLayout();
+    return staticInstance;
+}
+
+
+//-----------------------------------------------------------------------------
+// Constructor
+//-----------------------------------------------------------------------------
+private SD_PageLayout() {
+    NSApplication.loadNibNamed( "SD_PageLayout", this );
+    NSView v = accessoryWindow.contentView();
+    accessoryWindow.setContentView( null );
+    accessoryWindow.close();
+    accessoryWindow = null;	// Releases window resource.
+    setAccessoryView(v);
+}
+
+
+//-----------------------------------------------------------------------------
+// pickedUnits
+//-----------------------------------------------------------------------------
+public void pickedUnits( Object sender ) {
+    NSForm widthForm = (NSForm)contentView().viewWithTag( PLWidthForm );
+    final float oldWidth = widthForm.floatValue();
+    super.pickedUnits( sender );
+    final float scaler = oldWidth / widthForm.floatValue();
+
+    leftMarginField.setFloatValue( leftMarginField.floatValue() / scaler );
+    rightMarginField.setFloatValue( rightMarginField.floatValue() / scaler );
+    topMarginField.setFloatValue( topMarginField.floatValue() / scaler );
+    bottomMarginField.setFloatValue( bottomMarginField.floatValue() / scaler );
+}
+
+
+//-----------------------------------------------------------------------------
+// paginationToSlot
+//-----------------------------------------------------------------------------
+private static int paginationToSlot( int pg ) {
+    int slot = 1;
+    if (pg == NSPrintInfo.FitPagination)
+	slot = 0;
+    else if (pg == NSPrintInfo.ClipPagination)
+	slot = 2;
+    return slot;
+}
+
+
+//-----------------------------------------------------------------------------
+// slotToPagination
+//-----------------------------------------------------------------------------
+private static int slotToPagination( int slot ) {
+    int pg = NSPrintInfo.AutoPagination;
+    if (slot == 0)
+	pg = NSPrintInfo.FitPagination;
+    else if (slot == 2)
+	pg = NSPrintInfo.ClipPagination;
+    return pg;
+}
+
+
+//-----------------------------------------------------------------------------
+// readPrintInfo
+//-----------------------------------------------------------------------------
+public void readPrintInfo() {
+    super.readPrintInfo();
+    NSPrintInfo info = printInfo();
+    NSForm widthForm = (NSForm)contentView().viewWithTag( PLWidthForm );
+    final float scaler = info.paperSize().width() / widthForm.floatValue();
+
+    leftMarginField.setFloatValue( info.leftMargin() / scaler );
+    rightMarginField.setFloatValue( info.rightMargin() / scaler );
+    topMarginField.setFloatValue( info.topMargin() / scaler );
+    bottomMarginField.setFloatValue( info.bottomMargin() / scaler );
+
+    centerMatrix.selectCellAtLocation( info.isVerticallyCentered() ? 1 : 0,
+	info.isHorizontallyCentered() ? 1 : 0 );
+
+    final int pg_row = paginationToSlot( info.verticalPagination() );
+    final int pg_col = paginationToSlot( info.horizontalPagination() );
+    paginationMatrix.selectCellAtLocation( pg_row, pg_col );
+}
+
+
+//-----------------------------------------------------------------------------
+// writePrintInfo
+//-----------------------------------------------------------------------------
+public void writePrintInfo() {
+    super.writePrintInfo();
+    NSPrintInfo info = printInfo();
+    NSForm widthForm = (NSForm)contentView().viewWithTag( PLWidthForm );
+    final float scaler = info.paperSize().width() / widthForm.floatValue();
+
+    info.setLeftMargin( leftMarginField.floatValue() * scaler );
+    info.setRightMargin( rightMarginField.floatValue() * scaler );
+    info.setTopMargin( topMarginField.floatValue() * scaler );
+    info.setBottomMargin( bottomMarginField.floatValue() * scaler );
+
+    info.setVerticallyCentered( centerMatrix.selectedRow() != 0 );
+    info.setHorizontallyCentered( centerMatrix.selectedColumn() != 0 );
+
+    info.setHorizontalPagination(
+		slotToPagination(paginationMatrix.selectedColumn()) );
+    info.setVerticalPagination(
+		slotToPagination(paginationMatrix.selectedRow()) );
+}
+
+
+#else // __WIN32__
+//-----------------------------------------------------------------------------
+// sharedInstance
+//-----------------------------------------------------------------------------
+public static NSPageLayout sharedInstance() {
+    return NSPageLayout.pageLayout();
+}
+#endif // __WIN32__
+
+} // class SD_PageLayout

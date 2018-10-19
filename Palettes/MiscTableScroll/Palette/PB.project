@@ -1,0 +1,56 @@
+{
+    DYNAMIC_CODE_GEN = YES; 
+    FILESTABLE = {
+        BUNDLES = (); 
+        CLASSES = (
+            MiscTableConnInspector.M, 
+            MiscTableScrollInspector.M, 
+            MiscTableScrollPalette.M
+        ); 
+        FRAMEWORKS = (
+            MiscTableScroll.framework, 
+            InterfaceBuilder.framework, 
+            AppKit.framework, 
+            Foundation.framework
+        ); 
+        FRAMEWORKSEARCH = (); 
+        HEADERSEARCH = (); 
+        H_FILES = (
+            MiscTableConnInspector.h, 
+            MiscTableScrollInspector.h, 
+            MiscTableScrollPalette.h
+        ); 
+        IMAGES = (MiscTableDimple.tiff, MiscTableRightArrow.tiff, MiscTableScroll.tiff); 
+        INTERFACES = (MiscTableConnInspector.nib, MiscTableScroll.nib, MiscTableScrollInspector.nib); 
+        LIBS = (); 
+        OTHER_LINKED = (); 
+        OTHER_RESOURCES = (CustomInfo.plist, MiscTableConnector.strings, palette.table); 
+        OTHER_SOURCES = (Makefile.preamble, Makefile, Makefile.postamble); 
+        SUBPROJECTS = (); 
+        TOOLS = (); 
+    }; 
+    LANGUAGE = English; 
+    LOCALIZABLE_FILES = {
+        MiscTableConnInspector.nib = MiscTableConnInspector.nib; 
+        MiscTableScroll.nib = MiscTableScroll.nib; 
+        MiscTableScrollInspector.nib = MiscTableScrollInspector.nib; 
+    }; 
+    MAKEFILEDIR = "$(NEXT_ROOT)/NextDeveloper/Makefiles/pb_makefiles"; 
+    NEXTSTEP_BUILDTOOL = ./make.sh; 
+    NEXTSTEP_COMPILEROPTIONS = "-Werror -Wwrite-strings"; 
+    NEXTSTEP_INSTALLDIR = "$(NEXT_ROOT)$(LOCAL_DEVELOPER_DIR)/Palettes"; 
+    NEXTSTEP_JAVA_COMPILER = /usr/bin/javac; 
+    NEXTSTEP_OBJCPLUS_COMPILER = /usr/bin/cc; 
+    PDO_UNIX_BUILDTOOL = $NEXT_ROOT/NextDeveloper/bin/make; 
+    PDO_UNIX_INSTALLDIR = "$(HOME)/Library/Palettes"; 
+    PDO_UNIX_JAVA_COMPILER = "$(NEXTDEV_BIN)/javac"; 
+    PDO_UNIX_OBJCPLUS_COMPILER = "$(NEXTDEV_BIN)/gcc"; 
+    PROJECTNAME = MiscTableScroll; 
+    PROJECTTYPE = Palette; 
+    PROJECTVERSION = 2.7; 
+    WINDOWS_BUILDTOOL = ./make.sh; 
+    WINDOWS_COMPILEROPTIONS = "-Werror -Wwrite-strings"; 
+    WINDOWS_INSTALLDIR = "$(NEXT_ROOT)$(LOCAL_DEVELOPER_DIR)/Palettes"; 
+    WINDOWS_JAVA_COMPILER = "$(JDKBINDIR)/javac.exe"; 
+    WINDOWS_OBJCPLUS_COMPILER = "$(DEVDIR)/gcc"; 
+}

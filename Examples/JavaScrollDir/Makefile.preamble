@@ -1,0 +1,39 @@
+#==============================================================================
+#
+#	Copyright (C) 1999 by Paul S. McCarthy and Eric Sunshine.
+#		Written by Paul S. McCarthy and Eric Sunshine.
+#			    All Rights Reserved.
+#
+#	This notice may not be removed from this source code.
+#
+#	This object is included in the MiscKit by permission from the authors
+#	and its use is governed by the MiscKit license, found in the file
+#	"License.rtf" in the MiscKit distribution.  Please refer to that file
+#	for a list of all applicable permissions and restrictions.
+#
+#==============================================================================
+#------------------------------------------------------------------------------
+# Makefile.preamble
+# $Id: Makefile.preamble,v 1.1 99/06/14 15:32:27 sunshine Exp $
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Ensure that the Java directory within the MiscTableScroll framework is
+# included in the class-path passed to the Java compiler.
+#------------------------------------------------------------------------------
+CLASSPATH = $(subst $(THINAIR) $(THINAIR),:,$(strip \
+    $(NEXT_ROOT)/$(LOCAL_LIBRARY_DIR)/Frameworks/MiscTableScroll.framework/Resources/Java \
+    $(NEXT_ROOT)/Network/Library/Frameworks/MiscTableScroll.framework/Resources/Java \
+    $(shell javaconfig DefaultClasspath)))
+
+
+#------------------------------------------------------------------------------
+# SD_PageLayout under Mach adds functionality which is not supported under
+# Windows.  Choose the correct implementation by running the file through the
+# C-preprocessor.  See Makefile.postamble for the other half of this patch.
+#------------------------------------------------------------------------------
+
+PJAVAFILES = $(patsubst %.pjava,%.java,$(filter %.pjava,$(OTHERSRCS)))
+OTHER_GENERATED_SRCFILES += $(PJAVAFILES)
+JAVA_CLASSES += $(addprefix $(SFILE_DIR)/,$(PJAVAFILES))
+BEFORE_PREBUILD += java-scroll-dir-do-pjava

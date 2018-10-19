@@ -1,0 +1,17 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {info = id; openDirectory = id; runPageLayout = id; }; 
+            CLASS = DirController; 
+            LANGUAGE = Java; 
+            SUPERCLASS = java.lang.Object; 
+        }, 
+        {
+            ACTIONS = {destroy = id; export = id; openFile = id; printDirectory = id; }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}

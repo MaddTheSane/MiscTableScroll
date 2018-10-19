@@ -1,0 +1,41 @@
+//=============================================================================
+//
+//	Copyright (C) 1999 by Paul S. McCarthy and Eric Sunshine.
+//		Written by Paul S. McCarthy and Eric Sunshine.
+//			    All Rights Reserved.
+//
+//	This notice may not be removed from this source code.
+//
+//	This object is included in the MiscKit by permission from the authors
+//	and its use is governed by the MiscKit license, found in the file
+//	"License.rtf" in the MiscKit distribution.  Please refer to that file
+//	for a list of all applicable permissions and restrictions.
+//
+//=============================================================================
+//-----------------------------------------------------------------------------
+// CustomInfo.plist
+//
+//	Makefile automatically inserts contents of this file into Info.plist
+//	which is stored in the application's Resources directory.  This file
+//	configures the Java engine so that it can locate the MiscTableScroll
+//	byte-code files and run-time library.  It also installs the Null
+//	Security Manager which allows the Java to access MiscTableScroll over
+//	the Java-to-Objective-C bridge.
+//
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+// $Id: CustomInfo.plist,v 1.1 99/06/14 15:48:11 sunshine Exp $
+// $Log:	CustomInfo.plist,v $
+// Revision 1.1  99/06/14  15:48:11  sunshine
+// v1.1: Property list which configures application for Java use. 
+// 
+//-----------------------------------------------------------------------------
+{
+MiscTableScrollUseNullSecurityManager = Yes;
+MiscTableScrollAddLibrarySearchPaths = Yes;
+NSJavaUserPath = (
+    /Local/Library/Frameworks/MiscTableScroll.framework/Resources/Java,
+    /Apple/Local/Library/Frameworks/MiscTableScroll.framework/Resources/Java,
+    /Network/Library/Frameworks/MiscTableScroll.framework/Resources/Java
+    );
+}

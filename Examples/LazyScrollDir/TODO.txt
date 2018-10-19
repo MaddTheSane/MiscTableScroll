@@ -1,0 +1,24 @@
+//-----------------------------------------------------------------------------
+// ScrollDir TODO.txt
+// $Id: TODO.txt,v 1.1 97/02/05 08:20:07 sunshine Exp $
+//-----------------------------------------------------------------------------
+
+TODO:
+-----
+- Change the behavior:
+	* Double-click on a directory should perform a "change-dir"
+		(*not* launch a new window).
+	* cmd-o / cmd-n should create new windows pre-loaded with the
+		currently selected directories (or something like that).
+
+- Fix scroll position after reload.  Only "update" should preserve
+	the scroll position.
+
+- Should ask the workspace manager for notification of file system changes.
+
+DONE:
+-----
+- Implement save/restore settings to/from NXDefaults.
+- Don't load the image immediately while scanning the directory.
+- Separate the extra formatting that needs to be done for lazy mode
+	from the stuff done for eager mode.

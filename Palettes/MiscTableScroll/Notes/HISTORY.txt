@@ -1,0 +1,1984 @@
+//-----------------------------------------------------------------------------
+// MiscTableScroll HISTORY
+// $Id: HISTORY.txt,v 1.92 99/06/29 08:00:18 sunshine Exp $
+//-----------------------------------------------------------------------------
+
+v0.140 1999/06/29 04:15 EDT sunshine@sunshineco.com
+    Synchronized with MiscTableScroll v140.1 for OpenStep.
+    Updated copyright and contact information in README.
+    Renamed abbreviated titles on MiscExporterAccessoryView from "Col Titles"
+	and "Col Grid" to "Column Title" and "Column Grid", respectively.
+    Rewrote MiscExporterAccessoryView so that layout of controls is dynamic,
+	based upon their sizes, rather than using hard-coded coordinates.
+    Removed unused -getWidth: from MiscTableViewPrint.M.
+    Converted the slot list on the inspector from a matrix of buttons to a
+	TableScroll (via CustomView).
+    Reworked the color setting controls on the TableScroll inspector nib.  Now
+	provides user with ability to preview color selections by providing
+	two text field which adopt the chosen colors for text and background.
+	One text field previews selected cells, and the other unselected.
+	This configuration also makes better use of window real-estate.
+    Fixed bug: MiscTableBorder::clearCursor() was broken, making it a no-op.
+    Cleaned up Makefile.preamble and Makefile.postamble files.  Added
+	copyright notices.
+    Documentation of prototype for -reviveCell:at:: was slightly botched.
+    Documentation for these methods was botched:
+	-changeFont:
+	-setColTitleMode:
+	-setColTitlesHeight:
+	-setRowTitleMode:
+	-borderTitleMode:
+	-tableScroll:highlightBackgroundColorChangedTo:
+	-tableScroll:highlightTextColorChangedTo:
+	-tableScroll:textColorChangedTo:
+    The method summary for -border:slotSortReversed: in the documentation was
+	missing.
+    Documentation for -border:setUniformSizeSlots: made invalid claim about
+	not being able to resize uniform size slots.  This restriction was
+	lifted in v133.
+    Explained the for-all-cells portion of -sendAction:to:forAllCells: in
+	documentation.  The meaning of "forAllCells" is not clear by itself.
+    Added new "Delegates" section to documentation.
+    Fixed bug: -[MiscTableScroll changeFont:] was sending -convertFont:
+	directly to the shared FontManager rather than "sender" as documented.
+	Now sends the message to "sender", which is assumed to be a
+	FontManager or similarly capable object.
+    Fixed bug: -[MiscTableScroll sizeToFit] wasn't taking intercell grid into
+	account when computing slot sizes.
+    Added facility which informs TableScroll when the TableView changes first
+	responder status.  Added methods -didBecomeFirstResponder and
+	-didResignFirstResponder which subclasses may override as needed.
+	TableView sends these messages to TableScroll at the appropriate
+	times.  Added delegate methods -tableScrollDidBecomeFirstResponder:
+	and -tableScrollDidResignFirstResponder: Documented new methods.
+    Fixed bug: MiscTableTypes.h was incorrectly exporting
+	MiscDefaultCompareSlotFunc().  It failed to use extern "C" which meant
+	that the name was mangled and inaccessible to Objective-C clients.
+    Significant updates to mcgh2misc scripts.  Now filters output of Emacs
+	batch processing so that only important messages are displayed instead
+	of spewing an enormous amount of output.  Source and target
+	directories can now be specified on the command line and default to
+	sane values if omitted.  Removed requirement that script be run from
+	within MiscTableScroll source directory.  No longer copies RCS
+	directories to target.  Now files are checked out from source RCS
+	directories directly into target locations.  Added usage statement and
+	-help option.  Now optionally copies MiscKit license files, if
+	present, into target.  Simplified EXPAND() which was doing unnecessary
+	work.  WHATS_LOCKED() now takes the directory as an argument instead
+	of assuming the current working directory.  Simplified save and rename
+	logic in lisp code.  Now disables Emacs auto-save and backup-file
+	creation.  Renamed lisp functions and variables to better reflect
+	their actual meaning.  Added copyright notice.  No longer converts
+	tabs from 8 to 4 characters.  This change was motivated by a personal
+	desire to distribute code formatted in a fashion which I prefer.  Thus
+	this project will no longer adhere to the MiscKit guideline for
+	4-character tabs.
+    Created an English.lproj directory and moved the nib files into it.
+	Updated GNUmakefile to handle English.lproj via SRCDIRS.
+    Cleaned up IBConnector.h and added copyright notice.
+    Synchronized pack.sh with OpenStep pack.sh by merging in freeze.sh.
+    Ported back to NextStep 3.2.  Had to add -I. directive to OTHER_CFLAGS in
+	Makefile.preamble since the 3.2 makefiles do not recognize the -I
+	directives which are specified via Project Builder in NextStep 3.3.
+	Textually re-ordered inline functions in MiscTableBorder.h to appease
+	compiler which could not deal with isSortable() calling getSortFunc()
+	and getSortType() before they were declared.  Compiler complained
+	about signed vs. unsigned comparisons and assignments in
+	MiscExporterDBF.M, MiscSparseSet.cc, MiscTableBorderSel.cc,
+	MiscTableScrollISearch.M, MiscTableScrollSort.M.
+
+    Changed Files:
+    - freeze.sh
+    * GNUmakefile
+    * IBConnector.h
+    * Makefile
+    * Makefile.{preamble|postamble}
+    * MiscDelegateFlags.{h|cc}
+    * MiscExporterAccessoryView.M
+    * MiscExporterDBF.M
+    * MiscSparseSet.cc
+    * MiscTableBorder.h
+    * MiscTableBorderSel.cc
+    * MiscTableConnector.h
+    * MiscTableScroll.{h|M|rtf}
+    * MiscTableScrollInspector.{h|M|nib}
+    * MiscTableScrollISearch.M
+    * MiscTableScrollSort.M
+    * MiscTableTypes.h
+    * MiscTableViewCursor.M
+    * MiscTableViewPrint.M
+    * MiscTableTypes.h
+    * mcgh2misc.{el|sh}
+    * pack.sh
+    * PB.project
+    * README.rtf
+    + English.lproj
+    > *.nib --> English.lproj/*.nib
+
+v0.139 1998/05/11 20:42 EDT zarnuk@zarnuk.com
+    Fixed the MiscTableBorder.cc:1094: failed assertion `0 <= x' bug.
+    Fixed the MiscTableBorder.cc:1094: failed assertion `x < num_slots' bug.
+    These bugs were caused by the fact that the AppKit allows 0-3 pixels'
+    worth of slop on multi-click events -- even when the new location is
+    outside the bounds of the view that recieved the first mouse-down event.
+
+    Changed Files:
+    * MiscTableView.M
+    * MiscBorderView.M
+
+v0.138 1998/03/31 04:07 EST sunshine@sunshineco.com
+    Changes to MiscTableScroll.rtf:
+	- Fixed typographical errors
+	- Clarified -editCellAt::
+	- Described return value of -borderSetSlotSizes:
+	- Fixed -getNext:editRow:andCol: to refer to -canEdit:at::
+	- Added missing descriptions for:
+	    canEdit:at::
+	    editIfAble:at::
+	    edit:at::
+	    textDidChange:
+	    textDidEnd:endChar:
+	    textDidGetKeys:isEmpty:
+	    textWillChange:
+	    textWillEnd:
+    MiscTableBorder::write() was declaring same variable twice.
+    Removed junk/unused -[MiscTableScroll calcWidths:heights:maxW:maxH:].
+    Removed excess #import's from MiscTableScrollIO.M.
+    MiscTableBorder's setMinUniformSize() & setMaxUniformSize() were
+	declared as returning a value, but neglected to do so.
+    Removed a useless 'if' statement from
+	-[MiscTableScroll border:setSlotOrder:].
+    Fixed bugs: Methods failed to check -canDraw before sending -lockFocus:
+	-[MiscTableScroll drawCellAt::]
+	-[MiscTableScroll drawCol:]
+	-[MiscTableScroll drawRow:]
+	-[MiscTableScroll drawSlotTitle:]
+    Added -[MiscTableView shouldDelayWindowOrderingForEvent:] to control
+	window ordering during dragging-source operations.
+    Added delegate method -tableScroll:shouldDelayWindowOrderingForEvent:
+	and documented it.
+    README modifications:
+	- Updated email address.
+	- Updated copyright notice.
+    Fixed #import ("..." vs. <...>) in MiscTableViewCursor.M so that it
+	compiles as part of the MiscKit distribution.
+    Fixed v134 bug: -[MiscBorderView mouseDown:] was calling -suspendEditing
+	when border view was used to change selection.  This allowed the
+	slot selection to change while allowing editing to continue.  This
+	resulted in a high "surprise factor" and was inconsistent in these
+	ways: a) slot selection via MiscTableView always ends editing, b)
+	broke the relation where the slot containing the edit session is the
+	one *and* only selected slot, c) potentially broke the relationship
+	where -clicked{Row|Col} return the slot containing the edit session
+	(for instance, [Lazy]ScrollDir requires this relationship to be true).
+    Fixed mcgh2misc.sh to deal correctly with new MiscAlign{Left|Center|Right}
+	images in MiscTableScrollInspector.nib.
+
+    Changed Files:
+    * MiscBorderView.M
+    * MiscDelegateFlags.{h|cc}
+    * MiscTableBorder.h
+    * MiscTableBorderIO.cc
+    * MiscTableScroll.{h|M|rtf}
+    * MiscTableScrollIO.M
+    * MiscTableViewCursor.M
+    * MiscTableViewDrag.M
+    * mcgh2misc.sh
+    * README.rtf
+
+v0.137 1998/02/25 13:49 EST zarnuk@zarnuk.com
+    border:setSlotOrder: now accepts a null pointer to "unsort" the slots.
+
+    Changed Files:
+    * MiscTableScroll.{M|rtf}
+    * MiscTableBorder.{cc|h}
+
+v0.136 1998/02/19 16:36 EST zarnuk@zarnuk.com
+    Now uses NXOrderStrings for sorting and incremental search.
+
+    Changed Files:
+    * MiscTableScrollSort.M
+    * MiscTableScrollISearch.M
+
+v0.135 1998/02/16 17:53 EST zarnuk@zarnuk.com
+    Fixed v130 bug: inspector -- up/down buttons stopped working.
+
+    Changed Files:
+    * MiscTableBorder.{cc|h}
+    * MiscTableScrollInspector.M
+
+v0.134 1997/12/22 13:50 EST zarnuk@zarnuk.com
+    Fixed bug: current editing updates were lost if columns were dragged
+	or resized while editing was in progress.
+    Added suspendEditing/resumeEditing.
+    Eliminated delegate -tableScroll:edit:at:: methods.
+
+    Changed Files:
+    * MiscBorderView.M
+    * MiscDelegateFlags.{cc|h}
+    * MiscTableScroll.{h|M|rtf}
+    * MiscTableScrollEdit.M
+    + MiscTracer.{cc|h}
+
+v0.133 1997/11/22 13:24 EST zarnuk@zarnuk.com
+    Fixed v1 bug: bad range calculations in MiscBorderView.M
+    Fixed v132 bug: Inspector was not calling sizeToCells after adding rows.
+    Added -sizeToFit.
+    Eliminated the forced requirement for scrollers.
+    Added documentation for the printing methods.  Various minor
+	corrections to the documentation.
+    Turned on autoSortRows in the palette.
+    Removed obsolete declaration from MiscTableBorder.h.
+    Combined sort-dir and sort-type in MiscTableBorder.
+    Now passes the version to MiscTableBorder::read().
+    Bumped the version, new storage layout.
+    Broke-off IO routines from massive MiscTableScroll.M file.
+    Eliminated ill-defined and un-implemented "expands-to-data" feature.
+	I finally implemented this, and discovered that the resulting
+	behavior was horrible.
+    Eliminated constrain-min methods.  Functionality retained, but it
+	is now implicit based on the presence or absence of auto-size
+	slots.  Their presence was always a requirement anyway.
+    Eliminated constrain-max functionality and methods entirely.
+	This was introduced for symmetry with constrain-min, but it
+	made the resizing calculations in MiscTableBorder considerably
+	more complicated, and could only work by making slots smaller than
+	the sizes specified by the user, and was generally a pretty
+	artificial feature all together.  We have never used it at mcgh.
+    Eliminated {get|set}{Min|Max}Total{Size|Height|Width} methods.
+	Unnecessary when auto-sizing is automatic.  The internal
+	-constrainSize method, which was called from all over the place
+	was clobbering those values with the values from the size of the
+	frame anyway.
+    Renamed MiscNullView.{h|M} -> MiscCornerView.{h|M}
+    Added -cornerTitle, -setCornerTitle:.
+    User can now resize uniform-size borders.
+    Added -{get|set}{Min|Max}UniformSize{Slots|Rows|Cols} methods.
+    Added -{get|set}DrawClippedText.
+    Corner view now prints.
+    RCS files are now tagged by pack.sh
+    Added cell-alignment control to inspector.
+
+    Changed Files:
+    + freeze.sh
+    * Makefile
+    + MiscAlign{Center|Left|Right}.tiff
+    * MiscBorderView.M
+    + MiscCornerView.{h|M}
+    * MiscDrawList.{cc|h}
+    - MiscNullView.{h|M}
+    * MiscTableBorder.{cc|h}
+    * MiscTableBorderIO.cc
+    * MiscTableScroll.rtf
+    * MiscTableScroll.{h|M}
+    * MiscTableScrollInspector.{h|M|nib}
+    + MiscTableScrollIO.M
+    * MiscTableScrollPalette.M
+    * MiscTableScrollPrivate.h
+    * MiscTableTypes.h
+    * MiscTableUtil.h
+    * MiscTableView.{h|M}
+    * MiscTableViewPrint.M
+    * pack.sh
+    * PB.project
+
+v0.132 1997/11/16 17:58 EST zarnuk@zarnuk.com
+    Restored call to [super tile], but using dummy content view.
+    Renamed MiscTableBorder{_io|_sel}.cc --> *{IO|Sel}.cc
+
+    Changed Files:
+    * Makefile
+    * MiscTableBorderIO.cc
+    * MiscTableBorderSel.cc
+    * MiscTableScroll.M
+    * PB.project
+
+v0.131 1997/11/14 21:22 EST zarnuk@zarnuk.com
+    Fixed printing problems:
+	- orientation (landscape vs. portrait)
+	- pagination (fit vs. auto vs. clip)
+	- centering (horizontal and vertical)
+	- scalingFactor
+
+    Changed Files:
+    * MiscTableViewPrint.M
+
+v0.130 1997/11/14 20:50 EST zarnuk@zarnuk.com
+    Eric: Corrected filenames in README.rtf
+    Restored the executable settings on the shell scripts.
+    Fixed v123 bug -- -border:selectSlot: was infinite recursion.
+    -isSelectable now returns NO when the table is empty.
+    Broke up the massive MiscTableView.M file a little.
+    Broke up the massive MiscTableBorder.cc file somewhat.
+    No longer maintaining so many arrays in visual order in MiscTableBorder.
+    Fixed v1 bug -- -tile was not implemented properly.
+    Fixed v1 bug -- border views were not positioned properly when toggled on.
+
+    Changed Files:
+    * Makefile
+    * MiscTableBorder.{cc|h}
+    + MiscTableBorder_io.cc
+    + MiscTableBorder_sel.cc
+    * MiscTableScroll.M
+    + MiscTableScrollSel.M
+    * MiscTableView.{h|M}
+    + MiscTableViewCursor.M
+    + MiscTableViewDrag.M
+    + MiscTableViewPrivate.h
+    * MiscTableUtil.h
+    * PB.project
+    * README.rtf
+    * *.sh
+
+***********************************************************************
+**** MiscKit 2.0.5 Release contains v0.129.1 for OPENSTEP          ****
+***********************************************************************
+
+***********************************************************************
+**** MiscKit 2.0.4 Release contains v0.129.1 for OPENSTEP          ****
+***********************************************************************
+
+***********************************************************************
+**** MiscKit 1.10.0 Release contains v0.129 for NEXTSTEP           ****
+***********************************************************************
+
+***********************************************************************
+**** Released as MiscTableScroll v129.1 for OPENSTEP on 07/13/1997 ****
+***********************************************************************
+
+***********************************************************************
+**** Released as MiscTableScroll v129 for NEXTSTEP on 07/13/1997   ****
+***********************************************************************
+
+v0.129 1997/07/11 17:49 EDT sunshine@sunshineco.com
+    Fixed wording of "Errors" section.  Added a *FIXME* to MiscTableScroll.rtf.
+    Synchronized mcgh2misc with version from OPENSTEP MiscTableScroll v128.1.
+    Fixed wording in README.
+
+    Changed Files:
+    * MiscTableScroll.rtf
+    * mcgh2misc.sh
+    * README.rtf
+
+v0.128 1997/07/01 10:27 EDT sunshine@sunshineco.com
+    Added a README file which details how to build & install the palette.
+    Added missing descriptions for -borderTitlesSize:, -colTitlesHeight, and
+	-rowTitlesWidth to documentation.
+    Fixed bug: Delegate messages for text color and highlighted text color
+	were reversed.  Was sending one when it should have been sending other.
+    Published and documented the exception code which MiscTableScroll raises
+	upon an assertion failure.
+    For publication as standalone MiscKit palette, added new targets to
+	Makefile.postamble: install_lib, install_headers, install_docs,
+	install_all.  Added new variables to Makefile.preamble to support
+	customization of installation locations.
+    Fixed mcgh2misc script to handle new installation variables in
+	Makefile.preamble.
+    Fixed mcgh2misc script so that new README.rtf doesn't get installed as one
+	of PUB_DOCS.
+    Fixed a number of places in documentation where conversion via mcgh2misc
+	results in poor wording, such as: "an MiscTableScroll" -->
+	"an MiscTableScroll".
+    mcgh2misc conversion script now works off of RCS directory rather than
+	copying entire source tree.  Can now convert source tree which
+	includes subdirectories (subprojects and language projects).
+    mcgh2misc now makes the converted files read-only.
+    Can now run mcgh2misc in an incremental fashion.
+
+    Changed Files:
+    * Makefile.{preamble|postamble}
+    * MiscAssert.cc
+    * MiscDelegateFlags.{h|cc}
+    * MiscExporter.rtf
+    * MiscIntList.rtf
+    * MiscTableCell.rtf
+    * MiscTableScroll.rtf
+    * MiscTableTypes.h
+    * mcgh2misc.sh
+    + README.rtf
+
+v0.127 1997/06/10 05:58 EDT sunshine@sunshineco.com
+    MiscTableCell is now scrollable by default thus simplifying creation of
+	editable columns.
+    Fixed bug: -[MiscTableCell copyFromZone:] was making an allocation from
+	the wrong zone.
+    Fixed bug: -getRow:col:forPoint: was incorrectly returning 'self' when
+	point was outside of bounds.  Now returns 'nil' in this case to be
+	consistent with Matrix.  Updated documentation accordingly.
+    Fixed bug: Wasn't grabbing a copy of the cell when editing was started in
+	lazy mode.  Was only latching a reference to cell.  If any scrolling
+	occurred while editing was in progress (even the scroll-to-visible
+	which happens when editing starts), the contents of the cell could
+	be blasted -- since typically in lazy mode, a single cell is used for
+	all drawing in a column.  The cell is now copied, so its contents are
+	valid throughout the duration of the edit session.
+    Fixed bug: Tabbing from cell to cell during editing wasn't adjusting the
+	keyboard cursor -- it was lagging behind.
+    First responder status is now returned to the TableScroll when cell
+	editing ends via the Return key, rather than reverting uselessly to
+	the window.
+    Fixed bug: Keyboard cursor was being unconditionally drawn when
+	-setCursor{Row|Col}: was called -- even if it shouldn't have been
+	(for instance, if the MiscTableScroll was not first responder, or the
+	cursor had been disabled).
+    Fixed bug: Feedback from incremental-search was drawing outside of the
+	MiscTableScroll's frame.  Consequently the portion outside of the frame
+	was not getting erased.
+    Added MiscAssert() macro which throws an exception rather than calling
+	abort().  Thus assertion failures can now be caught and logged, unlike
+	the standard assert().  Modified all source code to use this new macro.
+    Did considerable work on all documentation (MiscTableScroll,
+	MiscTableCell, MiscExporter, MiscIntList):
+	- Added missing -getCellFrame:at::.
+	- Added missing -getRow:andCol:forPoint: to method-list.
+	- Fixed broken vertical formatting in method-list (thus reducing
+	  vertical size).
+	- Added a "Methods Implemented by Cell Subclasses" section to
+	  MiscTableScroll.rtf and moved descriptions of
+	  -tableScroll:retireAt:: and -tableScroll:reviveAt:: there from
+	  "Methods Implemented by Delegate" since they are not strictly
+	  delegate methods.
+	- Removed many more of the really obvious "See Also" entries.
+	- Unified formatting *throughout*.
+	- Synchronized with OPENSTEP version of each of the MiscTableScroll
+	  documents in v125.9.
+    The binary-file pack & unpack scripts no longer error out if tiffs or
+	nibs are non-existent and are synchronized with MiscTableScroll v125.9
+	for OPENSTEP.
+    Rewrote pack.sh script so that it knows about subprojects and lproj
+	directories (so we can now easily localize if preferred).  Now
+	synchronized with MiscTableScroll v125.9 for OPENSTEP.
+    Copied unpack.sh from the MiscTableScroll v125.9 for OPENSTEP whichs
+	knows about subprojects and lproj directories and performs the RCS
+	check-out and .uu file unpacking (so we can now easily localize if
+	preferred).
+    Moved build options from Makefile.preamble into PB.project.
+
+    Changed Files:
+    * Makefile
+    * Makefile.preamble
+    + MiscAssert.{h|cc}
+    * MiscBorderView.M
+    * MiscExporter.rtf
+    * MiscIntList.rtf
+    * MiscLineWrapper.cc
+    * MiscSparseSet.cc
+    * MiscTableBorder.cc
+    * MiscTableCell.{h|M|rtf}
+    * MiscTableScroll.{M|rtf}
+    * MiscTableScrollData.M
+    * MiscTableScrollEdit.M
+    * MiscTableScrollISearch.M
+    * MiscTableScrollSort.M
+    * MiscTableView.M
+    * MiscTableViewPrint.M
+    * pack.sh
+    * pack_binaries.sh
+    * PB.project
+    + unpack.sh
+    * unpack_binaries.sh
+
+v0.126 1997/05/04 18:35 EDT zarnuk@zarnuk.com
+    Fixed several errors in the documentation.
+    Fixed some minor compiler warnings.
+
+    Changed Files:
+    * MiscDelegateFlags.cc
+    * MiscExporterDBF.M
+    * MiscTableScroll.rtf
+    * MiscTableTypes.h
+    * MiscTableView.M
+
+v0.125 1997/03/14 01:32 EST zarnuk@zarnuk.com
+    Fixed v121 bug: fonts were not being restored properly in the
+	-[MiscTableCell tableScroll:reviveAt::] method.  Optimized
+	the method slightly.
+
+    Changed Files:
+    * MiscTableCell.{M|rtf}
+
+v0.124 1997/02/12 12:58 EST sunshine@sunshineco.com
+    Added clipping back to -[MiscTableView drawSelf::] so that we don't draw
+	outside of the update rectangles passed in.  This way we don't clobber
+	subviews.
+
+    Changed Files:
+    * MiscTableView.M
+
+v0.123 1997/02/11 19:11 EST sunshine@sunshineco.com
+    Added selection methods:
+	-border:selectSlot:byExtension:
+	-selectRow:byExtension:
+	-selectCol:byExtension:
+	-border:selectTags:byExtension:
+	-selectRowTags:byExtension:
+	-selectColTags:byExtension:
+	-border:selectSlots:byExtension:
+	-selectRows:byExtension:
+	-selectCols:byExtension:
+    Following methods no longer 'extend' selection:
+	-border:selectSlot:
+	-selectRow:
+	-selectCol:
+    Added deselection methods:
+	-border:deselectSlot:
+	-deselectRow:
+	-deselectCol:
+	-border:deselectTags:
+	-deselectRowTags:
+	-deselectColTags:
+	-border:deselectSlots:
+	-deselectRows:
+	-deselectCols:
+	-deselectAll:
+    Documented all the new methods.
+    Fixed bug: -border:selectSlots: was not checking for valid slots.  It was
+	allowing *any* slot to be added to the selection even if
+	non-existent.  (Also affected -selectRows: & -selectCols:.)
+    Fixed bug: Although MiscTableScroll was taking autoDisplay into account in
+	-reflectSelection, neither MiscBorderView nor MiscTableView was.
+    Got rid of -reflectSelection in favor of -selectionChanged since their
+	functionality was identical.  Updated documentation accordingly.
+    Published and documented -selectedCell.
+    Cleaned up documentation some more.
+    Inlined a use-owner-font check in MiscTableCell's high-frequency
+	-tableScroll:reviveAt:: method.
+    Removed the unused -putImage:atPoint: method from MiscTableViewPrint.M.
+    Removed the unused -tooSmall method in MiscTableViewPrint.M.
+    Fixed bug: MiscTableViewPrint was leaking every single NXImage that its
+	-getImage... methods created.
+    Removed the unnecessary code in MiscTableView's -drawSelf:: which sets up
+	a clipping rect if there are subviews.  It was not needed at all since
+	no drawing of subviews occurs inside of -drawSelf::.
+    Fixed bug: MiscDrawList was using the screen-font unconditionally -- even
+	when printing (not drawing to the screen).
+    Fixed bug: The delegate methods for printing -tableScrollWillPrint: and
+	-tableScroll:didPrint: were getting subverted if the -printPSCode:
+	message was sent to the firstResponder rather than the
+	MiscTableScroll itself.  (The firstResponder is really the
+	MiscTableView.) This can easily happen if the Print...  item is
+	connected to First Responder in IB.
+
+    Changed Files:
+    * MiscBorderView.{h|M}
+    * MiscDrawList.cc
+    * MiscTableBorder.{h|cc}
+    * MiscTableCell.M
+    * MiscTableScroll.{h|M|rtf}
+    * MiscTableScrollKB.M
+    * MiscTableScrollPrint.M
+    * MiscTableView.{h|M}
+    * MiscTableViewPrint.M
+
+v0.122 1997/02/05 07:08 EST sunshine@sunshineco.com
+    Fixed bug: Although setting cell's highlight flag during mouse tracking
+	is fine for eager-mode, it is insufficient for lazy-mode.  Fixed
+	by adding 'tracking' flag which is used in lazy-mode to determine
+	when cell should be drawn highlighted.
+    Updated documentation accordingly.
+    Clarified misleading documentation for -trackBy: and -trackingBy.
+
+    Changed Files:
+    * MiscTableScroll.{h|M|rtf}
+    * MiscTableData.M
+    * MiscTableScrollPrivate.h
+    * MiscTableView.M
+
+v0.121 1997/02/04 08:10 EST sunshine@sunshineco.com
+    Fixed some #import/#include statements (<...> vs.  "...") so that the
+	palette once again compiles as part of the MiscKit distribution.
+    Updated to reflect which MiscKit versions contain which MiscTableScroll
+	versions.
+
+    Changed Files:
+    * MiscDrawList.cc
+    * MiscTableCell.M
+    * MiscTableView.M
+
+v0.120 1997/02/04 04:56 EST sunshine@sunshineco.com
+    Fixed bug: -[MiscTableView mouseDown:] was not sending the tracker a
+	-mouseUp:atPos: message if the mouse went up during tracking of the
+	cell in which it originally went down.  Thus trackers which have
+	non-empty -mouseUp:atPos: methods were malfunctioning.  For instance,
+	this broke deselect by shift-click in MiscRadioTracker.  (v113 bug)
+    Fixed bug: When deleting the selected slot, MiscTableBorder::deleteAt()
+	wasn't coercing selectedSlot to a valid value.  Instead it was just
+	setting it to -1.  This was inconsistent with other parts of the
+	object which ensure that selectedSlot *always* points to a selected
+	slot unless there are none in which case it is set to -1.
+    Fixed bug: MiscTableBorder::moveFromTo() was adjusting the selectedSlot
+	before it ensured that said slot was indeed in the selected-slot set.
+	Since setSelectedSlot() calls MiscSparseSet::coerce(), wasn't
+	necessarily set to what it was presumed to be set as.  (Switched the
+	order of the statements around to fix it.)
+    Fixed bug: MiscTableBorder::setCount() was incorrectly setting
+	selectedSlot to -1 rather than coercing it to a valid slot in the
+	selection set.
+    Fixed bug: MiscTableBorder::setCount() was incorrectly clearing the
+	selection when it should have been clearning the cursor.
+
+    Changed Files:
+    * MiscTableBorder.M
+    * MiscTableView.M
+
+v0.119 1997/01/23 22:36 EST sunshine@sunshineco.com
+    Combined -setClickedRow: & -setClickedCol: since they are *always* called
+	in combination.
+    Added -resetSelection to MiscTableScroll and published it in
+	MiscTableScrollPrivate.h.  It calls -resetSelection in the border
+	and table views.
+    Fixed bug: The "remembered" selection in border and table views was not
+	being taken into account when adding/removing slots.  Hence the next
+	selection reflection via -reflectSelection was incorrect.
+    Removed unnecessary loop in MiscSparseSet::shiftDownAt().
+    Fixed bug: MiscTableScroll's -border:setUniformSizeSlots: was setting the
+	ScrollView's line-scroll amount to 0 if uniform-size was 0.  (This had
+	the effect of making the line-scroll buttons inoperable.)
+    Fixed bug: Cell wasn't scrolled to visible when editing was initiated, so
+	it was possible, with tab and shift-tab, to edit a cell which was not
+	visible.
+    Fixed bug: MiscTableView's -getCursorSlot would crash if the border had
+	a selection but not a selected slot.  (This can actually happen if
+	the selected slot gets deleted.  Maybe TableBorder should be modified
+	so that it *always* has a selected-slot whenever it has a selection?)
+
+    Changed Files:
+    * MiscSparseSet.cc
+    * MiscTableScroll.M
+    * MiscTableScrollData.M
+    * MiscTableScrollEdit.M
+    * MiscTableScrollPrivate.h
+    * MiscTableScrollSort.M
+    * MiscTableView.M
+
+v0.118 1997/01/22 07:02 EST sunshine@sunshineco.com
+    Fixed bug: MiscSparseSet::remove(int) was not taking into account that
+	insertAt() may have called realloc().  This led to (1) writing to
+	memory which had been freed() by realloc(), and (2) failure to set
+	the 'hi' anchor correctly (it was setting 'hi' in the old freed
+	memory rather than at its new location after realloc()).
+    MiscSparseSet::shiftDown() now folds out newly adjacent ranges.
+    MiscSparseSet::dump() now detects corruption.
+
+    Changed Files:
+    * MiscSparseSet.cc
+
+v0.117 1997/01/22 03:38 EST sunshine@sunshineco.com
+    Fixed bug: MiscIntList's std_cmp() was returning 0 when (x > y).
+
+    Changed Files:
+    * MiscIntList.{h|M}
+
+v0.116 1997/01/12 12:30 EST sunshine@sunshineco.com
+    Fixed bug: MiscTableView's mouse tracking code was not taking non-opaque
+	cells into account when [de]highlighting.
+    Fixed bug: Mouse tracking code was not checking for disabled cell.
+    The icon/image is no longer cleared when retiring cells.
+
+    Change Files:
+    * MiscTableCell.M
+    * MiscTableScrollData.M
+    * MiscTableView.M
+
+v0.115 1997/01/10 08:15 EST sunshine@sunshineco.com
+    Fixed bug: MiscTableCell's -tableScroll:reviveAt:: wasn't latching the
+	owner's font in all cases.  It would only latch it if the owner
+	changed or if it was not already using owner-font, but not in the
+	most common case where the owner was the same and it was already
+	using owner-font.  (Bug introduced in v0.111.)
+
+    Changed Files:
+    * MiscTableCell.M
+
+v0.114 1997/01/06 05:15 EST sunshine@sunshineco.com
+    Fixed bug introduced in v0.112.  MiscTableView's -drawCol: was
+	incorrectly referring to row_border rather than col_border.  This bug
+	frequently resulted in crashes (assertion: x < num_slots) during
+	column dragging, as well as the failure to redraw a column if it was
+	dropped back where it started (after the "well" was removed).
+    Fixed messed up wording in documentation from v0.113.
+    Fixed bug: mcgh2misc.sh wasn't publishing MiscExporter.h correctly.
+
+    Changed Files:
+    * MiscTableScroll.rtf
+    * MiscTableView.M
+    * mcgh2misc.sh
+
+v0.113 1996/12/30 16:36 EST zarnuk@zarnuk.com
+    Implemented text-cell editing.
+    Added methods to set the sizes of the borders.
+    Fixed bugs in the "clicked" stuff.
+
+    Changed Files:
+    * Makefile
+    * MiscBorderView.{h|M}
+    * MiscTableBorder.h
+    * MiscTableScroll.{h|M|rtf}
+    + MiscTableScrollEdit.M
+    * MiscTableView.{h|M}
+    * MiscDelegateFlags.{cc|h}
+    * PB.project
+
+v0.112 1996/12/17 21:07 EST sunshine@sunshineco.com
+    Added -borderClickedSlot:, -clickedRow, -clickedCol, and -clickedCell.
+    To conform to OpenStep UI guidelines, keyboard-focuser is now drawn as
+	a non-blinking dotted rectangle.
+    Made physicalToVisual() and visualToPhysical() more robust by having them
+	check for invalid slot rather than having to do so manually every
+	place which calls either one.
+    -drawRow:, -drawCol: no longer do any drawing if outside of visible rect.
+
+    Changed Files:
+    * Makefile
+    * MiscBorderView.M
+    * MiscTableBorder.{h|cc}
+    - MiscTableFocus.{h|M}
+    - MiscTableFocusPS.psw
+    * MiscTableScroll.{h|M|rtf}
+    * MiscTableScrollKB.M
+    * MiscTableScrollPrivate.h
+    * MiscTableView.{h|M}
+    + MiscTableViewPS.psw
+    * PB.project
+
+v0.111 1996/12/16 10:26 EST zarnuk@zarnuk.com
+    Improved performance of methods that add/remove rows from the table scroll.
+
+    Changed Files:
+    * MiscTableCell.{h|M|rtf}
+    * MiscTableScrollData.M
+
+v0.110 1996/10/24 22:50 EDT zarnuk@zarnuk.com
+    NOTE: I tagged the RCS files for v109 with "TableScroll-v109",
+    and the ones for v110 with "TableScroll-v110".
+    Added rough-draft, initial version Printing.  Still needs work.
+    Fixed bug: slot resized / reversed delegate messages were sending
+	VISUAL coordinates instead of PHYSICAL coordinates.
+    Fixed bug: New public headers (from v109) were not added to mcgh2misc.sh.
+
+    Changed Files:
+    * Makefile
+    * mcgh2misc.sh
+    * MiscDelegateFlags.{cc|h}
+    * MiscTableScroll.{h|M}
+    + MiscTableScrollPrint.M
+    * MiscTableScrollPrivate.h
+    * MiscTableTypes.h
+    * MiscTableView.{h|M}
+    + MiscTableViewPrint.M
+    * PB.project
+
+v0.109 1996/09/25 09:37 EDT zarnuk@zarnuk.com
+    Added exporter.
+    Slot dragging and resizing no longer clobber the selection.
+    Fixed (mostly) drag-cache drawing for row-borders. (v105 bug).
+
+    Changed Files:
+    * Makefile
+    * MiscBorderView.M
+    + MiscExporter.{h|M|rtf}
+    + MiscExporterAccessoryView.{h|M}
+    + MiscExporterASCII.M
+    + MiscExporterDBF.M
+    + MiscExporterPrivate.h
+    * PB.project
+
+v0.108 1996/09/25 05:06 EDT sunshine@sunshineco.com
+    Ripped all image dragging out of TableCell and promoted it to TableView.
+    Can now drag images from non-NX_ICONCELL cells as well.
+    Delegate now has chance to respond to dragging protocol messages
+	-draggingSourceOperationMaskForLocal:, and
+	-ignoreModifierKeysWhileDragging.
+    Updated documentation accordingly.
+    Fixed bugs: Image origin and mouse offset for dragging were being
+	incorrectly computed.
+    Added *temporary* -getCellInside:at:: to avoid places where the callers of
+	-getCellFrame:at:: had to adjust for the border lines manually.  This
+	can be removed when the whole cell-frame / intercell spacing issue is
+	finally resolved.
+    Removed the -scroll hack from TableView which TableCell was using during
+	image dragging.
+    Fixed bug: SparseSet::coerce() was accessing array[-1].
+    Fixed bug: pack.sh was checking in the PACKAGE_NUMBER file *before*
+	the new version number was recorded.
+    pack.sh no longer redundantly includes PACKAGE_NUMBER with the
+	package since that file now exists in the RCS directory.
+
+    Changed Files:
+    * MiscDelegateFlags.{h|cc}
+    * MiscSparseSet.cc
+    * MiscTableCell.{h|M|rtf}
+    * MiscTableScroll.{h|rtf}
+    * MiscTableView.{h|M}
+    * pack.sh
+
+v0.107 1996/09/19 06:37 EDT zarnuk@zarnuk.com
+    Fixed v104 bug: selectTags was not setting selectedSlot.
+    Fixed v104 bug: alignment of the cell at (0,0) was getting clobbered
+	on a mouseDown:
+    Fixed v105 bug: cursor rects were not getting updated when autosort
+	changed.
+    All access to the selection set now goes through the MiscTableBorder
+	object.
+    Restored pre-v104 "selectedSlot" behavior, so that selected_slot always
+	points to a selected slot if any slots are selected.  It is only
+	-1 if there are no selected slots.
+
+    Changed Files:
+    * MiscBorderView.{h|M}
+    * MiscHighlightTracker.M
+    * MiscListTracker.M
+    * MiscMouseTracker.{h|M}
+    * MiscRadioTracker.M
+    * MiscSparseSet.{cc|h}
+    * MiscTableBorder.{cc|h}
+    * MiscTableScroll.M
+    * MiscTableScrollISearch.M
+    * MiscTableScrollPrivate.h
+    * MiscTableScrollSort.M
+    * MiscTableView.{h|M}
+
+v0.106 1996/09/13 17:10 EDT zarnuk@zarnuk.com
+    Fixed v104 bug: slot dragged delegate notification message was botched.
+    Fixing bug: borderSelectedSlot: was not checking for a valid selection
+	before mapping an invalid value through the visual to physical map.
+
+    Changed Files:
+    * MiscDelegateFlags.cc
+    * MiscTableScroll.M
+
+v0.105 1996/09/07 12:00 EDT zarnuk@zarnuk.com
+    Restored -border:slotMovedFrom:to: and -border:slotResized: to the
+	public header so that PCSTableScroll will compile again.
+    Added user-sort-direction-toggling.
+    Fixed v104 bug where text was exceeding column width on some wide columns
+	with a lot of text.
+    New line-height calculations, completely point-size based, ignores
+	broken NeXT font bounding box.  Font-change behavior is more
+	predictable from the user's standpoint.
+    Fixed drag-cache drawing.
+
+    Changed Files:
+    * MiscBorderCell.h
+    * MiscBorderView.{h|M}
+    * MiscDelegateFlags.{h|cc}
+    * MiscDrawList.cc
+    * MiscLineWrapper.cc
+    + MiscReverseCursor.tiff
+    + MiscSort{A|De}scend{H|}.tiff
+    * MiscTableBorder.{cc|h}
+    * MiscTableScroll.{h|M|rtf}
+    * MiscTableScrollPrivate.h
+    * MiscTableTypes.h
+    * PB.project
+    * Makefile
+    * Makefile.postamble
+
+v0.104 1996/08/20 15:00 EDT sunshine@sunshineco.com
+    Removed "cursor" from SparseSet making it a simple generic (and more
+	widely useful) class.
+    Added notion of selected-slot to TableBorder.  This was the old "cursor"
+	from SparseSet.
+    Implemented -selectedCell in TableScroll (for use during mouse-tracking --
+	see below).
+    TableScroll now gives cells a chance to participate in mouse tracking
+	using standard -trackMouse:inRect:ofView:.
+    TableCell now supports dragging of images directly out of ICON-style cells
+	during mouse tracking.  Delegate/dataDelegate can allow/veto dragging,
+	optionally supply the dragging image (vs. using the one in the cell),
+	and provide the actual data for the dragging pasteboard.
+    Documented support of image dragging in TableCell.
+    Documented mouse tracking behavior in TableScroll.
+    Documented new keyboard control added in v0.103.
+    Documented selection modes.
+    Fixed bug: TableConnInspector's -initScroll:numCols: was not returning
+	a value though it had a non-void return type.
+    Fixed bug: Two MiscGeometry were not returning a value when they should
+	have been.  Corrected a few casts.
+    Removed deviant semi-colons from -setColSortVector:len:,
+	-setRowSortVector:len:, and -cursorRect:forPos: implementations.
+    Paul added searching methods to IntList.
+    Paul made optimizations to TableBorder's selectTags() method.
+    Fixed pack.sh so that it checks the PACKAGE_NUMBER into RCS (so that the
+	GNUmakefile can include it in the palette).
+    Updated GNUmakefile so that it includes MiscTableConnector.strings and
+	PACKAGE_NUMBER in the palette.
+    Fixed bug: TableScroll's -border:setSlotSizes: was not respecting min/max
+	slot size.
+    Fixed broken next-text chain in inspector nib.
+    Fixed bug: Setting the min-size greater, or the max-size smaller than the
+	current-size in the inspector would crash IB.
+    Fixed bug: TableScroll's border:selectSlot was checking for selection
+	membership using selectedSlot() rather than slotIsSelected().
+    Fixed bug: Using space to select from within incremental-search was
+	not going through the normal mouse-tracker, and was therefore short-
+	circuiting selection mode.
+    Added cursor for display over draggable slots.
+    Fixed bug: Cursor rectangles were not being clipped to the visible
+	rectangle, which meant that cursor changes would occur when the cursor
+	was not even over the TableScroll.
+    Moved drawing of "intercell" border from TableCell into TableView.  (Cells
+	no longer draw a border around them selves.)  *NOTE* This drawing
+	code still needs to be optimized.  I did nothing more than relocate
+	the code.  (Paul optimized it -- see below.)
+    Added -setSelected and -isSelected to TableCell.  TableScroll now uses
+	these methods to indicate that cell is part of the current selection
+	rather than overloading the meaning of state and isHighlighted which
+	have their own use during mouse-tracking.
+    Pulled the *private* parts of the TableScroll interface out of
+	TableScroll.h and placed them in the new unpublished
+	TableScrollPrivate.h.
+    Added MiscDelegateFlags which tracks which selectors the delegates
+	respond to.  These are determined and cached *once* when the delegate
+	are set up.
+    Updated all code which deals with delegate and dataDeleate to use
+	simplified MiscDelegateFlags interface.
+    Started implementing text editing.
+
+    *** Paul's changes ***
+    Created the MiscColorList, MiscRectList and MiscRectColorList C++ classes.
+    Eliminated the convoluted selection-update "optimizations" from
+	MiscTableView.M which were not properly implemented; did not result in
+	any noticable improvement in drawing performance; and which prevented
+	the consolidation of the drawing code.
+    Rewrote -[MiscTableView reflectSelection] to group contiguous cells into
+	rectangles for drawing.
+    Rewrote -[MiscTableView drawRect:] to collapse grid and background drawing
+	into fewer operations.
+    Modified MiscTableCell so that -useOwner[Highlight]BackgroundColor makes
+	the cell transparent, so that the individual cells are not painting
+	their individual backgrounds, unless they have custom background
+	colors.
+    Added -ownerDraw and -setOwnerDraw: to MiscTableCell.
+    MiscTableView now checks for -ownerDraw.
+    New drawing mechanism for table view -- way, *way*, *WAY* faster!
+    Added dump() routine to MiscSparseSet.
+    Now propagates -reflectSelection methods even when drawing is disabled.
+    Eliminated a few unnecessary function calls in BorderView.
+
+    Changed Files:
+    * MiscBorderCell.M
+    * MiscBorderView.M
+    + MiscColorList.{h|cc}
+    + MiscDelegateFlags.{h|cc}
+    + MiscDrawList.{h|cc}
+    * MiscGeometry.h
+    * MiscHighlightTracker.M
+    * MiscIntList.{h|M|rtf}
+    + MiscLineWrapper.{h|cc}
+    * MiscListTracker.M
+    * MiscRadioTracker.M
+    + MiscRectColorList.{h|cc}
+    + MiscRectList.{h|cc}
+    + MiscSlotDragCursor.tiff
+    * MiscSparseSet.{h|cc}
+    * MiscTableBorder.{h|cc}
+    * MiscTableCell.{h|M|rtf}
+    * MiscTableConnInspector.M
+    * MiscTableScrollISearch.M
+    * MiscTableScroll.{h|M|rtf}
+    * MiscTableScrollData.M
+    * MiscTableScrollInspector.{M|nib}
+    + MiscTableScrollPrivate.h
+    * MiscTableScrollSort.M
+    * MiscTableView.{h|M}
+    * PB.project
+    * Makefile
+    * GNUmakefile
+    * pack.sh
+
+v0.103 1996/05/05 11:30 EDT sunshine@sunshineco.com
+    Created MiscGeometry which contains geometric types (point, size,
+	rectangle) which are used by borders and know about their orientation.
+    Removed all of the duplicated "type variation" code from BorderView and
+	TableView and replaced with MiscGeometry.
+    Fixed bug: Wasn't considering border orientation during slot resizing
+	modal loop resulting in failure to auto-scroll in many cases when
+	resizing rows.
+    Fixed bug: Connection inspector was leaking connector objects when
+	breaking connections.
+    Fixed bug: Connection inspector was allowing non-target/action connections
+	to First Responder.
+    Fixed bug: Was crashing when trying to archive a connector whose
+	destination was First Responder.  Now connection inspector treats
+	First Responder as a special case.
+    Replaced low-level Post Script drawing code with higher level NeXT
+	drawing functions in BorderView.
+    Replaced 8 trips to the Window Server in BorderCell's -drawSelf:inView:
+	with 1 trip by using NXRectFillListWithGrays.
+    Added all manner of keyboard movement commands: page-up, page-down, home,
+	end, left, right -- for both numeric keypad and editing keypad.
+    TableView's -firstVisibleSlot & -lastVisibleSlot now return the first and
+	last *fully* visible slot if possible.  (This results in more
+	symmetric and intuitive page-scrolling via the new movement keys.)
+    Fixed problem: Incremental-search was going into modal event loop even if
+	it couldn't add the very first character.  Since it couldn't add the
+	first character, there was no feedback indicating that the modal loop
+	was active.
+    For OpenStep conformance, selection of slots with a keyboard event (via
+	the space bar) is treated the same as selection with the mouse.
+	This means that one now has to use the same modifiers with keyboard-
+	based selection as one uses with mouse-based selection.
+    Added alt-space (0x80) in -keyDown: methods to list of keys which perform
+	"selection" since alt-space is now meaningful with new OpenStep
+	conformance.
+    Fixed bug: Was unable to shift-drag in List mode to deselect a range of
+	slots.
+
+    Changed Files:
+    * MiscBorderCell.M
+    * MiscBorderView.{h|M}
+    + MiscGeometry.{h|cc}
+    * MiscHighlightTracker.{h|M}
+    * MiscListTracker.{h|M}
+    * MiscMouseTracker.{h|M}
+    * MiscRadioTracker.{h|M}
+    * MiscTableConnInspector.M
+    * MiscTableScrollISearch.M
+    * MiscTableScrollKB.M
+    * MiscTableView.M
+    * PB.project
+    * Makefile
+
+v0.102 1996/04/29 16:00 EDT zarnuk@zarnuk.com
+    Moved keyDown: out of MiscTableView and into MiscScrollView.
+    IB Connection Inspector no longer pre-selects an action if there is no
+	existing connection.
+    Slot dragged and resized notification messages are now sent to the
+	dataDelegate also.
+    Eliminated separate (DataDelegate) category, since all messages are
+	now sent to both the delegate and the dataDelegate.
+    Fixed bug introduced in v99 -- toggling lazy-mode in IB on non-empty
+	table-scrolls screwed things up.
+    Fixed some trivial bugs in incremental-search.
+	No longer faked out by changes that leave the buff-length unchanged
+	while drawing is disabled.
+	Now treats case-sensitive expand properly.
+
+    Changed Files:
+    * MiscTableConnInspector.M
+    * MiscTableScroll.{h|M}
+    * MiscTableScrollInspector.M
+    * MiscTableScrollISearch.M
+    + MiscTableScrollKB.M
+    * MiscTableView.{h|M}
+    * PB.project
+    * Makefile
+
+v0.101 1996/04/25 22:00 EDT sunshine@sunshineco.com
+    Replaced low-level Post Script code with higher-level (and portable)
+	NXImage code in BorderView which grabs pixels off the screen.
+    Fixed incorrect prototype specification in TableScroll documentation.
+    Added calcCellSize:inRect: to BorderCell.
+    Added visual feedback to incremental search.
+
+    Changed Files:
+    * MiscBorderCell.M
+    * MiscBorderView.M
+    * MiscTableScroll.rtf
+    * MiscTableScrollISearch.M
+
+v0.100 1996/04/25 00:00 EDT zarnuk@zarnuk.com
+    Added incremental search.
+    -[MiscTableView keyDown:] now forwards unrecognized key strokes
+	to the next responder (as it always should have).
+    Slot sort vector now uses one's complement to indicate reversed direction.
+    Setting a slot sort vector now turns off auto-sort.
+
+    Changed Files:
+    * Makefile
+    * MiscTableScroll.{h|rtf}
+    * MiscTableScrollSort.M
+    + MiscTableScrollISearch.M
+    * MiscTableView.M
+    * PB.project
+
+v0.99 1996/04/23 05:00 EDT zarnuk@zarnuk.com
+    Added {get/set}{first/last}Visible{slot/row/col} routines.
+    Cells are now "retired" before being freed in all cases.
+    Reviewed the documentation.  Cleared up many FIXME items.
+
+    Changed Files:
+    * MiscTableScroll.{h|M|rtf}
+    * MiscTableScrollData.M
+    * MiscTableView.{h|M}
+
+v0.98 1996/04/23 03:00 EDT sunshine@sunshineco.com
+    Fixed some memory leaks in the connector and connection-inspector code.
+    Reorganized so that all FoundationKit specific code is contained in
+	connection-inspector object file rather than connector file.  This
+	allows nibs to be loaded on 3.2 machines (which don't have Foundation
+	Kit).
+    BorderView now always sends action before sending doubleAction to be
+	consistent with TableView.
+    Removed unused -refresh method from BorderView.
+
+    Changed Files:
+    * MiscBorderView.{h|M}
+    * MiscTableConnector.{h|M}
+    * MiscTableConnInspector.M
+
+v0.97 1996/04/13 05:00 EDT zarnuk@zarnuk.com
+    Created custom IB connection inspector, so that doubleTarget and
+	doubleAction: can be set inside of IB now.
+    Added extern "Objective-C" declaration to MiscTableScrollPalette.h
+    Fixed bug: was not setting cursor in MiscSparseSet::add().  This
+	manifested itself by not setting -selectedRow when -selectRow:
+	was called.
+    Fixed bug: -selectRow: was not honoring radio-mode.
+    Fixed bug: -selectRow: was not clearing the selection on the other border.
+    Fixed bug: toggling titles on/off on IB inspector was not properly
+	enabling/disabling slot controls.
+
+    Changed Files:
+    + IBConnector.h
+    * MiscSparseSet.cc
+    * MiscTableScroll.M
+    * MiscTableScrollPalette.h
+    * MiscTableScrollInspector.M
+    + MiscTableScrollConnector.{h|M|strings}
+    + MiscTableScrollConnInspector.{h|M|nib}
+    + MiscTableRightArrow.tiff
+    + MiscTableDimple.tiff
+
+v0.96 1996/03/30 04:00 EST zarnuk@zarnuk.com
+    Applied Eric's changes to the mcgh -> misc conversion scripts.
+    Fixed some comments in MiscTableBorder.cc
+    Fixed bug in MiscSparseSet::getTotalRange()
+    	=> affected MiscTableBorder::hasMultipleSelection()
+	=> affected -[MiscTableScroll borderHasMultipleSelection:]
+	=> affected -[MiscTableScroll hasMultiple{Row|Col}Selection:]
+    Totally revamped MiscSparseSet.  Operations are simpler and more efficient.
+
+    Changed Files:
+    * mcgh2misc.sh
+    * MiscTableBorder.cc
+    * MiscSparseSet.{h|cc}
+
+v0.95 1996/03/25 22:00 EST zarnuk@zarnuk.com
+    Fixed bug: border:sortSlot: (sortRow:/sortCol:) was off by one position
+	when sorting a slot from a lower-index position to a higher-index
+	position.  This was a crasher when the resulting destination index
+	was beyond the last slot.
+    Modified behavior (not really a bug, per se).  MiscTableScroll now sends
+	the single-action message immediately before sending the double-action
+	message on a multi-click event.  This enables clients that use the
+	single-action message to adjust controls to reflect any changes in
+	the selection between the first click and the second click before
+	dealing with the double-click event.
+
+    Changed Files:
+    * MiscTableScrollSort.M
+    * MiscTableView.M
+
+*************************************************
+**** MiscKit 1.9.0 Release contains v0.94 *******
+*************************************************
+
+*************************************************
+**** MiscKit 1.8.1 Release contains v0.94 *******
+*************************************************
+
+*************************************************
+**** MiscKit 1.8.0 Release contains v0.94 *******
+*************************************************
+
+*************************************************
+**** MiscKit 1.7.1 patch-1 contains v0.94 *******
+*************************************************
+
+v0.94 1996/02/18 02:00 EST zarnuk@zarnuk.com
+    Fixed bug introduced in last revision.  Was skipping slots that had
+	a custom sort function.
+
+    Changed Files:
+    * MiscTableScrollSort.M
+
+v0.93 1996/02/14 06:00 EST zarnuk@zarnuk.com
+    Created subclass of IBPalette, MiscTableScrollPalette.
+    Removed IB-specific stuff from MiscTableScroll.M
+    Fixed bug where reading a non-empty lazy table caused free to crash.
+    Fixed bug where some pop-ups were inappropriately enabled on the
+	inspector even when there were no slots.
+    MiscIntList.h is no longer #import-ed in the MiscTableScroll header.
+    Did another overhaul on sorting.  Even faster now.
+    Fixed bug: slotsAreSorted: (rowsAreSorted,colsAreSorted) was not
+	working properly.  It was checking the physical order of the slots,
+	not the visual order.
+
+    Changed Files:
+    + MiscTableScrollPalette.{h|M}
+    * MiscTableBorder.cc
+    * MiscTableScrollInspector.M
+    * MiscTableScroll.nib
+    * MiscTableScroll.{h|M}
+    * MiscTableScrollData.M
+    * MiscTableScrollPB.M
+    * MiscTableScrollSort.M
+    * MiscTableTypes.h
+    * palette.table
+    * PB.project
+    * Makefile
+
+*************************************************
+**** MiscKit 1.7.1 Release contains v0.92 *******
+*************************************************
+
+v0.92 1996/02/11 23:30 EST sunshine@sunshineco.com
+    Fixed bug where -border:setSlot:sortType: was ignoring sort types "case-
+	sensitive title", "case-insensitive title", "state", and "unsigned
+	state".  This cause the default -stringValue variation to be used for
+	those slots -- which is clearly incorrect.
+    Row title width is now larger -- large enough to hold 5-digit numbers.
+	(This still needs to be reworked so as to be sizeable and dynamic.)
+
+    Changed Files:
+    * MiscTableScrollSort.M
+    * MiscBorderView.M
+
+v0.91 1996/01/17 05:30 EST sunshine@sunshineco.com
+    Fixed crasher.  Drag cache window was being allocated from the border-
+	view's zone even though the cache window is allocated once and never
+	freed (the pointer is kept in a static variable).  When the zone got
+	freed that the border-view was in, the pointer ceased to point at valid
+	memory.
+
+    Changed Files:
+    * MiscBorderView.M
+
+v0.90 1996/01/17 02:15 EST sunshine@sunshineco.com
+    Completely rewrote mcgh2misc conversion scripts.  They now also
+	(optionally) handle conversion of example applications.  Consequently
+	the mcgh2misc scripts were removed from the example directories.
+    Published -changeFont: in MiscTableScroll.h.
+    Added -changeFont: to documentation.
+
+    Changed Files:
+    * mcgh2misc.{el|sh}
+    * MiscTableScroll.{h|rtf}
+
+v0.89 1996/01/16 21:15 EST zarnuk@zarnuk.com
+    Added PACKAGE_NUMBER to "Other Resources" in Project Builder.
+    -[MiscTableScroll free] now calls [self setAutodisplay:NO] at the
+	beginning to avoid drawing while the object is being freed.
+    Eliminated huge amounts of unnecessary drawing while dragging and
+	dropping slots.  Set up for dragging slots is much faster now.
+    Published -selectionChanged.
+    Increased the SLOP factor for calculating drop position when dragging.
+	Must now have leading edge at least 4 pixels into destination slot.
+
+    Changed Files:
+    * Makefile
+    * MiscBorderView.M
+    * MiscTableScroll.{h|M}
+    * PB.project
+
+v0.88 1996/01/14 01:00 EST zarnuk@zarnuk.com
+    Fixed errors in MiscIntList documentation.
+    Fixed bug: lazyCellAt:: was not calling the dataDelegate.
+    Fixed bug: Now ignores "-selectAll:" in radio mode.
+    Applied MiscKit 1.7.0 changes to Makefile.{pre|post}depend
+    Make library target now depends on $(OFILES) so it gets rebuilt when
+	individual files are modified.
+    Now using allocFromZone for everything inside MiscTableScroll.M,
+	MiscTableScrollData.M, MiscTableScrollPB.M, MiscBorderView.M,
+	MiscTableView.M, and MiscNullView.M
+    Fixed bug: Was letting user resize slots 10 pixels beyond max size.
+	which resulted in failed assertion `r.size <= r.max_size'.
+    Fixed bug: Was leaking an MiscIntList with each pasteboard copy operation.
+    Eliminated most of the flicker during resizing.
+    Drop location when dragging slots is now determined by the "leading edge"
+	(left edge when dragging to the left, right edge when dragging to the
+	right, and likewise for up/down).
+    Fixed bug where -selectedRow:n would generate an assertion failure if
+	n was out of range.
+    New delegate notification message: -tableScroll:changeFont:to: is sent
+	only in response to user-initiated font changes (-changeFont:), not
+	programmatic changes (-setFont:).
+    setFont: messages are no longer sent to cells when the table is in lazy
+	mode.
+    Revamped set...Color: methods.
+    set...Color: messages are no longer sent to cells when the table scroll
+	is in lazy mode.
+    Added delegate notification messages for color changes:
+	tableScroll:backgroundColorChangedTo:,
+	tableScroll:highlightBackgroundColorChangedTo:,
+	tableScroll:highlightTextColorChangedTo:
+	tableScroll:textColorChangedTo:
+    Fixed bug: was not freeing cells when table-scroll was freed.
+    Renamed emptyAndFree -> emptyAndFreeCells to clarify function and
+	eliminate ambiguity concerning freeing the table scroll itself.
+    Fixed bug: was leaking memory in -read:cells: when the table being read
+	was empty (which it usually is).  An allocation request for zero bytes
+	was actually allocating some memory, which never got freed.
+    Isolated sorting support in MiscTableScroll(Sort) category.
+    Fixed bug: was leaking an MiscTableView with every nib load.
+    MiscBorderView now sets the name of the resize cursor images.
+    Totally revamping sorting.
+    Micro-optimization: does not resort if a "skip" slot is dragged.
+    Added: intValueAt::, floatValueAt::, doubleValueAt::, stringValueAt::,
+	tagAt::, titleAt::, stateAt::, and corresponding delegate messages.
+    Added: buffCount, and tableScrollBuffCount:.
+    MiscTableCell no longer allocates the tag dynamically.
+    Finished a first draft of the MiscTableCell documentation.
+    TODO: version for and table-scroll.
+
+    Changed Files:
+    * Makefile.{pre|post}depend
+    * MiscBorderView.M
+    * MiscIntList.rtf
+    * MiscNullView.M
+    * MiscTableBorder.{cc|h}
+    * MiscTableCell.{h|M|rtf}
+    * MiscTableScroll.{h|M|rtf}
+    * MiscTableScrollData.M
+    + MiscTableScrollSort.M
+    * MiscTableScrollPB.M
+    * MiscTableView.M
+
+*************************************************
+**** MiscKit 1.7.0 Release contains v0.87 *******
+*************************************************
+
+v0.87 1995/12/19 23:15 EST sunshine@sunshineco.com
+    Fixed bug which crashed IB running on Intel whenever a TableScroll was
+	initialized (such as when displaying the palette).  The bug
+	"MiscTableBorder.cc:1107: failed assertion `0 <= min_total_size'" was
+	caused by the contentView having -NaN for the y and height values of
+	its frame.  It turns out this was because the frame was being
+	initialized with an argument of zero.  It was just "luck" that this bug
+	never showed up on the Motorolla.
+
+    Changed Files:
+    * MiscTableScroll.M
+
+v0.86 1995/12/17 15:30 EST zarnuk@zarnuk.com
+    Added -border:sortSlot:, -sortCol:, -sortRow:
+    Corrected spelling mistakes in documentation.
+
+    Changed Files:
+    * MiscTableScroll.{h|M}
+    * MiscTableScroll.rtf
+
+v0.85 1995/11/12 23:30 EST sunshine@sunshineco.com
+    Fixed bugs where TableBorder selection and cursor methods where not taking
+	invalid coordinates into account, and were calling visual/physical
+	conversion methods with bad values.  This fixes a problem where
+	selectedSlot() was returning "random" and possibly out-of-range values.
+    Fixed bug in sample code in documentation: -setRowTag: ->> -setRow:tag:.
+
+    Changed Files:
+    * MiscTableBorder.{h|cc}
+    * MiscTableScroll.rtf
+
+v0.84 1995/11/12 07:00 EST sunshine@sunshineco.com
+    Fixed bug in Makefile.postamble where it was unconditionally referring to
+	m68k_obj rather than $(OFILE_DIR).
+
+    Changed Files:
+    * Makefile.postamble
+    * BUGS.txt
+
+v0.83 1995/10/20 13:30 EDT sunshine@sunshineco.com
+    Fixed mcgh2misc.csh so that it creates a "dummy" Makefile in the "dummy"
+	.subproj directory since NeXT's 'make clean' in the parent directory
+	tries to unconditionally perform 'make clean' in the .subproj too.
+
+    Changed Files:
+    * mcgh2misc.csh
+
+v0.82 1995/10/20 04:00 EDT sunshine@sunshineco.com
+    Modified Makefile.preamble and Makefile.postamble to work correctly in the
+	MiscKit environment.  Got rid of the scroll_lib target and added
+	$(LIB_NAME) to OTHER_PRODUCT_DEPENDS which builds library
+	automatically whenever the palette is built.
+    Extended mcgh2misc script so that it goes the whole distance now and
+	creates the entire MiscKit directory structure and deletes files which
+	are not part of the MiscKit distribution -- in addition to converting
+	all the files from mcgh to Misc, as it did in the past.
+    PB.project was still referring to old Palette class.
+    BorderView.M was using "" to include TableScroll.h instead of <>.
+    TableBorder.cc was using "" to include TableScroll.h instead of <>.
+    TableScroll.M was using "" to include TableScroll.h and TableCell.h instead
+	of <>.
+    TableScrollData.M was using "" to include TableScroll.h and TableCell.h
+	instead of <>.
+    TableScrollInspector.M was using "" to include TableScroll.h instead of <>.
+    TableView.M was using "" to include TableScroll.h instead of <>.
+    Pack script now has one-line What's Locked built into it instead of relying
+	on external script.
+
+    Changed Files:
+    * MiscBorderView.M
+    * MiscTableBorder.cc
+    * MiscTableScroll.M
+    * MiscTableScrollData.M
+    * MiscTableScrollInspector.M
+    * MiscTableView.M
+    * Makefile.preamble
+    * Makefile.postamble
+    * mcgh2misc.csh
+    * pack.sh
+    * PB.project
+    * Makefile
+    * BUGS.txt
+    * TODO.txt
+
+v0.81 1995/10/19 03:30 EDT sunshine@sunshineco.com
+    Fixed up FontManager messaging so that it is correctly updated whenever
+	the TableScroll is first responder in a running application.
+    Removed unused -startReadIB, -endReadIB, -startWriteIB, and -endWriteIB.
+    Default slot for columns no longer has 'autosize' turned on.
+    Default palette object now has one 'autosize' column only.
+    Fixed inspector inter-locks and a number of bugs.  Now controls are
+	enabled/disabled at more appropriate times.
+    Updated mcgh ->> misc conversion scripts so that they convert header
+	inclusions of the form <Miscxxxx.h> to <misckit/Miscxxxx.h>.
+    Got rid of mcgh specific installation rules from Makefile.preamble and
+	.postamble (such as /Net/devlibhost/...) since that functionality has
+	been moved to GNUmakefile.
+
+    Changed Files:
+    * MiscTableBorder.cc
+    * MiscTableScroll.M
+    * MiscTableScrollInspector.M
+    * MiscTableView.M
+    * mcgh2misc.{el|csh}
+    * Makefile.preamble
+    * Makefile.postamble
+    * BUGS.txt
+    * TODO.txt
+
+v0.80 1995/10/15 23:15 EDT zarnuk@zarnuk.com
+    Made one complete pass through the documentation.
+    Removed unnecessary "make clean" from the pack.sh script.
+
+    Changed Files:
+    * MiscTableScroll.rtf
+    * pack.sh
+
+v0.79 1995/10/15 03:30 EDT zarnuk@zarnuk.com
+    Filled in some more documentation.
+
+    Changed Files:
+    * MiscTableScroll.rtf
+
+v0.78 1995/10/14 17:00 EDT zarnuk@zarnuk.com
+    Fixed bug: -renewRows: was getting cell prototype from wrong column.
+    Added #defines for max values of enumerations in MiscTableTypes.h
+    Added range-checking asserts on all sets/reads of enumerated values
+	in MiscTableBorder.cc
+    Prototype cells are now allocated from the table-scroll's zone.
+    Fixed problem in -[MiscTableCell initTextCell:] where Cell's
+	implementation of -initTextCell: was calling -setFont:, thus
+	turning off "useOwnerFont".
+    Fixed GNUmakefile to add -I. before other include directories.
+
+    Changed Files:
+    * MiscTableScrollData.M
+    * MiscTableTypes.h
+    * MiscTableBorder.cc
+    * MiscTableCell.M
+    * GNUmakefile
+
+v0.77 1995/10/10 11:00 EDT zarnuk@zarnuk.com
+    Now checks, applies auto-sort when a new slot order is set.
+
+    Changed Files:
+    * MiscTableScroll.M
+
+v0.76 1995/10/09 00:30 EDT zarnuk@zarnuk.com
+    Updated documentation quite a bit.
+    Converted (Cell*) return types to (id).
+    Added:
+	- (int) border:(MiscBorderType)b findSlotWithTag:(int)x;
+	- (int) findColWithTag:(int)x;
+	- (int) findRowWithTag:(int)x;
+	- findCellWithTag:(int)x;
+	- findCellWithTag:(int)x row:(int*)row col:(int*)col;
+	- findCell:cell row:(int*)row col:(int*)col;
+
+    Changed Files:
+    * MiscBorderView.M
+    * MiscTableBorder.{cc|h}
+    * MiscTableScroll.{h|M|rtf}
+    * MiscTableScrollData.M
+    * MiscTableScrollPB.M
+    * MiscTableTypes.h
+    * MiscTableView.M
+    + pack.sh
+    + pack_binaries.sh
+    + unpack_binaries.sh
+    + PACKAGE_NUMBER
+
+v0.75 1995/10/07 15:00 EDT zarnuk@zarnuk.com
+    Just packaged up and moved master directory to charm.
+
+v0.74 1995/10/05 07:00 EDT zarnuk@zarnuk.com
+    Fixed: -sortSlots: now checks for count > 1 before proceeding.
+    Fixed: MiscTableBorder::find_slot_for_offset() fixed limit-check.
+    Fixed: MiscTableBorder::setPMap() null-checking.
+    Fixed: -selectAll: now sends action to target.
+    Fixed: MiscTableScroll does a flushWindow after in all public draw methods.
+    Added: sendActionIfEnabled / sendDoubleActionIfEnabled.
+
+    Changed Files:
+    * MiscTableBorder.cc
+    * MiscTableScroll.{h|M}
+
+v0.73 1995/10/05 06:00 EDT sunshine@sunshineco.com
+    Fixed bugs where TableView and BorderView wouldn't always draw selection
+	correctly.  Both keep a list of cells which were drawn highlighted last
+	time -reflectSelection was called but that "old list" was not being
+	upkept correctly.  The "old list" is used to optimize drawing of the
+	selection in -reflectSelection by only re-drawing the cells whose
+	selection state have changed.  Specifically, the problems were:
+	    1) -reflectSelection was updating it even if [self canDraw]
+		returned NO and no drawing occured; whereas it should have been
+		updating it only upon YES.
+	    2) The other drawing methods were not updating the "old list" at
+		all.  They would draw a cell (and even if its selection state
+		had changed -reflectSelection would think the cell was still
+		drawn with the old state).
+    Paul added a call to constrainSize in -border:setSlotSizes: in TableScroll.
+
+    Changed Files:
+    * MiscBorderView.M
+    * MiscTableView.M
+    * MiscTableScroll.M
+
+v0.72 1995/10/05 04:00 EDT sunshine@sunshineco.com
+    Fixed bug in TableView and BorderView.  Mouse tracking was asking for
+	invalid slot when mouse was beyond extent of view
+    This also fixed the bug where the keyboard cursor didn't jump to the
+	correct cell if the mouseUp was off the end of the view (in either
+	direction).
+
+    Changed Files:
+    * MiscBorderView.M
+    * MiscTableView.M
+
+v0.71 1995/10/04 15:30 EDT zarnuk@zarnuk.com
+    Fixed bug introduced in v0.63 where the standard method of resetting the
+	visual / physical mapping was broken.
+    Fixed up MiscTableBorder::setCount().  Now it always resets the visual /
+	physical mapping, even when the new count is the same as the old
+	count.  This will make -renewRows: always reset the mapping, not
+	just when the number of rows has changed.
+    Fixed bug in MiscTableBorder::setVMap() -- was not remapping most of
+	the arrays.
+
+    Changed Files:
+    * MiscTableBorder.{h|cc}
+    * MiscTableScroll.M
+
+v0.70 1995/10/03 23:30 EDT zarnuk@zarnuk.com
+    Fixed bug where Inspector was accessing an object IB had already
+	(silently) freed in -textDidEnd:endChar:.
+    Fixed bug where -scrollCellToVisible:: was screwed up.
+    Eric added more to MiscTableCell.rtf documentation.
+
+    Changed Files:
+    * MiscTableScrollInspector.{h|M}
+    * MiscTableView.M
+    * MiscTableCell.rtf
+
+v0.69 1995/10/03 05:10 EDT zarnuk@zarnuk.com
+    Fixed compile bug in MiscIntList.M
+
+    Changed Files:
+    * MiscIntList.M
+
+v0.68 1995/10/03 05:00 EDT sunshine@sunshineco.com
+    Fixed MiscTableCell so that it implements -copyFromZone: instead of -copy.
+    Fixed MiscTableCell so that it makes all of its own memory allocations from
+	[self zone] instead of the default-malloc-zone.
+    Fixed MiscIntList so that it allocates its Storage array from [self zone]
+	instead of the default-malloc-zone.
+    Implemented copyFromZone:, addIntList:, and initFromString: to MiscIntList.
+
+    Changed Files:
+    * MiscTableCell.{h|M|rtf}
+    * MiscIntList.{h|M|rtf}
+
+v0.67 1995/10/03 04:20 EDT sunshine@sunshineco.com
+    Fixed bug in -read: in MiscTableScroll.  It was asking for the typed stream
+	class version using [[self class] name] instead of the correct
+	[[MiscTableScroll class] name].
+
+    Changed Files:
+    * MiscTableScroll.M
+
+v0.66 1995/10/03 04:00 EDT sunshine@sunshineco.com
+    Added MiscIntList documentation.
+    Added preliminary MiscTableCell documentation.
+    Reverted MiscTableScroll class version number back to zero and removed all
+	of the version-conditional code from -read:.
+    MiscTableScroll now archives action and doubleAction.
+    Fixed bug where MiscIntList was unable to parse negative numbers in
+	-readFromString:.
+
+    Changed Files:
+    + MiscIntList.rtf
+    + MiscTableCell.rtf
+    * MiscTableScroll.M
+
+v0.65 1995/10/03 02:30 EDT zarnuk@zarnuk.com
+    Removed unnecessary custom IBPalette subclass.
+
+    Changed Files:
+    - MiscTableScrollPalette.{h|M}
+    * Makefile
+    * PB.project
+    * palette.table
+    * MiscTableScroll.nib
+
+v0.64 1995/10/01 15:30 EDT sunshine@sunshineco.com
+    Fixed mcgh2misc conversion to handle *.psw files.
+    TableCell now has optional explicit settings for highlighted text and
+	background color rather than using the "reverse-video" scheme (which
+	always turns out being extremely ugly).  (The default background color
+	is light-gray once again.  Paul hatez it but it is much more consistent
+	with the rest of the AppKit.)
+    TableScroll now publishes methods for setting highlighted text and
+	background colors.
+    TableScroll inspector now allows setting of text, background, and
+	highlighted text and background colors in IB.
+    Fixed bug where color was not working in IB.  Problem was lazy mode cell
+	was not getting -setOwner:.
+    Tested cell color settings.  They work!  Cells which have had colors set
+	manually do not inherit the TableScroll's colors.
+
+    Changed Files:
+    * mcgh2misc.csh
+    * MiscTableCell.{h|M}
+    * MiscTableScroll.{h|M}
+    * MiscTableScrollData.M
+    * MiscTableScrollInspector.{h|M|nib}
+
+v0.63 1995/09/30 19:00 EDT zarnuk@zarnuk.com
+    Added support for saving/restoring preferences...
+    Added -readFromString: -writeToString[:size:[canExpand:]] methods
+	to MiscIntList.
+
+    Changed Files:
+    * MiscIntList.{h|M}
+    * MiscTableBorder.{h|cc}
+    * MiscTableScroll.{h|M}
+
+v0.62 1995/09/29 16:00 EDT zarnuk@zarnuk.com
+    Improved cell stuff:
+	- lazy allocation for tags, colors.
+	- useOwner options for font, colors.
+
+    Changed Files:
+    * MiscTableCell.{h|M}
+    * MiscTableScroll.{h|M}
+    * MiscTableScrollData.M
+
+v0.61 1995/09/29 03:00 EDT zarnuk@zarnuk.com
+    Added preliminary color stuff.
+    MiscTableScrollData updates the frame when rows/columns
+	are inserted/deleted.
+    The Misc GNUmakefile mf.{pre/post}depend files in ".." have been
+    evolving quite a bit.  The current PB Makefile is probably out of date.
+
+    Moved Files:	/Net/devlibhost/system/include/mcgh/RCS
+    > MiscIntList.h
+    > MiscTableCell.h
+    > MiscTableScroll.h
+    > MiscTableTypes.h
+
+    Changed Files:
+    * MiscTableCell.{h|M}
+    * MiscTableScroll.{h|M}
+    * MiscTableScrollData.M
+
+v0.60 1995/09/27 09:00 EDT zarnuk@zarnuk.com
+    Checked-in source at Misc in:
+	/Net/devlibhost/system/Source/Palettes/MiscTableScroll/RCS
+
+    Moved Files:	/Net/devlibhost/system/include/MiscTableScroll/RCS
+    > MiscIntList.h
+    > MiscTableCell.h
+    > MiscTableScroll.h
+    > MiscTableTypes.h
+
+    Changed Files:
+    - NOTES.txt			<-- Out-of-date and incorrect.
+    - ARCHITECTURE.txt		<-- Out-of-date and incorrect.
+    - MiscTableAdaptor.[hM]	<-- Please make sure this doesn't come back!
+    * PB.project		    This is the second time I've deleted it.
+    * Makefile*
+
+v0.59 1995/09/27 03:30 EDT sunshine@sunshineco.com
+    Removed the newly obsolete BorderRange class.  It was only used by
+	BorderView.
+    SparseSet now uses (int) internally instead of MiscCoord since MiscCoord is
+	going away.  Also this makes it a more general-purpose class.
+    Removed MiscCoord to avoid name conflict with class in GISKit.
+    SparseSet now much a much more concerted effort to supply a meaningful
+	"cursor" by taking an active role in manipulating it.  In the past it
+	only assured that it had a valid value.  This was done so that methods
+	called by the client of TableScroll can execute -selectRowAt:, for
+	instance, and get a meaningful value from -selectedRow.  Previously
+	only mouse-tracking would provide a meaningful value for the selection
+	cursor.
+    Removed MiscTableCell protocol.  Now MiscTableCell header is public so
+	clients know what messages it responds to.
+
+    Changed Files:
+    - MiscBorderRange.{h|cc}
+    * MiscBorderView.M
+    * MiscSparseSet.{h|cc}
+    * MiscTableBorder.{h|cc}
+    * MiscTableTypes.h
+    * mcgh2misc.el
+    * MiscTableAdaptor.{h|M}
+    * MiscTableCell.{h|M}
+    * MiscTableScroll.{h|M}
+    * MiscTableScrollData.M
+    * MiscTableView.M
+
+v0.58 1995/09/26 08:00 EDT sunshine@sunshineco.com
+    Compiles under NEXTSTEP 3.3 again.
+    TableView no longer stores the keyboard-cursor.
+    Each border now has the notion of a current keyboard-cursor.  Is now much
+	more tightly integrated with slot manipulation -- gets updated as slots
+	are manipulated in border.
+    Caught a few more cases in TableBorder where selection needed to get
+	updated as slots are manipulated.
+    Added methods to TableScroll to allow client to control keyboard cursor
+	programatically.
+    Mouse events now turn off flashing keyboard-cursor during tracking.  This
+	is much more aesthetically pleasing especially during dragging, sizing,
+	and selection.
+    Flashing keyboard-cursor now jumps to mouse-up location.
+    Keyboard-cursor and mouse tracking in TableView can now be configured to be
+	either row-wise or column-wise (instead of being hard-coded as row-wise
+	only).
+    Keyboard-cursor now draws correctly after scrolling.  It is always drawn
+	within the visibleRect of the TableView, but previously it wasn't
+	getting updated upon scrolling (at which time the visibleRect changes).
+    Using -setImage: in TableCell no longer leaves the 'contents' icon name
+	with its last value.  Now every effort is made to install a meaningful
+	value or null if necessary.
+
+    Changed Files:
+    * MiscTableScrollData.M
+    * MiscTableScroll.{h|M}
+    * MiscBorderView.M
+    * MiscTableBorder.{h|cc}
+    * MiscTableView.{h|M}
+    * MiscTableFocus.M
+    * MiscTableCell.M
+
+v0.57 1995/09/25 02:30 EDT zarnuk@zarnuk.com
+    Reversed sense of autoSortSlots. '-autoSortRows' now means autoSort *rows*!
+	Likewise for cols.  Fixed inspector to reflect this.
+    Fixed -renewRows so that it actually 'retire's cells now.
+    Fixed the -doRetireCell:at:: method to check -respondsTo: before
+	sending messages and to avoid sending -setStringValue: to icon cells.
+    Selection now gets cleared every time -empty or -renewRows: is called.
+    Selection now gets updated when slots are inserted / deleted / moved.
+    Changed Files:
+    * MiscTableScroll.M
+    * MiscTableScrollData.M
+    * MiscTableScrollInspector.M
+    * MiscTableBorder.{h|cc}
+    * MiscSparseSet.{h|cc}
+
+v0.56 1995/09/24 01:00 EDT zarnuk@zarnuk.com
+    Selection methods now update the display if isAutodisplay,
+	else setNeedsDisplay:YES.
+    Added -replaceIntAt:with:, -sort, -sortUsing:data: methods to MiscIntList.
+    Added pasteboard / services stuff...
+    Added -border:visualToPhysical:, -border:physicalToVisual: to
+	MiscTableScroll.
+
+    Changed Files:
+    * PB.project
+    * MiscTableScroll.{h|M}
+    + MiscTableScrollPB.M
+    + MiscIntList.h
+    * MiscIntList.M
+
+v0.55 1995/09/24 04:00 EDT sunshine@sunshineco.com
+    Fixed *lib targets in Makefile.postamble so that they depend on the palette
+	target.
+    Renamed MiscTextCell to MiscTableCell.
+    Added icon functionality to MiscTableCell and fixed MiscTableBorder to use
+	the new icon stuff.
+    Speeded up sorting by making a lot of high frequency functions inline.
+    Added MiscTableCell protocol which all the cells returned by TableScroll
+	respect since we use private cell types internally and do not otherwise
+	specify what messages they respond to.  All methods throughout have
+	been converted.
+
+v0.54 1995/09/21 00:30 EDT zarnuk@zarnuk.com
+    Added revive/retire methods for data-cells.  Font gets fixed in revive.
+
+v0.53 1995/09/20 15:16 EDT zarnuk@zarnuk.com
+    Fixed more font stuff...
+	Changing the uniformSize of a border now gets the frame updated.
+	Changing the uniformSize of rows updates the line-scroll and
+		page-scroll values.
+	Display is disabled while fonts are being changed.
+    Removed obsolete MiscTableBorderOwner.*
+    Added libMiscTableScroll.a to OTHER_GARBAGE in Makefile.preamble.
+
+v0.52 1995/09/20 06:45 EDT sunshine@sunshineco.com
+    Got rid of abbreviations in selMode, setSelMode:, and reflectSel. They are
+	now selectionMode, setSelectionMode:, and reflectSelection,
+	respectively.  Updated documentation.
+    Added all manner of -scroll*ToVisible methods to TableScroll.
+	-scrollCellToVisible::, -scrollRowToVisible:, -scrollColToVisible,
+	-scrollSelToVisible.
+    Fixed Makefile.preamble.  It was adding -ObjC++ to CFLAGS.  This should not
+	be done since it causes problems with PS-wraps, *plus* it should not be
+	necessary since we are using the proper file extensions .M and .cc.
+	The reason this was done was because the NeXT makefile used for
+	palettes (/NextDeveloper/Makefiles/app/specialrules.make) has a bug in
+	it and does not add the -ObjC++ flag to files with .cc extension.  I
+	fixed the problem by overriding their buggy implicit rule for .cc in
+	our local Makefile.postamble.
+    Added keyboard control.  Rows can be selected via the keyboard in all
+	selection modes, in a sensible manner.  Works but still needs a bit
+	tighter integration with other operations such as mouse tracking,
+	changing num-rows, etc.  Added TableFocus class for showing keyboard
+	focus.  It displays a blinking dashed box.
+    Keyboard controls are:
+	Arrow keys move selection cursor.
+	Space selects/deselects slot and sends action.
+	Return sends doubleAction.
+	Tab sends -selectText to nextText.
+	Shift-Tab sends -selectText to previousText.
+
+v0.51 1995/09/19 07:30 EDT zarnuk@zarnuk.com
+    Added -makeCellsPerform: methods.
+    Fixed -sendAction:to:forAllCells: to match behavior documented in Matrix.
+    Added font stuff.
+    Created new archive version.  Added support for reading old versions.
+
+v0.50 1995/09/18 15:15 EDT zarnuk@zarnuk.com
+    Sorting was not honoring descending direction.
+    -sortSlots: now generates an error if called re-entrantly.
+    Added delegate call-backs for slot-dragged, slot-resized.
+    Implemented auto-sort.
+
+v0.49 1995/09/18 07:45 EDT zarnuk@zarnuk.com
+    Fixed some compilation problems.
+
+v0.48 1995/09/15 05:30 EDT sunshine@sunshineco.com
+    Mouse down methods in BorderView and TableView now send action and double
+	action.
+    Added programmatic selection interface.
+    Added MiscIntList to support selection of multiple rows/tags at one time.
+    Modified mouse tracking behavior so that it acts more like Matrix upon
+	double-click.  That is, now you can double-click-drag and the double-
+	action is sent upon the mouse-up from the double-click-drag.
+    Fixed 'lib' targets in Makefile.postample to use 'cc -ObjC++ -r -nostdlib'
+	instead of 'ld -r' since ld can't handle multiple architectures.
+    Fixed mcgh ->> Misc conversion scripts to also convert Makefile.*.
+
+v0.47 1995/09/14 05:45 EDT zarnuk@zarnuk.com
+    Applied Eric's fix to the -findImageNamed: stuff so that the resize
+	cursors can be found at runtime.
+    Added scroll_lib target to the Makefile.postamble to create the library.
+    Added -sizeToCells method.
+    Added sorting.
+    Added -tag and -setTag: to MiscTextCell.
+
+v0.46 1995/09/13 13:45 EDT zarnuk@zarnuk.com
+    Fixed compile problem.
+
+v0.45 1995/09/13 03:00 EDT zarnuk@zarnuk.com
+    Plugged memory leak in MiscTableBorder::setCount() when shrinking
+	uniform-size borders that had custom titles or prototype cells.
+    Added -setAutodisplay:
+    Added -border:drawSlot: (counter-part of -drawCol:, -drawRow:).
+    Added -border:drawSlotTitle:, -drawColTitle:, -drawRowTitle:
+    Added -[MiscBorderView drawSlot:].
+    Fixed up these methods to -update the display:
+	-border:setSlot:title:
+	-setBorderTitleMode:
+	-border:setUniformSizeSlots:
+    Converted all 'col' and 'row' methods to use the generic 'slot' methods.
+    Expanded size of 'size' fields in inspector to accomodate new larger max.
+    Implemented
+	-border:getDelegateSlotTitle:
+	-border:getDelegateSlotPrototype:
+    Fixed up implementation of -sendAction methods.
+    Added {get/set}{slot/col/row}data-size methods.
+
+v0.44 1995/09/12 15:30 EDT zarnuk@zarnuk.com
+    Fixed assertion failure min_total_size <= max_total_size.
+    Increased MISC_MAX_PIXELS_SIZE from 0x3FFF -> 0x7FFFF0000
+	(Note that 0x7FFFFFFE -- (LONG_MAX-1) Had problems from the
+	long -> float -> long conversions.  This value seems to be working.)
+    Removed fascist policy of always forcing at least one column to autosize.
+    Re-organized {get/set}{min/max} constrained stuff to be more consistent
+	with the rest of the interface.
+    Added {get/set}{min/max} total-size methods.
+    Added get total-size methods.
+    Published -constrainSize method.
+
+v0.43 1995/09/11 04:15 EDT zarnuk@zarnuk.com
+    Fixed botched declarations in MiscTableScroll.h.  These were all
+    mis-spelled as "Cols" instead of "Rows".
+    - (BOOL) sizeableRows;
+    - (BOOL) draggableRows;
+    - (BOOL) modifierDragRows;
+
+    Renamed xxxViewOn methods to xxxTitlesOn.
+    Fleshed out most of the documentation.
+    Added -tag, and -setTag:
+    Added stubs for -sendAction, -sendAction:to:, -sendAction:to:forAllCells:,
+	-sendDoubleAction, -cellIsSelected::
+    Added -constrain {min/max} {width/height} methods.
+    Added constrain {min/max} constrols to the inspector.
+    Columns are now autosize by default.
+    Eric added outlets to palette nib so connections can be made from Table
+	Scroll to other objects in IB.
+
+v0.42 1995/09/10 22:00 EDT sunshine@sunshineco.com
+    Finished mcgh ->> Misc conversion scripts.  They now handle nibs, tiffs,
+	and the documentation.
+    Incorporated Paul's changes to the documentation.
+
+v0.41 1995/09/10 21:00 EDT sunshine@sunshineco.com
+    Converted back to mcgh from Misc.  Added scripts to convert to Misc upon
+	demand.  The scripts are currently incomplete since they don't deal
+	with nibs or tiffs.
+
+v0.40 1995/09/03 06:00 EDT sunshine@sunshineco.com
+    Changed all prefixes to Misc or MISC_ as appropriate in preparation for
+	inclusion in the MiscKit.  Modified copyright notices to mention the
+	MiscKit and its license.
+    Fixed up the two public headers TableScroll.h and TableTypes.h so that they
+	can be included by non-C++ clients (in other words, probably *all*
+	MiscKit users) as well as C++ clients.
+    Started writing preliminary class documentation.
+    Added missing -doubleTarget and -setDoubleTarget: methods.
+    Added a TODO file.
+
+v0.39 1995/08/30 23:52 EDT sunshine@sunshineco.com
+    Fixed up the icons on the "up" and "down" buttons on the inspector.  They
+	now support both color and gray.
+    Added missing "to-do" stuff to the BUG file.  Should make a TODO file.
+
+v0.38 1995/08/30 22:17 EDT sunshine@sunshineco.com
+    Fixed bug where drawing got all messed up during auto-scroll when resizing
+	columns/row.  Problem was that instance-drawing was ON during
+	auto-scroll.
+    Fixed bug where automatic column/row titles were "reordering" themselves
+	automatically after dragging instead of sticking to original
+	columns/rows.  Problem was that visual coordinates were being used in
+	auto-generation instead of physical coordinates.
+    Added copyright notice to all files.  Normalized comment headers.
+
+v0.37 1995/08/27 04:00 EDT sunshine@sunshineco.com
+    Fixed the problem with list-mode selection where it "leaked" selected cells
+	when you dragged the mouse back and forth very quickly.
+    Fixed the problem where the scrollers and document frame were not being
+	updated when a column/row was resized.

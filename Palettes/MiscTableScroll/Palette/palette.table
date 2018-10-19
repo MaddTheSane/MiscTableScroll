@@ -1,0 +1,6 @@
+Class = MiscTableScrollPalette;		/* (a subclass of IBPalette) */
+NibFile = MiscTableScroll;		/* (a nib file name) */
+Icon = MiscTableScroll;			/* (a tiff/eps file name) */
+ExportClasses = (MiscTableScroll);	/* (a list of class names) */
+/* ExportImages = ();			(a list of image nmaes) */
+/* ExportSounds = ();			(a list of sound names) */

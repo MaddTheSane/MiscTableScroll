@@ -1,0 +1,3 @@
+"MiscTableScrollPalette" = {OUTLETS = (tableScroll); SUPERCLASS = IBPalette; };
+"MiscTableScroll" = {OUTLETS = (dataDelegate, delegate, doubleTarget); SUPERCLASS = NSScrollView; };
+"FirstResponder" = {CATEGORY = LocalActions; };

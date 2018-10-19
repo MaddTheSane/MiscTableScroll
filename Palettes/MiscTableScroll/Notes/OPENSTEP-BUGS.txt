@@ -1,0 +1,158 @@
+//-----------------------------------------------------------------------------
+// MiscTableScroll OPENSTEP BUGS
+// $Id: OPENSTEP-BUGS.txt,v 1.12 99/07/15 12:38:44 sunshine Exp $
+//-----------------------------------------------------------------------------
+
+BUGS:
+----
+- TableScroll is not receiving a -becomeFirstResponder message on Rhapsody DR2
+    when it is first unarchived from the nib and is the window's "initial
+    first responder".  Consequently, it does not have a chance to notify
+    NSFontManager as to the current font setting.  (-becomeFirstResponder is
+    correctly sent in other circumstances.)
+
+- Cursor rectangles do not work correctly on MacOS/X Server DR2 when mouse
+    moves vertically into rectangles.  The problem is the overlapping
+    rectangles.  I fixed this problem for horizontal mouse movement already by
+    eliminating some of the overlap on the DR2 platform.  The overlapping
+    rectangles are a work-around for buggy cursor rectangles on pre-DR2
+    platforms which do not handle small adjacent rectangles correctly.
+
+- MacOS/X Server DR2 changed the modifier keys used for extending selection.
+    On earlier platforms, shift is used to extend the selection incrementally,
+    and alt is used to extend it by an entire range.  With DR2, cmd is now
+    used for incremental selection, and shift extends by range.
+
+- LineWrapper isn't handling composed character sequences.  In fact, it's
+    using -lossyCString.
+
+- LineWrapper::draw() doesn't handle NSAttributedStrings.  It assumes that
+    strings will be drawn in a single font entirely.
+
+- Incremental-search should be handling composed character sequences and
+    Unicode via NSString.
+
+- The -keyDown: method in MiscTableScroll is only considering the first
+    character from the key-down event rather than all of them.
+
+- Dragging, resizing, etc.  a slot while cell editing is in progress causes
+    the cell to be redrawn with the old contents for the duration of the drag,
+    resize, etc. operation, at which time the new contents are restored.
+    This bug also afflicts the NEXTSTEP MiscTableScroll, but only when
+    dragging the column if it was only partially visible.  The MiscTableScroll
+    architecture does not easily lend itself to fixing this problem.
+
+
+NeXT BUGS:
+---------
+- There is a display bug *during* dragging.  It appears that the composite
+    operations are messing up the images.  For instance, as soon as you pick
+    up a column, the image of the column gets a slightly dithered appearance
+    (that's the best description I can think of).  As you drag the
+    visible-cache gets drawn back into the window at the newly exposed areas,
+    and it also has a dithered appearance.  This bug occurs on both Mach and
+    NT.  Furthermore it also occurs when applications linked with the NEXTSTEP
+    3.3 version of MiscTableScroll run under OPENSTEP 4.x.  This leads me to
+    believe that it is a bug in the window server itself.
+
+- OPENSTEP 4.2 prerelease Objective-C++ compiler for both Mach and NT crashes
+    whenever a message is sent to 'super' from within a category.  This comes
+    up quite frequently.  I reported this bug to NeXT on 03/31/97 and it was
+    registered with tracker #78005.  They fixed it in both the Mach and NT
+    compilers and sent me the patched Mach compiler on 04/08/97, and the
+    patched NT compiler on 04/21/97.  However, for some reason completely
+    unknown to me, their fix only made it into the 4.2 final release compiler
+    for Mach.  The 4.2 final release compiler for NT still contains the bug.
+    Therefore I had to work around this problem in order to support the NT
+    platform by reorganizing the code so as to avoid making such calls.
+
+- OPENSTEP 4.2 Objective-C++ compiler for Mach and NT generates warnings about
+    unused variables when the -Wall flag is used even though there is no
+    sensible way to prevent them.  This problem comes up frequently, for
+    instance: -(void)foo:(id)sender {}.  I worked around the problem by using
+    -Wmost instead.
+
+- OPENSTEP 4.2 pswrap generates unused 'pad' variables which result in useless
+    and annoying compiler warnings.
+
+- OPENSTEP 4.1 (gamma) Objective-C++ fails to define macro __PRETTY_FUNCTION__
+    which is used by NSCAssert() and relatives.
+
+- tops' "replacemethod" doesn't handle '&' correctly.  For instance, the
+    conversion of getRow:col:ofCell: to getRow:column:ofCell: will fail if it
+    is called in this fashion: [matrix getRow:&r col:&c ofCell:cell].  It will
+    succeed, however, if it is called in this (less common) fashion: [matrix
+    getRow:pr col:pc ofCell:cell]
+
+- nextText connections are not converted automatically to nextKeyView.  Next
+    should have patched their NSIBConnector class to perform this conversion
+    automatically so that they show up in IB correctly (in addition to working
+    correctly when loaded by an application).  I don't know what to do about
+    this without having to do a bunch of extra programming, so I'll await word
+    from NeXT about their final release.  [This appears to be fixed in 4.1.]
+
+- OPENSTEP 4.1 & 4.2 fail to publish object_setInstanceVariable() (which is
+    declared in the old Object.h) or an equivalent function.  This is used in
+    -[MiscTableConnector establishConnection].  As a fix I manually declared
+    the function.
+
+- MiscBorderCell text is drawn in black rather than white.  TableCell text is
+    drawn in black rather than -textColor/-selectedTextColor.  This is a known
+    bug in OPENSTEP 4.1 & 4.2 (ref# 52511), -setupFieldEditorAttributes: does
+    not get called for non-editable cells.  [I fixed this for now by
+    subclassing from NSTextFieldCell and manually setting the text color.]
+
+
+FIXED:
+-----
+v140.1
+- After dragging a TableScroll to a new location on a window in Interface
+    Builder, it appears to enter into a state where one can edit the
+    underlying NSScrollView.  The scrollers become active and the TableView
+    itself disappears.  It only exits this mode when a different object is
+    clicked.  This bug affects MacOS/X Server DR2.  [I can no longer reproduce
+    this.]
+- Mouse cursor custom image is not working properly on MacOS/X Server DR2.
+    For resizeable columns, the "resize" cursor only appears if moving the
+    mouse from left to right.  The cursor never appears if moving from right
+    to left.
+- On MacOS/X Server DR2 and YellowBox DR2, connection inspector is not showing
+    the item which action/doubleAction are connected to in any nib which is
+    loaded by Interface Builder.  It does show new connections which are
+    created during the current session, though.  This is true for both action
+    and doubleAction.  The connection inspector works fine for OpenStep.
+    [Problem was that IBClassData -actionsOfClass: no longer appends colon ":"
+    to returned action names, as it did prior to DR2, yet the action name
+    stored in the NSNibControlConnector includes the colon.  The connection
+    inspector was doing a simple string comparision to locate the action in
+    the action list.  Fixed by canonicalizing the names before comparing.]
+- MiscTableScroll crashes during sorting now that notifications are properly
+    exported with __declspec(dllexport).  [Problem was a bug in the
+    Objective-C++ compiler for YellowBox and OpenStep 4.2 for Windows where it
+    incorrectly places some variables in a .drectve section in the COFF object
+    file instead of .rdata where they belong.  Since the linker discards the
+    .drectve section before producing the final output, these variables were
+    not getting initialized at all.  In this case, the static COMPARE_FUNC[]
+    array was not being initialized in MiscTableScrollSort.M.  I worked around
+    the problem by changing the way MiscTableTypes.h deals with exported
+    symbols and also added MiscTableScrollSymbols.M which actually tells
+    Windows which symbols should be exported from the DLL.]
+- On MacOS/X Server, InterfaceBuilder complains that the MiscTableScroll
+    connection inspector is making obsolete calls to -outletsOfClass: and
+    -actionsOfClass:.  It suggests using -outletNamesOfClass: and
+    -actionNamesOfClass: instead.  This warning does not appear on DR2.
+    Evidence strongly indicates that the newer methods have the same input and
+    return types, thus indicating that the methods were simply renamed in
+    MacOS/X Server for clarity.  [Fixed by sending the new messages to
+    InterfaceBuilder if it responds to them; otherwise send the old.  This is
+    accomplished via -respondsToSelector:.]
+- MiscTableView ignores user-specified scaling factor during printing.
+    [Problem was that between NextStep and OpenStep, the AppKit engineers
+    moved the scaling factor input field from the page layout panel to the
+    print panel.  Under NextStep, it was possible to grab the scaling factor
+    from the global PrintInfo object even before the print panel was launched,
+    and this is exactly what MiscTableView did.  However, as of OpenStep, the
+    scaling factor is not available until the print panel has been dismissed
+    by the user.  MiscTableViewPrint.M had not been updated to account for
+    this difference.  It was still assuming that the scaling factor was
+    available prior to initiation of the print operation.]

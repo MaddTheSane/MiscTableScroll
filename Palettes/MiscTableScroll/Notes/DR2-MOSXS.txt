@@ -1,0 +1,73 @@
+//-----------------------------------------------------------------------------
+// MacOS/X Server versus Rhapsody DR2
+// $Id: DR2-MOSXS.txt,v 1.1 99/06/30 09:35:39 sunshine Exp $
+//-----------------------------------------------------------------------------
+
+This file describes problems encountered while porting MiscTableScroll v140.1
+from Rhapsody DR2 to MacOS/X Server for Mach.
+
+- Conflicting prototypes for objc_msgSendSuper_stret() & objc_msgSend_stret().
+
+    Problem: MiscTableScrollJava.h manually declares these two prototypes
+	since /System/Java/Headers/java-vm.h as shipped with DR2 neglects to
+	do so for PPC targets.  As of MacOS/X Server, the declaration of these
+	functions changed (the argument list differs), they have moved to
+	objc-runtime.h, and they are correctly declared for PPC targets.  To
+	avoid conflicting prototype errors, MiscTableScrollJava.h must only
+	declare the prototypes on DR2, but not on MacOS/X Server.
+
+    Resolution: MiscTableScrollJava.h should be conditionalized to only
+	declare these prototypes on DR2.  Consequently, it now tests for
+	existence of the macro __NeXT__ which exists in the DR2 compilation
+	environemnt, but not MacOS/X Server.
+
+- JavaScrollDir crashes with message sent to freed object.
+
+    Problem: The example program launches, loads, and displays a directory
+	window correctly but crashes upon activation of the window.  The crash
+	results from an attempt by the AppKit to dispatch -respondsToSelector:
+	to a freed object.  This crash does not occur on DR2.  While
+	researching the problem, I ran across an item in the latest Java
+	release notes on the Apple web site which mentioned that the behavior
+	of the Objective-C to Java bridge changed with regards to pure Java
+	objects which have only a "weak" reference on the Objective-C side.
+	As of MacOS/X Server, the bridge now deallocates the Objective-C proxy
+	object of weakly referenced pure Java objects if the object's proxy
+	has not been retained on the Objective-C side.  Weakly referenced
+	objects are actually a common occurrence.  For instance a pure Java
+	object as an NSWindow's delegate, is one example.  The NSWindow merely
+	maintains a pointer to the Java object's Objective-C proxy, but does
+	not retain it.  Consequently the bridge thinks that the proxy is
+	unused and should be deallocated.  On DR2, these weakly referenced
+	proxy objects were merely leaked.  In the case of JavaScrollDir,
+	DirWindow is a pure Java object which is both the NSWindow's and
+	MiscTableScroll's delegate.  Consequently, DirWindow's Objective-C
+	proxy gets freed by the bridge even though NSWindow and
+	MiscTableScroll are still pointing at it.
+
+    Resolution: To fix the problem some entity on the Objective-C side must
+	retain DirWindow's Objective-C proxy object.  A simple way to do this
+	is to store a reference to the DirWindow in an NSArray.  As it turns
+	out, DirWindow already maintains a list of active DirWindow objects,
+	named OPEN_DIRS, in a Java Vector object.  Simply converting OPEN_DIRS
+	from a Vector to an NSArray will fix the problem by creating a strong
+	reference on the Objective-C side.
+
+- InterfaceBuilder complains about obsolete method calls.
+
+    Problem: InterfaceBuilder complains that the MiscTableScroll connection
+	inspector is making obsolete calls to -outletsOfClass: and
+	-actionsOfClass:.  It suggests using -outletNamesOfClass: and
+	-actionNamesOfClass: instead.  This warning does not appear on DR2.
+	Evidence strongly indicates that the newer methods have the same input
+	and return types, thus indicating that the methods were simply renamed
+	in MacOS/X Server for clarity.
+
+    Resolution: Send the new messages to InterfaceBuilder if it responds to
+	them; otherwise send the old.  This can be accomplished with a simple
+	test via -respondsToSelector:.  Thus the code will work in all
+	environments and choose the most appropriate message for each case.
+	Note that these methods seem not to be published in the
+	InterfaceBuilder headers.  Therefore, the connection inspector must
+	manually declare the prototypes (which was the case with the older
+	methods, as well).

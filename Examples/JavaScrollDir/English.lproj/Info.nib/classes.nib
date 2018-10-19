@@ -1,0 +1,12 @@
+{
+    IBClasses = (
+        {
+            CLASS = DirController; 
+            LANGUAGE = Java; 
+            OUTLETS = {infoPanel = id; infoText = id; }; 
+            SUPERCLASS = java.lang.Object; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}

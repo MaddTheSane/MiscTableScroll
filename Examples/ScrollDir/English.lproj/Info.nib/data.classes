@@ -1,0 +1,6 @@
+"DirController" = {
+    ACTIONS = {}; 
+    OUTLETS = {infoPanel = id; infoText = id; }; 
+    SUPERCLASS = NSObject; 
+};
+"FirstResponder" = {ACTIONS = {}; OUTLETS = {}; SUPERCLASS = NSObject; };

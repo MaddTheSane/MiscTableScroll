@@ -1,0 +1,1261 @@
+/*=============================================================================
+//
+//	Copyright (C) 1996-1999 by Paul S. McCarthy and Eric Sunshine.
+//		Written by Paul S. McCarthy and Eric Sunshine.
+//			    All Rights Reserved.
+//
+//	This notice may not be removed from this source code.
+//
+//	This object is included in the MiscKit by permission from the authors
+//	and its use is governed by the MiscKit license, found in the file
+//	"License.rtf" in the MiscKit distribution.  Please refer to that file
+//	for a list of all applicable permissions and restrictions.
+//	
+=============================================================================*/
+/*-----------------------------------------------------------------------------
+** MiscTableScroll-3.3-4.x.tops
+** 
+**	"tops" conversion script to aid porting of NEXTSTEP 3.3 programs that
+**	use MiscTableScroll to OPENSTEP 4.x.
+**
+**	This script must be run *after* running the standard NeXT supplied
+**	conversion scripts.
+**
+**-----------------------------------------------------------------------------
+**-----------------------------------------------------------------------------
+** $Id: MiscTableScroll-3.3-4.x.tops,v 1.12 99/06/15 03:21:45 sunshine Exp $
+** $Log:	MiscTableScroll-3.3-4.x.tops,v $
+** Revision 1.12  99/06/15  03:21:45  sunshine
+** v140.1: Ported to MacOS/X Server DR2 for Mach and Windows.
+** Corrected potential bug: Now uses <token var> rather than just <var>.
+** Downgraded errors to warnings.  Dropped many really obvious warnings.
+** Many methods were renamed to support Java, new notification-style
+** delegate messages, and for better OpenStep conformance and general clarity.
+** border:moveSlotFrom:to: --> border:moveSlot:toSlot:
+** moveColumnFrom:to: --> moveColumn:toColumn:
+** moveRowFrom:to: --> moveRow:toRow:
+** slotDraggedFrom:to: --> slotDragged:toSlot:
+** select...:byExtension: --> select...:byExtendingSelection:
+** select{Slot|Row|Column}Tags: --> select{Slots|Rows|Columns}WithTags:
+** deselect{Slot|Row|Column}Tags: --> deselect{Slots|Rows|Columns}WithTags:
+** ...ISearchColumn: --> ...IncrementalSearchColumn:
+** drawClippedText --> drawsClippedText
+** setDrawClippedText: --> setDrawsClippedText:
+** trackingBy --> selectsByRows
+** trackBy: --> setSelectsByRows:
+** tracking --> isTrackingMouse
+** stringForNSTabularTextPBoardType --> stringForNSTabularPboardType
+** tableScroll:...ColorChangedTo: --> tableScroll...ColorChanged:
+** tableScroll:border:slotDraggedFrom:to: --> tableScrollSlotDragged:
+** tableScroll:border:slotResized: --> tableScrollSlotResized:
+** tableScroll:border:slotSortReversed: --> tableScrollSlotSortReversed:
+** tableScroll:changeFont:to: --> tableScrollChangeFont:
+** tableScroll:fontChangedFrom:to: --> tableScrollFontChanged:
+** tableScroll:didEdit:atRow:column: --> tableScrollDidEdit:
+** tableScroll:willEditAtRow:column: --> tableScrollWillEdit:
+** tableScroll:willPrintPageHeader:info: --> tableScrollWillPrintPageHeader:
+** tableScroll:willPrintPageFooter:info: --> tableScrollWillPrintPageFooter:
+** Fixed bug: -selectedTextColorChangedTo: was mis-spelled as
+** -selectedTextColorChanagedTo:.
+** Added a section which converts old-style delegate messages to notification-
+** style delegate messages.  The generated code automatically extracts the
+** appropriate information from the NSNotification's userInfo dictionary based
+** upon the notification's type.
+** 
+** Revision 1.11  1998/03/22 13:18:10  sunshine
+** v133.1: Added conversions for:
+** -cornerTitle, -setCornerTitle:
+** -minUniformSizeCols, setMinUniformSizeCols:
+** -maxUniformSizeCols, setMaxUniformSizeCols:
+** -makeCellsPerform:...
+** Removed obsolete conversions:
+** -colDataSize:, -setColDataSize:
+** -colExpandsToData, -setCol:expandsToData:
+**---------------------------------------------------------------------------*/
+
+/**
+** Header files moved into MiscTableScroll framework
+**	MiscExporter.h
+**	MiscTableCell.h
+**	MiscTableScroll.h
+**	MiscTableTypes.h
+**/
+
+replace "misckit/<s header>"
+    with "MiscTableScroll/<header>"
+    where "<header>" isOneOf {
+	"MiscExporter.h",
+	"MiscTableCell.h",
+	"MiscTableScroll.h",
+	"MiscTableTypes.h"
+	}
+
+/**
+** Obsolete MiscIntList replaced with NSArray:
+**	addInt:				--> numberWithInt: & addObject:
+**	addIntList:			--> addObjectsFromArray:
+**	bsearch:			--> numberWithInt: & indexOfObject:
+**	bsearch:using:data:		--> numberWithInt: & indexOfObject:
+**	initFromString:			--> componentsSeparatedByString:
+**	insertInt:at:			--> numberWithInt: & insertObject:atIndex:
+**	intAt:				--> objectAtIndex & intValue
+**	lsearch:			--> numberWithInt: & indexOfObject:
+**	lsearch:using:data:		--> numberWithInt: & indexOfObject:
+**	readFromString:			--> setArray: & componentsSeparatedByString:
+**	removeIntAt:			--> removeObjectAtIndex:
+**	replaceIntAt:with:		--> numberWithInt: & replaceObjectAtIndex:withObject:
+**	sortUsing:data:			--> sortUsingFunction:context:
+**	writeToString			--> description
+**	writeToString:size:		--> description
+**	writeToString:size:canExpand:	--> description
+**/
+
+replace "[<list> addInt:<int>]"
+    with "[<list> addObject:[NSNumber numberWithInt:<int>]]"
+
+replace "[<list> addIntList:<other>]"
+    with "[<list> addObjectsFromArray:<other>]"
+
+replace "[<list> <sel>:<int>]"
+    with "[<list> indexOfObject:[NSNumber numberWithInt:<int>]]"
+    warning "MiscTableScrollConversion: -[MiscIntList <sel>:] obsolete.  NSNotFound now indicates failed search rather than -1."
+    where "<sel>" isOneOf {
+	"bsearch",
+	"lsearch"
+	}
+
+replace "[<list> <sel>:<int> using:<func> data:<context>]"
+    with "[<list> indexOfObject:[NSNumber numberWithInt:<int>]]"
+    warning "MiscTableScrollConversion: -[MiscIntList <sel>:using:data:] obsolete.  NSNotFound now indicates failed search rather than -1."
+    where "<sel>" isOneOf {
+	"bsearch",
+	"lsearch"
+	}
+
+replace "[[MiscIntList <sel>:<zone>] initFromString:<str>]"
+    with "[[<str> componentsSeparatedByString:@\" \"] retain]"
+    warning "MiscTableScrollConversion: MiscIntList obsolete.  Use NSArray or NSMutableArray instead."
+    where "<sel>" isOneOf {
+	"allocFromZone",
+	"allocWithZone"
+	}
+    
+replace "[[MiscIntList alloc] initFromString:<str>]"
+    with "[[<str> componentsSeparatedByString:@\" \"] retain]"
+    warning "MiscTableScrollConversion: MiscIntList obsolete.  Use NSArray or NSMutableArray instead."
+    
+replace "[<list> insertInt:<int> at:<pos>]"
+    with "[<list> insertObject:[NSNumber numberWithInt:<int>] atIndex:<pos>]"
+
+replace "[<list> intAt:<pos>]"
+    with "[[<list> objectAtIndex:<pos>] intValue]"
+
+replace "[<list> readFromString:<str>]"
+    with "[<list> setArray:[<str> componentsSeparatedByString:@\" \"]]"
+    warning "MiscTableScrollConversion: -[MiscIntList readFromString:] obsolete.  Use NSArray or NSMutableArray instead."
+
+replacemethod "removeIntAt:"
+    with "removeObjectAtIndex:"
+
+replace "[<list> replaceIntAt:<pos> with:<int>]"
+    with "[<list> replaceObjectAtIndex:<pos> withObject:[NSNumber numberWithInt:<int>]]"
+
+replace "[<list> sortUsing:<func> data:<context>]"
+    with "[<list> sortUsingFunction:<func> context:<context>]"
+    error "MiscTableScrollConversion: MiscIntList obsolete.  Fix <func> to work with NSMutableArray."
+
+replace "<token var> = [<list> writeToString]"
+    with "<token var> = [<list> description]"
+    warning "MiscTableScrollConversion: -[MiscIntList writeToString] replaced with -[NSArray description]."
+
+replace "<token var> = [<list> writeToString:<buff> size:<size>]"
+    with "<token var> = [<list> description]"
+    warning "MiscTableScrollConversion: -[MiscIntList writeToString:size:] replaced with -[NSArray description]."
+
+replace "[<list> writeToString:<buff> size:<size>]"
+    with "<buff> = [<list> description]"
+    warning "MiscTableScrollConversion: -[MiscIntList writeToString:size:] replaced with -[NSArray description]."
+
+replace "<token var> = [<list> writeToString:<buff> size:<size> canExpand:<flag>]"
+    with "<token var> = [<list> description]"
+    warning "MiscTableScrollConversion: -[MiscIntList writeToString:size:canExpand] replaced with -[NSArray description]."
+
+replace "[<list> writeToString:<buff> size:<size> canExpand:<flag>]"
+    with "<buff> = [<list> description]"
+    warning "MiscTableScrollConversion: -[MiscIntList writeToString:size:canExpand] replaced with -[NSArray description]."
+
+
+/**
+** Obsolete data-type:
+**	MiscIntList --> NSArray
+**/
+
+replace "MiscIntList"
+    with "NSArray"
+    warning "MiscTableScrollConversion: MiscIntList obsolete.  Convert to NSArray or NSMutableArray."
+
+
+/**
+** Radical arg changes: MiscIntList --> NSArray
+**	border:selectedSlots:	--> selectedSlots:
+**	border:selectedTags:	--> selectedSlotTags:
+**	border:slotOrder:	--> slotOrder:
+**	border:slotSizes:	--> slotSizes:
+**/
+
+replace "[<scroll> border:<border> <old>:<arg>]"
+    with "<arg> = [<scroll> <new>:<border>]"
+    warning "MiscTableScrollConversion: <new> changed radically: MiscIntList --> NSArray."
+    where ("<old>", "<new>") isOneOf {
+	("selectedSlots",	"selectedSlots"),
+	("selectedTags",	"selectedSlotTags"),
+	("slotOrder",		"slotOrder"),
+	("slotSizes",		"slotSizes")
+	}
+
+
+/**
+** Radical arg changes: MiscIntList --> NSArray
+**	colOrder:		--> columnOrder
+**	colSizes:		--> columnSizes
+**	rowOrder:		--> rowOrder
+**	rowSizes:		--> rowSizes
+**	selectedCols:		--> selectedColumns
+**	selectedColTags:	--> selectedColumnTags
+**	selectedRows:		--> selectedRows
+**	selectedRowTags:	--> selectedRowTags
+**/
+
+replace "[<scroll> <old>:<arg>]"
+    with "<arg> = [<scroll> <new>]"
+    warning "MiscTableScrollConversion: <new> changed radically: MiscIntList --> NSArray."
+    where ("<old>", "<new>") isOneOf {
+	("colOrder",		"columnOrder"),
+	("colSizes",		"columnSizes"),
+	("rowOrder",		"rowOrder"),
+	("rowSizes",		"rowSizes"),
+	("selectedCols",	"selectedColumns"),
+	("selectedColTags",	"selectedColumnTags"),
+	("selectedRows",	"selectedRows"),
+	("selectedRowTags",	"selectedRowTags")
+	}
+
+
+/**
+** Minor arg changes: MiscIntList --> NSArray
+**	border:deselectSlots:		--> border:deselectSlots:
+**	border:deselectTags:		--> border:deselectSlotsWithTags:
+**	border:physicalToVisual:	--> border:physicalToVisual:
+**	border:selectSlots:		--> border:selectSlots:
+**	border:selectSlots:byExtension: --> border:selectSlots:byExtendingSelection:
+**	border:selectTags:		--> border:selectSlotsWithTags:
+**	border:selectTags:byExtension:	--> border:selectSlotsWithTags:byExtendingSelection:
+**	border:setSlotOrder:		--> border:setSlotOrder:
+**	border:setSlotSizes:		--> border:setSlotSizes:
+**	border:visualToPhysical:	--> border:visualToPhysical:
+**	deselectCols:			--> deselectColumns:
+**	deselectColTags:		--> deselectColumnsWithTags:
+**	deselectRows:			--> deselectRows:
+**	deselectRowTags:		--> deselectRowsWithTags:
+**	selectCols:			--> selectColumns:
+**	selectCols:byExtension:		--> selectColumns:byExtendingSelection:
+**	selectColTags:			--> selectColumnsWithTags:
+**	selectColTags:byExtension:	--> selectColumnsWithTags:byExtendingSelection:
+**	selectRows:			--> selectRows:
+**	selectRows:byExtension:		--> selectRows:byExtendingSelection:
+**	selectRowTags:			--> selectRowsWithTags:
+**	selectRowTags:byExtension:	--> selectRowsWithTags:byExtendingSelection:
+**	setColOrder:			--> setColumnOrder:
+**	setColSizes:			--> setColumnSizes:
+**	setRowOrder:			--> setRowOrder:
+**	setRowSizes:			--> setRowSizes:
+**/
+
+replacemethod "<old>"
+    with "<new>"
+    warning "MiscTableScrollConversion: <new> argument type changed: MiscIntList --> NSArray."
+    where ("<old>", "<new>") isOneOf {
+	("border:deselectSlots:",		"border:deselectSlots:"),
+	("border:deselectTags:",		"border:deselectSlotsWithTags:"),
+	("border:physicalToVisual:",		"border:physicalToVisual:"),
+	("border:selectSlots:",			"border:selectSlots:"),
+	("border:selectSlots:byExtension:",	"border:selectSlots:byExtendingSelection:"),
+	("border:selectTags:",			"border:selectSlotsWithTags:"),
+	("border:selectTags:byExtension:",	"border:selectSlotsWithTags:byExtendingSelection:"),
+	("border:setSlotOrder:",		"border:setSlotOrder:"),
+	("border:setSlotSizes:",		"border:setSlotSizes:"),
+	("border:visualToPhysical:",		"border:visualToPhysical:"),
+	("deselectCols:",			"deselectColumns:"),
+	("deselectColTags:",			"deselectColumnsWithTags:"),
+	("deselectRows:",			"deselectRows:"),
+	("deselectRowTags:",			"deselectRowsWithTags:"),
+	("selectCols:",				"selectColumns:")
+	("selectCols:byExtension:",		"selectColumns:byExtendingSelection:"),
+	("selectColTags:",			"selectColumnsWithTags:"),
+	("selectColTags:byExtension:",		"selectColumnsWithTags:byExtendingSelection:"),
+	("selectRows:",				"selectRows:"),
+	("selectRows:byExtension:",		"selectRows:byExtendingSelection:"),
+	("selectRowTags:",			"selectRowsWithTags:"),
+	("selectRowTags:byExtension:",		"selectRowsWithTags:byExtendingSelection:"),
+	("setColOrder:",			"setColumnOrder:"),
+	("setColSizes:",			"setColumnSizes:"),
+	("setRowOrder:",			"setRowOrder:"),
+	("setRowSizes:",			"setRowSizes:")
+	}
+
+
+/**
+** Radical return change: (int const*) --> NSArray
+**	slotSortVector:len:	--> slotSortVector:
+**/
+
+replace "<w w><token var> = [<token scroll> slotSortVector:<border> len:<arg>]"
+    with "<token var> = [<token scroll> slotSortVector:<border>];<w w>*<arg> = [<token var> count]"
+    error "MiscTableScrollConversion: slotSortVector: changed radically: int array --> NSArray."
+
+
+/**
+** Radical arg change: (int const*) --> NSArray
+**	border:setSlotSortVector:len:	--> border:setSlotSortVector:
+**/
+
+replace "[<token scroll> border:<border> setSlotSortVector:<arg> len:<len>]"
+    with "[<token scroll> border:<border> setSlotSortVector:<arg>]"
+    error "MiscTableScrollConversion: setSlotSortVector: changed radically: int array --> NSArray, <len> argument dropped."
+
+
+/**
+** Radical return change: (int const*) --> NSArray
+**	colSortVectorLen:	--> columnSortVector
+**	rowSortVectorLen:	--> rowSortVector
+**/
+
+replace "<w w><token var> = [<token scroll> <old>:<arg>]"
+    with "<token var> = [<token scroll> <new>];<w w>*<arg> = [<token var> count]"
+    error "MiscTableScrollConversion: <new> changed radically: int array --> NSArray."
+    where ("<old>", "<new>") isOneOf {
+	("colSortVectorLen",	"columnSortVector"),
+	("rowSortVectorLen",	"rowSortVector")
+	}
+
+
+/**
+** Radical arg change: (int const*) --> NSArray
+**	setColSortVector:len:	--> setColumnSortVector:
+**	setRowSortVector:len:	--> setRowSortVector:
+**/
+
+replace "[<scroll> <old>:<vector> len:<len>]"
+    with "[<scroll> <new>:<vector>]"
+    error "MiscTableScrollConversion: <new> changed radically: int array --> NSArray, <len> argument dropped."
+    where ("<old>", "<new>") isOneOf {
+	("setColSortVector",	"setColumnSortVector"),
+	("setRowSortVector",	"setRowSortVector")
+	}
+
+
+/**
+** Radical return type change: void --> NSArray
+**	border:physicalToVisual:
+**	border:visualToPhysical:
+**/
+
+replace "[<scroll> border:<border> <sel>:<arg>]"
+    with "NSArray* newArray = [<scroll> border:<border> <sel>:<arg>]"
+    error "MiscTableScrollConversion: border:<sel>: now returns an NSArray rather than converting the input array in-place."
+    where "<sel>" isOneOf {
+	"physicalToVisual",
+	"visualToPhysical"
+	}
+
+
+/**
+** Radical change: String methods: {char*,len} --> NSString
+**	border:slotOrderAsString:size:canExpand: --> slotOrderAsString:
+**	border:slotSizesAsString:size:canExpand: --> slotSizesAsString:
+**/
+
+replace "<token var> = [<scroll> border:<border> <sel>:<buff> size:<size> canExpand:<flag>]"
+    with "<token var> = [<scroll> <sel>:<border>]"
+    warning "MiscTableScrollConversion: <sel> now returns NSString and no longer accepts an input buffer."
+    where "<sel>" isOneOf {
+	"slotOrderAsString",
+	"slotSizesAsString"
+	}
+
+replace "[<scroll> border:<border> <sel>:<buff> size:<size> canExpand:<flag>]"
+    with "<buff> = [<scroll> <sel>:<border>]"
+    warning "MiscTableScrollConversion: <sel> now returns NSString and no longer accepts an input buffer."
+    where "<sel>" isOneOf {
+	"slotOrderAsString",
+	"slotSizesAsString"
+	}
+
+
+/**
+** Radical change: String methods: {char*,len} --> NSString
+**	colOrderAsString:size:canExpand: --> columnOrderAsString
+**	colSizesAsString:size:canExpand: --> columnSizesAsString
+**	rowOrderAsString:size:canExpand: --> rowOrderAsString
+**	rowSizesAsString:size:canExpand: --> rowSizesAsString
+**/
+
+replace "<token var> = [<scroll> <old>:<buff> size:<size> canExpand:<flag>]"
+    with "<token var> = [<scroll> <new>]"
+    warning "MiscTableScrollConversion: <new> now returns NSString and no longer accepts an input buffer."
+    where ("<old>", "<new>") isOneOf {
+	("colOrderAsString", "columnOrderAsString"),
+	("colSizesAsString", "columnSizesAsString"),
+	("rowOrderAsString", "rowOrderAsString"),
+	("rowSizesAsString", "rowSizesAsString")
+	}
+
+replace "[<scroll> <old>:<buff> size:<size> canExpand:<flag>]"
+    with "<buff> = [<scroll> <new>]"
+    warning "MiscTableScrollConversion: <new> now returns NSString and no longer accepts an input buffer."
+    where ("<old>", "<new>") isOneOf {
+	("colOrderAsString", "columnOrderAsString"),
+	("colSizesAsString", "columnSizesAsString"),
+	("rowOrderAsString", "rowOrderAsString"),
+	("rowSizesAsString", "rowSizesAsString")
+	}
+
+
+/**
+** Radical change: Mouse tracking: MiscBorderType --> BOOL
+**	trackingBy	--> selectsByRows
+**	trackBy:	--> setSelectsByRows:
+**/
+
+replace "[<scroll> trackingBy]"
+    with "([<scroll> selectsByRows] ? MISC_ROW_BORDER : MISC_COL_BORDER)"
+
+replace "[<scroll> trackBy:MISC_ROW_BORDER]"
+    with "[<scroll> setSelectsByRows:YES]"
+
+replace "[<scroll> trackBy:MISC_COL_BORDER]"
+    with "[<scroll> setSelectsByRows:NO]"
+
+replace "[<scroll> trackBy:<border>]"
+    with "[<scroll> setSelectsByRows:(<border> == MISC_ROW_BORDER)]"
+
+
+/**
+** Obsolete gray-value methods
+**	backgroundGray		--> backgroundColor
+**	highlightBackgroundGray	--> selectedBackgroundColor
+**	highlightTextGray	--> selectedTextColor
+**	textGray		--> textColor
+**/
+
+replace "[<obj> <old>]"
+    with "[[[<obj> <new>] colorUsingColorSpaceName:NSCalibratedWhiteColorSpace] whiteComponent]"
+    where ("<old>", "<new>") isOneOf {
+	("backgroundGray",		"backgroundColor"),
+	("highlightBackgroundGray",	"selectedBackgroundColor"),
+	("highlightTextGray",		"selectedTextColor"),
+	("textGray",			"textColor")
+	}
+
+
+/**
+** Obsolete gray-value methods
+**	setBackgroundGray		--> setBackgroundColor
+**	setHighlightBackgroundGray	--> setSelectedBackgroundColor
+**	setHighlightTextGray		--> setSelectedTextColor
+**	setTextGray			--> setTextColor
+**/
+
+replace "[<obj> <old>:<arg>]"
+    with "[<obj> <new>:[NSColor colorWithCalibratedWhite:<arg> alpha:1.0]]"
+    where ("<old>", "<new>") isOneOf {
+	("setBackgroundGray",		"setBackgroundColor"),
+	("setHighlightBackgroundGray",	"setSelectedBackgroundColor"),
+	("setHighlightTextGray",	"setSelectedTextColor"),
+	("setTextGray",			"setTextColor")
+	}
+
+
+/**
+** NXRect conversion:
+**	getDocClipFrame: --> documentClipRect
+**/
+
+replace "[<scroll> getDocClipFrame:<arg>]"
+    with "*<arg> = [<scroll> documentClipRect]"
+
+
+/**
+** Name change (for NSMatrix compatibility), return type change: (id) --> (BOOL)
+**	findCell:row:col:		--> getRow:column:ofCell:
+**	findCellWithTag:row:col:	--> getRow:column:ofCellWithTag:
+**	getRow:andCol:forPoint:		--> getRow:column:forPoint:
+**/
+
+replace "[<scroll> <old>:<arg> row:<row> col:<col>]"
+    with "[<scroll> getRow:<row> column:<col> <new>:<arg>]"
+    warning "MiscTableScrollConversion: getRow:column:<new>: now returns BOOL rather than (id)"
+    where ("<old>", "<new>") isOneOf {
+	("findCellWithTag",	"ofCellWithTag"),
+	("findCell",		"ofCell")
+	}
+
+replace "[<scroll> getRow:<row> andCol:<col> forPoint:<point>]"
+    with "[<scroll> getRow:<row> column:<col> forPoint:<point>]"
+    warning "MiscTableScrollConversion: getRow:column:forPoint: now returns BOOL rather than (id)"
+
+
+/**
+** Name change (for NSMatrix compatibility), return type change: (id) --> NSRect
+**	getCellFrame:at:: --> cellFrameAtRow:column:
+**/
+
+replace "[<scroll> getCellFrame:<rect> at:<row>:<col>]"
+    with "*<rect> = [<scroll> cellFrameAtRow:<row> column:<col>]"
+
+
+/**
+** Simple name change (for OpenStep's new naming conventions):
+**	addCol				--> addColumn
+**	autoSortCols			--> autoSortColumns
+**	border:deleteSlotAt:		--> border:removeSlot:
+**	border:findSlotWithTag:		--> border:slotWithTag:
+**	border:insertSlotAt:		--> border:insertSlot:
+**	border:moveSlotFrom:to:		--> border:moveSlot:toSlot:
+**	border:selectSlot:byExtension:	--> border:selectSlot:byExtendingSelection:
+**	border:setSlot:sortFunc:	--> border:setSlot:sortFunction:
+**	border:slotDraggedFrom:to:	--> border:slotDragged:toSlot:
+**	border:slotSortFunc:		--> border:slotSortFunction:
+**	buffCount			--> bufferCount
+**	builtinValidRequestorForSendType:andReturnType:
+**					--> builtinValidRequestorForSendType:returnType:
+**	canEdit:at::			--> canEdit:atRow:column:
+**	cellAt::			--> cellAtRow:column:
+**	cellIsSelected::		--> cellIsSelectedAtRow:column:
+**	clearColSelection		--> clearColumnSelection
+**	clearCursorCol			--> clearCursorColumn
+**	clickedCol			--> clickedColumn
+**	colAdjustedSize:		--> columnAdjustedSize:
+**	colAtPosition:			--> columnAtPosition:
+**	colBorder			--> columnBorder
+**	colCellPrototype:		--> columnCellPrototype:
+**	colCellType:			--> columnCellType:
+**	colIsAutosize:			--> columnIsAutosize:
+**	colIsSelected:			--> columnIsSelected:
+**	colIsSizeable:			--> columnIsSizeable:
+**	colIsSorted:			--> columnIsSorted:
+**	colIsVisible:			--> columnIsVisible:
+**	colMaxSize:			--> columnMaxSize:
+**	colMinSize:			--> columnMinSize:
+**	colPosition:			--> columnPosition:
+**	colsAreSorted			--> columnsAreSorted
+**	colSize:			--> columnSize:
+**	colSortDirection:		--> columnSortDirection:
+**	colSortFunc:			--> columnSortFunction:
+**	colSortType:			--> columnSortType:
+**	colTag:				--> columnTag:
+**	colTitle:			--> columnTitle:
+**	colTitleMode			--> columnTitleMode
+**	colTitlesHeight			--> columnTitlesHeight
+**	colTitlesOn			--> columnTitlesOn
+**	compareCols::			--> compareColumns::
+**	compareCols::info:		--> compareColumns::info:
+**	compareSlotFunc			--> compareSlotFunction
+**	cursorCol			--> cursorColumn
+**	deleteColAt:			--> removeColumn:
+**	deleteRowAt:			--> removeRow:
+**	deselectCol:			--> deselectColumn:
+**	doIncrementalSearch:col:	--> doIncrementalSearch:column:
+**	doRetireCell:at::		--> doRetireCell:atRow:column:
+**	doReviveCell:at::		--> doReviveCell:atRow:column:
+**	doubleValueAt::			--> doubleValueAtRow:column:
+**	draggableCols			--> draggableColumns
+**	drawCellAt::			--> drawCellAtRow:column:
+**	drawCol:			--> drawColumn:
+**	drawColTitle:			--> drawColumnTitle:
+**	drawClippedText			--> drawsClippedText
+**	edit:at::			--> edit:atRow:column:
+**	editCellAt::			--> editCellAtRow:column:
+**	editIfAble:at::			--> editIfAble:atRow:column:
+**	emptyAndFreeCells		--> emptyAndReleaseCells
+**	findCellWithTag:		--> cellWithTag:
+**	findColWithTag:			--> columnWithTag:
+**	findRowWithTag:			--> rowWithTag:
+**	firstVisibleCol			--> firstVisibleColumn
+**	floatValueAt::			--> floatValueAtRow:column:
+**	getColExportGridMode		--> getColumnExportGridMode
+**	getColExportTitleMode		--> getColumnExportTitleMode
+**	hasColSelection			--> hasColumnSelection
+**	hasMultipleColSelection		--> hasMultipleColumnSelection
+**	hasValidCursorCol		--> hasValidCursorColumn
+**	insertColAt:			--> insertColumn:
+**	insertRowAt:			--> insertRow:
+**	intValueAt::			--> intValueAtRow:column:
+**	lastVisibleCol			--> lastVisibleColumn
+**	makeCellsPerform:		--> makeCellsPerformSelector:
+**	makeCellsPerform:selectedOnly:	--> makeCellsPerformSelector:selectedOnly:
+**	makeCellsPerform:with:		--> makeCellsPerformSelector:with:
+**	makeCellsPerform:with:selectedOnly:
+**					--> makeCellsPerformSelector:with:selectedOnly:
+**	makeCellsPerform:with:with:	--> makeCellsPerformSelector:with:with:
+**	makeCellsPerform:with:with:selectedOnly:
+**					--> makeCellsPerformSelector:with:with:selectedOnly:
+**	maxUniformSizeCols		--> maxUniformSizeColumns
+**	minUniformSizeCols		--> minUniformSizeColumns
+**	modifierDragCols		--> modifierDragColumns
+**	moveColFrom:to:			--> moveColumn:toColumn:
+**	moveRowFrom:to:			--> moveRow:toRow:
+**	numCols				--> numberOfColumns
+**	numRows				--> numberOfRows
+**	numSelectedCols			--> numberOfSelectedColumns
+**	numSelectedRows			--> numberOfSelectedRows
+**	numSlots:			--> numberOfSlots:
+**	numVisibleCols			--> numberOfVisibleColumns
+**	numVisibleRows			--> numberOfVisibleRows
+**	numVisibleSlots:		--> numberOfVisibleSlots:
+**	reenableCursor			--> enableCursor
+**	retireCell:at::			--> retireCell:atRow:column:
+**	reviveCell:at::			--> reviveCell:atRow:column:
+**	rowSortFunc:			--> rowSortFunction:
+**	scrollCellToVisible::		--> scrollCellToVisibleAtRow:column:
+**	scrollColToVisible:		--> scrollColumnToVisible:
+**	scrollSelToVisible		--> scrollSelectionToVisible
+**	selectAllCols			--> selectAllColumns
+**	selectCol:			--> selectColumn:
+**	selectCol:byExtension:		--> selectColumn:byExtendingSelection:
+**	selectedCol			--> selectedColumn
+**	selectRow:byExtension:		--> selectRow:byExtendingSelection:
+**	setAutoSortCols:		--> setAutoSortColumns:
+**	setCol:autosize:		--> setColumn:autosize:
+**	setCol:cellPrototype:		--> setColumn:cellPrototype:
+**	setCol:cellType:		--> setColumn:cellType:
+**	setCol:maxSize:			--> setColumn:maxSize:
+**	setCol:minSize:			--> setColumn:minSize:
+**	setCol:size:			--> setColumn:size:
+**	setCol:sizeable:		--> setColumn:sizeable:
+**	setCol:sortDirection:		--> setColumn:sortDirection:
+**	setCol:sortFunc:		--> setColumn:sortFunction:
+**	setCol:sortType:		--> setColumn:sortType:
+**	setCol:tag:			--> setColumn:tag:
+**	setCol:title:			--> setColumn:title:
+**	setColExportGridMode:		--> setColumnExportGridMode:
+**	setColExportTitleMode:		--> setColumnExportTitleMode:
+**	setColOrderFromString:		--> setColumnOrderFromString:
+**	setColSizesFromString:		--> setColumnSizesFromString:
+**	setColTitleMode:		--> setColumnTitleMode:
+**	setColTitlesHeight:		--> setColumnTitlesHeight:
+**	setColTitlesOn:			--> setColumnTitlesOn:
+**	setCompareSlotFunc:		--> setCompareSlotFunction:
+**	setCursorCol:			--> setCursorColumn:
+**	setDraggableCols:		--> setDraggableColumns:
+**	setDrawClippedText:		--> setDrawsClippedText:
+**	setFirstVisibleCol:		--> setFirstVisibleColumn:
+**	setLastVisibleCol:		--> setLastVisibleColumn:
+**	setMaxUniformSizeCols:		--> setMaxUniformSizeColumns:
+**	setMinUniformSizeCols:		--> setMinUniformSizeColumns:
+**	setModifierDragCols:		--> setModifierDragColumns:
+**	setRow:sortFunc:		--> setRow:sortFunction:
+**	setSizeableCols:		--> setSizeableColumns:
+**	setUniformSizeCols:		--> setUniformSizeColumns:
+**	sizeableCols			--> sizeableColumns
+**	sortCol:			--> sortColumn:
+**	sortCols			--> sortColumns
+**	stateAt::			--> stateAtRow:column:
+**	stringValueAt::			--> stringValueAtRow:column:
+**	tagAt::				--> tagAtRow:column:
+**	titleAt::			--> titleAtRow:column:
+**	tracking			--> isTrackingMouse
+**	uniformSizeCols			--> uniformSizeColumns
+**	tableScroll:abortEditAt::	--> tableScroll:abortEditAtRow:column:
+**	tableScroll:allowDragOperationAt::
+**					--> tableScroll:allowDragOperationAtRow:column:
+**	tableScrollBuffCount:		--> tableScrollBufferCount:
+**	tableScroll:canEdit:at::	--> tableScroll:canEdit:atRow:column:
+**	tableScroll:cellAt::		--> tableScroll:cellAtRow:column:
+**	tableScroll:doubleValueAt::	--> tableScroll:doubleValueAtRow:column:
+**	tableScroll:edit:at::		--> tableScroll:edit:atRow:column:
+**	tableScroll:floatValueAt::	--> tableScroll:floatValueAtRow:column:
+**	tableScroll:getISearchCol:	--> tableScroll:getIncrementalSearchColumn:
+**	tableScroll:imageForDragOperationAt::
+**					--> tableScroll:imageForDragOperationAtRow:column:
+**	tableScroll:intValueAt::	--> tableScroll:intValueAtRow:column:
+**	tableScroll:preparePasteboard:forDragOperationAt::
+**					--> tableScroll:preparePasteboard:forDragOperationAtRow:column:
+**	tableScroll:retireAt::		--> tableScroll:retireAtRow:column:
+**	tableScroll:retireCell:at::	--> tableScroll:retireCell:atRow:column:
+**	tableScroll:reviveAt::		--> tableScroll:reviveAtRow:column:
+**	tableScroll:reviveCell:at::	--> tableScroll:reviveCell:atRow:column:
+**	tableScroll:setStringValue:at:: --> tableScroll:setStringValue:atRow:column:
+**	tableScroll:stateAt::		--> tableScroll:stateAtRow:column:
+**	tableScroll:stringValueAt::	--> tableScroll:stringValueAtRow:column:
+**	tableScroll:tagAt::		--> tableScroll:tagAtRow:column:
+**	tableScroll:titleAt::		--> tableScroll:titleAtRow:column:
+**	tableScroll:validRequestorForSendType:andReturnType:
+**					--> tableScroll:validRequestorForSendType:returnType:
+**/
+
+replacemethod "<old>"
+    with "<new>"
+    where ("<old>", "<new>") isOneOf {
+	("addCol",			"addColumn"),
+	("autoSortCols",		"autoSortColumns"),
+	("border:deleteSlotAt:",	"border:removeSlot:"),
+	("border:findSlotWithTag:",	"border:slotWithTag:"),
+	("border:insertSlotAt:",	"border:insertSlot:"),
+	("border:moveSlotFrom:to:",	"border:moveSlot:toSlot:"),
+	("border:selectSlot:byExtension:", "border:selectSlot:byExtendingSelection:"),
+	("border:setSlot:sortFunc:",	"border:setSlot:sortFunction:"),
+	("border:slotDraggedFrom:to:",	"border:slotDragged:toSlot:"),
+	("border:slotSortFunc:",	"border:slotSortFunction:"),
+	("buffCount",			"bufferCount"),
+	("builtinValidRequestorForSendType:andReturnType:", "builtinValidRequestorForSendType:returnType:"),
+	("canEdit:at::",		"canEdit:atRow:column:"),
+	("cellAt::",			"cellAtRow:column:"),
+	("cellIsSelected::",		"cellIsSelectedAtRow:column:"),
+	("clearColSelection",		"clearColumnSelection"),
+	("clearCursorCol",		"clearCursorColumn"),
+	("clickedCol",			"clickedColumn"),
+	("colAdjustedSize:",		"columnAdjustedSize:"),
+	("colAtPosition:",		"columnAtPosition:"),
+	("colBorder",			"columnBorder"),
+	("colCellPrototype:",		"columnCellPrototype:"),
+	("colCellType:",		"columnCellType:"),
+	("colIsAutosize:",		"columnIsAutosize:"),
+	("colIsSelected:",		"columnIsSelected:"),
+	("colIsSizeable:",		"columnIsSizeable:"),
+	("colIsSorted:",		"columnIsSorted:"),
+	("colIsVisible:",		"columnIsVisible:"),
+	("colMaxSize:",			"columnMaxSize:"),
+	("colMinSize:",			"columnMinSize:"),
+	("colPosition:",		"columnPosition:"),
+	("colsAreSorted",		"columnsAreSorted"),
+	("colSize:",			"columnSize:"),
+	("colSortDirection:",		"columnSortDirection:"),
+	("colSortFunc:",		"columnSortFunction:"),
+	("colSortType:",		"columnSortType:"),
+	("colTag:",			"columnTag:"),
+	("colTitle:",			"columnTitle:"),
+	("colTitleMode",		"columnTitleMode"),
+	("colTitlesHeight",		"columnTitlesHeight"),
+	("colTitlesOn",			"columnTitlesOn"),
+	("compareCols::",		"compareColumns::"),
+	("compareCols::info:",		"compareColumns::info:"),
+	("compareSlotFunc",		"compareSlotFunction"),
+	("cursorCol",			"cursorColumn"),
+	("deleteColAt:",		"removeColumn:"),
+	("deleteRowAt:",		"removeRow:"),
+	("deselectCol:",		"deselectColumn:"),
+	("doIncrementalSearch:col:",	"doIncrementalSearch:column:"),
+	("doRetireCell:at::",		"doRetireCell:atRow:column:"),
+	("doReviveCell:at::",		"doReviveCell:atRow:column:"),
+	("doubleValueAt::",		"doubleValueAtRow:column:"),
+	("draggableCols",		"draggableColumns"),
+	("drawCellAt::",		"drawCellAtRow:column:"),
+	("drawCol:",			"drawColumn:"),
+	("drawColTitle:",		"drawColumnTitle:"),
+	("drawClippedText",		"drawsClippedText"),
+	("edit:at::",			"edit:atRow:column:"),
+	("editCellAt::",		"editCellAtRow:column:"),
+	("editIfAble:at::",		"editIfAble:atRow:column:"),
+	("emptyAndFreeCells",		"emptyAndReleaseCells"),
+	("findCellWithTag:",		"cellWithTag:"),
+	("findColWithTag:",		"columnWithTag:"),
+	("findRowWithTag:",		"rowWithTag:"),
+	("firstVisibleCol",		"firstVisibleColumn"),
+	("floatValueAt::",		"floatValueAtRow:column:"),
+	("getColExportGridMode",	"getColumnExportGridMode"),
+	("getColExportTitleMode",	"getColumnExportTitleMode"),
+	("hasColSelection",		"hasColumnSelection"),
+	("hasMultipleColSelection",	"hasMultipleColumnSelection"),
+	("hasValidCursorCol",		"hasValidCursorColumn"),
+	("insertColAt:",		"insertColumn:"),
+	("insertRowAt:",		"insertRow:"),
+	("intValueAt::",		"intValueAtRow:column:"),
+	("lastVisibleCol",		"lastVisibleColumn"),
+	("makeCellsPerform:",		"makeCellsPerformSelector:"),
+	("makeCellsPerform:selectedOnly:", "makeCellsPerformSelector:selectedOnly:"),
+	("makeCellsPerform:with:",	"makeCellsPerformSelector:with:"),
+	("makeCellsPerform:with:selectedOnly:", "makeCellsPerformSelector:with:selectedOnly:"),
+	("makeCellsPerform:with:with:",	"makeCellsPerformSelector:with:with:"),
+	("makeCellsPerform:with:with:selectedOnly:", "makeCellsPerformSelector:with:with:selectedOnly:"),
+	("maxUniformSizeCols",		"maxUniformSizeColumns"),
+	("minUniformSizeCols",		"minUniformSizeColumns"),
+	("modifierDragCols",		"modifierDragColumns"),
+	("moveColFrom:to:",		"moveColumn:toColumn:"),
+	("moveRowFrom:to:",		"moveRow:toRow:"),
+	("numCols",			"numberOfColumns"),
+	("numRows",			"numberOfRows"),
+	("numSelectedCols",		"numberOfSelectedColumns"),
+	("numSelectedRows"		"numberOfSelectedRows"),
+	("numSlots:",			"numberOfSlots:"),
+	("numVisibleCols",		"numberOfVisibleColumns"),
+	("numVisibleRows"		"numberOfVisibleRows"),
+	("numVisibleSlots:"		"numberOfVisibleSlots:"),
+	("reenableCursor",		"enableCursor"),
+	("retireCell:at::",		"retireCell:atRow:column:"),
+	("reviveCell:at::",		"reviveCell:atRow:column:"),
+	("rowSortFunc:",		"rowSortFunction:"),
+	("scrollCellToVisible::",	"scrollCellToVisibleAtRow:column:"),
+	("scrollColToVisible:",		"scrollColumnToVisible:"),
+	("scrollSelToVisible",		"scrollSelectionToVisible"),
+	("selectAllCols",		"selectAllColumns"),
+	("selectCol:",			"selectColumn:"),
+	("selectCol:byExtension:",	"selectColumn:byExtendingSelection:"),
+	("selectedCol",			"selectedColumn"),
+	("selectRow:byExtension:",	"selectRow:byExtendingSelection:"),
+	("setAutoSortCols:",		"setAutoSortColumns:"),
+	("setCol:autosize:",		"setColumn:autosize:"),
+	("setCol:cellPrototype:",	"setColumn:cellPrototype:"),
+	("setCol:cellType:",		"setColumn:cellType:"),
+	("setCol:maxSize:",		"setColumn:maxSize:"),
+	("setCol:minSize:",		"setColumn:minSize:"),
+	("setCol:size:",		"setColumn:size:"),
+	("setCol:sizeable:",		"setColumn:sizeable:"),
+	("setCol:sortDirection:",	"setColumn:sortDirection:"),
+	("setCol:sortFunc:",		"setColumn:sortFunction:"),
+	("setCol:sortType:",		"setColumn:sortType:"),
+	("setCol:tag:",			"setColumn:tag:"),
+	("setCol:title:",		"setColumn:title:"),
+	("setColExportGridMode:",	"setColumnExportGridMode:"),
+	("setColExportTitleMode:",	"setColumnExportTitleMode:"),
+	("setColOrderFromString:",	"setColumnOrderFromString:"),
+	("setColSizesFromString:",	"setColumnSizesFromString:"),
+	("setColTitleMode:",		"setColumnTitleMode:"),
+	("setColTitlesHeight:",		"setColumnTitlesHeight:"),
+	("setColTitlesOn:",		"setColumnTitlesOn:"),
+	("setCompareSlotFunc:",		"setCompareSlotFunction:"),
+	("setCursorCol:",		"setCursorColumn:"),
+	("setDraggableCols:",		"setDraggableColumns:"),
+	("setDrawClippedText:",		"setDrawsClippedText:"),
+	("setFirstVisibleCol:",		"setFirstVisibleColumn:"),
+	("setLastVisibleCol:",		"setLastVisibleColumn:"),
+	("setMaxUniformSizeCols:",	"setMaxUniformSizeColumns:"),
+	("setMinUniformSizeCols:",	"setMinUniformSizeColumns:"),
+	("setModifierDragCols:",	"setModifierDragColumns:"),
+	("setRow:sortFunc:",		"setRow:sortFunction:"),
+	("setSizeableCols:",		"setSizeableColumns:"),
+	("setUniformSizeCols:",		"setUniformSizeColumns:"),
+	("sizeableCols",		"sizeableColumns"),
+	("sortCol:",			"sortColumn:"),
+	("sortCols",			"sortColumns"),
+	("stateAt::",			"stateAtRow:column:"),
+	("stringValueAt::",		"stringValueAtRow:column:"),
+	("tagAt::",			"tagAtRow:column:"),
+	("titleAt::",			"titleAtRow:column:"),
+	("tracking",			"isTrackingMouse"),
+	("uniformSizeCols",		"uniformSizeColumns"),
+	("tableScroll:abortEditAt::",	"tableScroll:abortEditAtRow:column:"),
+	("tableScroll:allowDragOperationAt::", "tableScroll:allowDragOperationAtRow:column:"),
+	("tableScrollBuffCount:",	"tableScrollBufferCount:"),
+	("tableScroll:canEdit:at::",	"tableScroll:canEdit:atRow:column:"),
+	("tableScroll:cellAt::",	"tableScroll:cellAtRow:column:"),
+	("tableScroll:doubleValueAt::", "tableScroll:doubleValueAtRow:column:"),
+	("tableScroll:edit:at::",	"tableScroll:edit:atRow:column:"),
+	("tableScroll:floatValueAt::",	"tableScroll:floatValueAtRow:column:"),
+	("tableScroll:getISearchCol:",	"tableScroll:getIncrementalSearchColumn:"),
+	("tableScroll:imageForDragOperationAt::", "tableScroll:imageForDragOperationAtRow:column:"),
+	("tableScroll:intValueAt::",	"tableScroll:intValueAtRow:column:"),
+	("tableScroll:preparePasteboard:forDragOperationAt::", "tableScroll:preparePasteboard:forDragOperationAtRow:column:"),
+	("tableScroll:retireAt::",	"tableScroll:retireAtRow:column:"),
+	("tableScroll:retireCell:at::", "tableScroll:retireCell:atRow:column:"),
+	("tableScroll:reviveAt::",	"tableScroll:reviveAtRow:column:"),
+	("tableScroll:reviveCell:at::", "tableScroll:reviveCell:atRow:column:"),
+	("tableScroll:setStringValue:at::", "tableScroll:setStringValue:atRow:column:"),
+	("tableScroll:stateAt::",	"tableScroll:stateAtRow:column:"),
+	("tableScroll:stringValueAt::", "tableScroll:stringValueAtRow:column:"),
+	("tableScroll:tagAt::",		"tableScroll:tagAtRow:column:"),
+	("tableScroll:titleAt::",	"tableScroll:titleAtRow:column:"),
+	("tableScroll:validRequestorForSendType:andReturnType:", "tableScroll:validRequestorForSendType:returnType:")
+	}
+
+
+/**
+** Simple name change (for OpenStep's new naming conventions):
+**
+** 'tops' program from OPENSTEP 4.2 (and earlier) is buggy.  In it, 
+** 'replacemethod' simply fails to recognize method calls which contain an 
+** ampersand, as in '[scroll getISearchCol:&col]'.  We have to use 'replace' 
+** rather than 'replacemethod' for messages which will likely contain 
+** ampersands, such as the ones in this section.  If not for this bug, these 
+** methods would have been included in the preceding section.  
+**
+**	doGetISearchCol:		--> doGetIncrementalSearchColumn:
+**	getISearchCol:			--> getIncrementalSearchColumn:
+**	getNext:editRow:andCol:		--> getNext:editRow:column:
+**	getNextEditRow:andCol:		--> getNextEditRow:column:
+**	getPreviousEditRow:andCol:	--> getPreviousEditRow:column:
+**/
+
+replace "[<scroll> <old>:<var>]"
+    with "[<scroll> <new>:<var>]"
+    where ("<old>", "<new>") isOneOf {
+	("doGetISearchCol",	"doGetIncrementalSearchColumn"),
+	("getISearchCol",	"getIncrementalSearchColumn")
+	}
+
+replace "[<scroll> <sel>:<row> andCol:<col>]"
+    with "[<scroll> <sel>:<row> column:<col>]"
+    where "<sel>" isOneOf {
+	"getNextEditRow",
+	"getPreviousEditRow"
+	}
+
+replace "[<scroll> getNext:<flag> editRow:<row> andCol:<col>]"
+    with "[<scroll> getNext:<flag> editRow:<row> column:<col>]"
+
+
+/**
+** Simple name change (for OpenStep's new naming conventions):
+**	MISC_TABLE_CELL_ICON --> MISC_TABLE_CELL_IMAGE
+**/
+
+replace "<old>"
+    with "<new>"
+    where ("<old>", "<new>") isOneOf {
+	("MISC_TABLE_CELL_ICON", "MISC_TABLE_CELL_IMAGE")
+	}
+
+
+/**
+** Cleaned up naming conventions (for better internal consistency):
+**	borderClearCursor:		--> clearCursorSlot:
+**	borderClearSelection:		--> clearSlotSelection:
+**	borderClickedSlot:		--> clickedSlot:
+**	borderCursor:			--> cursorSlot:
+**	borderHasMultipleSelection:	--> hasMultipleSlotSelection:
+**	borderHasSelection:		--> hasSlotSelection:
+**	borderHasValidCursor:		--> hasValidCursorSlot:
+**	borderNumSelectedSlots:		--> numberOfSelectedSlots:
+**	borderSelectAll:		--> selectAllSlots:
+**	borderSelectedSlot:		--> selectedSlot:
+**	border:setCursor:		--> border:setCursorSlot:
+**	border:setTitleMode:		--> border:setSlotTitleMode:
+**	border:setTitlesOn:		--> border:setSlotTitlesOn:
+**	border:setTitlesSize:		--> border:setSlotTitlesSize:
+**	borderTitleMode:		--> slotTitleMode:
+**	borderTitlesOn:			--> slotTitlesOn:
+**	borderTitlesSize:		--> slotTitlesSize:
+**	defaultHighlightBackgroundColor	--> defaultSelectedBackgroundColor
+**	defaultHighlightTextColor	--> defaultSelectedTextColor
+**	highlightBackgroundColor	--> selectedBackgroundColor
+**	highlightBackgroundColor	--> selectedBackgroundColor [variable]
+**	highlightTextColor		--> selectedTextColor
+**	highlightTextColor		--> selectedTextColor [variable]
+**	setHighlightBackgroundColor:	--> setSelectedBackgroundColor:
+**	setHighlightTextColor:		--> setSelectedTextColor:
+**	setOwnerHighlightBackgroundColor: --> setOwnerSelectedBackgroundColor:
+**	setOwnerHighlightTextColor:	--> setOwnerSelectedTextColor:
+**	setUseOwnerHighlightBackgroundColor: --> setUseOwnerSelectedBackgroundColor:
+**	setUseOwnerHighlightTextColor:	--> setUseOwnerSelectedTextColor:
+**	tc1HighlightBackgroundColorLen	--> tc1SelectedBackgroundColorLen
+**	tc1HighlightBackgroundColorPos	--> tc1SelectedBackgroundColorPos
+**	tc1HighlightBackgroundColorPtr	--> tc1SelectedBackgroundColorPtr
+**	tc1HighlightTextColorLen	--> tc1SelectedTextColorLen
+**	tc1HighlightTextColorPos	--> tc1SelectedTextColorPos
+**	tc1HighlightTextColorPtr	--> tc1SelectedTextColorPtr
+**	useOwnerHighlightBackgroundColor--> useOwnerSelectedBackgroundColor
+**	useOwnerHighlightTextColor	--> useOwnerSelectedTextColor
+**/
+
+replacemethod "<old>"
+    with "<new>"
+    where ("<old>", "<new>") isOneOf {
+	("borderClearCursor:",			"clearCursorSlot:"),
+	("borderClearSelection:",		"clearSlotSelection:"),
+	("borderClickedSlot:"			"clickedSlot:")
+	("borderCursor:",			"cursorSlot:"),
+	("borderHasMultipleSelection:", 	"hasMultipleSlotSelection:"),
+	("borderHasSelection:",			"hasSlotSelection:"),
+	("borderHasValidCursor:",		"hasValidCursorSlot:"),
+	("borderNumSelectedSlots:",		"numberOfSelectedSlots:"),
+	("borderSelectAll:",			"selectAllSlots:"),
+	("borderSelectedSlot:",			"selectedSlot:"),
+	("border:setCursor:",			"border:setCursorSlot:"),
+	("border:setTitleMode:",		"border:setSlotTitleMode:"),
+	("border:setTitlesOn:",			"border:setSlotTitlesOn:"),
+	("border:setTitlesSize:"		"border:setSlotTitlesSize:"),
+	("borderTitleMode:",			"slotTitleMode:"),
+	("borderTitlesOn:",			"slotTitlesOn:"),
+	("borderTitlesSize:"			"slotTitlesSize:"),
+	("defaultHighlightBackgroundColor",	"defaultSelectedBackgroundColor"),
+	("defaultHighlightTextColor",		"defaultSelectedTextColor"),
+	("highlightBackgroundColor",		"selectedBackgroundColor"),
+	("highlightTextColor",			"selectedTextColor"),
+	("setHighlightBackgroundColor:",	"setSelectedBackgroundColor:"),
+	("setHighlightTextColor:",		"setSelectedTextColor:"),
+	("setOwnerHighlightBackgroundColor:",	"setOwnerSelectedBackgroundColor:"),
+	("setOwnerHighlightTextColor:",		"setOwnerSelectedTextColor:"),
+	("setUseOwnerHighlightBackgroundColor:","setUseOwnerSelectedBackgroundColor:"),
+	("setUseOwnerHighlightTextColor:",	"setUseOwnerSelectedTextColor:"),
+	("tc1HighlightBackgroundColorLen",	"tc1SelectedBackgroundColorLen"),
+	("tc1HighlightBackgroundColorPos",	"tc1SelectedBackgroundColorPos"),
+	("tc1HighlightBackgroundColorPtr",	"tc1SelectedBackgroundColorPtr"),
+	("tc1HighlightTextColorLen",		"tc1SelectedTextColorLen"),
+	("tc1HighlightTextColorPos",		"tc1SelectedTextColorPos"),
+	("tc1HighlightTextColorPtr",		"tc1SelectedTextColorPtr"),
+	("useOwnerHighlightBackgroundColor",	"useOwnerSelectedBackgroundColor"),
+	("useOwnerHighlightTextColor",		"useOwnerSelectedTextColor")
+	}
+
+replace "<old>"
+    with "<new>"
+    where ("<old>", "<new>") isOneOf {
+	("highlightBackgroundColor",	"selectedBackgroundColor"),
+	("highlightTextColor",		"selectedTextColor")
+	}
+
+
+/**
+** Radical change: Delegate methods which are now notification targets.
+**	tableScroll:backgroundColorChangedTo:		--> tableScrollBackgroundColorChanged:
+**	tableScroll:border:slotDraggedFrom:to:		--> tableScrollSlotDragged:
+**	tableScroll:border:slotResized:			--> tableScrollSlotResized:
+**	tableScroll:border:slotSortReversed:		--> tableScrollSlotSortReversed:
+**	tableScroll:changeFont:to:			--> tableScrollChangeFont:
+**	tableScroll:didEdit:at::			--> tableScrollDidEdit:
+**	tableScroll:fontChangedFrom:to:			--> tableScrollFontChanged:
+**	tableScroll:highlightBackgroundColorChangedTo:	--> tableScrollSelectedBackgroundColorChanged:
+**	tableScroll:highlightTextColorChangedTo:	--> tableScrollSelectedTextColorChanged:
+**	tableScroll:textColorChangedTo:			--> tableScrollTextColorChanged:
+**	tableScroll:willEditAt::			--> tableScrollWillEdit:
+**	tableScroll:willPrintPageFooter:info:		--> tableScrollWillPrintPageFooter:
+**	tableScroll:willPrintPageHeader:info:		--> tableSCrollWillPrintPageHeader:
+**	tableScrollDidPrint:				--> tableScrollDidPrint:
+**	tableScrollWillPrint:				--> tableScrollWillPrint:
+**/
+
+replacemethod "<sel>"
+    with same {
+	replace "<implementation>" with "NSColor* <color_param> = (NSColor*)[[notification userInfo] objectForKey:@\"Color\"];
+    <implementation>"
+	}
+    where "<sel>" isOneOf {
+	"tableScroll:backgroundColorChangedTo:<color>",
+	"tableScroll:highlightBackgroundColorChangedTo:<color>",
+	"tableScroll:highlightTextColorChangedTo:<color>",
+	"tableScroll:textColorChangedTo:<color>"
+	}
+
+replacemethod "<sel>"
+    with same {
+	replace "<implementation>" with "NSFont* <oldfont_param> = (NSFont*)[[notification userInfo] objectForKey:@\"OldFont\"];
+    NSFont* <newfont_param> = (NSFont*)[[notification userInfo] objectForKey:@\"NewFont\"];
+    <implementation>"
+	}
+    where "<sel>" isOneOf {
+	"tableScroll:changeFont:<oldfont>to:<newfont>",
+	"tableScroll:fontChangedFrom:<oldfont>to:<newfont>"
+	}
+
+replacemethod "<sel>"
+    with same {
+	replace "<implementation>" with "int <slot_param> = [[[notification userInfo] objectForKey:@\"Slot\"] intValue];
+    <implementation>"
+	}
+    where "<sel>" isOneOf {
+	"tableScroll:border:slotResized:<slot>",
+	"tableScroll:border:slotSortReversed:<slot>"
+	}
+
+replacemethod "<sel>"
+    with same {
+	replace "<implementation>" with "int <oldslot_param> = [[[notification userInfo] objectForKey:@\"OldSlot\"] intValue];
+    int <newslot_param> = [[[notification userInfo] objectForKey:@\"NewSlot\"] intValue];
+    <implementation>"
+	}
+    where "<sel>" isOneOf {
+	"tableScroll:border:slotDraggedFrom:<oldslot>to:<newslot>"
+	}
+
+replacemethod "<sel>"
+    with same {
+	replace "<implementation>" with "MiscBorderType <border_param> = (MiscBorderType)[[[notification userInfo] objectForKey:@\"Border\"] intValue];
+    <implementation>"
+	}
+    where "<sel>" isOneOf {
+	"tableScroll:border:<border>slotResized:",
+	"tableScroll:border:<border>slotSortReversed:",
+	"tableScroll:border:<border>slotDraggedFrom:to:"
+	}
+
+replacemethod "<sel>"
+    with same {
+	replace "<implementation>" with "int <row_param> = [[[notification userInfo] objectForKey:@\"Row\"] intValue];
+    int <col_param> = [[[notification userInfo] objectForKey:@\"Column\"] intValue];
+    <implementation>"
+	}
+    where "<sel>" isOneOf {
+	"tableScroll:didEdit:at:<row>:<col>",
+	"tableScroll:willEditAt:<row>:<col>"
+	}
+
+replacemethod "<sel>"
+    with same {
+	replace "<implementation>" with "BOOL <changed_param> = [[[notification userInfo] objectForKey:@\"Changed\"] boolValue];
+    <implementation>"
+	}
+    where "<sel>" isOneOf {
+	"tableScroll:didEdit:<changed>at::"
+	}
+
+replacemethod "<sel>"
+    with same {
+	replace "<implementation>" with "NSView* <view_param> = [[notification userInfo] objectForKey:@\"View\"];
+    float pageWidth = [[[notification userInfo] objectForKey:@\"PageWidth\"] floatValue];
+    float pageHeight = [[[notification userInfo] objectForKey:@\"PageHeight\"] floatValue];
+    float printRectX = [[[notification userInfo] objectForKey:@\"PrintRectX\"] floatValue];
+    float printRectY = [[[notification userInfo] objectForKey:@\"PrintRectY\"] floatValue];
+    float printRectWidth = [[[notification userInfo] objectForKey:@\"PrintRectWidth\"] floatValue];
+    float printRectHeight = [[[notification userInfo] objectForKey:@\"PrintRectHeight\"] floatValue];
+    MiscCoord_V firstPrintRow = (MiscCoord_V)[[[notification userInfo] objectForKey:@\"FirstPrintRow\"] intValue];
+    MiscCoord_V lastPrintRow = (MiscCoord_V)[[[notification userInfo] objectForKey:@\"LastPrintRow\"] intValue];
+    MiscCoord_V firstPrintColumn = (MiscCoord_V)[[[notification userInfo] objectForKey:@\"FirstPrintColumn\"] intValue];
+    MiscCoord_V lastPrintColumn = (MiscCoord_V)[[[notification userInfo] objectForKey:@\"LastPrintColumn\"] intValue];
+    int printPage = [[[notification userInfo] objectForKey:@\"PrintPage\"] intValue];
+    int printRow = [[[notification userInfo] objectForKey:@\"PrintRow\"] intValue];
+    int printColumn = [[[notification userInfo] objectForKey:@\"PrintColumn\"] intValue];
+    int numberOfPrintPages = [[[notification userInfo] objectForKey:@\"NumberOfPrintPages\"] intValue];
+    int numberOfPrintRows = [[[notification userInfo] objectForKey:@\"NumberOfPrintRows\"] intValue];
+    int numberOfPrintColumns = [[[notification userInfo] objectForKey:@\"NumberOfPrintColumns\"] intValue];
+    double scaleFactor = [[[notification userInfo] objectForKey:@\"ScaleFactor\"] doubleValue];
+    BOOL isScaled = [[[notification userInfo] objectForKey:@\"IsScaled\"] boolValue];
+    <implementation>"
+	}
+    where "<sel>" isOneOf {
+	"tableScroll:willPrintPageFooter:<view>info:",
+	"tableScroll:willPrintPageHeader:<view>info:"
+	}
+
+replacemethod "<old>"
+    with "<new>" {
+	replace "<rettype>" with "(void)"
+	replace "<scroll_type>" with "(NSNotification*)"
+	replace "<scroll_param>" with "notification"
+	replace "<implementation>" with "MiscTableScroll* <scroll_param> = (MiscTableScroll*)[notification object];
+    <implementation>"
+	}
+    within ("<implementation>") {
+	replace "return self;" with "return;"
+	replace "return (self);" with "return;"
+	}
+    where ("<old>", "<new>") isOneOf {
+	("tableScroll:<scroll>backgroundColorChangedTo:",	  "tableScrollBackgroundColorChanged:<scroll>"),
+	("tableScroll:<scroll>border:slotDraggedFrom:to:",	  "tableScrollSlotDragged:<scroll>"),
+	("tableScroll:<scroll>border:slotResized:",		  "tableScrollSlotResized:<scroll>"),
+	("tableScroll:<scroll>border:slotSortReversed:",	  "tableScrollSlotSortReversed:<scroll>"),
+	("tableScroll:<scroll>changeFont:to:",			  "tableScrollChangeFont:<scroll>"),
+	("tableScroll:<scroll>didEdit:at::",			  "tableScrollDidEdit:<scroll>"),
+	("tableScroll:<scroll>fontChangedFrom:to:",	  	  "tableScrollFontChanged:<scroll>"),
+	("tableScroll:<scroll>highlightBackgroundColorChangedTo:","tableScrollSelectedBackgroundColorChanged:<scroll>"),
+	("tableScroll:<scroll>highlightTextColorChangedTo:",	  "tableScrollSelectedTextColorChanged:<scroll>"),
+	("tableScroll:<scroll>textColorChangedTo:",		  "tableScrollTextColorChanged:<scroll>"),
+	("tableScroll:<scroll>willEditAt::",			  "tableScrollWillEdit:<scroll>"),
+	("tableScroll:<scroll>willPrintPageFooter:info:",	  "tableScrollWillPrintPageFooter:<scroll>"),
+	("tableScroll:<scroll>willPrintPageHeader:info:",	  "tableScrollWillPrintPageHeader:<scroll>"),
+	("tableScrollDidPrint:<scroll>",			  "tableScrollDidPrint:<scroll>"),
+	("tableScrollWillPrint:<scroll>",			  "tableScrollWillPrint:<scroll>")
+	}
+
+
+/**
+** Delegate and TableCell methods which now return explicit (id):
+**	tableScroll:border:slotPrototype:
+**	tableScroll:cellAtRow:column:
+**	tableScroll:retireAtRow:column:
+**	tableScroll:retireCell:atRow:column:
+**	tableScroll:reviveAtRow:column:
+**	tableScroll:reviveCell:atRow:column:
+**	tableScroll:validRequestorForSendType:returnType:
+**/
+
+replacemethod "<sel>"
+    with same {
+	replace "<rettype>" with "(id)"
+	replace "<scroll_type>" with "(MiscTableScroll*)"
+	}
+    where "<sel>" isOneOf {
+	"tableScroll:<scroll>border:slotPrototype:",
+	"tableScroll:<scroll>cellAtRow:column:",
+	"tableScroll:<scroll>retireAtRow:column:"
+	"tableScroll:<scroll>retireCell:atRow:column:",
+	"tableScroll:<scroll>reviveAtRow:column:",
+	"tableScroll:<scroll>reviveCell:atRow:column:",
+	"tableScroll:<scroll>validRequestorForSendType:returnType:",
+	}
+
+
+/**
+** Delegate method return changed: (char*) --> NSString
+**	tableScroll:stringValueAtRow:column:
+**	tableScroll:titleAtRow:column:
+**/
+
+replacemethod "<sel>"
+    with same {
+	replace "<rettype>" with "(NSString*)"
+	replace "<scroll_type>" with "(MiscTableScroll*)"
+	}
+    where "<sel>" isOneOf {
+	"tableScroll:<scroll>stringValueAtRow:column:",
+	"tableScroll:<scroll>titleAtRow:column:"
+	}
+
+
+/**
+** Delegate method argument changes: (char*) --> NSString
+**	tableScroll:setStringValue:atRow:column:
+**/
+
+replacemethod "<sel>"
+    with same {
+	replace "<scroll_type>" with "(MiscTableScroll*)"
+	replace "<str_type>" with "(NSString*)"
+	}
+    where "<sel>" isOneOf {
+	"tableScroll:<scroll>setStringValue:<str>atRow:column:",
+	}
+
+
+/**
+** Delegate method argument changes: NXAtom --> NSString
+**	tableScroll:validRequestorForSendType:returnType:
+**/
+
+replacemethod "<sel>"
+    with same {
+	replace "<scroll_type>" with "(MiscTableScroll*)"
+	replace "<str1_type>" with "(NSString*)"
+	replace "<str2_type>" with "(NSString*)"
+	}
+    where "<sel>" isOneOf {
+	"tableScroll:<scroll>validRequestorForSendType:<str1>returnType:<str2>",
+	}
+
+
+/**
+** Delegate method argument changes: (NXEvent const*) --> NSEvent
+**	tableScroll:canEdit:atRow:column:
+**	tableScroll:edit:atRow:column:
+**/
+
+replacemethod "<sel>"
+    with same {
+	replace "<scroll_type>" with "(MiscTableScroll*)"
+	replace "<ev_type>" with "(NSEvent*)"
+	}
+    where "<sel>" isOneOf {
+	"tableScroll:<scroll>canEdit:<ev>atRow:column:",
+	"tableScroll:<scroll>edit:<ev>atRow:column:",
+	}
+
+
+/**
+** Final clean up.
+**/
+
+replace "*&" with ""
+
+replace "&*" with ""
+
+replace "- (void)<b method><w w1>{<w w2><b implementation>return;<w w3>}"
+    with "- (void)<b method><w w1>{<w w2><b implementation><w w3>}"

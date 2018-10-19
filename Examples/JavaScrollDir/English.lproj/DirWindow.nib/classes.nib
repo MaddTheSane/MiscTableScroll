@@ -1,0 +1,34 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {
+                autoSortClick = id; 
+                cdPressed = id; 
+                dragUnscaledClick = id; 
+                hiddenFilesClick = id; 
+                highlightClick = id; 
+                refreshPressed = id; 
+                rowNumbersClick = id; 
+                scrollClick = id; 
+                scrollDoubleClick = id; 
+            }; 
+            CLASS = DirWindow; 
+            LANGUAGE = Java; 
+            OUTLETS = {
+                autoSortSwitch = id; 
+                cdButton = id; 
+                countField = id; 
+                dragUnscaledSwitch = id; 
+                hiddenFilesSwitch = id; 
+                highlightSwitch = id; 
+                refreshButton = id; 
+                rowNumbersSwitch = id; 
+                scroll = id; 
+                window = id; 
+            }; 
+            SUPERCLASS = java.lang.Object; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}

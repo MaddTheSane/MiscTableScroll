@@ -1,0 +1,66 @@
+#==============================================================================
+#
+#	Copyright (C) 1995-1999 by Paul S. McCarthy and Eric Sunshine.
+#		Written by Paul S. McCarthy and Eric Sunshine.
+#			    All Rights Reserved.
+#
+#	This notice may not be removed from this source code.
+#
+#	This object is included in the MiscKit by permission from the authors
+#	and its use is governed by the MiscKit license, found in the file
+#	"License.rtf" in the MiscKit distribution.  Please refer to that file
+#	for a list of all applicable permissions and restrictions.
+#
+#==============================================================================
+#------------------------------------------------------------------------------
+# Makefile.preamble
+# $Id: Makefile.preamble,v 1.14 99/07/15 13:09:59 sunshine Exp $
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Perform post-build finalization of the framework.  See Makefile.preamble for
+# the other half of this step.
+#------------------------------------------------------------------------------
+
+AFTER_BUILD += table-scroll-finalize-build
+
+
+#------------------------------------------------------------------------------
+# Under 4.1 & 4.2 although PB defines CCFILES, CPPFILES, and CXXFILES in the
+# Makefile, SRCFILES does not actually references them, so the C++ files
+# don't get compiled.  This is patched by assigning them to OTHER_SOURCEFILES
+# which does get referenced.
+#
+# Under 4.1 & 4.2 (prerelease) OFILES does not include any of the C++ object
+# files, so we manually add them to OTHER_OFILES.  Under 4.2 (final), OFILES
+# *does* refer to them, so we must remove the duplicates lest the linker
+# complains about linking the same files twice.  This is done in the
+# Makefile.postamble.
+#
+# Under 4.1 & 4.2 implicitrules.make neglects to mention the .cpp suffix.
+#------------------------------------------------------------------------------
+
+.SUFFIXES: .cpp
+OTHER_SOURCEFILES += $(CCFILES) $(CPPFILES) $(CXXFILES)
+OTHER_OFILES += $(CCFILES:.cc=.o) $(CPPFILES:.cpp=.o) $(CXXFILES:.cxx=.o)
+
+
+#------------------------------------------------------------------------------
+# As of OpenStep 4.2, the compiler (gcc 2.7.2.1) does not accept Objective-C
+# code in cc files, so we have to force ObjC++ mode manually.
+#------------------------------------------------------------------------------
+
+OTHER_CCFLAGS += -ObjC++
+
+
+#------------------------------------------------------------------------------
+# Under OPENSTEP for NT, +[NSBundle load] fails to load the palette DLL file if
+# it has the same name (MiscTableScroll.dll) as the dll file in the Framework
+# even though they reside in different directories.  (I don't know if the
+# problem is with the Microsoft DLL loader or the Objective-C run-time.)  Work
+# around the system by renaming the executable (DLL) file within the
+# MiscTableScroll.palette wrapper.  (Also see the CustomInfo.plist which
+# redefines "NSExecutable" in order to support this.)
+#------------------------------------------------------------------------------
+
+PALEXENAME = $(NAME)Palette

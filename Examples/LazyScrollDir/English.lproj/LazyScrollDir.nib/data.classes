@@ -1,0 +1,15 @@
+"DirController" = {
+    ACTIONS = {"info:" = id; "openDirectory:" = id; "runPageLayout:" = id; }; 
+    OUTLETS = {}; 
+    SUPERCLASS = NSObject; 
+};
+"FirstResponder" = {
+    ACTIONS = {
+        "destroy:" = id; 
+        "export:" = id; 
+        "openSelected:" = id; 
+        "printDirectory:" = id; 
+    }; 
+    OUTLETS = {}; 
+    SUPERCLASS = NSObject; 
+};

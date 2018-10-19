@@ -1,0 +1,115 @@
+//-----------------------------------------------------------------------------
+// Objective-C++ Compiler DLL Symbol Export Bug on YellowBox and OpenStep 4.2
+// $Id: DLL-EXPORT.txt,v 1.1 99/06/14 18:22:58 sunshine Exp $
+//-----------------------------------------------------------------------------
+
+This file describes a bug in the Objective-C++ compiler for Windows which
+affects YellowBox and OpenStep 4.2.  The bug manifests itself when exporting
+symbols via __declspec(dllexport).  The symptom of the bug is that some static
+file-global variables may not get initialized.
+
+This bug was discovered when notifications were added to MiscTableScroll in
+version 140.1 and exported via MISC_TABLE_SCROLL_EXPORT which is defined in
+MiscTableTypes.h.  MiscTableScroll promptly began to crash whenever it tried
+sorting rows (a common occurrence).  Investigation quickly revealed that the
+COMPARE_FUNCS[] array in MiscTableScrollSort.M was filled with NULL pointers.
+Other affected variables were AMERICAN_DATE and DBF_TYPE_CODE[] in
+MiscExporterDBF.M.
+
+Here is a simple example program which demonstrates the bug:
+
+    // bugtest.c
+    #include <stdio.h>
+    extern __declspec(dllexport) char const* const FOOBAR;
+
+    static int func1(int n) { return n; }
+    static int func2(int n) { return n * n; }
+    typedef int (*FuncType)(int);
+    static FuncType const FUNCTIONS[] = { func1, func2 };
+
+    int main() {
+        printf( "FUNCTIONS[1] = %p\n", FUNCTIONS[1] );
+        fflush( stdout );
+        printf( "FUNCTIONS[1](3) = %d\n", FUNCTIONS[1](3) );
+        return 0;
+    }
+
+    char const* const FOOBAR = "FOOBAR";
+
+When this program is compiled with the Objective-C compiler, it works
+correctly:
+
+    C:\> gcc -ObjC -O -fno-common -Wmost -o bugtest bugtest.c
+    C:\> bugtest
+    FUNCTIONS[1] = 00401008
+    FUNCTIONS[1](3) = 9
+
+However, when using the Objective-C++ compiler, it crashes:
+
+    C:\> gcc -ObjC++ -O -fno-common -Wmost -o bugtest bugtest.c
+    C:\> bugtest
+    FUNCTIONS[1] = 00000000
+    >>> crash <<<
+    The instruction at "0x00000000" referenced memory at
+    "0x00000000".  The memory could not be "read".
+
+It is clear that the FUNCTIONS[] array is not being initialized and is, in
+fact, filled with NULL pointers.  A peek at the generated assembly explains
+what is going on.  This is an excerpt from the very bottom of the
+Objective-C++ assembly output:
+
+     .section .drectve , "s"
+        .ascii " -export:_FOOBAR,data\0"
+     .stabs "FUNCTIONS:S39=ar1;0;1;36",38,0,8,_FUNCTIONS
+        .align 4
+    _FUNCTIONS:
+        .long _func1__Fi
+        .long _func2__Fi
+
+The compiler has incorrectly inserted ".section .drectve" prior to the
+definition of FUNCTIONS[].  Or stated another way, the compiler has
+incorrectly located the FUNCTIONS[] array inside the .drectve section.
+Normally FUNCTIONS[] should be part of the .const section which precedes the
+.drectve section.
+
+The Microsoft documentation states that the .drectve section contains
+directives for the linker but no actual code or data.  The linker actually
+discards this section before creating the final output file.  It is clear,
+therefore, that the definition of the FUNCTIONS[] array should definitely not
+be part of the .drectve section, and that it was placed there as a result of a
+compiler bug.
+
+It is interesting to note that simple textual re-organization of the test file
+eliminates the problem.  For instance, if the definition of FOOBAR is moved so
+that it immediately follows its declaration, then the bug disappears.
+
+    extern __declspec(dllexport) char const* const FOOBAR;
+    char const* const FOOBAR = "FOOBAR";
+
+Now the generated assembly looks like this:
+
+    .section .drectve , "s"
+        .ascii " -export:_FOOBAR,data\0"
+        .const
+        .align 4
+    _FUNCTIONS:
+        .long _func1__Fi
+        .long _func2__Fi
+
+One can observe that the compiler has now correctly placed the FUNCTIONS[]
+table in the .const section where it belongs.  Unfortunately manual textual
+manipulations are risky since there is no obvious pattern which one should
+follow to avoid the bug.  Likewise, such manipulations place an unnecessary
+burden on the developer who must remember that the problem may pop up at any
+time, and must also guess when and where such preventive measures should be
+taken.
+
+A better solution is to only use the __declspec(dllexport) directive in files
+which do not define any other variables at all.  In this manner, the compiler
+should not be able to botch any other important information.  Stated more
+precisely, one or more files should be devoted specifically to the task of
+informing the Microsoft linker as to which symbols should be exported from the
+DLL.  The declaration and definition of the symbols should be placed
+elsewhere, as appropriate.  This is the approach which was ultimately used for
+the MiscTableScroll framework.  Please consult MiscTableTypes.h and
+MiscTableScrollSymbols.M to see this technique in practice.

@@ -1,0 +1,252 @@
+//-----------------------------------------------------------------------------
+// ScrollDir HISTORY
+// $Id: HISTORY.txt,v 1.9 99/06/29 08:15:22 sunshine Exp $
+//-----------------------------------------------------------------------------
+
+v35 1999/06/25 08:13 EDT sunshine@sunshineco.com
+    Synchronized with ScrollDir v35.1 for OpenStep.
+    Renamed Directory menu's New item to Open.
+    Renamed Directory menu's Save item to Export.
+    Added File menu.  Moved Open & Delete items to this menu.
+    Reorganized DirWindow.nib layout to match OpenStep counterpart.
+    Renamed DirController's -new: to -openDirectory:.
+    Renamed DirWindow's -open: to -openSelected:.
+    Renamed DirWindow's -save: to -export:.
+    Fixed spelling error in SD_PageLayout.nib: Botom -> Bottom.
+    Updated copyrignt on Info panel.
+    Updated copyright and contact information in README.
+    The user is now prompted for confirmation before deleting files via the
+	File/Delete menu item.
+    Moved nib files to English.lproj to support localization.
+    Added unpack.sh to simplify unpacking a project with subdirectories.
+    Added copyright notice to ScrollDir_main.m.
+    PB.project no longer generates main() file upon save.
+    Removed unused +[SD_PageLayout launch:].
+    Fixed comments in SD_PageLayout.{h|m}.
+    Now correctly uses -tableScroll:changeFont:to: rather than
+	-tableScroll:fontChangedFrom:to: to note user instigated font change.
+    For naming consistency, renamed -didClick: to -scrollClick: and
+	-didDoubleClick: to -scrollDoubleClick: in DirWindow.  This is more
+	consistent with other names such as -lockClick:.
+    Removed Copy Font, Paste Font, Underline, Superscript, Subscript, and
+	Unscript from Font menu since they made no sense in this context.
+    Cleaned up Makefile.preamble and Makefile.postamble files.  Added
+	copyright notices.
+    Ported back to NextStep 3.2.  Had to add -I & -L directives to
+	OTHER_CFLAGS & OTHER_LDFLAGS in Makefile.preamble since the 3.2
+	makefiles do not recognize these directives when specified via
+	NextStep 3.3's Project Builder.
+
+    Changed Files:
+    * DirController.{h|m}
+    * DirWindows.{h|m|nib}
+    * Info.nib
+    * Makefile
+    * Makefile.{preamble|postamble}
+    * PB.project
+    * README.rtf
+    * ScrollDir.nib
+    * ScrollDir_main.m
+    * SD_PageLayout.{h|m|nib}
+    + unpack.sh
+
+v34 1998/03/23 22:59 EST sunshine@sunshineco.com
+    Implemented -tableScroll:draggingSourceOperationMaskForLocal: since the
+	default value changed from Copy to Generic in MiscTableScroll v126.
+    Added -tableScrollIgnoreModifierKeysWhileDragging:, which returns NO.
+    Updated copyright notices on user interface items.
+    Added a "Printing" section to the README.
+    Added license and contact information to the README.
+
+    Changed Files:
+    * DirWindow.m
+    * Info.nib
+    * Makefile
+    * PB.project
+    * README.rtf
+
+v33 1997/11/24 17:05 EST sunshine@sunshineco.com
+    Synchronized with LazyScrollDir v17 for NEXTSTEP.
+    Fixed miminum window size of DirWindow.
+    Unified formatting.
+
+    Changed Files:
+    * DirWindow.{m|nib}
+
+v32 1997/11/14 12:05 EST zarnuk@zarnuk.com
+    Added row-numbers switch.
+
+    Changed Files:
+    * DirWindow.{h|m|nib}
+
+v31 1997/07/08 12:00 EDT sunshine@sunshineco.com
+    Moved include and libarary paths from Makefile.preamble into PB.project.
+    Added /LocalDeveloper/Headers to include paths.
+    Added /LocalDeveloper/Libraries to library paths.
+    Moved -Wwrite-strings from Makefile.preamble into PB.project.
+    Removed hard-coded names from 'relink' target in Makefile.postamble.
+    Worked around AppKit but where the Cell class blindly allocates ClipViews
+	from transient zones and caches them for later re-use.
+
+    Changed Files:
+    * DirWindow.m
+    * Makefile
+    * Makefile.{preamble|postamble}
+    * PB.project
+
+v30 1997/06/10 05:09 EDT sunshine@sunshineco.com
+    Synchronized with ScrollDir v29.4 for OPENSTEP.
+    Restructured DirWindow.m to parallel LazyScrollDir counterpart.
+    Now sets window title with -setTitleAsFilename:.
+    Fixed bug: Wasn't taking "sticky bit" on directories into account when
+	computing whether file could be renamed.
+    No longer misleadingly stat()'s the file which a soft-link points at.
+    Ditched the Message slot.
+
+    Changed Files:
+    * DirWindow.{m|nib}
+    * pack.sh
+    * pack_binaries.sh
+    * unpack_binaries.sh
+
+v29 1997/02/05 04:04 EST sunshine@sunshineco.com
+    Synchronized with LazyScrollDir v13 for NEXTSTEP.
+    Fixed order of headers in ScrollDir.m.
+    Fixed order of headers in DirWindow.m.
+    If directory is readonly then no longer responds to Delete (cmd-r).
+    Removed deviant semi-colon from NameCache.h.
+    Removed deviant semi-colon from -tableScroll:border:slotDraggedFrom:to:
+	in DirWindow.m.
+    Reorganized main menu to be consistent with other NEXTSTEP applications.
+    Recreated missing PB.gdbinit.
+
+    Changed Files:
+    * Defaults.m
+    * DirWindow.{h|m}
+    * NameCache.h
+    + PB.gdbinit
+    * ScrollDir.nib
+
+v28 1997/01/12 07:58 EST sunshine@sunshineco.com
+    Added new delegate methods for support of dragging images out of cells.
+    Added capability to drag scaled or unscaled image from icon cell.
+    Added new column which demonstrates how to use ButtonCell in TableScroll.
+    Fixed wording on Info panel.
+    Updated all the copyrights to include 1997 (including Info.nib).
+    Unified formatting.
+    Updated documentation to reflect the new features.
+    Renamed: "Update" -> "Refresh"
+    Checked all of the files into RCS.
+    Added pack and unpack scripts.
+
+    Changed Files:
+    * Everything
+
+v27 1996/12/30 17:02 EST zarnuk@zarnuk.com
+    Now works with MiscTableScroll v113.
+    Added text-cell editing to rename files.
+    Also added preliminary printing.
+
+v26 1996/10/07 09:39 EDT zarnuk@zarnuk.com
+    Now works with MiscTableScroll v109.
+    Added Save command for exporting contents of TableScroll.
+
+v25 1996/10/07 09:38 EDT zarnuk@zarnuk.com
+    Now works with MiscTableScroll v105.
+    Responds to new user slot-sort-reversed message.
+
+v24 1996/02/17 09:00 EST zarnuk@zarnuk.com
+    Fixed includes since MiscTableScroll.h no longer includes MiscIntList.h
+
+v23 1996/02/09 01:00 EST sunshine@sunshineco.com
+    Replaced NameCache's custom hash table with NeXT's HashTable.
+    Info panel will now load README.rtf or README.rtfd.
+    Updated README.
+
+v22 1996/02/01 04:15 EST sunshine@sunshineco.com
+    Added Defaults.[mh] as simple front-end to NeXT defaults.
+    The following are now saved and restored via NeXT defaults:
+	Auto-sort
+	Column order
+	Column widths
+	Font
+	Highlight directories
+	Show hidden
+	Window color
+	Window size
+    Added a README.rtf file which explains what this example demonstrates.
+    Added an Info panel that displays the README.rtf file.
+
+v21 1996/01/17 05:30 EST sunshine@sunshineco.com
+    Fixed warning that showed up when compiling for debug.  Had to replace
+	(int const) with #define for array size.
+
+v20 1996/01/17 04:30 EST zarnuk@zarnuk.com
+    Added NameCache code from LazyScrollDir.  Small performance improvement.
+	Asking the Workspace for the icons is the real time killer.
+
+v19 1996/01/17 02:00 EST sunshine@sunshineco.com
+    Removed mcgh2misc conversions scripts since the one in the palette
+	directory now handles the example directories automatically.
+
+v18 1996/01/16 01:00 EST zarnuk@zarnuk.com
+    Fixed bug: Now calls -setImage:0 before freeing the image that was
+	in the cell before.  This was the crasher that was generating the
+	message: "objc: FREE(id): message getSize: sent to freed object"
+	The bug was reproducible:
+	(1) Create a non-empty selection.
+	(2) Click on the close box.
+	At step #2, -[DirWindow free] called -freeImages, which freed all the
+	images, but left pointers to the freed images in the icon cells, then
+	it called -[Window free] which ultimately called -[MiscTableScroll
+	free] while it was freeing the views on the window...  This invoked
+	-emptyAndFreeCells, which called -empty, which called -renewRows:0,
+	which called -clearSelection, which called -selectionChanged, which
+	called -reflectSelection, which called -[MiscTableView
+	reflectSelection] which tried to draw the cells in their unhighlighted
+	state.  (All this, despite the fact that the window had been closed,
+	and was, in fact, about to be freed.)
+
+v17 1996/01/08 21:00 EST zarnuk@zarnuk.com
+    Fixed bug: Was not closing directory after scanning it.
+    Fixed bug: Was not freeing images.
+
+v16 1995/10/20 13:30 EDT sunshine@sunshineco.com
+    Added missing implementation for -new:.  Now it uses the OpenPanel to
+	select the directory you want to view.
+
+v15 1995/10/20 04:30 EDT sunshine@sunshineco.com
+    Prepared for inclusion in MiscKit.
+    Added mcgh2misc conversion scripts.
+    Fixed Makefile.preamble's -I and -L flags to work with MiscKit also.
+    Added libMiscTableScroll.a directly to the Project so that Project Builder
+	handles it instead of manually adding it to the Makefile.preamble.
+    Added an application icon.
+    Localized nibs.
+
+v14 1995/10/19 02:30 EDT sunshine@sunshineco.com
+    Converted nib's TableScroll class version number from 3 to 0.  I changed
+	the version number in TableScroll itself some time ago and converted
+	this nib, but apparently I forgot to cut a new version of ScrollDir.
+	(So essentially this nib could not be loaded in IB, or elsewhere.)
+    Updated DirWindow.m to reflect fact that -cellAt:: methods in TableScroll
+	now return (id) instead of (Cell*).
+
+v13 1995/10/01 17:15 EDT zarnuk@zarnuk.com
+    Directory highlight now extends to include the "message" column.
+    Now suppresses display while re-loading the directory.
+
+v12 1995/10/01 15:30 EDT sunshine@sunshineco.com
+    Can now drag color swatches into window.
+    Added "highlight dirs" switch which sets the color on cells which show
+	directories.  This was done to test individual cell colors to make
+	sure that they don't get changed when a swatch is dropped on the
+	window.
+
+v11 1995/09/26 04:00 EDT sunshine@sunshineco.com
+    Now imports newly public header <MiscTableCell.h>.  Old MiscTableCell
+	protocol went away.
+
+v10 1995/09/26 04:00 EDT sunshine@sunshineco.com
+    "Change Dir" button is now enabled only when a single directory is
+	selected.

@@ -1,0 +1,111 @@
+//-----------------------------------------------------------------------------
+// MiscTableScroll TODO
+// $Id: TODO.txt,v 1.44 99/06/29 07:56:57 sunshine Exp $
+//-----------------------------------------------------------------------------
+
+TODO:
+----
+** DOCUMENTATION
+- Usage tips for sorting.
+- Usage tips for editing.
+- Common problems ("Gotchas") section.
+
+** KEYBOARD
+- Add a keyboard equivalent to start text editing in a cell.
+    (Should probably be "return" to maintain symmetry with the mouse
+    double-click.  Makes the most sense when cell-wise selection is finally
+    developed and key focus identifies an individual cell instead of an
+    entire slot.)
+- Consider adding support for up/down keys during editing which would edit
+    the previous and next cells in the current column, respectively.  Having
+    done so in Clue.app, we see how extremely nice this feature is.
+- Upgrade keyboard interaction to mirror OpenStep conventions: Ctrl-tab and
+    Ctrl-Shift-tab when plain tab has other interpretations.
+
+** SELECTION
+- Cell-wise selection.
+- Add ability to disable selection -- both for the entire object and for
+    individual slots/cells.
+- Centralize selection-mode handling during mouse & keyboard tracking.  Right
+    now this is spread throughout TableView, BorderView, TableScrollKB, and
+    TableScrollISearch.  Each needs to perform selection via either mouse or
+    keyboard, and each reimplements much of the same code.
+- Need to revamp mouse-tracking, selection.
+- Allow all cells under mouse to participate in mouse-tracking rather than
+    *only* the first cell under which the mouse went down.
+- Possibly support single-click-to-edit.  This also turned out to be a nice
+    feature in Clue.app.
+
+** DRAGGING
+- Add dragging-destination support so that images can be dragged-in and
+    dropped on cells.  The delegate should get appropriate messages.
+
+** DRAWING
+- Use display: mechanism to perform drawing.  This will fix problems of
+    subviews not getting drawn.
+- MiscTableView -- route drawRect: through a cell-coordinate oriented
+    -doDrawRange:::: and provide a public -drawRange::: method.  Most places
+    where drawing is done in the code, we know the cell coordinates.  It does
+    not make sense to convert them to NXRect visual rectangle only to convert
+    it back to cell coordinates.
+- Fix the handling of the grid.  The width for the grid lines should not
+    count as part of the width of the slots.  It should be separated from the
+    slots themselves entirely.  Move grid drawing out of the *BORDER* cells.
+    (This has already been done for the *table* cells.)
+- Provide public access / IB methods for selecting grid styles.
+
+** PRINTING
+- Finish user-supplied page headers/footers.
+
+** FUNCTIONALITY
+- User should be able to set the width/height of row/col titles, just like
+    resizing normal slots.
+- Allow copyFont / pasteFont operations.
+- Add non-anchored incremental search, plus previous/next mechanism.
+- Add search (find) support.
+
+** INTERFACE BUILDER
+- Use AltViews / SwapViews in the IB inspector.  That panel is way too
+    crowded and we need to add even more stuff.
+
+** MISCELLANEOUS
+- The C++ MiscTableBorder stuff should be doing its allocations from the
+    table scroll's zone.
+- Consider adding facilities to automatically save column order and sizes to
+    NeXT defaults (like Window does).
+- Figure out how icon cells should work precisely.  Should they take control
+    of the image display in any way?  For instance, if the cell is too small
+    to contain the entire image should it be cropped?  Scaled?  Not shown?
+- Subclass hooks for choosing subclass subviews -- make some means for
+    the programmer to choose a different subclass for the table-view,
+    border-view, corner-view.
+- It has been suggested some methods, such as -deleteRowAt: should throw an
+    exception if the specified row is invalid.  This is probably a religious
+    issue, as some people prefer to be very explicit about having to manually
+    check limits, whereas other people prefer that the object be forgiving and
+    simply ignore bad input.  On the other hand, there are certainly some
+    cases where ignoring bad input is improper behavior and an exception
+    probably should be thrown in these cases.  For instance, there is no
+    sensible value which -tagAtRow: can return when provided with invalid
+    input.  Currently it simply returns 0 in this case, but there is no way
+    to determine, from the return value alone, if the row's tag really was 0
+    or if the row number was simply invalid.
+
+DONE:
+----
+v140
+- Stop converting source to 4-space tabs as suggested by the MiscKit
+    guidelines.  This decision is motivated by a personal desire to distribute
+    code formatted in a fashion which I prefer.
+
+v138
+- Dragging-source stuff should also respond to
+    -shouldDelayWindowOrderingForEvent:.  Also add a delegate hook.
+
+v137
+- Add an unsort{Rows|Cols|Slots:} method.  (Restore original physical order).
+    border:setSlotOrder: now accepts a null pointer to unsort the slots.
+
+v136
+- Use NXOrderStrings() for case-insensitive comparisons in
+    MiscTableScroll(Sort) and MiscTableScroll(IncrementalSearch)

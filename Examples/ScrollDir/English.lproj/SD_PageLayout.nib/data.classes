@@ -1,0 +1,14 @@
+"FirstResponder" = {ACTIONS = {}; OUTLETS = {}; SUPERCLASS = NSObject; };
+"SD_PageLayout" = {
+    ACTIONS = {}; 
+    OUTLETS = {
+        accessoryWindow = id; 
+        bottomMarginField = id; 
+        centerMatrix = id; 
+        leftMarginField = id; 
+        paginationMatrix = id; 
+        rightMarginField = id; 
+        topMarginField = id; 
+    }; 
+    SUPERCLASS = NSObject; 
+};
