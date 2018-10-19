@@ -95,6 +95,9 @@
 		55B437F02179B2AF005ABAA2 /* MiscBorderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B4379B2179B2AF005ABAA2 /* MiscBorderView.h */; };
 		55B437F12179B2AF005ABAA2 /* MiscVertResizeCursor.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55B4379C2179B2AF005ABAA2 /* MiscVertResizeCursor.tiff */; };
 		55B437F22179B2AF005ABAA2 /* MiscRectList.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B4379D2179B2AF005ABAA2 /* MiscRectList.mm */; };
+		55B437F52179B34B005ABAA2 /* License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 55B437F32179B34B005ABAA2 /* License.rtf */; };
+		55B437F62179B34B005ABAA2 /* License_Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 55B437F42179B34B005ABAA2 /* License_Notes.rtf */; };
+		55B437F82179B35A005ABAA2 /* README.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 55B437F72179B35A005ABAA2 /* README.rtf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -188,6 +191,9 @@
 		55B4379B2179B2AF005ABAA2 /* MiscBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscBorderView.h; sourceTree = "<group>"; };
 		55B4379C2179B2AF005ABAA2 /* MiscVertResizeCursor.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MiscVertResizeCursor.tiff; sourceTree = "<group>"; };
 		55B4379D2179B2AF005ABAA2 /* MiscRectList.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscRectList.mm; sourceTree = "<group>"; };
+		55B437F32179B34B005ABAA2 /* License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License.rtf; sourceTree = SOURCE_ROOT; };
+		55B437F42179B34B005ABAA2 /* License_Notes.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License_Notes.rtf; sourceTree = SOURCE_ROOT; };
+		55B437F72179B35A005ABAA2 /* README.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = README.rtf; path = Palettes/MiscTableScroll/README.rtf; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +226,9 @@
 		55B4373A2179B0E4005ABAA2 /* MiscTableScroll */ = {
 			isa = PBXGroup;
 			children = (
+				55B437F72179B35A005ABAA2 /* README.rtf */,
+				55B437F42179B34B005ABAA2 /* License_Notes.rtf */,
+				55B437F32179B34B005ABAA2 /* License.rtf */,
 				55B437992179B2AF005ABAA2 /* MiscBorderCell.h */,
 				55B437592179B2A8005ABAA2 /* MiscBorderCell.mm */,
 				55B4379B2179B2AF005ABAA2 /* MiscBorderView.h */,
@@ -417,12 +426,15 @@
 			files = (
 				55B437C22179B2AF005ABAA2 /* MiscSortDescendH.tiff in Resources */,
 				55B437F12179B2AF005ABAA2 /* MiscVertResizeCursor.tiff in Resources */,
+				55B437F62179B34B005ABAA2 /* License_Notes.rtf in Resources */,
 				55B437EC2179B2AF005ABAA2 /* MiscSortAscend.tiff in Resources */,
+				55B437F82179B35A005ABAA2 /* README.rtf in Resources */,
 				55B437472179B27E005ABAA2 /* MiscExporterAccessoryView.nib in Resources */,
 				55B437B62179B2AF005ABAA2 /* MiscSortAscendH.tiff in Resources */,
 				55B437A52179B2AF005ABAA2 /* MiscTableViewPS.psw in Resources */,
 				55B437482179B27E005ABAA2 /* MiscExporterAccessoryView-macintosh.nib in Resources */,
 				55B437A32179B2AF005ABAA2 /* MiscTableScroll-3.3-4.x.tops in Resources */,
+				55B437F52179B34B005ABAA2 /* License.rtf in Resources */,
 				55B437D82179B2AF005ABAA2 /* MiscSortDescend.tiff in Resources */,
 				55B437E92179B2AF005ABAA2 /* MiscReverseCursor.tiff in Resources */,
 				55B437AD2179B2AF005ABAA2 /* MiscSlotDragCursor.tiff in Resources */,
@@ -630,7 +642,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 140.1;
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 140;
 				DYLIB_CURRENT_VERSION = 140.1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
@@ -655,7 +667,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 140.1;
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 140;
 				DYLIB_CURRENT_VERSION = 140.1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
