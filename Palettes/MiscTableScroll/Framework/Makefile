@@ -22,24 +22,25 @@ GLOBAL_RESOURCES = MiscHorzResizeCursor.tiff MiscReverseCursor.tiff\
                    MiscSortDescendH.tiff MiscVertResizeCursor.tiff\
                    Documentation MiscTableScroll-3.3-4.x.tops
 
-CCFILES = MiscColorList.cc MiscDelegateFlags.cc MiscDrawList.cc\
-          MiscGeometry.cc MiscLineWrapper.cc MiscRectColorList.cc\
-          MiscRectList.cc MiscSparseSet.cc MiscTableBorder.cc\
-          MiscTableBorderIO.cc MiscTableBorderSel.cc MiscTracer.cc
+CCFILES = MiscSparseSet.cc 
 
-CAPMFILES = MiscBorderCell.M MiscBorderView.M MiscColView.M\
-            MiscCornerView.M MiscExporter.M MiscExporterAccessoryView.M\
-            MiscExporterASCII.M MiscExporterDBF.M MiscHighlightTracker.M\
-            MiscListTracker.M MiscMouseTracker.M MiscRadioTracker.M\
-            MiscRowView.M MiscTableCell.M MiscTableConnector.M\
-            MiscTableScroll.M MiscTableScrollData.M\
-            MiscTableScrollEdit.M MiscTableScrollIO.M\
-            MiscTableScrollISearch.M MiscTableScrollKB.M\
-            MiscTableScrollPB.M MiscTableScrollPrint.M\
-            MiscTableScrollSel.M MiscTableScrollSort.M\
-            MiscTableScrollSymbols.M MiscTableView.M\
-            MiscTableViewCursor.M MiscTableViewDrag.M\
-            MiscTableViewPrint.M MiscTableWell.M
+CAPMFILES = MiscBorderCell.mm MiscBorderView.mm MiscColView.mm\
+            MiscCornerView.mm MiscExporter.mm MiscExporterAccessoryView.mm\
+            MiscExporterASCII.mm MiscExporterDBF.mm MiscHighlightTracker.mm\
+            MiscListTracker.mm MiscMouseTracker.mm MiscRadioTracker.mm\
+            MiscRowView.mm MiscTableCell.mm MiscTableConnector.mm\
+            MiscTableScroll.mm MiscTableScrollData.mm\
+            MiscTableScrollEdit.mm MiscTableScrollIO.mm\
+            MiscTableScrollISearch.mm MiscTableScrollKB.mm\
+            MiscTableScrollPB.mm MiscTableScrollPrint.mm\
+            MiscTableScrollSel.mm MiscTableScrollSort.mm\
+            MiscTableScrollSymbols.mm MiscTableView.mm\
+            MiscTableViewCursor.mm MiscTableViewDrag.mm\
+            MiscTableViewPrint.mm MiscTableWell.mm\
+            MiscColorList.mm MiscDelegateFlags.mm MiscDrawList.mm\
+            MiscGeometry.mm MiscLineWrapper.mm MiscRectColorList.mm\
+            MiscRectList.mm MiscSparseSet.mm MiscTableBorder.mm\
+            MiscTableBorderIO.mm MiscTableBorderSel.mm MiscTracer.mm
 
 HFILES = bool.h MiscBorderCell.h MiscBorderView.h MiscColorList.h\
          MiscColView.h MiscCornerView.h MiscDelegateFlags.h\
@@ -62,7 +63,7 @@ MAKEFILEDIR = $(NEXT_ROOT)/NextDeveloper/Makefiles/pb_makefiles
 CURRENTLY_ACTIVE_VERSION = YES
 DEPLOY_WITH_VERSION_NAME = B
 CODE_GEN_STYLE = DYNAMIC
-MAKEFILE = framework.make
+MAKEFILE = framework.mmake
 NEXTSTEP_INSTALLDIR = $(NEXT_ROOT)$(LOCAL_LIBRARY_DIR)/Frameworks
 WINDOWS_INSTALLDIR = $(NEXT_ROOT)$(LOCAL_LIBRARY_DIR)/Frameworks
 LIBS = 
@@ -89,7 +90,7 @@ NEXTSTEP_JAVA_COMPILER = /usr/bin/javac
 WINDOWS_JAVA_COMPILER = $(JDKBINDIR)/javac.exe
 PDO_UNIX_JAVA_COMPILER = $(NEXTDEV_BIN)/javac
 
-include $(MAKEFILEDIR)/platform.make
+include $(MAKEFILEDIR)/platform.mmake
 
 -include Makefile.preamble
 
