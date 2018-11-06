@@ -75,6 +75,7 @@
 #import "MiscTableBorder.h"
 #import "MiscTableScrollPrivate.h"
 #import "MiscTableView.h"
+#include <objc/objc-class.h>
 
 extern "C" {
 #import	<stdlib.h>
@@ -485,14 +486,14 @@ id cell = (*(p->cell_at_func))( obj, \
 self, row, col ); \
 if (cell != 0) \
 { \
-if (p->cell_class == (id)cell->isa) \
+if (p->cell_class == object_getClass(cell)) \
 { \
 if (p->cell_func.SUFFIX != 0) \
 return (*(p->cell_func.SUFFIX))( cell, p->cell_sel ); \
 } \
 else \
 { \
-p->cell_class = (id)cell->isa; \
+p->cell_class = object_getClass(cell); \
 if ([cell respondsToSelector:p->cell_sel]) \
 { \
 p->cell_func.SUFFIX = (MISC_TS_##FUNC_TYPE##_VAL) \
@@ -529,14 +530,14 @@ MISC_INDIRECT( NSString*, title, s, STRING )	// titleAtRow:column:
 :(MiscEntrySortInfo*)p :(MiscSlotSortInfo*)q \
 { \
 id cell = cells[ row * num_cols + col ]; \
-if (p->cell_class == (id)cell->isa) \
+if (p->cell_class == object_getClass(cell)) \
 { \
 if (p->cell_func.SUFFIX != 0) \
 return (*(p->cell_func.SUFFIX))( cell, p->cell_sel ); \
 } \
 else \
 { \
-p->cell_class = (id)cell->isa; \
+p->cell_class = object_getClass(cell); \
 if ([cell respondsToSelector:p->cell_sel]) \
 { \
 p->cell_func.SUFFIX = (MISC_TS_##FUNC_TYPE##_VAL) \

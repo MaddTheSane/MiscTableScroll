@@ -53,6 +53,7 @@
 #import	<AppKit/NSPrintInfo.h>
 #import <AppKit/NSPrintOperation.h>
 #import	<AppKit/NSPrintPanel.h>
+#import <AppKit/NSAffineTransform.h>
 //#import <AppKit/psops.h>
 #include <cmath>	// floor()
 
@@ -707,7 +708,9 @@ clip_exit:
     if (info.is_scaled)
     {
         CGFloat const k = info.scale_factor;
-        PSscale( k, k );
+		NSAffineTransform *trans = [NSAffineTransform transform];
+		[trans scaleBy:k];
+		[trans set];
         bottom /= k;
         top /= k;
         left /= k;
