@@ -95,6 +95,7 @@
 		55B437F52179B34B005ABAA2 /* License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 55B437F32179B34B005ABAA2 /* License.rtf */; };
 		55B437F62179B34B005ABAA2 /* License_Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 55B437F42179B34B005ABAA2 /* License_Notes.rtf */; };
 		55B437F82179B35A005ABAA2 /* README.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 55B437F72179B35A005ABAA2 /* README.rtf */; };
+		55B99596219230F400342A80 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B99595219230F400342A80 /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -189,6 +190,7 @@
 		55B437F32179B34B005ABAA2 /* License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License.rtf; sourceTree = SOURCE_ROOT; };
 		55B437F42179B34B005ABAA2 /* License_Notes.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License_Notes.rtf; sourceTree = SOURCE_ROOT; };
 		55B437F72179B35A005ABAA2 /* README.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = README.rtf; path = Palettes/MiscTableScroll/README.rtf; sourceTree = SOURCE_ROOT; };
+		55B99595219230F400342A80 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55B99596219230F400342A80 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				55B4373A2179B0E4005ABAA2 /* MiscTableScroll */,
+				55B99594219230F400342A80 /* Frameworks */,
 				55B437392179B0E4005ABAA2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -315,6 +319,14 @@
 			);
 			name = MiscTableScroll;
 			path = Palettes/MiscTableScroll/Framework;
+			sourceTree = "<group>";
+		};
+		55B99594219230F400342A80 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				55B99595219230F400342A80 /* Cocoa.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
