@@ -45,9 +45,7 @@
 #import <AppKit/NSWindow.h>
 
 extern "C" {
-//#import "MiscTableViewPS.h"
-	extern void MISC_TV_initps(void);
-	extern void MISC_TV_dashedrects(float const*, int);
+#import "MiscTableViewPS.h"
 }
 #include <cmath>
 

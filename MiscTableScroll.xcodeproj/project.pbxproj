@@ -96,6 +96,8 @@
 		55B437F62179B34B005ABAA2 /* License_Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 55B437F42179B34B005ABAA2 /* License_Notes.rtf */; };
 		55B437F82179B35A005ABAA2 /* README.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 55B437F72179B35A005ABAA2 /* README.rtf */; };
 		55B99596219230F400342A80 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B99595219230F400342A80 /* Cocoa.framework */; };
+		55B9959A219231DA00342A80 /* MiscTableViewPS.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B99598219231DA00342A80 /* MiscTableViewPS.h */; };
+		55B9959B219231DA00342A80 /* MiscTableViewPS.c in Sources */ = {isa = PBXBuildFile; fileRef = 55B99599219231DA00342A80 /* MiscTableViewPS.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -191,6 +193,8 @@
 		55B437F42179B34B005ABAA2 /* License_Notes.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = License_Notes.rtf; sourceTree = SOURCE_ROOT; };
 		55B437F72179B35A005ABAA2 /* README.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = README.rtf; path = Palettes/MiscTableScroll/README.rtf; sourceTree = SOURCE_ROOT; };
 		55B99595219230F400342A80 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		55B99598219231DA00342A80 /* MiscTableViewPS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MiscTableViewPS.h; sourceTree = "<group>"; };
+		55B99599219231DA00342A80 /* MiscTableViewPS.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = MiscTableViewPS.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +320,8 @@
 				55B4379C2179B2AF005ABAA2 /* MiscVertResizeCursor.tiff */,
 				55B4378A2179B2AD005ABAA2 /* NSNibConnector.h */,
 				55B4373C2179B0E4005ABAA2 /* Info.plist */,
+				55B99598219231DA00342A80 /* MiscTableViewPS.h */,
+				55B99599219231DA00342A80 /* MiscTableViewPS.c */,
 			);
 			name = MiscTableScroll;
 			path = Palettes/MiscTableScroll/Framework;
@@ -360,6 +366,7 @@
 				55B437E72179B2AF005ABAA2 /* MiscTableTypes.h in Headers */,
 				55B437B22179B2AF005ABAA2 /* MiscTableCell.h in Headers */,
 				55B437A22179B2AF005ABAA2 /* MiscExporter.h in Headers */,
+				55B9959A219231DA00342A80 /* MiscTableViewPS.h in Headers */,
 				55B437CD2179B2AF005ABAA2 /* MiscRowView.h in Headers */,
 				55B437B02179B2AF005ABAA2 /* MiscGeometry.h in Headers */,
 				55B437AF2179B2AF005ABAA2 /* MiscRectColorList.h in Headers */,
@@ -473,6 +480,7 @@
 				55B437DB2179B2AF005ABAA2 /* MiscTableScrollSymbols.mm in Sources */,
 				55B437B82179B2AF005ABAA2 /* MiscColorList.mm in Sources */,
 				55B437BC2179B2AF005ABAA2 /* MiscTableCell.mm in Sources */,
+				55B9959B219231DA00342A80 /* MiscTableViewPS.c in Sources */,
 				55B437B72179B2AF005ABAA2 /* MiscExporterAccessoryView.mm in Sources */,
 				55B437EF2179B2AF005ABAA2 /* MiscTableScrollISearch.mm in Sources */,
 				55B437D72179B2AF005ABAA2 /* MiscTableBorderSel.mm in Sources */,
