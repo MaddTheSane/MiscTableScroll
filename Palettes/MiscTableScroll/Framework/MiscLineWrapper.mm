@@ -68,7 +68,7 @@ MiscLineWrapper::MiscLineWrapper()
     text_max = 1024;
     text = (char*) malloc( text_max );
     font = 0;
-    alignment = NSLeftTextAlignment;
+    alignment = NSTextAlignmentLeft;
     num_lines = 0;
     max_lines = 16;
     lines = (Line*) malloc( max_lines * sizeof(*lines) );
@@ -178,7 +178,7 @@ void MiscLineWrapper::setBottomMargin( float f )
 //-----------------------------------------------------------------------------
 void MiscLineWrapper::setText( NSString* str )
 {
-    char const* t = [str lossyCString]; // FIXME: Not Unicode compliant
+    char const* t = [str cStringUsingEncoding:NSASCIIStringEncoding]; // FIXME: Not Unicode compliant
     if (t == 0 || *t == 0)
     {
         if (text_len != 0)
@@ -187,7 +187,7 @@ void MiscLineWrapper::setText( NSString* str )
     }
     else
     {
-        int len = strlen( t );
+        size_t len = strlen( t );
         if (len >= MAX_TEXT_LENGTH)
             len = MAX_TEXT_LENGTH - 1;
         if (len != text_len || strncmp( t, text, len ) != 0)
@@ -233,8 +233,8 @@ void MiscLineWrapper::setFont( NSFont* f )
 //-----------------------------------------------------------------------------
 void MiscLineWrapper::setAlignment( NSTextAlignment a )
 {
-    if (a != NSCenterTextAlignment && a != NSRightTextAlignment)
-        a = NSLeftTextAlignment;
+    if (a != NSTextAlignmentCenter && a != NSTextAlignmentRight)
+        a = NSTextAlignmentLeft;
     if (alignment != a)
     {
         alignment = a;
@@ -259,7 +259,7 @@ float MiscLineWrapper::calc_width( int i, int lim ) const
         int const TAB_STOPS = 8;
         NSInteger n = 0;
         for (int j = i; j < lim; j++)
-            if (text[j] == '\t' && alignment == NSLeftTextAlignment)
+            if (text[j] == '\t' && alignment == NSTextAlignmentLeft)
                 n += TAB_STOPS - (n & (TAB_STOPS - 1));
             else
                 n++;
@@ -278,7 +278,7 @@ float MiscLineWrapper::calc_width( int i, int lim ) const
         {
             unsigned char c = (unsigned char) text[i];
             if (c == '\t')
-                if (alignment == NSLeftTextAlignment)
+                if (alignment == NSTextAlignmentLeft)
                     w = (floor(w / TAB_SIZE) + 1.0) * TAB_SIZE;
                 else
                     w += space_width;
@@ -308,7 +308,7 @@ float MiscLineWrapper::calc_width( int i, int lim ) const
 //-----------------------------------------------------------------------------
 void MiscLineWrapper::wrap_segment( int seg_start, int seg_end )
 {
-    bool do_char_wrap = char_wrap && alignment == NSLeftTextAlignment;
+    bool do_char_wrap = char_wrap && alignment == NSTextAlignmentLeft;
     float max_width = rect.size.width;
     do  {
         if (num_lines >= max_lines)

@@ -40,7 +40,7 @@
 //  Temporarily moved affected code from MiscTableConnector.M to this file.
 //-----------------------------------------------------------------------------
 #import	"MiscTableConnector.h"
-extern "Objective-C" {
+extern "C" {
 #import <objc/objc-class.h>
 Ivar object_setInstanceVariable( id, char const* name, void const* );
 }
@@ -154,17 +154,17 @@ int const MISC_CONN_VERSION      = MISC_CONN_VERSION_1000;
 // -setInstanceVariable:of:to:
 //-----------------------------------------------------------------------------
 - (void)setInstanceVariable:(NSString*)var of:(id)obj to:(id)val
-    {
+{
     if (var != 0 && [var length] > 0)
 	object_setInstanceVariable( obj, [var cString], val );
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 // -establishConnection
 //-----------------------------------------------------------------------------
 - (void)establishConnection
-    {
+{
     id const src = [self source];
     id const dst = [self destination];
     if (src != 0 && dst != 0 && [outletName length] > 0)
@@ -177,22 +177,6 @@ int const MISC_CONN_VERSION      = MISC_CONN_VERSION_1000;
 		[self setInstanceVariable:actionName of:src to:(id)aSel];
 	    }
 	} 
-    }
-
-
-//-----------------------------------------------------------------------------
-// *FIXME*
-//	OPENSTEP 4.2 Objective-C++ compiler for NT (final release) crashes 
-//	whenever a message is sent to 'super' from within a category.  This 
-//	bug also afflicts the 4.2 (prerelease) compiler for Mach and NT.  
-//	Work around it by providing stub methods in the main (non-category) 
-//	implementation which merely forward the appropriate message to 'super' 
-//	on behalf of the categories.  Though ugly, it works, is very 
-//	localized, and simple to remove when the bug is finally fixed.  
-//-----------------------------------------------------------------------------
-- (id)superInitSource:(id)s destination:(id)d label:(NSString*)l
-	{ return [super initSource:s destination:d label:l]; }
-- (void)superEncodeWithCoder:(NSCoder*)c
-	{ [super encodeWithCoder:c]; }
+}
 
 @end

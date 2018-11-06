@@ -75,6 +75,7 @@
 #import "MiscTableBorder.h"
 #import "MiscTableScrollPrivate.h"
 #import "MiscTableView.h"
+#import <AppKit/NSWindow.h>
 #include <objc/objc-class.h>
 
 extern "C" {
@@ -478,7 +479,7 @@ static void do_qsort(
 //-----------------------------------------------------------------------------
 
 #define MISC_INDIRECT( DATA_TYPE, NAME, SUFFIX, FUNC_TYPE ) \
-- (DATA_TYPE)indirect:obj NAME##AtRow:(int)row column:(int)col \
+- (DATA_TYPE)indirect:obj NAME##AtRow:(NSInteger)row column:(NSInteger)col \
 :(MiscEntrySortInfo*)p :(MiscSlotSortInfo*)q \
 { \
 id cell = (*(p->cell_at_func))( obj, \
@@ -508,12 +509,12 @@ p->cell_func.SUFFIX = 0; \
 return 0; \
 }
 
-MISC_INDIRECT( int, tag, i, INT )		// tagAtRow:column:
-MISC_INDIRECT( int, intValue, i, INT )		// intValueAtRow:column:
+MISC_INDIRECT( NSInteger, tag, i, INT )		// tagAtRow:column:
+MISC_INDIRECT( NSInteger, intValue, i, INT )		// intValueAtRow:column:
 MISC_INDIRECT( float, floatValue, f, FLOAT )	// floatValueAtRow:column:
 MISC_INDIRECT( double, doubleValue, d, DOUBLE )	// doubleValueAtRow:column:
 MISC_INDIRECT( NSString*, stringValue,s,STRING)	// stringValueAtRow:column:
-MISC_INDIRECT( int, state, i, INT )		// stateAtRow:column:
+MISC_INDIRECT( NSInteger, state, i, INT )		// stateAtRow:column:
 MISC_INDIRECT( NSString*, title, s, STRING )	// titleAtRow:column:
 
 
@@ -719,7 +720,7 @@ MISC_INFO_INIT( title, TITLE )			// sortInfoInit_title:
     ip->entry_info	= 0;
     ip->need_copy	= lazy && ([self bufferCount] < 2);
 
-    int M;					// Number of "cols".
+    NSInteger M;					// Number of "cols".
     NSArray* v = [self slotSortVector:ob];
     if (v != 0)
         M = [v count];
@@ -741,7 +742,7 @@ MISC_INFO_INIT( title, TITLE )			// sortInfoInit_title:
 
     if (M > 0)
     {
-        unsigned int const sz = M * sizeof( MiscEntrySortInfo );
+        size_t const sz = M * sizeof( MiscEntrySortInfo );
         MiscEntrySortInfo* ep = (MiscEntrySortInfo*) NSZoneMalloc( z, sz );
 
         if (ep != 0)
@@ -802,7 +803,7 @@ MISC_INFO_INIT( title, TITLE )			// sortInfoInit_title:
         else
         {
             [NSException raise:NSMallocException
-                        format:@"%d bytes requested", sz];
+						format:@"%zu bytes requested", sz];
         }
     }
 }

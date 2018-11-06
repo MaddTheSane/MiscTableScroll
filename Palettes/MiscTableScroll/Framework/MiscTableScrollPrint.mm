@@ -63,9 +63,9 @@
 - (void)dumpPrintInfo:(NSPrintInfo*)pinfo
 {
     fprintf( stderr, "printInfo=%p\n", pinfo );
-    fprintf( stderr, "paperType:[%s]\n", [[pinfo paperName] cString] );
+    fprintf( stderr, "paperType:[%s]\n", [[pinfo paperName] UTF8String] );
     fprintf( stderr, "paperSize:%s\n",
-            [NSStringFromSize([pinfo paperSize]) cString] );
+            [NSStringFromSize([pinfo paperSize]) UTF8String] );
     fprintf( stderr, "margins: left=%g right=%g top=%g bottom=%g\n",
             [pinfo leftMargin], [pinfo rightMargin],
             [pinfo topMargin], [pinfo bottomMargin] );
@@ -76,10 +76,10 @@
             (int)[pinfo isHorizontallyCentered] );
     fprintf( stderr, "isVerticallyCentered=%d\n",
             (int)[pinfo isVerticallyCentered] );
-    fprintf( stderr, "horizontalPagination=%d\n",
-            [pinfo horizontalPagination] );
-    fprintf( stderr, "verticalPagination=%d\n",
-            [pinfo verticalPagination] );
+	fprintf( stderr, "horizontalPagination=%lu\n",
+			(unsigned long)[pinfo horizontalPagination] );
+	fprintf( stderr, "verticalPagination=%lu\n",
+			(unsigned long)[pinfo verticalPagination] );
     fprintf( stderr, "isAllPages=%d\n",
             (int)[[[pinfo dictionary] objectForKey:NSPrintAllPages] boolValue] );
     fprintf( stderr, "firstPage=%d\n",

@@ -110,29 +110,29 @@ MISC_TS_CLASS_DEF( MiscDelegateFlags );
 
 
 typedef struct MiscCellEditInfo
-	{
+{
 	BOOL			editing;	// Is editing in progress?
 	MiscCoord_P		row;		// Coords of edited cell.
 	MiscCoord_P		col;
 	NSText*			editor;		// Field editor.
 	id			cell;		// Temporary editing cell.
 	int			suspended;	// Suspend/resume counter.
-	} MiscCellEditInfo;
+} MiscCellEditInfo;
 
 
 typedef struct MiscBorderInfo
-	{
+{
 	MiscTableBorder*	border;
 	MiscBorderView*		view;
 	NSClipView*		clip;
 	NSArray*		sort_vector;
 	BOOL			isOn;
 	BOOL			autoSort;
-	} MiscBorderInfo;
+} MiscBorderInfo;
 
 
 @interface MiscTableScroll : NSScrollView
-    {
+{
 @private
     MiscTableView*	tableView;
     MiscBorderInfo*	info[2];	// { &colInfo, &rowInfo }
@@ -152,7 +152,7 @@ typedef struct MiscBorderInfo
     id			doubleTarget;
     SEL			action;
     SEL			doubleAction;
-    int			tag;
+    NSInteger	tag;
     MiscCompareEntryFunc sort_entry_func;
     MiscCompareSlotFunc	sort_slot_func;
     MiscSelectionMode	mode;
@@ -169,7 +169,7 @@ typedef struct MiscBorderInfo
     BOOL		lazy;
     BOOL		drawsClippedText;
     id			representedObject;
-    }
+}
 
 - (id)initWithFrame:(NSRect)frameRect;
 - (void)dealloc;
@@ -181,22 +181,16 @@ typedef struct MiscBorderInfo
 - (id)dataDelegate;
 - (void)setDataDelegate:(id)obj;
 
-- (int)tag;
-- (void)setTag:(int)x;
+@property NSInteger tag;
 
-- (id)representedObject;
-- (void)setRepresentedObject:(id)object;
+@property (retain) id representedObject;
 
 
 // TARGET / ACTION ------------------------------------------------------------
-- (id)target;
-- (void)setTarget:(id)obj;
-- (id)doubleTarget;
-- (void)setDoubleTarget:(id)obj;
-- (SEL)action;
-- (void)setAction:(SEL)new_sel;
-- (SEL)doubleAction;
-- (void)setDoubleAction:(SEL)new_sel;
+@property (assign) id target;
+@property (assign) id doubleTarget;
+@property SEL action;
+@property SEL doubleAction;
 
 - (BOOL)sendAction:(SEL)theAction to:(id)theTarget;
 - (BOOL)sendAction;
@@ -326,18 +320,18 @@ typedef struct MiscBorderInfo
 - (BOOL)sizeableSlots:(MiscBorderType)b;
 - (BOOL)draggableSlots:(MiscBorderType)b;
 - (BOOL)modifierDragSlots:(MiscBorderType)b;
-- (float)uniformSizeSlots:(MiscBorderType)b;
-- (float)minUniformSizeSlots:(MiscBorderType)b;
-- (float)maxUniformSizeSlots:(MiscBorderType)b;
+- (CGFloat)uniformSizeSlots:(MiscBorderType)b;
+- (CGFloat)minUniformSizeSlots:(MiscBorderType)b;
+- (CGFloat)maxUniformSizeSlots:(MiscBorderType)b;
 
-- (float)border:(MiscBorderType)b slotAdjustedSize:(int)slot;
-- (float)border:(MiscBorderType)b slotSize:(int)slot;
-- (float)border:(MiscBorderType)b slotMinSize:(int)slot;
-- (float)border:(MiscBorderType)b slotMaxSize:(int)slot;
+- (CGFloat)border:(MiscBorderType)b slotAdjustedSize:(int)slot;
+- (CGFloat)border:(MiscBorderType)b slotSize:(int)slot;
+- (CGFloat)border:(MiscBorderType)b slotMinSize:(int)slot;
+- (CGFloat)border:(MiscBorderType)b slotMaxSize:(int)slot;
 - (BOOL)border:(MiscBorderType)b slotIsSizeable:(int)slot;
 - (BOOL)border:(MiscBorderType)b slotIsAutosize:(int)slot;
 - (NSString*)border:(MiscBorderType)b slotTitle:(int)slot;
-- (int)border:(MiscBorderType)b slotTag:(int)slot;
+- (NSInteger)border:(MiscBorderType)b slotTag:(int)slot;
 - (id)border:(MiscBorderType)b slotRepresentedObject:(int)slot;
 - (MiscTableCellStyle)border:(MiscBorderType)b slotCellType:(int)slot;
 - (id)border:(MiscBorderType)b slotCellPrototype:(int)slot;
@@ -345,17 +339,17 @@ typedef struct MiscBorderInfo
 - (void)border:(MiscBorderType)b setSizeableSlots:(BOOL)flag;
 - (void)border:(MiscBorderType)b setDraggableSlots:(BOOL)flag;
 - (void)border:(MiscBorderType)b setModifierDragSlots:(BOOL)flag;
-- (void)border:(MiscBorderType)b setUniformSizeSlots:(float)uniform_size;
-- (void)border:(MiscBorderType)b setMinUniformSizeSlots:(float)size;
-- (void)border:(MiscBorderType)b setMaxUniformSizeSlots:(float)size;
+- (void)border:(MiscBorderType)b setUniformSizeSlots:(CGFloat)uniform_size;
+- (void)border:(MiscBorderType)b setMinUniformSizeSlots:(CGFloat)size;
+- (void)border:(MiscBorderType)b setMaxUniformSizeSlots:(CGFloat)size;
 
-- (void)border:(MiscBorderType)b setSlot:(int)n size:(float)size;
-- (void)border:(MiscBorderType)b setSlot:(int)n minSize:(float)size;
-- (void)border:(MiscBorderType)b setSlot:(int)n maxSize:(float)size;
+- (void)border:(MiscBorderType)b setSlot:(int)n size:(CGFloat)size;
+- (void)border:(MiscBorderType)b setSlot:(int)n minSize:(CGFloat)size;
+- (void)border:(MiscBorderType)b setSlot:(int)n maxSize:(CGFloat)size;
 - (void)border:(MiscBorderType)b setSlot:(int)n sizeable:(BOOL)flag;
 - (void)border:(MiscBorderType)b setSlot:(int)n autosize:(BOOL)flag;
 - (void)border:(MiscBorderType)b setSlot:(int)n title:(NSString*)title;
-- (void)border:(MiscBorderType)b setSlot:(int)n tag:(int)tag;
+- (void)border:(MiscBorderType)b setSlot:(int)n tag:(NSInteger)tag;
 - (void)border:(MiscBorderType)b setSlot:(int)n representedObject:(id)object;
 - (void)border:(MiscBorderType)b setSlot:(int)n cellType:(MiscTableCellStyle)t;
 - (void)border:(MiscBorderType)b setSlot:(int)n cellPrototype:(id)cell;
@@ -363,10 +357,9 @@ typedef struct MiscBorderInfo
 
 // COLS -----------------------------------------------------------------------
 - (MiscTableBorder*)columnBorder;
-- (BOOL)columnTitlesOn;
+@property (readonly) BOOL columnTitlesOn;
 - (BOOL)setColumnTitlesOn:(BOOL)on_off;	// Returns YES if changed.
-- (MiscTableTitleMode)columnTitleMode;
-- (void)setColumnTitleMode:(MiscTableTitleMode)x;
+@property MiscTableTitleMode columnTitleMode;
 - (float)columnTitlesHeight;
 - (void)setColumnTitlesHeight:(float)x;
 
@@ -387,7 +380,7 @@ typedef struct MiscBorderInfo
 - (BOOL)columnIsSizeable:(int)col;
 - (BOOL)columnIsAutosize:(int)col;
 - (NSString*)columnTitle:(int)col;
-- (int)columnTag:(int)col;
+- (NSInteger)columnTag:(int)col;
 - (id)columnRepresentedObject:(int)col;
 - (MiscTableCellStyle)columnCellType:(int)col;
 - (id)columnCellPrototype:(int)col;
@@ -410,12 +403,12 @@ typedef struct MiscBorderInfo
 - (void)setColumn:(int)col cellType:(MiscTableCellStyle)type;
 - (void)setColumn:(int)col cellPrototype:(id)cell;
 
-- (int)numberOfVisibleColumns;
-- (int)firstVisibleColumn;
-- (int)lastVisibleColumn;
-- (BOOL)columnIsVisible:(int)n;
-- (void)setFirstVisibleColumn:(int)n;
-- (void)setLastVisibleColumn:(int)n;
+- (NSInteger)numberOfVisibleColumns;
+- (NSInteger)firstVisibleColumn;
+- (NSInteger)lastVisibleColumn;
+- (BOOL)columnIsVisible:(NSInteger)n;
+- (void)setFirstVisibleColumn:(NSInteger)n;
+- (void)setLastVisibleColumn:(NSInteger)n;
 
 
 // ROWS -----------------------------------------------------------------------
@@ -431,80 +424,72 @@ typedef struct MiscBorderInfo
 - (int)rowPosition:(int)row;
 - (int)rowAtPosition:(int)pos;
 
-- (BOOL)sizeableRows;
-- (BOOL)draggableRows;
-- (BOOL)modifierDragRows;
-- (float)uniformSizeRows;
-- (float)minUniformSizeRows;
-- (float)maxUniformSizeRows;
-- (float)rowAdjustedSize:(int)row;
-- (float)rowSize:(int)row;
-- (float)rowMinSize:(int)row;
-- (float)rowMaxSize:(int)row;
-- (BOOL)rowIsSizeable:(int)row;
-- (BOOL)rowIsAutosize:(int)row;
-- (NSString*)rowTitle:(int)row;
-- (int)rowTag:(int)row;
-- (id)rowRepresentedObject:(int)row;
-- (MiscTableCellStyle)rowCellType:(int)row;
-- (id)rowCellPrototype:(int)row;
+@property BOOL sizeableRows;
+@property BOOL draggableRows;
+@property BOOL modifierDragRows;
+@property CGFloat uniformSizeRows;
+@property CGFloat minUniformSizeRows;
+@property CGFloat maxUniformSizeRows;
+- (CGFloat)rowAdjustedSize:(NSInteger)row;
+- (CGFloat)rowSize:(NSInteger)row;
+- (CGFloat)rowMinSize:(NSInteger)row;
+- (CGFloat)rowMaxSize:(NSInteger)row;
+- (BOOL)rowIsSizeable:(NSInteger)row;
+- (BOOL)rowIsAutosize:(NSInteger)row;
+- (NSString*)rowTitle:(NSInteger)row;
+- (NSInteger)rowTag:(NSInteger)row;
+- (id)rowRepresentedObject:(NSInteger)row;
+- (MiscTableCellStyle)rowCellType:(NSInteger)row;
+- (id)rowCellPrototype:(NSInteger)row;
 
-- (void)setSizeableRows:(BOOL)flag;
-- (void)setDraggableRows:(BOOL)flag;
-- (void)setModifierDragRows:(BOOL)flag;
-- (void)setUniformSizeRows:(float)uniform_size;
-- (void)setMinUniformSizeRows:(float)size;
-- (void)setMaxUniformSizeRows:(float)size;
+- (void)setRow:(NSInteger)row size:(CGFloat)size;
+- (void)setRow:(NSInteger)row minSize:(CGFloat)size;
+- (void)setRow:(NSInteger)row maxSize:(CGFloat)size;
+- (void)setRow:(NSInteger)row sizeable:(BOOL)flag;
+- (void)setRow:(NSInteger)row autosize:(BOOL)flag;
+- (void)setRow:(NSInteger)row title:(NSString*)title;
+- (void)setRow:(NSInteger)row tag:(NSInteger)tag;
+- (void)setRow:(NSInteger)row representedObject:(id)object;
+- (void)setRow:(NSInteger)row cellType:(MiscTableCellStyle)type;
+- (void)setRow:(NSInteger)row cellPrototype:(id)cell;
 
-- (void)setRow:(int)row size:(float)size;
-- (void)setRow:(int)row minSize:(float)size;
-- (void)setRow:(int)row maxSize:(float)size;
-- (void)setRow:(int)row sizeable:(BOOL)flag;
-- (void)setRow:(int)row autosize:(BOOL)flag;
-- (void)setRow:(int)row title:(NSString*)title;
-- (void)setRow:(int)row tag:(int)tag;
-- (void)setRow:(int)row representedObject:(id)object;
-- (void)setRow:(int)row cellType:(MiscTableCellStyle)type;
-- (void)setRow:(int)row cellPrototype:(id)cell;
-
-- (int)numberOfVisibleRows;
-- (int)firstVisibleRow;
-- (int)lastVisibleRow;
-- (BOOL)rowIsVisible:(int)n;
-- (void)setFirstVisibleRow:(int)n;
-- (void)setLastVisibleRow:(int)n;
+- (NSInteger)numberOfVisibleRows;
+- (NSInteger)firstVisibleRow;
+- (NSInteger)lastVisibleRow;
+- (BOOL)rowIsVisible:(NSInteger)n;
+- (void)setFirstVisibleRow:(NSInteger)n;
+- (void)setLastVisibleRow:(NSInteger)n;
 
 
 // DRAWING --------------------------------------------------------------------
 - (NSRect)documentClipRect;
 
-- (void)drawCellAtRow:(int)row column:(int)col;	// Physical coords
+- (void)drawCellAtRow:(NSInteger)row column:(NSInteger)col;	// Physical coords
 
-- (void)drawRow:(int)row;				// Physical coords
-- (void)drawColumn:(int)col;				// Physical coords
+- (void)drawRow:(NSInteger)row;				// Physical coords
+- (void)drawColumn:(NSInteger)col;				// Physical coords
 - (void)border:(MiscBorderType)b drawSlot:(int)n;
 
-- (int)numberOfVisibleSlots:(MiscBorderType)b;
-- (int)firstVisibleSlot:(MiscBorderType)b;
-- (int)lastVisibleSlot:(MiscBorderType)b;
-- (BOOL)border:(MiscBorderType)b slotIsVisible:(int)n;
-- (void)border:(MiscBorderType)b setFirstVisibleSlot:(int)n;
-- (void)border:(MiscBorderType)b setLastVisibleSlot:(int)n;
+- (NSInteger)numberOfVisibleSlots:(MiscBorderType)b;
+- (NSInteger)firstVisibleSlot:(MiscBorderType)b;
+- (NSInteger)lastVisibleSlot:(MiscBorderType)b;
+- (BOOL)border:(MiscBorderType)b slotIsVisible:(NSInteger)n;
+- (void)border:(MiscBorderType)b setFirstVisibleSlot:(NSInteger)n;
+- (void)border:(MiscBorderType)b setLastVisibleSlot:(NSInteger)n;
 
-- (void)scrollCellToVisibleAtRow:(int)row column:(int)col; // Physical coords
-- (void)scrollRowToVisible:(int)row;			// Physical coord
-- (void)scrollColumnToVisible:(int)col;			// Physical coord
+- (void)scrollCellToVisibleAtRow:(NSInteger)row column:(NSInteger)col; // Physical coords
+- (void)scrollRowToVisible:(NSInteger)row;			// Physical coord
+- (void)scrollColumnToVisible:(NSInteger)col;			// Physical coord
 - (void)scrollSelectionToVisible;
 
-- (void)border:(MiscBorderType)b drawSlotTitle:(int)n;
-- (void)drawRowTitle:(int)n;
-- (void)drawColumnTitle:(int)n;
+- (void)border:(MiscBorderType)b drawSlotTitle:(NSInteger)n;
+- (void)drawRowTitle:(NSInteger)n;
+- (void)drawColumnTitle:(NSInteger)n;
 
 - (void)sizeToCells;
 - (void)sizeToFit;
 
-- (BOOL)drawsClippedText;
-- (void)setDrawsClippedText:(BOOL)x;
+@property BOOL drawsClippedText;
 
 
 // INTERNAL COMMUNICATIONS ON USER-ACTIONS FOR SUBCLASSES ONLY ----------------
@@ -516,13 +501,6 @@ typedef struct MiscBorderInfo
 - (void)didBecomeFirstResponder;
 - (void)didResignFirstResponder;
 
-
-// OPENSTEP 4.2/NT COMPILER BUG WORK-AROUND; DO NOT USE THESE METHODS ---------
-// See implementation for an explanation.
-- (id)superInitWithCoder:(NSCoder*)coder;
-- (void)superEncodeWithCoder:(NSCoder*)coder;
-- (void)superKeyDown:(NSEvent*)p;
-- (id)superValidRequestorForSendType:(NSString*)s returnType:(NSString*)r;
 
 @end
 

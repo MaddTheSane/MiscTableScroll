@@ -55,6 +55,7 @@
 #import <AppKit/NSFont.h>
 #import <AppKit/NSImage.h>
 #import <AppKit/NSPasteboard.h>
+#import <AppKit/NSColor.h>
 #include <cmath>
 #include <cstring>
 
@@ -102,7 +103,7 @@
     [super initTextCell:s];				// NOTE *1*
     [self setBordered:NO];
     [self setWraps:NO];
-    [self setAlignment:NSLeftTextAlignment];
+	[self setAlignment:NSTextAlignmentLeft];
     [self setScrollable:YES];
     [self setUseOwnerFont:YES];				// NOTE *1*
     [self setOwnerFont:[[self class] defaultFont]];
@@ -155,28 +156,13 @@
 //-----------------------------------------------------------------------------
 // tag
 //-----------------------------------------------------------------------------
-- (int)tag
-{
-    return tag;
-}
-
-
-//-----------------------------------------------------------------------------
-// setTag:
-//-----------------------------------------------------------------------------
-- (void)setTag:(int)x
-{
-    tag = x;
-}
+@synthesize tag;
 
 
 //-----------------------------------------------------------------------------
 // owner
 //-----------------------------------------------------------------------------
-- (id)owner
-{
-    return owner;
-}
+@synthesize owner;
 
 
 //-----------------------------------------------------------------------------
@@ -187,7 +173,7 @@
     if (obj != owner)
     {
         owner = obj;
-        if (owner != 0)
+        if (owner != nil)
         {
             if ([owner respondsToSelector:@selector(font)])
                 [self setOwnerFont:[owner font]];
@@ -1089,7 +1075,7 @@
     [self tc1DestroyData];
     [self tc1FreeData];
     
-    unsigned int const ver =
+    NSInteger const ver =
     [aDecoder versionForClassName:[[MiscTableCell class] description]];
     
     switch (ver)
@@ -1099,7 +1085,7 @@
         case MISC_TC_VERSION_1000: [self initWithCoder_v1000:aDecoder]; break;
         default:
             [NSException raise:NSGenericException
-                        format:@"Cannot read: unknown version %d", ver];
+						format:@"Cannot read: unknown version %ld", (long)ver];
             break;
     }
     

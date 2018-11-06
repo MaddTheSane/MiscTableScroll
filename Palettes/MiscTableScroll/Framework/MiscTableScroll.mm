@@ -124,6 +124,7 @@
 #import <AppKit/NSFontManager.h>
 #import <AppKit/NSScroller.h>
 #import <AppKit/NSColor.h>
+#import <AppKit/NSWindow.h>
 
 typedef MiscDelegateFlags DF;
 
@@ -186,18 +187,9 @@ static NSArray* DEL_NOTIFICATIONS = 0;	// Array of MiscNotification objects.
 //=============================================================================
 @implementation MiscTableScroll
 
-- (int)tag		{ return tag; }
-- (void)setTag:(int)x	{ tag = x; }
+@synthesize tag;
 
-- (id)representedObject	{ return representedObject; }
-- (void)setRepresentedObject:(id)p
-{
-    if (p != representedObject)
-    {
-        [representedObject release];
-        representedObject = [p retain];
-    }
-}
+@synthesize representedObject;
 
 //-----------------------------------------------------------------------------
 // + registerNotifications
@@ -276,12 +268,14 @@ static NSArray* DEL_NOTIFICATIONS = 0;	// Array of MiscNotification objects.
             if (!f || [self cellIsSelectedAtRow:r column:c])
             {
                 id cell = [self cellAtRow:r column:c];
-                if ([cell respondsToSelector:s])
+                if ([cell respondsToSelector:s]) {
                     if ([cell performSelector:s
-                                   withObject:p1 withObject:p2])
+                                   withObject:p1 withObject:p2]){
                         count++;
-                    else
+                    } else {
                         return count;
+                    }
+                }
             }
     return count;
 }
@@ -418,7 +412,7 @@ static NSArray* DEL_NOTIFICATIONS = 0;	// Array of MiscNotification objects.
                                 flags:(MiscDelegateFlags const*)flags
 {
     NSNotificationCenter* const nc = [NSNotificationCenter defaultCenter];
-    for (unsigned int i = [DEL_NOTIFICATIONS count]; i-- > 0; )
+    for (NSInteger i = [DEL_NOTIFICATIONS count]; i-- > 0; )
     {
         MiscNotification* const n = [DEL_NOTIFICATIONS objectAtIndex:i];
         DF::Selector const s = [n selector];
@@ -432,7 +426,7 @@ static NSArray* DEL_NOTIFICATIONS = 0;	// Array of MiscNotification objects.
     flags:(MiscDelegateFlags const*)flags
 {
     NSNotificationCenter* const nc = [NSNotificationCenter defaultCenter];
-    for (unsigned int i = [DEL_NOTIFICATIONS count]; i-- > 0; )
+    for (NSInteger i = [DEL_NOTIFICATIONS count]; i-- > 0; )
     {
         MiscNotification* const n = [DEL_NOTIFICATIONS objectAtIndex:i];
         if (flags->respondsTo( [n selector] ))
@@ -755,9 +749,9 @@ static void set_sizes( MiscTableBorder* b, float const* v, float lim )
         dummy = [[NSClipView alloc] initWithFrame:NSZeroRect];
 
     NSClipView* const old = [self contentView];
-    _contentView = dummy;
+    self.contentView = dummy;
     [super tile];
-    _contentView = old;
+    self.contentView = old;
 
     NSRect docRect = [dummy frame];
 
@@ -924,7 +918,7 @@ static void set_sizes( MiscTableBorder* b, float const* v, float lim )
      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
                [NSNumber numberWithInt:b], @"Border",
                [NSNumber numberWithInt:fromPos], @"OldSlot",
-               [NSNumber numberWithInt:toPos], @"NewSlot", 0]];
+               [NSNumber numberWithInt:toPos], @"NewSlot", nil]];
 }
 
 - (void)border:(MiscBorderType)b slotSortReversed:(int)n
@@ -937,7 +931,7 @@ static void set_sizes( MiscTableBorder* b, float const* v, float lim )
      postNotificationName:MiscTableScrollSlotSortReversedNotification
      object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
                            [NSNumber numberWithInt:b], @"Border",
-                           [NSNumber numberWithInt:phys], @"Slot", 0]];
+                           [NSNumber numberWithInt:phys], @"Slot", nil]];
 }
 
 - (void)border:(MiscBorderType)b slotResized:(int)n
@@ -947,21 +941,17 @@ static void set_sizes( MiscTableBorder* b, float const* v, float lim )
      postNotificationName:MiscTableScrollSlotResizedNotification object:self
      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
                [NSNumber numberWithInt:b], @"Border",
-               [NSNumber numberWithInt:phys], @"Slot", 0]];
+               [NSNumber numberWithInt:phys], @"Slot", nil]];
 }
 
 
 //-----------------------------------------------------------------------------
 // Target / Action
 //-----------------------------------------------------------------------------
-- (id)target				{ return target; }
-- (void)setTarget:(id)obj		{ target = obj; }
-- (id)doubleTarget			{ return doubleTarget; }
-- (void)setDoubleTarget:(id)obj		{ doubleTarget = obj; }
-- (SEL)action				{ return action; }
-- (void)setAction:(SEL)new_sel		{ action = new_sel; }
-- (void)setDoubleAction:(SEL)new_sel	{ doubleAction = new_sel; }
-- (SEL)doubleAction			{ return doubleAction; }
+@synthesize target;
+@synthesize doubleTarget;
+@synthesize action;
+@synthesize doubleAction;
 
 - (BOOL)sendAction:(SEL)aSel to:(id)obj
 {
@@ -1050,7 +1040,7 @@ static double get_height( NSFont* font )
         [[NSNotificationCenter defaultCenter]
          postNotificationName:MiscTableScrollFontChangedNotification
          object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                               oldFont, @"OldFont", newFont, @"NewFont", 0]];
+                               oldFont, @"OldFont", newFont, @"NewFont", nil]];
 
         [self setNeedsDisplay:YES];
     }
@@ -1068,7 +1058,7 @@ static double get_height( NSFont* font )
         [[NSNotificationCenter defaultCenter]
          postNotificationName:MiscTableScrollChangeFontNotification
          object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                               oldFont, @"OldFont", newFont, @"NewFont", 0]];
+                               oldFont, @"OldFont", newFont, @"NewFont", nil]];
         if (editInfo.editing)
             [editInfo.cell setFont:newFont];
         [self resumeEditing];
@@ -1162,7 +1152,7 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
 - (NSString*)stringFromIntArray:(NSArray*)array
 {
     NSMutableString* s = [[[NSMutableString alloc] init] autorelease];
-    for (int i = 0, lim = [array count]; i < lim; i++)
+    for (NSInteger i = 0, lim = [array count]; i < lim; i++)
     {
         if (i > 0) [s appendString:@" "];
         [s appendString:[[array objectAtIndex:i] stringValue]];
@@ -1428,7 +1418,7 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
 - (NSArray*)border:(MiscBorderType)b physicalToVisual:(NSArray*)p_array
 {
     NSMutableArray* v_array = [NSMutableArray array];
-    for (unsigned int i = 0, lim = [p_array count]; i < lim; i++)
+    for (NSInteger i = 0, lim = [p_array count]; i < lim; i++)
     {
         MiscCoord_P const p = [[p_array objectAtIndex:i] intValue];
         MiscCoord_V const v = [self border:b slotPosition:p];
@@ -1440,7 +1430,7 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
 - (NSArray*)border:(MiscBorderType)b visualToPhysical:(NSArray*)v_array
 {
     NSMutableArray* p_array = [NSMutableArray array];
-    for (unsigned int i = 0, lim = [v_array count]; i < lim; i++)
+    for (NSInteger i = 0, lim = [v_array count]; i < lim; i++)
     {
         MiscCoord_V const v = [[v_array objectAtIndex:i] intValue];
         MiscCoord_P const p = [self border:b slotAtPosition:v];
@@ -1456,28 +1446,28 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
 { return info[b]->border->isDraggable(); }
 - (BOOL)modifierDragSlots:(MiscBorderType)b
 { return info[b]->border->isModifierDrag(); }
-- (float)uniformSizeSlots:(MiscBorderType)b
-{ return (float) info[b]->border->getUniformSize(); }
-- (float)minUniformSizeSlots:(MiscBorderType)b
-{ return (float) info[b]->border->getMinUniformSize(); }
-- (float)maxUniformSizeSlots:(MiscBorderType)b
-{ return (float) info[b]->border->getMaxUniformSize(); }
+- (CGFloat)uniformSizeSlots:(MiscBorderType)b
+{ return (CGFloat) info[b]->border->getUniformSize(); }
+- (CGFloat)minUniformSizeSlots:(MiscBorderType)b
+{ return (CGFloat) info[b]->border->getMinUniformSize(); }
+- (CGFloat)maxUniformSizeSlots:(MiscBorderType)b
+{ return (CGFloat) info[b]->border->getMaxUniformSize(); }
 
-- (float)border:(MiscBorderType)b slotAdjustedSize:(int)n
-{ return (float) info[b]->border->effectiveSize_P(n); }
-- (float)border:(MiscBorderType)b slotSize:(int)n
-{ return (float) info[b]->border->getSize_P(n); }
-- (float)border:(MiscBorderType)b slotMinSize:(int)n
-{ return (float) info[b]->border->getMinSize_P(n); }
-- (float)border:(MiscBorderType)b slotMaxSize:(int)n
-{ return (float) info[b]->border->getMaxSize_P(n); }
+- (CGFloat)border:(MiscBorderType)b slotAdjustedSize:(int)n
+{ return (CGFloat) info[b]->border->effectiveSize_P(n); }
+- (CGFloat)border:(MiscBorderType)b slotSize:(int)n
+{ return (CGFloat) info[b]->border->getSize_P(n); }
+- (CGFloat)border:(MiscBorderType)b slotMinSize:(int)n
+{ return (CGFloat) info[b]->border->getMinSize_P(n); }
+- (CGFloat)border:(MiscBorderType)b slotMaxSize:(int)n
+{ return (CGFloat) info[b]->border->getMaxSize_P(n); }
 - (BOOL)border:(MiscBorderType)b slotIsSizeable:(int)n
 { return info[b]->border->isSizeable_P(n); }
 - (BOOL)border:(MiscBorderType)b slotIsAutosize:(int)n
 { return info[b]->border->isSpringy_P(n); }
 - (NSString*)border:(MiscBorderType)b slotTitle:(int)n
 { return info[b]->border->getTitle_P(n); }
-- (int)border:(MiscBorderType)b slotTag:(int)n
+- (NSInteger)border:(MiscBorderType)b slotTag:(int)n
 { return info[b]->border->getTag_P(n); }
 - (id)border:(MiscBorderType)b slotRepresentedObject:(int)n
 { return info[b]->border->getRepresentedObject_P(n); }
@@ -1492,7 +1482,7 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
 { info[b]->border->setDraggable( flag ); }
 - (void)border:(MiscBorderType)b setModifierDragSlots:(BOOL)flag
 { info[b]->border->setModifierDrag( flag ); }
-- (void)border:(MiscBorderType)b setUniformSizeSlots:(float)uniform_size
+- (void)border:(MiscBorderType)b setUniformSizeSlots:(CGFloat)uniform_size
 {
     MiscBorderInfo* const ip = info[b];
     if (ip->border->setUniformSize((MiscPixels)floor(uniform_size)))
@@ -1500,7 +1490,7 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
         [self constrainSize];
         if (b == MISC_ROW_BORDER)
         {
-            float const scr_size = uniform_size != 0 ?
+            CGFloat const scr_size = uniform_size != 0 ?
             uniform_size : ip->border->getDefaultSize();
             [self setLineScroll:scr_size];
             [self setPageScroll:scr_size];
@@ -1509,22 +1499,22 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
     }
 }
 
-- (void)border:(MiscBorderType)b setMinUniformSizeSlots:(float)size
+- (void)border:(MiscBorderType)b setMinUniformSizeSlots:(CGFloat)size
 { info[b]->border->setMinUniformSize( (MiscPixels)floor(size) ); }
-- (void)border:(MiscBorderType)b setMaxUniformSizeSlots:(float)size
+- (void)border:(MiscBorderType)b setMaxUniformSizeSlots:(CGFloat)size
 { info[b]->border->setMaxUniformSize( (MiscPixels)floor(size) ); }
 
-- (void)border:(MiscBorderType)b setSlot:(int)n size:(float)size
+- (void)border:(MiscBorderType)b setSlot:(int)n size:(CGFloat)size
 {
     info[b]->border->setSize_P( n, (MiscPixels)floor(size) );
     [self constrainSize];
 }
-- (void)border:(MiscBorderType)b setSlot:(int)n minSize:(float)size
+- (void)border:(MiscBorderType)b setSlot:(int)n minSize:(CGFloat)size
 {
     info[b]->border->setMinSize_P( n, (MiscPixels)floor(size) );
     [self constrainSize];
 }
-- (void)border:(MiscBorderType)b setSlot:(int)n maxSize:(float)size
+- (void)border:(MiscBorderType)b setSlot:(int)n maxSize:(CGFloat)size
 {
     info[b]->border->setMaxSize_P( n, (MiscPixels)floor(size) );
     [self constrainSize];
@@ -1544,7 +1534,7 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
         [ip->view setNeedsDisplay:YES];
 }
 
-- (void)border:(MiscBorderType)b setSlot:(int)n tag:(int)x
+- (void)border:(MiscBorderType)b setSlot:(int)n tag:(NSInteger)x
 { info[b]->border->setTag_P( n, x ); }
 - (void)border:(MiscBorderType)b setSlot:(int)n representedObject:(id)x
 { info[b]->border->setRepresentedObject_P( n, x ); }
@@ -1610,7 +1600,7 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
 { return [self border:MISC_COL_BORDER slotIsAutosize:n]; }
 - (NSString*)columnTitle:(int)n
 { return [self border:MISC_COL_BORDER slotTitle:n]; }
-- (int)columnTag:(int)n
+- (NSInteger)columnTag:(int)n
 { return [self border:MISC_COL_BORDER slotTag:n]; }
 - (id)columnRepresentedObject:(int)n
 { return [self border:MISC_COL_BORDER slotRepresentedObject:n]; }
@@ -1687,34 +1677,34 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
 { return [self draggableSlots:MISC_ROW_BORDER]; }
 - (BOOL)modifierDragRows
 { return [self modifierDragSlots:MISC_ROW_BORDER]; }
-- (float)uniformSizeRows
+- (CGFloat)uniformSizeRows
 { return [self uniformSizeSlots:MISC_ROW_BORDER]; }
-- (float)minUniformSizeRows
+- (CGFloat)minUniformSizeRows
 { return [self minUniformSizeSlots:MISC_ROW_BORDER]; }
-- (float)maxUniformSizeRows
+- (CGFloat)maxUniformSizeRows
 { return [self maxUniformSizeSlots:MISC_ROW_BORDER]; }
 
-- (float)rowAdjustedSize:(int)n
+- (CGFloat)rowAdjustedSize:(NSInteger)n
 { return [self border:MISC_ROW_BORDER slotAdjustedSize:n]; }
-- (float)rowSize:(int)n
+- (CGFloat)rowSize:(NSInteger)n
 { return [self border:MISC_ROW_BORDER slotSize:n]; }
-- (float)rowMinSize:(int)n
+- (CGFloat)rowMinSize:(NSInteger)n
 { return [self border:MISC_ROW_BORDER slotMinSize:n]; }
-- (float)rowMaxSize:(int)n
+- (CGFloat)rowMaxSize:(NSInteger)n
 { return [self border:MISC_ROW_BORDER slotMaxSize:n]; }
-- (BOOL)rowIsSizeable:(int)n
+- (BOOL)rowIsSizeable:(NSInteger)n
 { return [self border:MISC_ROW_BORDER slotIsSizeable:n]; }
-- (BOOL)rowIsAutosize:(int)n
+- (BOOL)rowIsAutosize:(NSInteger)n
 { return [self border:MISC_ROW_BORDER slotIsAutosize:n]; }
-- (NSString*)rowTitle:(int)n
+- (NSString*)rowTitle:(NSInteger)n
 { return [self border:MISC_ROW_BORDER slotTitle:n]; }
-- (int)rowTag:(int)n
+- (NSInteger)rowTag:(NSInteger)n
 { return [self border:MISC_ROW_BORDER slotTag:n]; }
-- (id)rowRepresentedObject:(int)n
+- (id)rowRepresentedObject:(NSInteger)n
 { return [self border:MISC_ROW_BORDER slotRepresentedObject:n]; }
-- (MiscTableCellStyle)rowCellType:(int)n
+- (MiscTableCellStyle)rowCellType:(NSInteger)n
 { return [self border:MISC_ROW_BORDER slotCellType:n]; }
-- (id)rowCellPrototype:(int)n
+- (id)rowCellPrototype:(NSInteger)n
 { return [self border:MISC_ROW_BORDER slotCellPrototype:n]; }
 
 - (void)setSizeableRows:(BOOL)flag
@@ -1723,32 +1713,32 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
 { [self border:MISC_ROW_BORDER setDraggableSlots:flag]; }
 - (void)setModifierDragRows:(BOOL)flag
 { [self border:MISC_ROW_BORDER setModifierDragSlots:flag]; }
-- (void)setUniformSizeRows:(float)size
+- (void)setUniformSizeRows:(CGFloat)size
 { [self border:MISC_ROW_BORDER setUniformSizeSlots:size]; }
-- (void)setMinUniformSizeRows:(float)size
+- (void)setMinUniformSizeRows:(CGFloat)size
 { [self border:MISC_ROW_BORDER setMinUniformSizeSlots:size]; }
-- (void)setMaxUniformSizeRows:(float)size
+- (void)setMaxUniformSizeRows:(CGFloat)size
 { [self border:MISC_ROW_BORDER setMaxUniformSizeSlots:size]; }
 
-- (void)setRow:(int)n size:(float)size
+- (void)setRow:(NSInteger)n size:(CGFloat)size
 { [self border:MISC_ROW_BORDER setSlot:n size:size]; }
-- (void)setRow:(int)n minSize:(float)size
+- (void)setRow:(NSInteger)n minSize:(CGFloat)size
 { [self border:MISC_ROW_BORDER setSlot:n minSize:size]; }
-- (void)setRow:(int)n maxSize:(float)size
+- (void)setRow:(NSInteger)n maxSize:(CGFloat)size
 { [self border:MISC_ROW_BORDER setSlot:n maxSize:size]; }
-- (void)setRow:(int)n sizeable:(BOOL)flag
+- (void)setRow:(NSInteger)n sizeable:(BOOL)flag
 { [self border:MISC_ROW_BORDER setSlot:n sizeable:flag]; }
-- (void)setRow:(int)n autosize:(BOOL)flag
+- (void)setRow:(NSInteger)n autosize:(BOOL)flag
 { [self border:MISC_ROW_BORDER setSlot:n autosize:flag]; }
-- (void)setRow:(int)n title:(NSString*)title
+- (void)setRow:(NSInteger)n title:(NSString*)title
 { [self border:MISC_ROW_BORDER setSlot:n title:title]; }
-- (void)setRow:(int)n tag:(int)x
+- (void)setRow:(NSInteger)n tag:(NSInteger)x
 { [self border:MISC_ROW_BORDER setSlot:n tag:x]; }
-- (void)setRow:(int)n representedObject:(id)x
+- (void)setRow:(NSInteger)n representedObject:(id)x
 { [self border:MISC_ROW_BORDER setSlot:n representedObject:x]; }
-- (void)setRow:(int)n cellType:(MiscTableCellStyle)x
+- (void)setRow:(NSInteger)n cellType:(MiscTableCellStyle)x
 { [self border:MISC_ROW_BORDER setSlot:n cellType:x]; }
-- (void)setRow:(int)n cellPrototype:(id)p
+- (void)setRow:(NSInteger)n cellPrototype:(id)p
 { [self border:MISC_ROW_BORDER setSlot:n cellPrototype:p]; }
 
 
@@ -1759,7 +1749,7 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
 //	subviews will have an opportunity to draw themselves.
 //-----------------------------------------------------------------------------
 
-- (void)drawCellAtRow:(int)row column:(int)col
+- (void)drawCellAtRow:(NSInteger)row column:(NSInteger)col
 {
     if ([tableView canDraw])
     {
@@ -1770,7 +1760,7 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
     }
 }
 
-- (void)drawRow:(int)row
+- (void)drawRow:(NSInteger)row
 {
     if ([tableView canDraw])
     {
@@ -1781,7 +1771,7 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
     }
 }
 
-- (void)drawColumn:(int)col
+- (void)drawColumn:(NSInteger)col
 {
     if ([tableView canDraw])
     {
@@ -1810,9 +1800,9 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
         }
     }
 }
-- (void)drawRowTitle:(int)n
+- (void)drawRowTitle:(NSInteger)n
 { [self border:MISC_ROW_BORDER drawSlotTitle:n]; }
-- (void)drawColumnTitle:(int)n
+- (void)drawColumnTitle:(NSInteger)n
 { [self border:MISC_COL_BORDER drawSlotTitle:n]; }
 
 - (BOOL)drawsClippedText		{ return drawsClippedText; }
@@ -1829,10 +1819,10 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
 // VISIBLE / SCROLLING
 //-----------------------------------------------------------------------------
 
-- (void)scrollCellToVisibleAtRow:(int)row column:(int)col
+- (void)scrollCellToVisibleAtRow:(NSInteger)row column:(NSInteger)col
 { [tableView scrollCellToVisibleAtRow:row column:col]; }
-- (void)scrollRowToVisible:(int)row { [tableView scrollRowToVisible:row]; }
-- (void)scrollColumnToVisible:(int)col
+- (void)scrollRowToVisible:(NSInteger)row { [tableView scrollRowToVisible:row]; }
+- (void)scrollColumnToVisible:(NSInteger)col
 { [tableView scrollColumnToVisible:col]; }
 - (void)scrollSelectionToVisible
 {
@@ -1843,63 +1833,44 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
 }
 
 
-- (int)numberOfVisibleSlots:(MiscBorderType)b
+- (NSInteger)numberOfVisibleSlots:(MiscBorderType)b
 { return [tableView numberOfVisibleSlots:b]; }
-- (int)firstVisibleSlot:(MiscBorderType)b
+- (NSInteger)firstVisibleSlot:(MiscBorderType)b
 { return [tableView firstVisibleSlot:b]; }
-- (int)lastVisibleSlot:(MiscBorderType)b
+- (NSInteger)lastVisibleSlot:(MiscBorderType)b
 { return [tableView lastVisibleSlot:b]; }
-- (BOOL)border:(MiscBorderType)b slotIsVisible:(int)n
+- (BOOL)border:(MiscBorderType)b slotIsVisible:(NSInteger)n
 { return [tableView border:b slotIsVisible:n]; }
-- (void)border:(MiscBorderType)b setFirstVisibleSlot:(int)n
+- (void)border:(MiscBorderType)b setFirstVisibleSlot:(NSInteger)n
 { [tableView border:b setFirstVisibleSlot:n]; }
-- (void)border:(MiscBorderType)b setLastVisibleSlot:(int)n
+- (void)border:(MiscBorderType)b setLastVisibleSlot:(NSInteger)n
 { [tableView border:b setLastVisibleSlot:n]; }
 
-- (int)numberOfVisibleColumns
+- (NSInteger)numberOfVisibleColumns
 { return [self numberOfVisibleSlots:MISC_COL_BORDER]; }
-- (int)firstVisibleColumn
+- (NSInteger)firstVisibleColumn
 { return [self firstVisibleSlot:MISC_COL_BORDER]; }
-- (int)lastVisibleColumn
+- (NSInteger)lastVisibleColumn
 { return [self lastVisibleSlot:MISC_COL_BORDER]; }
-- (BOOL)columnIsVisible:(int)n
+- (BOOL)columnIsVisible:(NSInteger)n
 { return [self border:MISC_COL_BORDER slotIsVisible:n]; }
-- (void)setFirstVisibleColumn:(int)n
+- (void)setFirstVisibleColumn:(NSInteger)n
 { [self border:MISC_COL_BORDER setFirstVisibleSlot:n]; }
-- (void)setLastVisibleColumn:(int)n
+- (void)setLastVisibleColumn:(NSInteger)n
 { [self border:MISC_COL_BORDER setLastVisibleSlot:n]; }
 
-- (int)numberOfVisibleRows
+- (NSInteger)numberOfVisibleRows
 { return [self numberOfVisibleSlots:MISC_ROW_BORDER]; }
-- (int)firstVisibleRow
+- (NSInteger)firstVisibleRow
 { return [self firstVisibleSlot:MISC_ROW_BORDER]; }
-- (int)lastVisibleRow
+- (NSInteger)lastVisibleRow
 { return [self lastVisibleSlot:MISC_ROW_BORDER]; }
-- (BOOL)rowIsVisible:(int)n
+- (BOOL)rowIsVisible:(NSInteger)n
 { return [self border:MISC_ROW_BORDER slotIsVisible:n]; }
-- (void)setFirstVisibleRow:(int)n
+- (void)setFirstVisibleRow:(NSInteger)n
 { [self border:MISC_ROW_BORDER setFirstVisibleSlot:n]; }
-- (void)setLastVisibleRow:(int)n
+- (void)setLastVisibleRow:(NSInteger)n
 { [self border:MISC_ROW_BORDER setLastVisibleSlot:n]; }
 
-
-//-----------------------------------------------------------------------------
-// *FIXME*
-//	OPENSTEP 4.2 Objective-C++ compiler for NT (final release) crashes
-//	whenever a message is sent to 'super' from within a category.  This
-//	bug also afflicts the 4.2 (prerelease) compiler for Mach and NT.
-//	Work around it by providing stub methods in the main (non-category)
-//	implementation which merely forward the appropriate message to 'super'
-//	on behalf of the categories.  Though ugly, it works, is very
-//	localized, and simple to remove when the bug is finally fixed.
-//-----------------------------------------------------------------------------
-- (id)superInitWithCoder:(NSCoder*)coder
-{ return [super initWithCoder:coder]; }
-- (void)superEncodeWithCoder:(NSCoder*)coder
-{ [super encodeWithCoder:coder]; }
-- (void)superKeyDown:(NSEvent*)p
-{ [super keyDown:p]; }
-- (id)superValidRequestorForSendType:(NSString*)s returnType:(NSString*)r
-{ return [super validRequestorForSendType:s returnType:r]; }
 
 @end

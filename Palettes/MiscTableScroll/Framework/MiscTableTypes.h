@@ -249,22 +249,22 @@ typedef enum
 #define MISC_SIZING_USER_BIT	(1 << 1) // User can resize.
 
 
-typedef enum
+typedef NS_ENUM(int, MiscTableSizing)
 {
     MISC_NUSER_NSPRINGY_SIZING,
     MISC_NUSER_SPRINGY_SIZING,
     MISC_USER_NSPRINGY_SIZING,
     MISC_USER_SPRINGY_SIZING,
-} MiscTableSizing;
+};
 
 #define	MISC_MAX_SIZING	MISC_USER_SPRINGY_SIZING
 
 
-typedef enum
+typedef NS_ENUM(int, MiscSortDirection)
 {
     MISC_SORT_ASCENDING,
     MISC_SORT_DESCENDING
-} MiscSortDirection;
+};
 
 #define	MISC_SORT_DIR_MAX	MISC_SORT_DESCENDING
 
@@ -273,22 +273,22 @@ typedef enum
 MISC_SORT_ASCENDING : MISC_SORT_DESCENDING)
 
 
-typedef enum				// Selector used to get data:
+typedef NS_ENUM(int, MiscSortType)				// Selector used to get data:
 {
     MISC_SORT_STRING_CASE_INSENSITIVE,	//  0 -stringValue
     MISC_SORT_STRING_CASE_SENSITIVE,	//  1 -stringValue
-    MISC_SORT_INT,			//  2 -intValue
-    MISC_SORT_UNSIGNED_INT,		//  3 -intValue
-    MISC_SORT_TAG,			//  4 -tag
-    MISC_SORT_UNSIGNED_TAG,		//  5 -tag
-    MISC_SORT_FLOAT,			//  6 -floatValue
-    MISC_SORT_DOUBLE,			//  7 -doubleValue
-    MISC_SORT_SKIP,			//  8 Don't compare cells in this slot.
+    MISC_SORT_INT,						//  2 -intValue
+    MISC_SORT_UNSIGNED_INT,				//  3 -intValue
+    MISC_SORT_TAG,						//  4 -tag
+    MISC_SORT_UNSIGNED_TAG,				//  5 -tag
+    MISC_SORT_FLOAT,					//  6 -floatValue
+    MISC_SORT_DOUBLE,					//  7 -doubleValue
+    MISC_SORT_SKIP,						//  8 Don't compare cells in this slot.
     MISC_SORT_TITLE_CASE_INSENSITIVE,	//  9 -title
-    MISC_SORT_TITLE_CASE_SENSITIVE,	// 10 -title
-    MISC_SORT_STATE,			// 11 -state
-    MISC_SORT_UNSIGNED_STATE,		// 12 -state
-} MiscSortType;
+    MISC_SORT_TITLE_CASE_SENSITIVE,		// 10 -title
+    MISC_SORT_STATE,					// 11 -state
+    MISC_SORT_UNSIGNED_STATE,			// 12 -state
+};
 
 #define	MISC_SORT_TYPE_MAX	MISC_SORT_UNSIGNED_STATE
 #define	MISC_SORT_CUSTOM	((MiscSortType)(int(MISC_SORT_TYPE_MAX) + 1))

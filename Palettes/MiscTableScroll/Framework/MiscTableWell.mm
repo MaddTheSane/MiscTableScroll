@@ -29,6 +29,7 @@
 //  Ported to OpenStep 4.0 for Mach PR2.
 //-----------------------------------------------------------------------------
 #import "MiscTableWell.h"
+#import <AppKit/NSColor.h>
 
 @implementation MiscTableWell
 

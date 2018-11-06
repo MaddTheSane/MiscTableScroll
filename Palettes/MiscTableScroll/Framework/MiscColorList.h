@@ -46,11 +46,11 @@ private:
 public:
 	MiscColorList();
 	~MiscColorList();
-	int count() const		{ return [colors count]; }
+	NSInteger count() const	{ return [colors count]; }
 	void empty()			{ [colors removeAllObjects]; }
-	NSColor* nth( int n ) const	{ return [colors objectAtIndex:n]; }
-	NSColor* operator[]( int n ) const { return nth(n); }
-	int store( NSColor* );
+	NSColor* nth( NSInteger n ) const	{ return [colors objectAtIndex:n]; }
+	NSColor* operator[]( NSInteger n ) const { return nth(n); }
+	NSInteger store( NSColor* );
 };
 
 #endif // __MiscColorList_h

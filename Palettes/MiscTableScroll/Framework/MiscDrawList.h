@@ -51,7 +51,7 @@ public:
 		NSString* text;
 		NSFont*   font;
 		NSImage*  image;
-		int       text_color;
+		NSInteger text_color;
 		NSUInteger flags;	// (alignment << 1) | (char_wrap)
 		void      draw_image();
 		void      draw_text( MiscLineWrapper& ) const;

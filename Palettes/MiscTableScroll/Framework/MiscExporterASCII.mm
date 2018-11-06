@@ -122,9 +122,9 @@ static void rowgrid( MiscExportGridMode row_grid, MiscExportGridMode col_grid,
 //-----------------------------------------------------------------------------
 // cell_alignment
 //-----------------------------------------------------------------------------
-static int cell_alignment( id cell )
+static NSTextAlignment cell_alignment( id cell )
 {
-    int rc = NSLeftTextAlignment;
+	NSTextAlignment rc = NSTextAlignmentLeft;
     if (cell != 0 && [cell respondsToSelector:@selector(alignment)])
         rc = [cell alignment];
     return rc;
@@ -158,17 +158,17 @@ class MiscCharFilter
 protected:
     FILE* fp;
     char const* s;
-    int len;
+    size_t len;
     int pos;
 public:
     MiscCharFilter( FILE* f ): fp(f), s(0), len(0), pos(0) {}
     virtual	~MiscCharFilter();
     virtual	char nextChar();
-    void reset( char const* t, int n ) { s = t; len = n; pos = 0; }
+    void reset( char const* t, size_t n ) { s = t; len = n; pos = 0; }
     void reset( char const* t ) { s = t; len = safe_strlen(s); pos = 0; }
-    void reset( NSString* t ) { reset( [t lossyCString] ); }
+    void reset( NSString* t ) { reset( [t UTF8String] ); }
     void reset()			{ pos = 0; }
-    int length() const		{ return len; }
+    size_t length() const		{ return len; }
     bool done() const		{ return pos >= len; }
     bool more() const		{ return pos < len; }
     virtual	void write();
@@ -176,8 +176,8 @@ public:
     void left( int field_width );
     void center( int field_width );
     void right( int field_width );
-    static	void pad( int n, FILE* f, char ch=' ' );
-    void pad( int n, char ch=' ' )	{ pad( n, fp, ch ); }
+    static	void pad( size_t n, FILE* f, char ch=' ' );
+    void pad( size_t n, char ch=' ' )	{ pad( n, fp, ch ); }
 };
 
 MiscCharFilter::~MiscCharFilter() {}
@@ -190,7 +190,7 @@ char MiscCharFilter::nextChar()
 }
 
 
-void MiscCharFilter::pad( int n, FILE* fp, char ch )
+void MiscCharFilter::pad( size_t n, FILE* fp, char ch )
 {
     while (n-- > 0)
         fputc( ch, fp );
@@ -213,7 +213,7 @@ void MiscCharFilter::write( int w )
 
 void MiscCharFilter::left( int w )
 {
-    int const delta = w - length();
+    ssize_t const delta = w - length();
     if (delta <= 0)
         write( w );
     else
@@ -226,13 +226,13 @@ void MiscCharFilter::left( int w )
 
 void MiscCharFilter::center( int w )
 {
-    int const delta = w - length();
+    ssize_t const delta = w - length();
     if (delta <= 0)
         write( w );
     else
     {
-        int const left_pad = (delta >> 1);
-        int const right_pad = delta - left_pad;
+        ssize_t const left_pad = (delta >> 1);
+        ssize_t const right_pad = delta - left_pad;
         pad( left_pad );
         write();
         pad( right_pad );
@@ -242,7 +242,7 @@ void MiscCharFilter::center( int w )
 
 void MiscCharFilter::right( int w )
 {
-    int const delta = w - length();
+    ssize_t const delta = w - length();
     if (delta <= 0)
         write( w );
     else
@@ -337,7 +337,7 @@ void MiscDelimFilter::write()
         int* w = widths;
         for (int c = 0; c < ncols; c++,w++)
         {
-            int const len = safe_strlen( str_at(r, map[c], tableScroll) );
+            size_t const len = safe_strlen( str_at(r, map[c], tableScroll) );
             if (*w < len)
                 *w = len;
         }
@@ -357,7 +357,7 @@ void MiscDelimFilter::write()
     int* wp = widths;
     for (c = 0; c < ncols; c++,wp++)
     {
-        int const len = safe_strlen( col_title(map[c], tableScroll) );
+        size_t const len = safe_strlen( col_title(map[c], tableScroll) );
         if (*wp < len)
             *wp = len;
     }
@@ -386,18 +386,18 @@ void MiscDelimFilter::write()
 - (void)fixedHeadersWrap:(int)row_title_width :(int)ncols
 			:(int const*)map :(int*)widths :(FILE*)fp
 {
-    int c;
-    int max_lines = 1;
+    NSInteger c;
+    NSInteger max_lines = 1;
 
     int* wp = widths;
     for (c = 0; c < ncols; c++,wp++)
     {
-        int const len = safe_strlen( col_title(map[c], tableScroll) );
+        ssize_t const len = safe_strlen( col_title(map[c], tableScroll) );
         if (len > *wp)
         {
             if (*wp == 0)
                 *wp = 1;
-            int const num_lines = (len + (*wp - 1)) / *wp;
+            NSInteger const num_lines = (len + (*wp - 1)) / *wp;
             if (max_lines < num_lines)
                 max_lines = num_lines;
         }
@@ -414,13 +414,13 @@ void MiscDelimFilter::write()
         {
             colgrid( columnGrid, fp );
             NSString* const s = col_title( map[c], tableScroll );
-            char const* const cs = [s lossyCString];
-            int const len = safe_strlen( cs );
+            char const* const cs = [s UTF8String];
+            size_t const len = safe_strlen( cs );
             bool skip = true;
             if (len > 0)
             {
-                int const num_lines = (len + (*w - 1)) / *w;
-                int const first_line = max_lines - num_lines;
+                NSInteger const num_lines = (len + (*w - 1)) / *w;
+                NSInteger const first_line = max_lines - num_lines;
                 if (i >= first_line)
                 {
                     skip = false;
@@ -431,7 +431,7 @@ void MiscDelimFilter::write()
                     }
                     else
                     {
-                        int const start_pos = (i - first_line) * *w;
+                        size_t const start_pos = (i - first_line) * *w;
                         filt.reset( cs + start_pos, len - start_pos );
                         filt.left( *w );
                     }
@@ -506,7 +506,7 @@ void MiscDelimFilter::write()
     int const ncols = [tableScroll numberOfColumns];
     int* col_map = [self makeColMap:ncols];
     int* widths = [self fixedWidths:nrows:ncols:col_map];
-    int const row_title_width = [self rowTitleCharWidth:nrows];
+    NSInteger const row_title_width = [self rowTitleCharWidth:nrows];
 
     [self fixedHeaders:row_title_width:ncols:col_map:widths:fp];
 
@@ -529,9 +529,9 @@ void MiscDelimFilter::write()
             switch (cell_alignment( cell ))
             {
                 default:
-                case NSLeftTextAlignment:   filt.left( *w );	break;
-                case NSRightTextAlignment:  filt.right( *w );	break;
-                case NSCenterTextAlignment: filt.center( *w );	break;
+				case NSTextAlignmentLeft:   filt.left( *w );	break;
+				case NSTextAlignmentRight:  filt.right( *w );	break;
+				case NSTextAlignmentCenter: filt.center( *w );	break;
             }
         }
         endline( columnGrid, fp );

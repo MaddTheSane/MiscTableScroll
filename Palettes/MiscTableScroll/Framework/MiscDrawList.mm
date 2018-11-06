@@ -64,11 +64,13 @@ void MiscDrawList::append( NSRect frame_rect, id cell, BOOL lit,
         if ([cell respondsToSelector:@selector(image)])
             img = [cell image];
 
-        if (img == 0)
-            if ([cell respondsToSelector:@selector(title)])
+        if (img == 0){
+            if ([cell respondsToSelector:@selector(title)]) {
                 txt = [cell title];
-            else if ([cell respondsToSelector:@selector(stringValue)])
+            } else if ([cell respondsToSelector:@selector(stringValue)]) {
                 txt = [cell stringValue];
+			}
+		}
 
         if (img != 0 || (txt != 0 && [txt length] != 0))
         {
@@ -114,7 +116,7 @@ void MiscDrawList::append( NSRect frame_rect, id cell, BOOL lit,
                 if ([cell respondsToSelector:@selector(alignment)])
                     flags = ([cell alignment] << 1);
                 else
-                    flags = (NSLeftTextAlignment << 1);
+					flags = (NSTextAlignmentLeft << 1);
                 if (get_char_wrap( cell ))
                     flags |= 1;
                 r.flags = flags;
@@ -156,7 +158,7 @@ void MiscDrawList::Rec::draw_image()
     else if (dy > 0)
         p.y = floor( p.y - dy / 2 );
 
-    [image compositeToPoint:p fromRect:r operation:NSCompositeSourceOver];
+	[image drawAtPoint:p fromRect:r operation:NSCompositingOperationSourceOver fraction:1];
 }
 
 

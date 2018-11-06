@@ -78,7 +78,7 @@ private:
     MiscCoord_P*	v2p;		// Visual -> Physical coord map.
     MiscCoord_V*	p2v;		// Physical -> Visual coord map.
     int		def_tag;	// Default tag value.
-    int*		tags;		// Indexed by physical coords.
+    NSInteger*		tags;		// Indexed by physical coords.
     id*		rep_objs;	// Indexed by physical coords.
     MiscPixels	min_uniform_size;// Limits for user resizing.
     MiscPixels	max_uniform_size;//
@@ -276,11 +276,11 @@ public:
     void setSizeable_P( MiscCoord_P x, bool y )
     { setSizeable( physicalToVisual(x), y ); }
 
-    int getTag_P( MiscCoord_P ) const;
-    int getTag( MiscCoord_V x ) const
+    NSInteger getTag_P( MiscCoord_P ) const;
+    NSInteger getTag( MiscCoord_V x ) const
     { return getTag_P( visualToPhysical(x) ); }
-    void setTag_P( MiscCoord_P, int );
-    void setTag( MiscCoord_V x, int y )
+    void setTag_P( MiscCoord_P, NSInteger );
+    void setTag( MiscCoord_V x, NSInteger y )
     { setTag_P( visualToPhysical(x), y ); }
 
     id getRepresentedObject_P( MiscCoord_P ) const;

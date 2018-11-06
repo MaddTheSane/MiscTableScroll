@@ -51,30 +51,29 @@ extern "C" {
 // MiscExporter
 //=============================================================================
 @implementation MiscExporter
+@synthesize exportFormat;
+@synthesize rowExportTitleMode=rowTitleMode;
+@synthesize columnExportTitleMode=columnTitleMode;
+@synthesize rowExportGridMode=rowGrid;
+@synthesize columnExportGridMode=columnGrid;
 
-- (MiscExportFormat)getExportFormat		{ return exportFormat; }
-- (MiscExportTitleMode)getRowExportTitleMode	{ return rowTitleMode; }
-- (MiscExportTitleMode)getColumnExportTitleMode	{ return columnTitleMode; }
-- (MiscExportGridMode)getRowExportGridMode	{ return rowGrid; }
-- (MiscExportGridMode)getColumnExportGridMode	{ return columnGrid; }
-
-- (void)setExportFormat:(MiscExportFormat)x		{ exportFormat = x; }
-- (void)setRowExportTitleMode:(MiscExportTitleMode)x	{ rowTitleMode = x; }
-- (void)setColumnExportTitleMode:(MiscExportTitleMode)x	{ columnTitleMode = x; }
-- (void)setRowExportGridMode:(MiscExportGridMode)x	{ rowGrid = x; }
-- (void)setColumnExportGridMode:(MiscExportGridMode)x	{ columnGrid = x; }
+- (MiscExportFormat)getExportFormat		{ return self.exportFormat; }
+- (MiscExportTitleMode)getRowExportTitleMode	{ return self.rowExportTitleMode; }
+- (MiscExportTitleMode)getColumnExportTitleMode	{ return self.columnExportTitleMode; }
+- (MiscExportGridMode)getRowExportGridMode	{ return self.rowExportGridMode; }
+- (MiscExportGridMode)getColumnExportGridMode	{ return self.columnExportGridMode; }
 
 
 //-----------------------------------------------------------------------------
 // rowTitleCharWidth:
 //-----------------------------------------------------------------------------
-- (int)rowTitleCharWidth:(int)nrows
+- (NSInteger)rowTitleCharWidth:(NSInteger)nrows
 {
-    int max_width = 0;
+    NSInteger max_width = 0;
     if (rowTitleMode != MISC_EXPORT_TITLES_OFF)
-        for (int r = 0; r < nrows; r++)
+        for (NSInteger r = 0; r < nrows; r++)
         {
-            int const len = [row_title( r, tableScroll ) length];
+            NSInteger const len = [row_title( r, tableScroll ) length];
             if (max_width < len)
                 max_width = len;
         }
@@ -116,7 +115,7 @@ extern "C" {
 - (int)exportToFilename:(NSString*)nm
 {
     int rc = 0;
-    FILE* fp = fopen( [nm lossyCString], "wb" );
+    FILE* fp = fopen( [nm fileSystemRepresentation], "wb" );
     if (fp == 0)
         rc = errno;
     else
@@ -170,10 +169,10 @@ extern "C" {
         
         [panel setDelegate:self];
         [panel setAccessoryView:[accessory view]];
-        if ([panel runModal] == NSOKButton)
+		if ([panel runModal] == NSModalResponseOK)
         {
             [self getValuesFromAccessoryView:accessory];
-            NSString* name = [panel filename];
+            NSString* name = [panel URL].path;
             if ((rc = [self exportToFilename:name]) != 0)
                 NSRunAlertPanel( @"Error", @"Cannot open %@.\n%s",
                                 @"OK", nil, nil, name, strerror(rc));

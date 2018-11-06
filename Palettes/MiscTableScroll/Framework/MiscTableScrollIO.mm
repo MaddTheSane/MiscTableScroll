@@ -330,7 +330,7 @@
     if (rowInfo.isOn && colInfo.isOn) [cornerView removeFromSuperview];
     [tableView removeFromSuperview];
 
-    [self superEncodeWithCoder:encoder];
+    [super encodeWithCoder:encoder];
     [self writeGlobalInfo:encoder];
     [self writeBorder:&colInfo encoder:encoder];
     [self writeBorder:&rowInfo encoder:encoder];

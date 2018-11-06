@@ -65,7 +65,7 @@
 //-----------------------------------------------------------------------------
 - (void)select:(NSPopUpButton*)popup itemWithTag:(int)tag
 {
-    unsigned int i = [popup numberOfItems];
+    NSInteger i = [popup numberOfItems];
     NSParameterAssert( i != 0 );
     while (i-- > 1)
         if (tag == [[popup itemAtIndex:i] tag])

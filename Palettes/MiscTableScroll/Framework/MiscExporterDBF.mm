@@ -36,6 +36,7 @@
 //-----------------------------------------------------------------------------
 #import "MiscExporterPrivate.h"
 #include <stdbool.h>
+#include <cstdio>
 
 extern "C" {
 #import	<stdio.h>
@@ -89,10 +90,12 @@ enum DBFDataType
     DBF_TYPE_DATETIME		// Date-time values only.
 };
 
-#define	DBF_BIT_CHAR		(1 << DBF_TYPE_CHAR)
-#define	DBF_BIT_NUMERIC		(1 << DBF_TYPE_NUMERIC)
-#define	DBF_BIT_DATE		(1 << DBF_TYPE_DATE)
-#define	DBF_BIT_DATETIME	(1 << DBF_TYPE_DATETIME)
+typedef NS_OPTIONS(unsigned int, DBFDataMask) {
+	DBF_BIT_CHAR		= (1 << DBF_TYPE_CHAR),
+	DBF_BIT_NUMERIC		= (1 << DBF_TYPE_NUMERIC),
+	DBF_BIT_DATE		= (1 << DBF_TYPE_DATE),
+	DBF_BIT_DATETIME	= (1 << DBF_TYPE_DATETIME)
+};
 
 static char const DBF_TYPE_CODE[] = "CNDD";
 
@@ -100,10 +103,10 @@ static char const DBF_TYPE_CODE[] = "CNDD";
 struct DBFInfo
 {
     DBFDataType	type;		// Final data type.
-    unsigned int	mask;		// All candidate types.
-    int		max_width;	// Max width for this column.
-    int		max_left;	// Left of decimal for numeric.
-    int		max_right;	// Right of decimal for numeric.
+    DBFDataMask	mask;		// All candidate types.
+    NSInteger	max_width;	// Max width for this column.
+    NSInteger	max_left;	// Left of decimal for numeric.
+    NSInteger	max_right;	// Right of decimal for numeric.
 };
 
 struct DBFDateTime
@@ -124,7 +127,15 @@ struct DBFDateTime
 static int dbf_field_name( char* buff, NSString* str )
 {
     int len = 0;
-    char const* s = (str != 0 ? [str lossyCString] : 0);
+	char const* s = NULL;
+	char *s2 = NULL;
+	if (str) {
+		NSData *tmpData = [str dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+		s2 = new char[tmpData.length + 1];
+		[tmpData getBytes:s2 length:tmpData.length];
+		s2[tmpData.length] = 0;
+		s = s2;
+	}
     if (s != 0)
     {
         bool in_gap = true;
@@ -162,6 +173,9 @@ static int dbf_field_name( char* buff, NSString* str )
 
     buff[ len ] = '\0';
 
+	if (s) {
+		delete [] s2;
+	}
     return len;
 }
 
@@ -175,12 +189,12 @@ static int dbf_field_name( char* buff, NSString* str )
 //	trimmed back to allow more space for the counter.  Returns the
 //	new "core" length for the field.
 //-----------------------------------------------------------------------------
-static int adjust_name( char* name, int core_len, int counter )
+static size_t adjust_name( char* name, size_t core_len, int counter )
 {
     char buff[ 16 ];
     sprintf( buff, "%d", counter );
 
-    int buff_len = strlen( buff );
+    size_t buff_len = strlen( buff );
     if (core_len + buff_len > DBF_FLD_NAME_MAX)
         core_len = DBF_FLD_NAME_MAX - buff_len;
 
@@ -211,7 +225,7 @@ static BOOL collision(	DBFFieldDef const* flds,
 static void set_field_name( NSString* s, DBFFieldDef* fld,
 			DBFFieldDef* flds )
 {
-    int slen = dbf_field_name( fld->name, s );
+    size_t slen = dbf_field_name( fld->name, s );
     int num_tries = 0;
     while (collision( flds, fld ))
         slen = adjust_name( fld->name, slen, ++num_tries );
@@ -262,13 +276,23 @@ inline static char const* skip_whitespace( char const* s )
 //-----------------------------------------------------------------------------
 static bool dbf_is_numeric( NSString* str, DBFInfo* ip )
 {
+	char const* s;
+	char *s2;
+	{
+		NSData *tmpData = [str dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+		s2 = new char[tmpData.length + 1];
+		[tmpData getBytes:s2 length:tmpData.length];
+		s2[tmpData.length] = 0;
+		s = s2;
+	}
     bool neg = false;
     int left_len = 0;
     int right_len = 0;
-    char const* s = [str lossyCString];
-    
-    if (*s == '\0')			// Empty string, treat as null.
+	
+	if (*s == '\0')	{		// Empty string, treat as null.
+		delete [] s2;
         return true;
+	}
     
     if (*s == '-')
     { s++; neg = true; }
@@ -308,9 +332,11 @@ static bool dbf_is_numeric( NSString* str, DBFInfo* ip )
         if (ip->max_right < right_len)
             ip->max_right = right_len;
         
+		delete [] s2;
         return true;
     }
     
+	delete [] s2;
     return false;
 }
 
@@ -320,7 +346,15 @@ static bool dbf_is_numeric( NSString* str, DBFInfo* ip )
 //-----------------------------------------------------------------------------
 static DBFDataType dbf_parse_time( NSString* str, DBFDateTime& dt )
 {
-    char const* s = [str lossyCString];
+	char *s2;
+	char const* s;
+	{
+		NSData *tmpData = [str dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+		s2 = new char[tmpData.length + 1];
+		[tmpData getBytes:s2 length:tmpData.length];
+		s2[tmpData.length] = 0;
+		s = s2;
+	}
     DBFDataType type = DBF_TYPE_CHAR;
     if ('0' <= *s && *s <= '9')
     {
@@ -367,6 +401,7 @@ static DBFDataType dbf_parse_time( NSString* str, DBFDateTime& dt )
             }
         }
     }
+	delete [] s2;
     return type;
 }
 
@@ -376,7 +411,14 @@ static DBFDataType dbf_parse_time( NSString* str, DBFDateTime& dt )
 //-----------------------------------------------------------------------------
 static DBFDataType dbf_parse_date( NSString* str, DBFDateTime& dt )
 {
-    char const* s = [str lossyCString];
+	char const* s;
+	@autoreleasepool {
+		NSData *tmpData = [str dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+		char *s2 = new char[tmpData.length + 1];
+		[tmpData getBytes:s2 length:tmpData.length];
+		s2[tmpData.length] = 0;
+		s = s2;
+	}
     memset( &dt, 0, sizeof(dt) );
     DBFDataType type = DBF_TYPE_CHAR;
     if (*s == '\0')
@@ -431,7 +473,7 @@ static DBFDataType dbf_parse_date( NSString* str, DBFDateTime& dt )
                                 type = DBF_TYPE_DATE;
                             else
                             {
-                                NSString* tm = [NSString stringWithCString:s];
+                                NSString* tm = @(s);
                                 type = dbf_parse_time( tm, dt );
                             }
                         }
@@ -470,7 +512,7 @@ static DBFDataType dbf_parse_date( NSString* str, DBFDateTime& dt )
             NSString* const s = str_at( r, map[c], tableScroll );
             if (s != 0 && [s length] > 0)
             {
-                int const len = [s length];
+                NSInteger const len = [s length];
                 if (ip->max_width < len)
                     ip->max_width = len;
                 unsigned int mask = ip->mask;
@@ -654,13 +696,20 @@ static DBFDataType dbf_parse_date( NSString* str, DBFDateTime& dt )
 //-----------------------------------------------------------------------------
 static void dbf_put_char( NSString* str, int width, FILE* fp )
 {
-    char const* s = [str lossyCString];
+	char const* s;
+	{
+		NSData *tmpData = [str dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+		char *s2 = new char[tmpData.length + 1];
+		[tmpData getBytes:s2 length:tmpData.length];
+		s2[tmpData.length] = 0;
+		s = s2;
+	}
     if (s == 0)
         pad( width, fp );
     else
     {
-        int const len = strlen( s );
-        int const delta = width - len;
+        size_t const len = strlen( s );
+        ssize_t const delta = width - len;
         if (delta > 0)
         {
             fwrite( s, len, 1, fp );
@@ -669,6 +718,7 @@ static void dbf_put_char( NSString* str, int width, FILE* fp )
         else
             fwrite( s, width, 1, fp );
     }
+	delete [] s;
 }
 
 
@@ -691,9 +741,17 @@ static void dbf_put_numeric( NSString* str, DBFInfo const* ip, FILE* fp )
     else
     {
         bool neg = false;
-        int right_len = 0;
+        NSInteger right_len = 0;
 
-        char const* s = [str lossyCString];
+		char const* s;
+        char *s2;
+		{
+			NSData *tmpData = [str dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+			s2 = new char[tmpData.length + 1];
+			[tmpData getBytes:s2 length:tmpData.length];
+			s2[tmpData.length] = 0;
+			s = s2;
+		}
         s = skip_whitespace(s);
         if (*s == '-')
         { s++; neg = true; }
@@ -705,7 +763,7 @@ static void dbf_put_numeric( NSString* str, DBFInfo const* ip, FILE* fp )
         while ('0' <= *s && *s <= '9')
             s++;
 
-        int const left_len = (s - left_part);
+        NSInteger const left_len = (s - left_part);
 
         char const* right_part = s;
         if (*s == DECIMAL_CHAR)
@@ -717,7 +775,7 @@ static void dbf_put_numeric( NSString* str, DBFInfo const* ip, FILE* fp )
             right_len = (s - right_part);
         }
 
-        int left_pad = ip->max_width - left_len;
+        NSInteger left_pad = ip->max_width - left_len;
         if (left_len == 0)
             left_pad--;			// Room for required '0'.
 
@@ -743,6 +801,7 @@ static void dbf_put_numeric( NSString* str, DBFInfo const* ip, FILE* fp )
             if (right_len < ip->max_right)
                 repchar( ip->max_right - right_len, '0', fp );
         }
+        delete [] s2;
     }
 }
 
@@ -752,7 +811,15 @@ static void dbf_put_numeric( NSString* str, DBFInfo const* ip, FILE* fp )
 //-----------------------------------------------------------------------------
 static void dbf_put_date( NSString* str, DBFInfo const* ip, FILE* fp )
 {
-    char const* s = (str != 0 ? [str lossyCString] : 0);
+	char const* s = NULL;
+	if (str) @autoreleasepool {
+		NSData *tmpData = [str dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+		char *s2 = new char[tmpData.length + 1];
+		[tmpData getBytes:s2 length:tmpData.length];
+		s2[tmpData.length] = 0;
+		s = s2;
+	}
+    char const* s3 = s;
     s = skip_whitespace(s);
     if (s == 0 || *s == 0)
     {
@@ -773,6 +840,9 @@ static void dbf_put_date( NSString* str, DBFInfo const* ip, FILE* fp )
             fputs( buff, fp );
         }
     }
+    if (s3) {
+        delete [] s3;
+    }
 }
 
 
@@ -785,7 +855,7 @@ static void dbf_put_date( NSString* str, DBFInfo const* ip, FILE* fp )
     int const tcols = [tableScroll numberOfColumns];
     int* col_map = [self makeColMap:tcols];
     DBFInfo* info = [self dbfAnalyze:nrows:tcols:col_map];
-    int row_title_width = [self rowTitleCharWidth:nrows];
+    NSInteger row_title_width = [self rowTitleCharWidth:nrows];
 
     if (row_title_width > DBF_CHAR_LEN_MAX)
         row_title_width = DBF_CHAR_LEN_MAX;

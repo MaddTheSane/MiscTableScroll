@@ -35,6 +35,7 @@
 //-----------------------------------------------------------------------------
 #import <MiscTableScroll/MiscTableScroll.h>
 #import "MiscTableView.h"
+#import <AppKit/NSWindow.h>
 
 enum KB_Action
 {
@@ -57,7 +58,7 @@ enum KB_Action
     ACT_NUM_ACTIONS
 };
 
-enum
+NS_ENUM(unichar)
 {
     K_RETURN		= '\r',
     K_SPACE		= ' ' ,
@@ -144,8 +145,8 @@ enum
 {
     if ([self numberOfSlots:b] > 0)
     {
-        int sFirst = [self firstVisibleSlot:b];
-        int const sLast  = [self lastVisibleSlot:b];
+        NSInteger sFirst = [self firstVisibleSlot:b];
+        NSInteger const sLast  = [self lastVisibleSlot:b];
         int const v = [self border:b slotPosition:sFirst];
         if (sFirst == sLast && v > 0)
             sFirst = [self border:b slotAtPosition:(v - 1)];
@@ -168,8 +169,8 @@ enum
     int const lim = [self numberOfSlots:b];
     if (lim > 0)
     {
-        int const sFirst = [self firstVisibleSlot:b];
-        int sLast = [self lastVisibleSlot:b];
+        NSInteger const sFirst = [self firstVisibleSlot:b];
+        NSInteger sLast = [self lastVisibleSlot:b];
         int const v = [self border:b slotPosition:sLast];
         if (sFirst == sLast && v < lim - 1)
             sLast = [self border:b slotAtPosition:(v + 1)];
@@ -255,7 +256,7 @@ enum
 //-----------------------------------------------------------------------------
 // - classifyFlags:forAction:
 //-----------------------------------------------------------------------------
-- (KB_Action)classifyFlags:(int)flags forAction:(KB_Action)deed
+- (KB_Action)classifyFlags:(NSEventModifierFlags)flags forAction:(KB_Action)deed
 {
     static KB_Action const MODIFIED_ACTIONS[ ACT_NUM_ACTIONS ] =
     {
@@ -276,7 +277,7 @@ enum
         ACT_LEFT_EDGE,		// ACT_TOP_EDGE
         ACT_RIGHT_EDGE		// ACT_BOT_EDG
     };
-    int const FLAGS = NSControlKeyMask | NSAlternateKeyMask | NSShiftKeyMask;
+	NSEventModifierFlags const FLAGS = NSEventModifierFlagControl | NSEventModifierFlagOption | NSEventModifierFlagShift;
     if ((flags & FLAGS) != 0)
         return MODIFIED_ACTIONS[ deed ];
     return deed;
@@ -289,12 +290,12 @@ enum
 - (KB_Action)classifyKeyDown:(NSEvent*)p
 {
     KB_Action deed = ACT_IGNORE;
-    unsigned int const flags = [p modifierFlags];
-    if ((flags & NSCommandKeyMask) == 0)
+    NSEventModifierFlags const flags = [p modifierFlags];
+	if ((flags & NSEventModifierFlagCommand) == 0)
     {
-        if ((flags & NSFunctionKeyMask) != 0)
+		if ((flags & NSEventModifierFlagFunction) != 0)
             deed = [self classifyFunctionKey:p];
-        else if ((flags & NSNumericPadKeyMask) != 0)
+		else if ((flags & NSEventModifierFlagNumericPad) != 0)
             deed = [self classifyNumericPadKey:p];
         else
             deed = [self classifyOtherKey:p];
@@ -336,7 +337,7 @@ enum
     }
 
     if (!handled && ![self incrementalSearch:p])
-        [self superKeyDown:p];
+        [super keyDown:p];
 }
 
 @end

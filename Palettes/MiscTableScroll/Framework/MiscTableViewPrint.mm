@@ -729,8 +729,8 @@ clip_exit:
         [self drawImage:img.page_footer at:NSMakePoint(left, bottom)];
     }
 
-    float dx = 0;
-    float dy = 0;
+    CGFloat dx = 0;
+    CGFloat dy = 0;
 
     if ([printInfo isHorizontallyCentered])
     {

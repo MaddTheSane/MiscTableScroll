@@ -46,7 +46,7 @@
 //-----------------------------------------------------------------------------
 - (void) mouseDown:(NSEvent*) event atPos:(MiscCoord_V)pos
 {
-    extending = (([event modifierFlags] & NSAlternateKeyMask) != 0);
+	extending = (([event modifierFlags] & NSEventModifierFlagOption) != 0);
     if (extending)
     {
         [super mouseDown: event atPos: pos];

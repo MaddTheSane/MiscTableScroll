@@ -41,9 +41,9 @@
 #include <cstring>
 
 
-@interface MiscExporter(Private)
+@interface MiscExporter()
 - (int*)makeColMap:(int)ncols;
-- (int)rowTitleCharWidth:(int) nrows;
+- (NSInteger)rowTitleCharWidth:(NSInteger) nrows;
 @end
 
 @interface MiscExporter(ASCII)
@@ -59,7 +59,7 @@
 //-----------------------------------------------------------------------------
 // safe_strlen
 //-----------------------------------------------------------------------------
-inline static int safe_strlen( NSString* s )
+inline static size_t safe_strlen( NSString* s )
 {
     return (s != 0 ? [s length] : 0);
 }
@@ -68,7 +68,7 @@ inline static int safe_strlen( NSString* s )
 //-----------------------------------------------------------------------------
 // safe_strlen
 //-----------------------------------------------------------------------------
-inline static int safe_strlen( char const* s )
+inline static size_t safe_strlen( char const* s )
 {
     return (s != 0 ? strlen(s) : 0);
 }
@@ -77,9 +77,9 @@ inline static int safe_strlen( char const* s )
 //-----------------------------------------------------------------------------
 // repchar
 //-----------------------------------------------------------------------------
-inline static void repchar( int rep, char c, FILE* fp )
+inline static void repchar( size_t rep, char c, FILE* fp )
 {
-    for (int i = 0; i < rep; i++)
+    for (size_t i = 0; i < rep; i++)
         fputc( c, fp );
 }
 
@@ -87,7 +87,7 @@ inline static void repchar( int rep, char c, FILE* fp )
 //-----------------------------------------------------------------------------
 // pad
 //-----------------------------------------------------------------------------
-inline static void pad( int len, FILE* fp )
+inline static void pad( size_t len, FILE* fp )
 {
     repchar( len, ' ', fp );
 }
@@ -101,19 +101,19 @@ inline static int col_at( int visual_pos, id obj )
 { return [obj columnAtPosition:visual_pos]; }
 
 
-inline static id cell_at( int r, int c, id obj )
+inline static id cell_at( NSInteger r, NSInteger c, id obj )
 { return [obj cellAtRow:r column:c]; }
 
 
-inline static NSString* str_at( int r, int c, id obj )
+inline static NSString* str_at( NSInteger r, NSInteger c, id obj )
 { return [obj stringValueAtRow:r column:c]; }
 
 
-inline static NSString* col_title( int c, id obj )
+inline static NSString* col_title( NSInteger c, id obj )
 { return [obj columnTitle:c]; }
 
 
-inline static NSString* row_title( int r, id obj )
+inline static NSString* row_title( NSInteger r, id obj )
 { return [obj rowTitle:r]; }
 
 

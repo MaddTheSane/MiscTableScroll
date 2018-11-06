@@ -209,6 +209,7 @@
 				55B437392179B0E4005ABAA2 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		55B437392179B0E4005ABAA2 /* Products */ = {
 			isa = PBXGroup;

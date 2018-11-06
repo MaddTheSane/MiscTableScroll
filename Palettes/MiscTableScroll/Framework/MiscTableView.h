@@ -115,12 +115,12 @@ struct MiscTablePages
 - (void)scrollRowToVisible:(int)row;			// Physical coord
 - (void)scrollColumnToVisible:(int)col;			// Physical coord
 
-- (int)numberOfVisibleSlots:(MiscBorderType)b;		// All physical coords.
-- (int)firstVisibleSlot:(MiscBorderType)b;
-- (int)lastVisibleSlot:(MiscBorderType)b;
-- (BOOL)border:(MiscBorderType)b slotIsVisible:(int)n;
-- (void)border:(MiscBorderType)b setFirstVisibleSlot:(int)n;
-- (void)border:(MiscBorderType)b setLastVisibleSlot:(int)n;
+- (NSInteger)numberOfVisibleSlots:(MiscBorderType)b;		// All physical coords.
+- (NSInteger)firstVisibleSlot:(MiscBorderType)b;
+- (NSInteger)lastVisibleSlot:(MiscBorderType)b;
+- (BOOL)border:(MiscBorderType)b slotIsVisible:(NSInteger)n;
+- (void)border:(MiscBorderType)b setFirstVisibleSlot:(NSInteger)n;
+- (void)border:(MiscBorderType)b setLastVisibleSlot:(NSInteger)n;
 
 - (void)setSelectionMode:(MiscSelectionMode)mode;
 - (void)selectionChanged;

@@ -36,16 +36,17 @@
 //-----------------------------------------------------------------------------
 #import <MiscTableScroll/MiscTableTypes.h>
 #import <Foundation/NSObject.h>
+#import <AppKit/NSSavePanel.h>
 
 @class MiscTableScroll;
 
-typedef enum
+typedef NS_ENUM(NSInteger, MiscExportFormat)
 {
     MISC_EXPORT_ASCII_FIXED,
     MISC_EXPORT_ASCII_TAB,
     MISC_EXPORT_ASCII_DELIMITED,
     MISC_EXPORT_DBF
-} MiscExportFormat;
+};
 
 #define	MISC_EXPORT_FORMAT_FIRST	MISC_EXPORT_ASCII_FIXED
 #define	MISC_EXPORT_FORMAT_LAST		MISC_EXPORT_DBF
@@ -79,7 +80,7 @@ typedef enum
 #define	MISC_EXPORT_GRID_COL_DEFAULT	MISC_EXPORT_GRID_LINE
 
 
-@interface MiscExporter : NSObject
+@interface MiscExporter : NSObject <NSOpenSavePanelDelegate>
 {
     MiscTableScroll*	tableScroll;	// Defaults
     MiscExportFormat	exportFormat;	// MISC_EXPORT_ASCII_FIXED
@@ -94,17 +95,17 @@ typedef enum
 - (int)exportTableScroll:(MiscTableScroll*)ts;	// Run SavePanel.
 - (int)exportTableScroll:(MiscTableScroll*)ts toFilename:(NSString*)name;
 
-- (void)setExportFormat:(MiscExportFormat)exportFormat;
-- (void)setRowExportTitleMode:(MiscExportTitleMode)rowTitleMode;
-- (void)setColumnExportTitleMode:(MiscExportTitleMode)columnTitleMode;
-- (void)setRowExportGridMode:(MiscExportGridMode)rowExportGridMode;
-- (void)setColumnExportGridMode:(MiscExportGridMode)columnExportGridMode;
+@property MiscExportFormat exportFormat;
+@property MiscExportTitleMode rowExportTitleMode;
+@property MiscExportTitleMode columnExportTitleMode;
+@property MiscExportGridMode rowExportGridMode;
+@property MiscExportGridMode columnExportGridMode;
 
-- (MiscExportFormat)getExportFormat;
-- (MiscExportTitleMode)getRowExportTitleMode;
-- (MiscExportTitleMode)getColumnExportTitleMode;
-- (MiscExportGridMode)getRowExportGridMode;
-- (MiscExportGridMode)getColumnExportGridMode;
+- (MiscExportFormat)getExportFormat NS_DEPRECATED_WITH_REPLACEMENT_MAC("exportFormat", 10_0, 10_9);
+- (MiscExportTitleMode)getRowExportTitleMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("rowExportTitleMode", 10_0, 10_9);
+- (MiscExportTitleMode)getColumnExportTitleMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("columnExportTitleMode", 10_0, 10_9);
+- (MiscExportGridMode)getRowExportGridMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("rowExportGridMode", 10_0, 10_9);
+- (MiscExportGridMode)getColumnExportGridMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("columnExportGridMode", 10_0, 10_9);
 
 + (MiscExporter*)commonInstance;
 

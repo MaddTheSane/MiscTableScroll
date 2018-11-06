@@ -74,7 +74,7 @@ static NSString* decode_string( NSCoder* coder, bool isCString )
         [coder decodeValueOfObjCType:@encode(char*) at:&cstr];
         if (cstr != 0)
         {
-            s = [NSString stringWithCString:cstr];
+            s = [NSString stringWithCString:cstr encoding:NSNEXTSTEPStringEncoding];
             NSZoneFree( [coder objectZone], cstr );
         }
     }
@@ -102,7 +102,7 @@ static void decode_c_string_array( NSCoder* coder, NSString** strings, int n )
     [coder decodeArrayOfObjCType:@encode(char*) count:n at:cstrings];
     for (int i = 0; i < n; i++)
     {
-        strings[i] = [[NSString allocWithZone:z] initWithCString:cstrings[i]];
+        strings[i] = [[NSString allocWithZone:z] initWithCString:cstrings[i] encoding:NSNEXTSTEPStringEncoding];
         NSZoneFree( z, cstrings[i] );
     }
     free( cstrings );
@@ -127,7 +127,7 @@ void MiscTableSlot::encodeWithCoder( NSCoder* coder )
 void MiscTableBorder::encodeWithCoder( NSCoder* coder )
 {
     int i;
-    register unsigned int m = 0;
+	unsigned int m = 0;
     m = (m << 1) | (rep_objs != 0);
     m = (m << 1) | (prototypes != 0);
     m = (m << 1) | (titles != 0);

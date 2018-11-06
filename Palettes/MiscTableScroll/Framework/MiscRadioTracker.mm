@@ -55,8 +55,8 @@
 //-----------------------------------------------------------------------------
 - (void) mouseDown:(NSEvent*) event atPos:(MiscCoord_V)pos
 {
-    if ([event type] == NSKeyDown &&				// NOTE *1*
-        ([event modifierFlags] & NSShiftKeyMask) != 0 &&
+	if ([event type] == NSEventTypeKeyDown &&				// NOTE *1*
+		([event modifierFlags] & NSEventModifierFlagShift) != 0 &&
         border->hasSelection() && pos == border->selectedSlot())
         border->selectNone();
     else
@@ -81,7 +81,7 @@
 //-----------------------------------------------------------------------------
 - (void) mouseUp:(NSEvent*) event atPos:(MiscCoord_V)pos
 {
-    if (([event modifierFlags] & NSShiftKeyMask) != 0 &&	// NOTE *1*
+	if (([event modifierFlags] & NSEventModifierFlagShift) != 0 &&	// NOTE *1*
         border->goodPos(pos) && border->isSelected(pos))
         border->selectNone();
 }

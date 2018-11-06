@@ -69,7 +69,7 @@ MISC_TS_EXTERN_END
 @interface MiscTableCell : NSCell <NSCopying,NSCoding>
 {
     id owner;
-    int tag;
+    NSInteger tag;
     unsigned int tc1_flags;
     void* tc1_data;
 }
@@ -89,11 +89,9 @@ MISC_TS_EXTERN_END
 - (void)setSelected:(BOOL)flag;
 - (BOOL)isSelected;
 
-- (int)tag;
-- (void)setTag:(int)tag;
+@property NSInteger tag;
 
-- (id)owner;
-- (void)setOwner:(id)obj;
+@property (nonatomic, assign) id owner;
 
 - (NSFont*)font;
 - (void)setFont:(NSFont*)obj;		// Turns off -useOwnerFont

@@ -46,10 +46,6 @@
 - (void)dealloc;
 - (void)establishConnection;
 
-// See implementation for explanation of the following methods.
-- (id)superInitSource:(id)src destination:(id)dest label:(NSString*)label;
-- (void)superEncodeWithCoder:(NSCoder*)coder;
-
 @end
 
 #endif // __MiscTableConnector_h

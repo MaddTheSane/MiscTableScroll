@@ -48,13 +48,13 @@
 - (void) mouseDown:(NSEvent*) event atPos:(MiscCoord_V)pos
 {
     deselecting = NO;
-    if ([event modifierFlags] & NSShiftKeyMask)
+	if ([event modifierFlags] & NSEventModifierFlagShift)
     {
         deselecting = border->isSelected( pos );
         border->toggle( pos );
         anchor = pos;
     }
-    else if ([event modifierFlags] & NSAlternateKeyMask)
+	else if ([event modifierFlags] & NSEventModifierFlagOption)
     {
         int selected_slot = border->selectedSlot();
         if (!border->goodPos( selected_slot ))

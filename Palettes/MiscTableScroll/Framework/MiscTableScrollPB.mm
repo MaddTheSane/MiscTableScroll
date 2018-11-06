@@ -68,7 +68,7 @@
 - (void)builtinRegisterServicesTypes
 {
     NSArray* sendTypes = [NSArray arrayWithObjects:
-                          NSTabularTextPboardType, NSStringPboardType, 0];
+                          NSPasteboardTypeTabularText, NSPasteboardTypeString, nil];
     NSArray* returnTypes = [NSArray array];
     [NSApp registerServicesMenuSendTypes:sendTypes returnTypes:returnTypes];
 }
@@ -97,12 +97,12 @@
                             returnType:(NSString*)t_return
 {
     if (t_return == 0 &&	// We only send stuff, we never take stuff.
-        ([t_send isEqualToString:NSTabularTextPboardType] ||
-         [t_send isEqualToString:NSStringPboardType]) &&
+        ([t_send isEqualToString:NSPasteboardTypeTabularText] ||
+         [t_send isEqualToString:NSPasteboardTypeString]) &&
         ([self hasRowSelection] || [self hasColumnSelection]))
         return self;
 
-    return [self superValidRequestorForSendType:t_send returnType:t_return];
+    return [super validRequestorForSendType:t_send returnType:t_return];
 }
 
 
@@ -149,8 +149,8 @@
 //-----------------------------------------------------------------------------
 - (BOOL)builtinCanWritePboardType:(NSString*)type
 {
-    return ([type isEqualToString:NSStringPboardType] ||
-            [type isEqualToString:NSTabularTextPboardType]);
+    return ([type isEqualToString:NSPasteboardTypeString] ||
+            [type isEqualToString:NSPasteboardTypeTabularText]);
 }
 
 
@@ -169,9 +169,9 @@
 
 
 //-----------------------------------------------------------------------------
-// - stringForNSStringPboardTypeAtRow:column:
+// - stringForNSPasteboardTypeStringAtRow:column:
 //-----------------------------------------------------------------------------
-- (NSString*)stringForNSStringPboardTypeAtRow:(int)row column:(int)col
+- (NSString*)stringForNSPasteboardTypeStringAtRow:(int)row column:(int)col
 {
     NSString* s = 0;
     id cell = [self cellAtRow:row column:col];
@@ -207,13 +207,13 @@
 
 
 //-----------------------------------------------------------------------------
-// - stringForNSStringPboardType
+// - stringForNSPasteboardTypeString
 //-----------------------------------------------------------------------------
-- (NSString*)stringForNSStringPboardType
+- (NSString*)stringForNSPasteboardTypeString
 {
     NSMutableString* s =
     [[[NSMutableString allocWithZone:[self zone]] init] autorelease];
-    unsigned int i, i_lim;
+    NSInteger i, i_lim;
     MiscCoord_V j, j_lim;
     MiscCoord_P row, col;
 
@@ -231,7 +231,7 @@
                 if (j > 0) [s appendString:MISC_PB_FIELD_SEPARATOR];
                 col = [self columnAtPosition:j];
                 [s appendString:
-                 [self stringForNSStringPboardTypeAtRow:row column:col]];
+                 [self stringForNSPasteboardTypeStringAtRow:row column:col]];
             }
             [s appendString:MISC_PB_RECORD_TERMINATOR];
         }
@@ -250,7 +250,7 @@
                 if (i > 0) [s appendString:MISC_PB_FIELD_SEPARATOR];
                 col = (MiscCoord_P) [[sel_list objectAtIndex:i] intValue];
                 [s appendString:
-                 [self stringForNSStringPboardTypeAtRow:row column:col]];
+                 [self stringForNSPasteboardTypeStringAtRow:row column:col]];
             }
             [s appendString:MISC_PB_RECORD_TERMINATOR];
         }
@@ -260,11 +260,11 @@
 
 
 //-----------------------------------------------------------------------------
-// - stringForNSTabularTextPboardType
+// - stringForNSPasteboardTypeTabularText
 //-----------------------------------------------------------------------------
-- (NSString*)stringForNSTabularTextPboardType
+- (NSString*)stringForNSPasteboardTypeTabularText
 {
-    return [self stringForNSStringPboardType];
+    return [self stringForNSPasteboardTypeString];
 }
 
 
@@ -274,10 +274,10 @@
 - (NSString*)builtinStringForPboardType:(NSString*)type
 {
     NSString* s = @"";
-    if ([type isEqualToString:NSStringPboardType])
-        s = [self stringForNSStringPboardType];
-    else if ([type isEqualToString:NSTabularTextPboardType])
-        s = [self stringForNSTabularTextPboardType];
+    if ([type isEqualToString:NSPasteboardTypeString])
+        s = [self stringForNSPasteboardTypeString];
+    else if ([type isEqualToString:NSPasteboardTypeTabularText])
+        s = [self stringForNSPasteboardTypeTabularText];
     return s;
 }
 
@@ -354,7 +354,7 @@
 - (void)copy:(id)sender
 {
     NSArray* types = [NSArray arrayWithObjects:
-                      NSTabularTextPboardType, NSStringPboardType, 0];
+                      NSPasteboardTypeTabularText, NSPasteboardTypeString, nil];
     [self writeSelectionToPasteboard:[NSPasteboard generalPasteboard]
                                types:types];
 }

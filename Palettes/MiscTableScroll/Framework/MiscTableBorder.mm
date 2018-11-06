@@ -229,7 +229,7 @@ void MiscTableBorder::do_realloc()
     slots  = (MiscTableSlot*) do_realloc( slots, sizeof(*slots) );
     v2p	   = (MiscCoord_P*) do_realloc( v2p, sizeof(*v2p) );
     p2v	   = (MiscCoord_V*) do_realloc( p2v, sizeof(*p2v) );
-    tags   = (int*) do_realloc( tags, sizeof(*tags) );
+    tags   = (NSInteger*) do_realloc( tags, sizeof(*tags) );
     rep_objs = (id*) do_realloc( rep_objs, sizeof(*rep_objs) );
     titles = (NSString**) do_realloc( titles, sizeof(*titles) );
     styles = (MiscTableCellStyle*) do_realloc( styles, sizeof(*styles) );
@@ -445,11 +445,13 @@ void MiscTableBorder::insertAt( MiscCoord_V x, MiscCoord_P p )
 //-----------------------------------------------------------------------------
 void MiscTableBorder::do_shift( void* p, int n, int i, int j )
 {
-    if (p != 0)
-        if (i < j)
+    if (p != 0) {
+        if (i < j) {
             memmove( (void*)((uintptr_t)p + i * n), (const void*)((uintptr_t)p + (i + 1) * n), (j - i) * n );
-        else
+        } else {
             memmove( (void*)((uintptr_t)p + (j  + 1) * n), (const void*)((uintptr_t)p + j * n), (i - j) * n );
+        }
+    }
 }
 
 
@@ -702,7 +704,7 @@ bool MiscTableBorder::setV2PMap( MiscCoord_P const* new_v2p )
 void MiscTableBorder::swapSlots( MiscCoord_P x, MiscCoord_P y )
 {
     MISC_SWAP( MiscTableSlot, slots, x, y )
-    MISC_SWAP( int, tags, x, y )
+    MISC_SWAP( NSInteger, tags, x, y )
     MISC_SWAP( id, rep_objs, x, y )
     MISC_SWAP( NSString*, titles, x, y )
     MISC_SWAP( MiscTableCellStyle, styles, x, y )
@@ -1002,7 +1004,7 @@ bool MiscTableBorder::setTitle_P( MiscCoord_P x, NSString* s )
 
 static inline void prepend_char( NSMutableString* s, char const c )
 {
-    NSString* cs = [NSString stringWithCString:&c length:1];
+    NSString* cs = [NSString stringWithFormat:@"%c", c];
     [s insertString:cs atIndex:0];
 }
 
@@ -1064,20 +1066,20 @@ bool MiscTableBorder::setTitleMode( MiscTableTitleMode x )
 //-----------------------------------------------------------------------------
 void MiscTableBorder::alloc_tags()
 {
-    tags = (int*) do_alloc_init( sizeof(*tags) );
+    tags = (NSInteger*) do_alloc_init( sizeof(*tags) );
     if (def_tag != 0)
         for (int i = 0;	 i < num_slots;	 i++)
             tags[i] = def_tag;
 }
 
-void MiscTableBorder::setTag_P( MiscCoord_P x, int n )
+void MiscTableBorder::setTag_P( MiscCoord_P x, NSInteger n )
 {
     MISC_RANGE_CHECK( x );
     if (tags == 0) alloc_tags();
     tags[x] = n;
 }
 
-int MiscTableBorder::getTag_P( MiscCoord_P x ) const
+NSInteger MiscTableBorder::getTag_P( MiscCoord_P x ) const
 {
     MISC_RANGE_CHECK( x );
     return (tags != 0) ? tags[x] : def_tag;

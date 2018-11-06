@@ -109,7 +109,7 @@ static int extract_rect( int* map, int nc, int nr,
 
     int r, c;
 
-    int const n = p - map;
+    NSInteger const n = p - map;
     r0 = n / nc;
     c0 = n % nc;
 
@@ -424,7 +424,7 @@ static int extract_rect( int* map, int nc, int nr,
 //-----------------------------------------------------------------------------
 // - border:slotIsVisible: -- Physical coord
 //-----------------------------------------------------------------------------
-- (BOOL)border:(MiscBorderType)bdr slotIsVisible:(int)n
+- (BOOL)border:(MiscBorderType)bdr slotIsVisible:(NSInteger)n
 {
     MiscTableBorder* const b = [self borderFor:bdr];
     if (b->count() > 0)
@@ -444,7 +444,7 @@ static int extract_rect( int* map, int nc, int nr,
 //-----------------------------------------------------------------------------
 // - border:setFirstVisibleSlot: -- Physical coord
 //-----------------------------------------------------------------------------
-- (void)border:(MiscBorderType)bdr setFirstVisibleSlot:(int)n
+- (void)border:(MiscBorderType)bdr setFirstVisibleSlot:(NSInteger)n
 {
     MiscTableBorder* const b = [self borderFor:bdr];
     int const num_slots = b->count();
@@ -462,7 +462,7 @@ static int extract_rect( int* map, int nc, int nr,
 //-----------------------------------------------------------------------------
 // - border:setLastVisibleSlot: -- Physical coord
 //-----------------------------------------------------------------------------
-- (void)border:(MiscBorderType)bdr setLastVisibleSlot:(int)n
+- (void)border:(MiscBorderType)bdr setLastVisibleSlot:(NSInteger)n
 {
     MiscTableBorder* const b = [self borderFor:bdr];
     int const num_slots = b->count();

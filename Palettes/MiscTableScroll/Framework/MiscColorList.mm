@@ -32,11 +32,9 @@
 #ifdef __GNUC__
 #pragma implementation
 #endif
+#import <Foundation/NSArray.h>
 #include "MiscColorList.h"
-
-extern "C" {
-#include <stdlib.h>	// free(), malloc(), realloc()
-}
+#include <cstdlib>	// free(), malloc(), realloc()
 
 
 //-----------------------------------------------------------------------------
@@ -60,9 +58,9 @@ MiscColorList::MiscColorList()
 //-----------------------------------------------------------------------------
 // store
 //-----------------------------------------------------------------------------
-int MiscColorList::store( NSColor* c )
+NSInteger MiscColorList::store( NSColor* c )
 {
-    for (int i = count(); i-- > 0; )
+    for (NSInteger i = count(); i-- > 0; )
         if ([c isEqual:nth(i)])
             return i;
     [colors addObject:c];
