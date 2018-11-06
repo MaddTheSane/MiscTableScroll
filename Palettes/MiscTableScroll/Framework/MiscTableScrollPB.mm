@@ -56,6 +56,16 @@
 }
 
 
+- (NSString *)stringForNSStringPboardType
+{
+	return [self stringForPboardType:NSPasteboardTypeString];
+}
+
+- (NSString *)stringForNSTabularTextPboardType
+{
+	return [self stringForPboardType:NSPasteboardTypeTabularText];
+}
+
 
 //-----------------------------------------------------------------------------
 // - builtinRegisterServicesTypes
@@ -305,9 +315,9 @@
     BOOL result = NO;
     NSMutableArray* types = [NSMutableArray array];
 
-    if (original_types != 0)
+    if (original_types != nil)
     {
-        for (unsigned int i = 0, lim = [original_types count]; i < lim; i++)
+        for (NSInteger i = 0, lim = [original_types count]; i < lim; i++)
         {
             id t = [original_types objectAtIndex:i];
             if ([self canWritePboardType:t])
@@ -315,12 +325,12 @@
         }
     }
 
-    unsigned int const nTypes = [types count];
+    NSInteger const nTypes = [types count];
     if (nTypes > 0 && ([self hasRowSelection] || [self hasColumnSelection]))
     {
-        [pboard declareTypes:types owner:0];
+        [pboard declareTypes:types owner:nil];
         
-        for (unsigned int i = 0;  i < nTypes;  i++)
+        for (NSInteger i = 0;  i < nTypes;  i++)
         {
             NSString* s = [types objectAtIndex:i];
             [pboard setString:[self stringForPboardType:s] forType:s];
