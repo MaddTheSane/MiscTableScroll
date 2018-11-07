@@ -47,6 +47,8 @@
 #import	<AppKit/NSCell.h>
 #import <AppKit/NSControl.h>
 #import	<AppKit/NSText.h>
+#import	<AppKit/NSColor.h>
+#import	<AppKit/NSWindow.h>
 
 typedef MiscDelegateFlags DF;
 
@@ -82,7 +84,7 @@ typedef MiscDelegateFlags DF;
     [[NSNotificationCenter defaultCenter]
      postNotificationName:name object:self
      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-               [n object], @"NSFieldEditor", 0]];
+               [n object], @"NSFieldEditor", nil]];
 }
 
 
@@ -96,7 +98,7 @@ typedef MiscDelegateFlags DF;
      object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
                            [NSNumber numberWithBool:changed], @"Changed",
                            [NSNumber numberWithInt:r], @"Row",
-                           [NSNumber numberWithInt:c], @"Column", 0]];
+                           [NSNumber numberWithInt:c], @"Column", nil]];
 }
 
 
@@ -428,7 +430,7 @@ typedef MiscDelegateFlags DF;
      postNotificationName:MiscTableScrollWillEditNotification
      object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
                            [NSNumber numberWithInt:row], @"Row",
-                           [NSNumber numberWithInt:col], @"Column", 0]];
+                           [NSNumber numberWithInt:col], @"Column", nil]];
     
     id const cell = [[self cellAtRow:row column:col] copyWithZone:[self zone]];
     id const editor = [[self window] fieldEditor:YES forObject:self];

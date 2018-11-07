@@ -361,7 +361,7 @@ static int extract_rect( int* map, int nc, int nr,
 //-----------------------------------------------------------------------------
 // - firstVisibleSlot: -- Physical coord
 //-----------------------------------------------------------------------------
-- (int)firstVisibleSlot:(MiscBorderType)bdr
+- (NSInteger)firstVisibleSlot:(MiscBorderType)bdr
 {
     MiscCoord_P ret = -1;
     MiscTableBorder* const b = [self borderFor:bdr];
@@ -383,7 +383,7 @@ static int extract_rect( int* map, int nc, int nr,
 //-----------------------------------------------------------------------------
 // - lastVisibleSlot: -- Physical coord
 //-----------------------------------------------------------------------------
-- (int)lastVisibleSlot:(MiscBorderType)bdr
+- (NSInteger)lastVisibleSlot:(MiscBorderType)bdr
 {
     MiscCoord_P ret = -1;
     MiscTableBorder* const b = [self borderFor:bdr];
@@ -405,7 +405,7 @@ static int extract_rect( int* map, int nc, int nr,
 //-----------------------------------------------------------------------------
 // - numberOfVisibleSlots:
 //-----------------------------------------------------------------------------
-- (int)numberOfVisibleSlots:(MiscBorderType)bdr
+- (NSInteger)numberOfVisibleSlots:(MiscBorderType)bdr
 {
     MiscTableBorder* const b = [self borderFor:bdr];
     if (b->count() > 0)
@@ -564,8 +564,8 @@ static int extract_rect( int* map, int nc, int nr,
         MiscColorList cl;
         id const scroll = [self scroll];
 
-        int const NORM_COLOR = cl.store([scroll backgroundColor]) + 1;
-        int const HIGH_COLOR = cl.store([scroll selectedBackgroundColor]) + 1;
+        NSInteger const NORM_COLOR = cl.store([scroll backgroundColor]) + 1;
+        NSInteger const HIGH_COLOR = cl.store([scroll selectedBackgroundColor]) + 1;
 
         int const nc = (cmax - cmin) + 1;
         int const nr = (rmax - rmin) + 1;
@@ -682,8 +682,8 @@ static int extract_rect( int* map, int nc, int nr,
                 rect.size.width = (w - 1);
                 id cell = [scroll cellAtRow:pr column:pc];
                 if (cell == 0 ||
-                    [cell respondsToSelector:@selector(ownerDraw)] &&
-                    [cell ownerDraw])
+                    ([cell respondsToSelector:@selector(ownerDraw)] &&
+                    [cell ownerDraw]))
                 {
                     dl.append( rect, cell, lit,
                               (lit ? hfgColor : fgColor), fnt );
@@ -708,7 +708,7 @@ static int extract_rect( int* map, int nc, int nr,
 //-----------------------------------------------------------------------------
 // - drawCellAtRow:column: -- Physical coords
 //-----------------------------------------------------------------------------
-- (void)drawCellAtRow:(int)row column:(int)col
+- (void)drawCellAtRow:(NSInteger)row column:(NSInteger)col
 {
     [self drawRect:[self cellFrameAtRow:row column:col]];
 }

@@ -101,6 +101,7 @@
 
 MISC_TS_EXTERN_BEGIN( "Objective-C" )
 #import <AppKit/NSScrollView.h>
+#import <AppKit/NSCell.h>
 MISC_TS_EXTERN_END
 
 MISC_TS_CLASS_DEF( MiscTableBorder );
@@ -130,6 +131,8 @@ typedef struct MiscBorderInfo
 	BOOL			autoSort;
 } MiscBorderInfo;
 
+@protocol MiscTableScrollDelegate;
+@protocol MiscTableScrollDataSource;
 
 @interface MiscTableScroll : NSScrollView
 {
@@ -140,16 +143,16 @@ typedef struct MiscBorderInfo
     MiscBorderInfo	rowInfo;
     MiscCornerView*	cornerView;
     NSFont*		font;
-    NSColor*		textColor;
-    NSColor*		backgroundColor;
-    NSColor*		selectedTextColor;
-    NSColor*		selectedBackgroundColor;
-    id			delegate;
-    id			dataDelegate;
-    MiscDelegateFlags*	delegateFlags;
-    MiscDelegateFlags*	dataDelegateFlags;
-    id			target;
-    id			doubleTarget;
+    NSColor*	textColor;
+    NSColor*	backgroundColor;
+    NSColor*	selectedTextColor;
+    NSColor*	selectedBackgroundColor;
+    __unsafe_unretained id<MiscTableScrollDelegate>			delegate;
+    __unsafe_unretained id<MiscTableScrollDataSource>		dataDelegate;
+    MiscDelegateFlags*		delegateFlags;
+    MiscDelegateFlags*		dataDelegateFlags;
+	__unsafe_unretained id	target;
+	__unsafe_unretained id	doubleTarget;
     SEL			action;
     SEL			doubleAction;
     NSInteger	tag;
@@ -176,10 +179,8 @@ typedef struct MiscBorderInfo
 
 
 // DELEGATE / TAG -------------------------------------------------------------
-- (id)delegate;
-- (void)setDelegate:(id)obj;
-- (id)dataDelegate;
-- (void)setDataDelegate:(id)obj;
+@property (assign) id<MiscTableScrollDelegate> delegate;
+@property (assign) id<MiscTableScrollDataSource> dataDelegate;
 
 @property NSInteger tag;
 
@@ -824,7 +825,8 @@ typedef struct MiscBorderInfo
 
 
 // DELEGATE PROTOCOL ----------------------------------------------------------
-@interface NSObject(MiscTableScrollDelegate)
+@protocol MiscTableScrollDelegate <NSObject>
+@optional
 - (BOOL)tableScroll:(MiscTableScroll*)scroll
 	getIncrementalSearchColumn:(int*)col;
 
@@ -834,12 +836,12 @@ typedef struct MiscBorderInfo
 	border:(MiscBorderType)b slotTitle:(int)slot;
 
 - (BOOL)tableScroll:(MiscTableScroll*)scroll
-	allowDragOperationAtRow:(int)row column:(int)col;
+	allowDragOperationAtRow:(NSInteger)row column:(NSInteger)col;
 - (void)tableScroll:(MiscTableScroll*)scroll
 	preparePasteboard:(NSPasteboard*)pb
-	forDragOperationAtRow:(int)row column:(int)col;
+	forDragOperationAtRow:(NSInteger)row column:(NSInteger)col;
 - (NSImage*)tableScroll:(MiscTableScroll*)scroll
-	imageForDragOperationAtRow:(int)row column:(int)col;
+	imageForDragOperationAtRow:(NSInteger)row column:(NSInteger)col;
 - (unsigned int)tableScroll:(MiscTableScroll*)scroll
 	draggingSourceOperationMaskForLocal:(BOOL)isLocal;
 - (BOOL)tableScrollIgnoreModifierKeysWhileDragging:(MiscTableScroll*)scroll;
@@ -860,16 +862,16 @@ typedef struct MiscBorderInfo
 	readSelectionFromPasteboard:(NSPasteboard*)pboard;
 
 - (BOOL)tableScroll:(MiscTableScroll*)scroll
-	canEdit:(NSEvent*)ev atRow:(int)row column:(int)col;
+	canEdit:(NSEvent*)ev atRow:(NSInteger)row column:(NSInteger)col;
 - (void)tableScroll:(MiscTableScroll*)scroll
-	edit:(NSEvent*)ev atRow:(int)row column:(int)col;
+	edit:(NSEvent*)ev atRow:(NSInteger)row column:(NSInteger)col;
 - (void)tableScroll:(MiscTableScroll*)scroll
-	abortEditAtRow:(int)row column:(int)col;
-@end
+	abortEditAtRow:(NSInteger)row column:(NSInteger)col;
+//@end
 
 
 // DELEGATE NOTIFICATIONS PROTOCOL --------------------------------------------
-@interface NSObject(MiscTableScrollNotifications)
+//@interface NSObject(MiscTableScrollNotifications)
 - (void)tableScrollSlotDragged:(NSNotification*)n;
 - (void)tableScrollSlotSortReversed:(NSNotification*)n;
 - (void)tableScrollSlotResized:(NSNotification*)n;
@@ -896,32 +898,33 @@ typedef struct MiscBorderInfo
 
 
 // DATA DELEGATE PROTOCOL -----------------------------------------------------
-@interface NSObject(MiscTableScrollDataSource)
+@protocol MiscTableScrollDataSource <NSObject>
+@optional
 - (int)tableScrollBufferCount:(MiscTableScroll*)scroll;
 
-- (id)tableScroll:(MiscTableScroll*)scroll cellAtRow:(int)row column:(int)col;
+- (id)tableScroll:(MiscTableScroll*)scroll cellAtRow:(NSInteger)row column:(NSInteger)col;
 - (id)tableScroll:(MiscTableScroll*)scroll reviveCell:(id)cell
-	atRow:(int)row column:(int)col;
+	atRow:(NSInteger)row column:(NSInteger)col;
 - (id)tableScroll:(MiscTableScroll*)scroll retireCell:(id)cell
-	atRow:(int)row column:(int)col;
+	atRow:(NSInteger)row column:(NSInteger)col;
 
+- (NSInteger)tableScroll:(MiscTableScroll*)scroll
+	tagAtRow:(NSInteger)row column:(NSInteger)col;
 - (int)tableScroll:(MiscTableScroll*)scroll
-	tagAtRow:(int)row column:(int)col;
-- (int)tableScroll:(MiscTableScroll*)scroll
-	intValueAtRow:(int)row column:(int)col;
+	intValueAtRow:(NSInteger)row column:(NSInteger)col;
 - (float)tableScroll:(MiscTableScroll*)scroll
-	floatValueAtRow:(int)row column:(int)col;
+	floatValueAtRow:(NSInteger)row column:(NSInteger)col;
 - (double)tableScroll:(MiscTableScroll*)scroll
-	doubleValueAtRow:(int)row column:(int)col;
+	doubleValueAtRow:(NSInteger)row column:(NSInteger)col;
 - (NSString*)tableScroll:(MiscTableScroll*)scroll
-	stringValueAtRow:(int)row column:(int)col;
+	stringValueAtRow:(NSInteger)row column:(NSInteger)col;
 - (NSString*)tableScroll:(MiscTableScroll*)scroll
-	titleAtRow:(int)row column:(int)col;
-- (int)tableScroll:(MiscTableScroll*)scroll
-	stateAtRow:(int)row column:(int)col;
+	titleAtRow:(NSInteger)row column:(NSInteger)col;
+- (NSControlStateValue)tableScroll:(MiscTableScroll*)scroll
+	stateAtRow:(NSInteger)row column:(NSInteger)col;
 
 - (BOOL)tableScroll:(MiscTableScroll*)scroll
-	setStringValue:(NSString*)s atRow:(int)row column:(int)col;
+	setStringValue:(NSString*)s atRow:(NSInteger)row column:(NSInteger)col;
 @end
 
 

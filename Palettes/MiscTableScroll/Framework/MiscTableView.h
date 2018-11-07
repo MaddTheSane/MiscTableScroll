@@ -107,7 +107,7 @@ struct MiscTablePages
 - (BOOL)getRow:(int*)row column:(int*)col		// Physical coords
 	forPoint:(NSPoint)point;
 
-- (void)drawCellAtRow:(int)row column:(int)col;		// Physical coords
+- (void)drawCellAtRow:(NSInteger)row column:(NSInteger)col;		// Physical coords
 - (void)drawRow:(int)row;				// Physical coord
 - (void)drawColumn:(int)col;				// Physical coord
 

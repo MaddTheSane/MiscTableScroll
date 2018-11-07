@@ -42,6 +42,7 @@
 #import "MiscTableView.h"
 #import	<AppKit/NSApplication.h>
 #import <AppKit/NSCursor.h>
+#import <AppKit/NSWindow.h>
 
 static float const ISEARCH_TIMEOUT = 2.5;	// seconds
 
@@ -84,7 +85,7 @@ void MISC_IS_Feedback::init_cell()
     if (cell == 0)
     {
         cell = [[MiscBorderCell allocWithZone:[scroll zone]] initTextCell:@""];
-        [cell setAlignment:NSLeftTextAlignment];
+		[cell setAlignment:NSTextAlignmentLeft];
     }
 }
 
@@ -123,12 +124,12 @@ void MISC_IS_Feedback::draw( NSString* str )
 //-----------------------------------------------------------------------------
 static MiscKeyAction classify_event(NSEvent* p)
 {
-    int const BAD_FLAGS = (NSCommandKeyMask | NSHelpKeyMask | NSControlKeyMask);
+	NSEventModifierFlags const BAD_FLAGS = (NSEventModifierFlagCommand | NSEventModifierFlagHelp | NSEventModifierFlagControl);
     MiscKeyAction rc = MISC_KEY_ABORT;
     unichar const K_DEL = '\x7f';
     NSEventType type = [p type];
 
-    if ([p type] == NSKeyDown)
+	if ([p type] == NSEventTypeKeyDown)
     {
         if (([p modifierFlags] & BAD_FLAGS) == 0)
         {
@@ -144,7 +145,7 @@ static MiscKeyAction classify_event(NSEvent* p)
                 rc = MISC_KEY_SPACE;
         }
     }
-    else if (type == NSKeyUp || type == NSFlagsChanged)
+	else if (type == NSEventTypeKeyUp || type == NSEventTypeFlagsChanged)
     {
         rc = MISC_KEY_IGNORE;
     }
@@ -222,7 +223,7 @@ static int MISC_IS_bsearch(
         int cmp = [s compare:buff options:cmp_mask range:r];
         if (descending)
             cmp = -cmp;
-        if (cmp < 0 || upper_bound && cmp == 0)
+        if (cmp < 0 || (upper_bound && cmp == 0))
             lo = mid + 1;
         else
             hi = mid - 1;
@@ -236,7 +237,7 @@ static int MISC_IS_bsearch(
 //-----------------------------------------------------------------------------
 inline static NSEvent* peek_event( float timeout )
 {
-    return [NSApp nextEventMatchingMask:NSAnyEventMask
+	return [NSApp nextEventMatchingMask:NSEventMaskAny
                               untilDate:[NSDate dateWithTimeIntervalSinceNow:timeout]
                                  inMode:NSDefaultRunLoopMode
                                 dequeue:NO];
@@ -313,7 +314,7 @@ inline static NSEvent* peek_event( float timeout )
                     unichar ch = [[p characters] characterAtIndex:0];
                     buff[ buff_len++ ] = char( ch );
                     buff[ buff_len ] = '\0';
-                    NSString* s = [NSString stringWithCString:buff];
+                    NSString* s = @(buff);
                     
                     MiscCoord_V const new_first = MISC_IS_bsearch(
                                                                   first, last, NO, descending, self, s,
@@ -370,7 +371,7 @@ inline static NSEvent* peek_event( float timeout )
                             last_stk[j] = last;
                         }
                         buff_len = i;
-                        strncpy( buff, [s cString], buff_len );
+                        strncpy( buff, [s UTF8String], buff_len );
                         buff[ buff_len ] = '\0';
                         changed = YES;
                     }
@@ -413,7 +414,7 @@ inline static NSEvent* peek_event( float timeout )
                         [self border:MISC_ROW_BORDER setCursorSlot:r];
                     [self displayIfNeeded];
                 }
-                NSString* s = [NSString stringWithCString:margin];
+                NSString* s = @(margin);
                 feedback.draw( s );
                 [win enableFlushWindow];
                 [win flushWindow];
@@ -430,7 +431,7 @@ inline static NSEvent* peek_event( float timeout )
         ka = classify_event( p );
 
         if (ka != MISC_KEY_ABORT)	// "Eat" the event.
-            [NSApp nextEventMatchingMask:NSAnyEventMask
+			[NSApp nextEventMatchingMask:NSEventMaskAny
                                untilDate:[NSDate dateWithTimeIntervalSinceNow:ISEARCH_TIMEOUT]
                                   inMode:NSDefaultRunLoopMode
                                  dequeue:YES];
