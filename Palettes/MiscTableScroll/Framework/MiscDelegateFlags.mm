@@ -40,6 +40,7 @@
 #include "MiscDelegateFlags.h"
 #import <Foundation/NSObject.h>
 #include <cstring>
+#import "MiscTableScroll.h"
 extern "C" {
 #include <string.h>	// memset()
 }
