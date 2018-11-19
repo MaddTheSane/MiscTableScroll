@@ -985,7 +985,7 @@ static void set_sizes( MiscTableBorder* b, float const* v, float lim )
 // FONT
 //-----------------------------------------------------------------------------
 + (NSFont*)defaultFont { return [NSFont userFontOfSize:12.0]; }
-- (NSFont*)font { return font; }
+@synthesize font;
 
 
 static double get_height( NSFont* font )

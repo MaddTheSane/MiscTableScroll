@@ -1076,7 +1076,7 @@
     [self tc1FreeData];
     
     NSInteger const ver =
-    [aDecoder versionForClassName:[[MiscTableCell class] description]];
+    [aDecoder versionForClassName:[MiscTableCell className]];
     
     switch (ver)
     {

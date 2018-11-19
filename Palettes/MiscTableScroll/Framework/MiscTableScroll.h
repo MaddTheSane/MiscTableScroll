@@ -201,8 +201,7 @@ typedef struct MiscBorderInfo
 
 
 // FONT -----------------------------------------------------------------------
-- (NSFont*)font;
-- (void)setFont:(NSFont*)newFont;
+@property (nonatomic, retain) NSFont *font;
 - (void)changeFont:(id)sender;
 + (NSFont*)defaultFont;
 
