@@ -218,7 +218,7 @@ void MiscDrawList::draw_text()
             {
                 if (recs[j].text_color >= 0)
                 {
-                    int const color_id = recs[j].text_color;
+                    NSInteger const color_id = recs[j].text_color;
                     [color_list[ color_id ] set];
                     
                     for (int k = j; k < num_recs; k++)	// For each record...
