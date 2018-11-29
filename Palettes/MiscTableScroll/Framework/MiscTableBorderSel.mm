@@ -91,8 +91,8 @@ NSArray* MiscTableBorder::selected_slots( bool do_tags ) const
         selection.getRangeAt( i, lo, hi );
         for ( ; lo <= hi; lo++)
         {
-            int n = (do_tags ? getTag(lo) : visualToPhysical(lo));
-            [array addObject:[NSNumber numberWithInt:n]];
+            NSInteger n = (do_tags ? getTag(lo) : visualToPhysical(lo));
+            [array addObject:@(n)];
         }
     }
     return array;
@@ -106,11 +106,11 @@ void MiscTableBorder::select_slots( NSArray* list, bool clear, bool set )
 {
     if (clear)
         selectNone();
-    int const lim = [list count];
+    NSInteger const lim = [list count];
     if (lim > 0)
     {
         MiscCoord_V last_selected = -1;
-        for (int i = lim; i-- > 0; )
+        for (NSInteger i = lim; i-- > 0; )
         {
             MiscCoord_P const p_slot = [[list objectAtIndex:i] intValue];
             if (goodPos( p_slot ))
@@ -138,7 +138,7 @@ void MiscTableBorder::select_tags( NSArray* list, bool clear, bool set )
 {
     if (clear)
         selectNone();
-    unsigned int const M = [list count];
+    NSUInteger const M = [list count];
     if (M > 0)
     {
         MiscCoord_V last_selected = -1;

@@ -242,7 +242,7 @@ void MiscTableBorder::initWithCoder_v2( NSCoder* coder, int ver )
     
     unsigned int mbuff;
     [coder decodeValueOfObjCType:@encode(unsigned int) at:&mbuff];
-    register unsigned int m = mbuff;
+    unsigned int m = mbuff;
 
     type	= MiscBorderType( m & 1 );
     selectable	= bool((m >>= 1) & 1);

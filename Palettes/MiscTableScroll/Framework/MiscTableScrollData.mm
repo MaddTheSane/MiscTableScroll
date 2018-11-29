@@ -124,12 +124,12 @@ return [cell NAME];\
 return 0;\
 }
 
-MISC_CELL_VAL( NSInteger, tag, TAG )				// tagAtRow:column:
+MISC_CELL_VAL( NSInteger, tag, TAG )			// tagAtRow:column:
 MISC_CELL_VAL( int, intValue, INT_VALUE )		// intValueAtRow:col...
 MISC_CELL_VAL( float, floatValue, FLOAT_VALUE )		// floatValueAtRow:c...
 MISC_CELL_VAL( double, doubleValue, DOUBLE_VALUE )	// doubleValueAtRow:...
 MISC_CELL_VAL( NSString*, stringValue, STRING_VALUE )	// stringValueAtRow:...
-MISC_CELL_VAL( int, state, STATE )			// stateAtRow:column:
+MISC_CELL_VAL( NSControlStateValue, state, STATE )	// stateAtRow:column:
 MISC_CELL_VAL( NSString*, title, TITLE )		// titleAtRow:column:
 #undef MISC_CELL_VAL
 
