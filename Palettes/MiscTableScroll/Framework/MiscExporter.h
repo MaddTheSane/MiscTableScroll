@@ -35,7 +35,7 @@
 //  v108: Ported to OPENSTEP 4.1 (gamma).
 //-----------------------------------------------------------------------------
 #import <MiscTableScroll/MiscTableTypes.h>
-MISC_TS_EXTERN_BEGIN( "Objective-C" )
+MISC_TS_EXTERN_BEGIN( "C" )
 #import <Foundation/NSObject.h>
 MISC_TS_EXTERN_END
 

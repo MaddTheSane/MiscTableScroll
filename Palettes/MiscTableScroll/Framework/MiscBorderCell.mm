@@ -34,10 +34,12 @@
 //  be set with -setTextColor:.
 //-----------------------------------------------------------------------------
 #import "MiscBorderCell.h"
-extern "Objective-C" {
+extern "C" {
 #import <AppKit/NSFont.h>
 #import <AppKit/NSImage.h>
 }
+
+#include <cmath>
 
 int const RESIZE_WIDTH = 4; // Resize zone to right of "toggle" image.
 
@@ -112,8 +114,8 @@ int const RESIZE_WIDTH = 4; // Resize zone to right of "toggle" image.
 	NSSize sz = [toggleImage size];
 	NSPoint pt = { NSMaxX(r) - RESIZE_WIDTH, NSMaxY(r) };
 
-	float const max_height = floor( NSHeight(r) );
-	float const max_width = floor( NSWidth(r) - RESIZE_WIDTH );
+        float const max_height = std::floor( NSHeight(r) );
+	float const max_width = std::floor( NSWidth(r) - RESIZE_WIDTH );
 
 	BOOL const too_high = sz.height > max_height;
 	BOOL const too_wide = sz.width > max_width;

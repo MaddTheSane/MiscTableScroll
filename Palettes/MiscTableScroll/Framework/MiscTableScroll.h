@@ -99,8 +99,9 @@
 //-----------------------------------------------------------------------------
 #import <MiscTableScroll/MiscTableTypes.h>
 
-MISC_TS_EXTERN_BEGIN( "Objective-C" )
+MISC_TS_EXTERN_BEGIN( "C" )
 #import <AppKit/NSScrollView.h>
+#import <AppKit/AppKit.h>
 MISC_TS_EXTERN_END
 
 MISC_TS_CLASS_DEF( MiscTableBorder );

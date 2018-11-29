@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5549652321B0A86D0085AE98 /* bool.h in Headers */ = {isa = PBXBuildFile; fileRef = 5549652221B0A86D0085AE98 /* bool.h */; };
 		558250F521B0A1D0009B7C3D /* MiscTableConnInspector.nib in Resources */ = {isa = PBXBuildFile; fileRef = 558250DE21B0A1D0009B7C3D /* MiscTableConnInspector.nib */; };
 		558250F621B0A1D0009B7C3D /* MiscTableScroll.nib in Resources */ = {isa = PBXBuildFile; fileRef = 558250E021B0A1D0009B7C3D /* MiscTableScroll.nib */; };
 		558250F721B0A1D0009B7C3D /* MiscTableScrollInspector.nib in Resources */ = {isa = PBXBuildFile; fileRef = 558250E221B0A1D0009B7C3D /* MiscTableScrollInspector.nib */; };
@@ -20,6 +21,7 @@
 		5582510321B0A1D0009B7C3D /* palette.table in Resources */ = {isa = PBXBuildFile; fileRef = 558250F221B0A1D0009B7C3D /* palette.table */; };
 		5582510B21B0A2F6009B7C3D /* MiscTableScroll.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B437382179B0E4005ABAA2 /* MiscTableScroll.framework */; };
 		5582510E21B0A303009B7C3D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B99595219230F400342A80 /* Cocoa.framework */; };
+		5582511C21B0A42B009B7C3D /* InterfaceBuilder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5582511B21B0A42B009B7C3D /* InterfaceBuilder.framework */; };
 		55B4373D2179B0E4005ABAA2 /* MiscTableScroll.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B4373B2179B0E4005ABAA2 /* MiscTableScroll.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55B437482179B27E005ABAA2 /* MiscExporterAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B437452179B27D005ABAA2 /* MiscExporterAccessoryView.xib */; };
 		55B4379E2179B2AF005ABAA2 /* MiscListTracker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B437492179B2A7005ABAA2 /* MiscListTracker.mm */; };
@@ -85,7 +87,7 @@
 		55B437DC2179B2AF005ABAA2 /* MiscTableViewDrag.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B437872179B2AD005ABAA2 /* MiscTableViewDrag.mm */; };
 		55B437DD2179B2AF005ABAA2 /* MiscExporterDBF.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B437882179B2AD005ABAA2 /* MiscExporterDBF.mm */; };
 		55B437DE2179B2AF005ABAA2 /* MiscTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B437892179B2AD005ABAA2 /* MiscTableView.h */; };
-		55B437DF2179B2AF005ABAA2 /* NSxibConnector.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B4378A2179B2AD005ABAA2 /* NSxibConnector.h */; };
+		55B437DF2179B2AF005ABAA2 /* NSNibConnector.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B4378A2179B2AD005ABAA2 /* NSNibConnector.h */; };
 		55B437E02179B2AF005ABAA2 /* MiscRadioTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B4378B2179B2AD005ABAA2 /* MiscRadioTracker.h */; };
 		55B437E12179B2AF005ABAA2 /* MiscColorList.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B4378C2179B2AD005ABAA2 /* MiscColorList.h */; };
 		55B437E22179B2AF005ABAA2 /* MiscExporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B4378D2179B2AD005ABAA2 /* MiscExporter.mm */; };
@@ -113,13 +115,23 @@
 		55B9959B219231DA00342A80 /* MiscTableViewPS.c in Sources */ = {isa = PBXBuildFile; fileRef = 55B99599219231DA00342A80 /* MiscTableViewPS.c */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5582511F21B0A442009B7C3D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55B4372F2179B0E4005ABAA2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55B437372179B0E4005ABAA2;
+			remoteInfo = MiscTableScroll;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		5549652221B0A86D0085AE98 /* bool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bool.h; sourceTree = "<group>"; };
 		558250D421B0A171009B7C3D /* MiscTableScrollPalette.ibpalette */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiscTableScrollPalette.ibpalette; sourceTree = BUILT_PRODUCTS_DIR; };
-		558250D521B0A171009B7C3D /* MiscTableScrollPalette-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "MiscTableScrollPalette-Info.plist"; sourceTree = "<group>"; };
 		558250DF21B0A1D0009B7C3D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MiscTableConnInspector.nib; sourceTree = "<group>"; };
 		558250E121B0A1D0009B7C3D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MiscTableScroll.nib; sourceTree = "<group>"; };
 		558250E321B0A1D0009B7C3D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MiscTableScrollInspector.nib; sourceTree = "<group>"; };
-		558250E421B0A1D0009B7C3D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		558250E421B0A1D0009B7C3D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		558250E521B0A1D0009B7C3D /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		558250E621B0A1D0009B7C3D /* Makefile.postamble */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.postamble; sourceTree = "<group>"; };
 		558250E721B0A1D0009B7C3D /* Makefile.preamble */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.preamble; sourceTree = "<group>"; };
@@ -135,10 +147,11 @@
 		558250F121B0A1D0009B7C3D /* MiscTableScrollPalette.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscTableScrollPalette.mm; sourceTree = "<group>"; };
 		558250F221B0A1D0009B7C3D /* palette.table */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = palette.table; sourceTree = "<group>"; };
 		558250F321B0A1D0009B7C3D /* PB.project */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PB.project; sourceTree = "<group>"; };
+		5582511B21B0A42B009B7C3D /* InterfaceBuilder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InterfaceBuilder.framework; path = Library/Frameworks/InterfaceBuilder.framework; sourceTree = SYSTEM_DEVELOPER_DIR; };
 		55B437382179B0E4005ABAA2 /* MiscTableScroll.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MiscTableScroll.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B4373B2179B0E4005ABAA2 /* MiscTableScroll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MiscTableScroll.h; sourceTree = "<group>"; };
-		55B4373C2179B0E4005ABAA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
-		55B437462179B27D005ABAA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.xib; name = en; path = en.lproj/MiscExporterAccessoryView.xib; sourceTree = "<group>"; };
+		55B4373C2179B0E4005ABAA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55B437462179B27D005ABAA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MiscExporterAccessoryView.xib; sourceTree = "<group>"; };
 		55B437492179B2A7005ABAA2 /* MiscListTracker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscListTracker.mm; sourceTree = "<group>"; };
 		55B4374A2179B2A7005ABAA2 /* MiscColView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscColView.mm; sourceTree = "<group>"; };
 		55B4374B2179B2A7005ABAA2 /* MiscTableScrollIO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscTableScrollIO.mm; sourceTree = "<group>"; };
@@ -203,7 +216,7 @@
 		55B437872179B2AD005ABAA2 /* MiscTableViewDrag.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscTableViewDrag.mm; sourceTree = "<group>"; };
 		55B437882179B2AD005ABAA2 /* MiscExporterDBF.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscExporterDBF.mm; sourceTree = "<group>"; };
 		55B437892179B2AD005ABAA2 /* MiscTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscTableView.h; sourceTree = "<group>"; };
-		55B4378A2179B2AD005ABAA2 /* NSxibConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSxibConnector.h; sourceTree = "<group>"; };
+		55B4378A2179B2AD005ABAA2 /* NSNibConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNibConnector.h; sourceTree = "<group>"; };
 		55B4378B2179B2AD005ABAA2 /* MiscRadioTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscRadioTracker.h; sourceTree = "<group>"; };
 		55B4378C2179B2AD005ABAA2 /* MiscColorList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscColorList.h; sourceTree = "<group>"; };
 		55B4378D2179B2AD005ABAA2 /* MiscExporter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscExporter.mm; sourceTree = "<group>"; };
@@ -238,6 +251,7 @@
 			files = (
 				5582510B21B0A2F6009B7C3D /* MiscTableScroll.framework in Frameworks */,
 				5582510E21B0A303009B7C3D /* Cocoa.framework in Frameworks */,
+				5582511C21B0A42B009B7C3D /* InterfaceBuilder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,7 +300,6 @@
 				558250DC21B0A1CF009B7C3D /* Palette */,
 				55B99594219230F400342A80 /* Frameworks */,
 				55B437392179B0E4005ABAA2 /* Products */,
-				558250D521B0A171009B7C3D /* MiscTableScrollPalette-Info.plist */,
 			);
 			sourceTree = "<group>";
 			tabWidth = 8;
@@ -304,6 +317,7 @@
 		55B4373A2179B0E4005ABAA2 /* MiscTableScroll */ = {
 			isa = PBXGroup;
 			children = (
+				5549652221B0A86D0085AE98 /* bool.h */,
 				55B437F72179B35A005ABAA2 /* README.rtf */,
 				55B437F42179B34B005ABAA2 /* License_Notes.rtf */,
 				55B437F32179B34B005ABAA2 /* License.rtf */,
@@ -392,7 +406,7 @@
 				55B437652179B2A9005ABAA2 /* MiscTracer.h */,
 				55B437512179B2A8005ABAA2 /* MiscTracer.mm */,
 				55B4379C2179B2AF005ABAA2 /* MiscVertResizeCursor.tiff */,
-				55B4378A2179B2AD005ABAA2 /* NSxibConnector.h */,
+				55B4378A2179B2AD005ABAA2 /* NSNibConnector.h */,
 				55B4373C2179B0E4005ABAA2 /* Info.plist */,
 				55B99598219231DA00342A80 /* MiscTableViewPS.h */,
 				55B99599219231DA00342A80 /* MiscTableViewPS.c */,
@@ -404,6 +418,7 @@
 		55B99594219230F400342A80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5582511B21B0A42B009B7C3D /* InterfaceBuilder.framework */,
 				55B99595219230F400342A80 /* Cocoa.framework */,
 			);
 			name = Frameworks;
@@ -423,7 +438,7 @@
 				55B437DE2179B2AF005ABAA2 /* MiscTableView.h in Headers */,
 				55B437D52179B2AF005ABAA2 /* MiscLineWrapper.h in Headers */,
 				55B437C12179B2AF005ABAA2 /* MiscCornerView.h in Headers */,
-				55B437DF2179B2AF005ABAA2 /* NSxibConnector.h in Headers */,
+				55B437DF2179B2AF005ABAA2 /* NSNibConnector.h in Headers */,
 				55B437F02179B2AF005ABAA2 /* MiscBorderView.h in Headers */,
 				55B437AB2179B2AF005ABAA2 /* MiscExporterPrivate.h in Headers */,
 				55B437C62179B2AF005ABAA2 /* MiscMouseTracker.h in Headers */,
@@ -449,6 +464,7 @@
 				55B437CA2179B2AF005ABAA2 /* MiscColView.h in Headers */,
 				55B437E12179B2AF005ABAA2 /* MiscColorList.h in Headers */,
 				55B437E02179B2AF005ABAA2 /* MiscRadioTracker.h in Headers */,
+				5549652321B0A86D0085AE98 /* bool.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +482,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5582512021B0A442009B7C3D /* PBXTargetDependency */,
 			);
 			name = MiscTableScrollPalette;
 			productName = MiscTableScrollPalette;
@@ -625,6 +642,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		5582512021B0A442009B7C3D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55B437372179B0E4005ABAA2 /* MiscTableScroll */;
+			targetProxy = 5582511F21B0A442009B7C3D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		558250DE21B0A1D0009B7C3D /* MiscTableConnInspector.nib */ = {
 			isa = PBXVariantGroup;
@@ -668,8 +693,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DEVELOPER_FRAMEWORKS_DIR)\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -699,8 +726,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DEVELOPER_FRAMEWORKS_DIR)\"";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
@@ -776,7 +805,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH_ACTUAL)";
+				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -787,8 +816,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "ppc i386 ppc64 x86_64";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

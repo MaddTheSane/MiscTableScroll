@@ -40,7 +40,7 @@
 // v134.1: Eliminated -tableScroll:edit:atRow:column:.
 //-----------------------------------------------------------------------------
 #include "bool.h"
-extern "Objective-C" {
+extern "C" {
 #import <Foundation/NSObject.h>
 }
 
@@ -106,7 +106,7 @@ public:
 	};
 
 private:
-    int const SET_SIZE = ((MAX_DEL_ENUM - 1) / 8) + 1;
+    static int const SET_SIZE = ((MAX_DEL_ENUM - 1) / 8) + 1;
     unsigned char set[ SET_SIZE ];
 
 public:

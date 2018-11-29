@@ -38,7 +38,8 @@
 // v108: Ported to OPENSTEP 4.1 (gamma).
 //-----------------------------------------------------------------------------
 #import "MiscExporterAccessoryView.h"
-extern "Objective-C" {
+extern "C" {
+#import <Foundation/Foundation.h>
 #import <AppKit/NSNibLoading.h>
 #import	<AppKit/NSPopUpButton.h>
 #import <AppKit/NSWindow.h>

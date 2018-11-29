@@ -49,8 +49,9 @@
 #import "MiscTableConnector.h"
 #import	<MiscTableScroll/MiscTableScroll.h>
 
-extern "Objective-C" {
+extern "C" {
 #import <AppKit/NSImage.h>
+#import <AppKit/NSApplication.h>
 #import	<Foundation/NSArray.h>
 #import	<Foundation/NSBundle.h>
 #import	<Foundation/NSDictionary.h>
@@ -189,7 +190,7 @@ static NSString*	FIRST_RESP_NAME = @"FirstResponder";
     [coder encodeObject:actionName];
     }
 
-- (id)nibLabel
+- (NSString*)nibLabel
     {
     return [NSString stringWithFormat:
 		@"%@/%@", [self outletName], [self actionValue] ];
@@ -616,7 +617,7 @@ static NSString*	FIRST_RESP_NAME = @"FirstResponder";
 	    {
 	    id dst = [conn destination];
 	    curdst = [self virtualDestFor:dst];
-	    [NSApp displayConnectionBetween:[conn source] and:dst];
+	    //[NSApp displayConnectionBetween:[conn source] and:dst];
 	    }
 	else
 	    curdst = 0;

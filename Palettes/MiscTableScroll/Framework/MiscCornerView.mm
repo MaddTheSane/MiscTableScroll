@@ -31,7 +31,7 @@
 #import "MiscCornerView.h"
 #import "MiscBorderCell.h"
 
-extern "Objective-C" {
+extern "C" {
 #import <AppKit/NSGraphics.h>
 }
 

@@ -36,8 +36,8 @@
 // An extensible array of specifications for drawing cell contents.
 //-----------------------------------------------------------------------------
 #include "MiscColorList.h"
-#include <bool.h>
-extern "Objective-C" {
+#include "bool.h"
+extern "C" {
 #import <Foundation/NSGeometry.h>
 }
 @class NSColor, NSFont, NSImage;

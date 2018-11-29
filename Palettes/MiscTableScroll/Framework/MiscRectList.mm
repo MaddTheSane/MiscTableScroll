@@ -33,7 +33,7 @@
 #pragma implementation
 #endif
 #include "MiscRectList.h"
-extern "Objective-C" {
+extern "C" {
 #import <AppKit/NSColor.h>
 }
 extern "C" {

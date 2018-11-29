@@ -34,7 +34,7 @@
 //-----------------------------------------------------------------------------
 #include <MiscTableScroll/MiscTableTypes.h>
 #include "bool.h"
-extern "Objective-C" {
+extern "C" {
 #import <Foundation/NSException.h>
 }
 

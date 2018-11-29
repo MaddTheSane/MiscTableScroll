@@ -40,7 +40,7 @@
 // A C++ object for calculating line breaks in text.
 //-----------------------------------------------------------------------------
 #include <bool.h>
-extern "Objective-C" {
+extern "C" {
 #import	<AppKit/NSFont.h>
 #import	<Foundation/NSGeometry.h>	// NSRect
 }
@@ -52,7 +52,7 @@ extern "C" {
 class MiscLineWrapper
 	{
 public:
-	int const	MAX_TEXT_LENGTH		= (INT_MAX / 2);
+	static int const	MAX_TEXT_LENGTH		= (INT_MAX / 2);
 static	float const	DEFAULT_LEFT_MARGIN;
 static	float const	DEFAULT_TOP_MARGIN;
 static	float const	DEFAULT_RIGHT_MARGIN;

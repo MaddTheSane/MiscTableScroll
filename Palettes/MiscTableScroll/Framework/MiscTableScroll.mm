@@ -115,16 +115,10 @@
 #import "MiscTableBorder.h"
 #import "MiscTableScrollPrivate.h"
 #import "MiscTableView.h"
-#import	<new.h>
+#include <new>
 
-extern "Objective-C" {
-#import <AppKit/NSApplication.h>
-#import <AppKit/NSCell.h>
-#import <AppKit/NSClipView.h>
-#import <AppKit/NSControl.h>	// Control-text notifications
-#import <AppKit/NSFont.h>
-#import <AppKit/NSFontManager.h>
-#import <AppKit/NSScroller.h>
+extern "C" {
+#import <AppKit/AppKit.h>
 }
 
 typedef MiscDelegateFlags DF;

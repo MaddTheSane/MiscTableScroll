@@ -44,7 +44,7 @@
 #import "MiscTableScrollPrivate.h"
 #import "MiscTableBorder.h"
 #import "MiscTableView.h"
-extern "Objective-C" {
+extern "C" {
 #import	<AppKit/NSCell.h>
 #import <AppKit/NSControl.h>
 #import	<AppKit/NSText.h>

@@ -52,7 +52,7 @@
 # define MISC_TS_CLASS_DEF(X)		typedef struct X X
 #endif
 
-MISC_TS_EXTERN_BEGIN( "Objective-C" )
+MISC_TS_EXTERN_BEGIN( "C" )
 #import <Foundation/NSGeometry.h>
 MISC_TS_EXTERN_END
 

@@ -39,7 +39,7 @@
 //  Revision 1.16  97/11/23  07:41:24  sunshine
 //  v130.1: Broke off MiscTableViewDrag.M and MiscTableViewCursor.M
 //-----------------------------------------------------------------------------
-extern "Objective-C" {
+extern "C" {
 #import <AppKit/NSView.h>
 }
 #import <MiscTableScroll/MiscTableTypes.h>

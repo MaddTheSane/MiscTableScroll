@@ -42,7 +42,7 @@
 #import "MiscTableBorder.h"
 #import "MiscMouseTracker.h"
 
-extern "Objective-C" {
+extern "C" {
 #import <AppKit/NSFontManager.h>
 }
 extern "C" {
@@ -59,7 +59,7 @@ int const MAX_COORDS = NUM_EDGES * NUM_COORDS;	// 16 coords per 4 rects
 //-----------------------------------------------------------------------------
 static inline void init_pswrap()
     {
-    static initialized = NO;
+    static BOOL initialized = NO;
     if (!initialized)
 	{
 	initialized = YES;

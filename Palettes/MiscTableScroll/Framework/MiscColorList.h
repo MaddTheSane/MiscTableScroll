@@ -34,7 +34,8 @@
 // Revision 1.1  96/08/30  14:51:51  sunshine
 // Extensible array of colors acting as a color palette.
 //-----------------------------------------------------------------------------
-extern "Objective-C" {
+extern "C" {
+#import <Foundation/NSArray.h>
 #import <AppKit/NSColor.h>
 }
 @class NSMutableArray;

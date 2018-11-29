@@ -36,17 +36,19 @@
 #endif
 #include "MiscLineWrapper.h"
 
-extern "Objective-C" {
+extern "C" {
 #import	<AppKit/NSText.h>	// NSLeftTextAlignment
-#import <AppKit/psops.h>
+#import <AppKit/NSFont.h>
+#import <AppKit/NSGraphicsContext.h>
+#import	<AppKit/NSStringDrawing.h>
+//#import <AppKit/psops.h>
 }
 
-extern "C" {
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-}
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <ctype.h>
 
 float const MiscLineWrapper::DEFAULT_LEFT_MARGIN   = 2.0;
 float const MiscLineWrapper::DEFAULT_TOP_MARGIN    = 0.0;
@@ -247,6 +249,10 @@ void MiscLineWrapper::setAlignment( int a )
 	}
     }
 
+@interface NSFont (deprecated)
+- (float)widthOfString:(NSString*)str1;
+- (float*)widths;
+@end
 
 //-----------------------------------------------------------------------------
 // calc_width
@@ -458,8 +464,7 @@ void MiscLineWrapper::draw( float x, float y, int start, int len )
     int const lim = start + len;
     char const save_ch = text[ lim ];
     text[ lim ] = '\0';
-    PSmoveto( x, y );
-    PSshow( text + start );
+        [[NSString stringWithUTF8String:text + start] drawAtPoint:NSMakePoint(x, y) withAttributes:nil];
     text[ lim ] = save_ch;
     }
 
@@ -511,7 +516,7 @@ void MiscLineWrapper::draw()
     if (width_check())
 	{
 	did_clip = true;
-	PSgsave();
+        [NSGraphicsContext saveGraphicsState];
 	NSRectClip( rect );
 	}
 
@@ -526,7 +531,7 @@ void MiscLineWrapper::draw()
 	    if (is_partial && !did_clip)
 		{
 		did_clip = true;
-		PSgsave();
+                [NSGraphicsContext saveGraphicsState];
 		NSRectClip( rect );
 		}
 	    x = x0;
@@ -543,5 +548,5 @@ void MiscLineWrapper::draw()
 	}
 
     if (did_clip)
-	PSgrestore();
+        [NSGraphicsContext restoreGraphicsState];
     }

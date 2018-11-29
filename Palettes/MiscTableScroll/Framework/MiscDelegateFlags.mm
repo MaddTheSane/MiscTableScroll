@@ -38,7 +38,7 @@
 #pragma implementation
 #endif
 #include "MiscDelegateFlags.h"
-extern "Objective-C" {
+extern "C" {
 #import <Foundation/NSObject.h>
 }
 extern "C" {

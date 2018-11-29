@@ -41,7 +41,7 @@
 #import "MiscExporterPrivate.h"
 #import "MiscExporterAccessoryView.h"
 #import	<MiscTableScroll/MiscTableScroll.h>
-extern "Objective-C" {
+extern "C" {
 #import	<AppKit/NSSavePanel.h>
 }
 extern "C" {

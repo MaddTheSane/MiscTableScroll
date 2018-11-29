@@ -37,7 +37,7 @@
 #import <MiscTableScroll/MiscTableScroll.h>
 #import "MiscTableScrollPrivate.h"
 
-extern "Objective-C" {
+extern "C" {
 #import <AppKit/NSApplication.h>
 #import <AppKit/NSCell.h>
 #import <AppKit/NSPasteboard.h>

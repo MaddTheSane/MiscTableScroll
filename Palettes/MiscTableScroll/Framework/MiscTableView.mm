@@ -54,18 +54,15 @@
 #import "MiscTableScrollPrivate.h"
 #import <MiscTableScroll/MiscTableCell.h>
 #import <MiscTableScroll/MiscTableScroll.h>
-#import	<new.h>
+#include	<new>
 
-extern "Objective-C" {
+extern "C" {
 #import <AppKit/NSApplication.h>
 #import <AppKit/NSControl.h>	// Control-text notifications
 #import <AppKit/NSText.h>
-#import <AppKit/psops.h>
+//#import <AppKit/psops.h>
 }
-
-extern "C" {
-#import <math.h>	// floor()
-}
+#include <cmath>	// floor()
 
 //-----------------------------------------------------------------------------
 // dump_map
@@ -555,7 +552,7 @@ static int extract_rect( int* map, int nc, int nr,
     BOOL const need_clip = ([[self subviews] count] != 0);
     if (need_clip)
 	{
-	PSgsave();
+	[NSGraphicsContext saveGraphicsState];
 	NSRectClip( nsrect );
 	}
 
@@ -705,7 +702,7 @@ static int extract_rect( int* map, int nc, int nr,
 	}
 
     if (need_clip)
-	PSgrestore();
+	[NSGraphicsContext restoreGraphicsState];
     }
 
 

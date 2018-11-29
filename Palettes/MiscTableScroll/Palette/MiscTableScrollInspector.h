@@ -41,7 +41,7 @@
 //  presence/absence of auto-size slots.  Eliminated data-sizing.
 //  Added alignment control.
 //-----------------------------------------------------------------------------
-extern "Objective-C" {
+extern "C" {
 #import <InterfaceBuilder/InterfaceBuilder.h>
 }
 #import <MiscTableScroll/MiscTableTypes.h>

@@ -36,7 +36,7 @@
 //  as one does with mouse events rather than the behavior being different
 //  for keyboard events).  Ditched -keyDown:atPos: method.
 //-----------------------------------------------------------------------------
-extern "Objective-C" {
+extern "C" {
 #import <Foundation/NSObject.h>
 }
 #import <MiscTableScroll/MiscTableTypes.h>

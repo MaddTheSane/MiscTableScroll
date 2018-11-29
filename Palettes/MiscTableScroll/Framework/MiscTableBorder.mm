@@ -49,16 +49,14 @@
 #include "MiscTableUtil.h"
 #include <MiscTableScroll/MiscTableScroll.h>
 #include <MiscTableScroll/MiscTableCell.h>
-extern "Objective-C" {
+extern "C" {
 #import <AppKit/NSCell.h>
 #import <AppKit/NSButtonCell.h>
 #import <AppKit/NSImage.h>
 }
-extern "C" {
-#include <math.h>	// floor()
-#include <stdlib.h>
-#include <string.h>
-}
+#include <cmath>	// floor()
+#include <cstdlib>
+#include <cstring>
 
 #define MISC_SWAP(T,V,X,Y)\
 	if ((V) != 0) { T const t = (V)[X]; (V)[X] = (V)[Y]; (V)[Y] = t; }

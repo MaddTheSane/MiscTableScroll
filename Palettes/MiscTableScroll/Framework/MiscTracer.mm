@@ -32,10 +32,13 @@
 #pragma implementation
 #endif
 #include "MiscTracer.h"
-extern "Objective-C" {
+extern "C" {
 #include <Foundation/NSAutoreleasePool.h>
-#include <Foundation/NSUtilities.h>
+#import <Foundation/NSString.h>
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSEnumerator.h>
 }
+#include <cstdarg>
 
 int MiscTracer::TRACE_DEPTH = 0;
 

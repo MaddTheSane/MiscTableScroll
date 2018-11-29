@@ -49,18 +49,16 @@
 #import "MiscTableBorder.h"
 #import "MiscTableScrollPrivate.h"
 
-extern "Objective-C" {
+extern "C" {
 #import	<AppKit/NSApplication.h>
 #import	<AppKit/NSImage.h>
 #import	<AppKit/NSPrintInfo.h>
 #import <AppKit/NSPrintOperation.h>
 #import	<AppKit/NSPrintPanel.h>
-#import <AppKit/psops.h>
+//#import <AppKit/psops.h>
 }
 
-extern "C" {
-#import	<math.h>	// floor()
-}
+#include <cmath>	// floor()
 
 @implementation MiscTableView(Print)
 
@@ -713,6 +711,8 @@ clip_exit:
     if (info.is_scaled)
 	{
 	float const k = info.scale_factor;
+            extern void PSscale( float, float );
+
 	PSscale( k, k );
 	bottom /= k;
 	top /= k;

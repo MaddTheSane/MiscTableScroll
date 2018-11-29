@@ -42,8 +42,8 @@
 #import "MiscTableBorder.h"
 #import "MiscTableScrollPrivate.h"
 #import "MiscTableView.h"
-#import <new.h>
-extern "Objective-C" {
+#include <new>
+extern "C" {
 #import <AppKit/NSClipView.h>
 }
 

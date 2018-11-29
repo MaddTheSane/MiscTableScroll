@@ -41,7 +41,7 @@
 #import "MiscTableView.h"
 #import "MiscBorderView.h"
 
-extern "Objective-C" {
+extern "C" {
 #import	<AppKit/NSApplication.h>
 #import	<AppKit/NSPrintInfo.h>
 #import	<AppKit/NSPrintPanel.h>

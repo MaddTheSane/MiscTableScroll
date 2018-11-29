@@ -42,7 +42,7 @@
 #import <MiscTableScroll/MiscTableCell.h>
 #import "MiscTableBorder.h"
 #import "MiscTableScrollPrivate.h"
-extern "Objective-C" {
+extern "C" {
 #import <AppKit/NSCell.h>
 #import <AppKit/NSImage.h>
 }

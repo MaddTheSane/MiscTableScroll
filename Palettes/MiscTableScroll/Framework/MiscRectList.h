@@ -34,7 +34,7 @@
 // An extensible array of rectangles for rendering a whole list
 // of rectangles with a single trip to the display server
 //-----------------------------------------------------------------------------
-extern "Objective-C" {
+extern "C" {
 #import <Foundation/NSGeometry.h>	// NSRect
 }
 @class NSColor;

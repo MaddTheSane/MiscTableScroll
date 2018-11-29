@@ -50,7 +50,7 @@
 // framework organization.
 //-----------------------------------------------------------------------------
 #import <MiscTableScroll/MiscTableTypes.h>
-MISC_TS_EXTERN_BEGIN( "Objective-C" )
+MISC_TS_EXTERN_BEGIN( "C" )
 #import <AppKit/NSCell.h>
 MISC_TS_EXTERN_END
 @class NSImage, NSPasteboard;

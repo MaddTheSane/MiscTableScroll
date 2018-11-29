@@ -28,7 +28,7 @@
 // v130.1: Selection management routines for MiscTableBorder.
 //-----------------------------------------------------------------------------
 #include "MiscTableBorder.h"
-extern "Objective-C" {
+extern "C" {
 #import <Foundation/NSArray.h>
 }
 

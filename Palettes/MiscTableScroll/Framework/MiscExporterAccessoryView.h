@@ -34,7 +34,7 @@
 //  Revision 1.3  97/03/10  10:28:46  sunshine
 //  v113.1: For OpenStep conformance, many 'col' methods rename to 'column'.
 //-----------------------------------------------------------------------------
-extern "Objective-C" {
+extern "C" {
 #import	<Foundation/NSObject.h>
 }
 #import <MiscTableScroll/MiscExporter.h>

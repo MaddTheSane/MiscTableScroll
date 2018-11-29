@@ -27,7 +27,7 @@
 // Ported to OpenStep 4.0 for Mach PR2.
 // 
 //-----------------------------------------------------------------------------
-extern "Objective-C" {
+extern "C" {
 #import <InterfaceBuilder/InterfaceBuilder.h>
 }
 

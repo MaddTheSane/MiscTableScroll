@@ -45,7 +45,7 @@
 // Revision 1.3  1997/06/18 09:53:53  sunshine
 // v125.9: Renamed: IBConnector.h --> NSIBConnector.h.  Commented & updated.
 //-----------------------------------------------------------------------------
-extern "Objective-C" {
+extern "C" {
 #import <InterfaceBuilder/InterfaceBuilder.h>
 }
 
