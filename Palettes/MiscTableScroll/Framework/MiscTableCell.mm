@@ -62,7 +62,8 @@
 #define	MISC_TC_VERSION_0	0	// Conditional tag.
 #define	MISC_TC_VERSION_1	1	// Tag became unconditional.
 #define	MISC_TC_VERSION_1000	1000	// First OpenStep version (4.0 PR2).
-#define	MISC_TC_VERSION		MISC_TC_VERSION_1000
+#define	MISC_TC_VERSION_1001	1001	// Keyed coding.
+#define	MISC_TC_VERSION		MISC_TC_VERSION_1001
 
 
 //=============================================================================
@@ -610,6 +611,8 @@
 //=============================================================================
 // COLOR MANIPULATION
 //=============================================================================
+//TODO: Migrate away from pointer arithmetic for colors: we have enough RAM
+//TODO: nowadays for this to be supurfluous
 //-----------------------------------------------------------------------------
 // +defaultBackgroundColor
 //-----------------------------------------------------------------------------
@@ -875,9 +878,9 @@
 //	latch the owner's current font unconditionally here.
 //-----------------------------------------------------------------------------
 - (id)tableScroll:(MiscTableScroll*)scroll
-      reviveAtRow:(int)row column:(int)col
+      reviveAtRow:(NSInteger)row column:(NSInteger)col
 {
-    unsigned int const MASK =
+    MiscTableCellFlags const MASK =
     MISC_TC1_SELF_DRAW |
     MISC_TC1_SELF_TEXT_COLOR |
     MISC_TC1_SELF_BACKGROUND_COLOR |
@@ -909,7 +912,7 @@
 // tableScroll:retireAtRow:column:
 //-----------------------------------------------------------------------------
 - (id)tableScroll:(MiscTableScroll*)scroll
-      retireAtRow:(int)row column:(int)col
+      retireAtRow:(NSInteger)row column:(NSInteger)col
 {
     if ([self type] == NSTextCellType)
         [self setStringValue:@""];
@@ -1003,9 +1006,11 @@
     owner = [[aDecoder decodeObject] retain];
     
     [aDecoder decodeValueOfObjCType:@encode(unsigned int) at:&x];
-    if (x & MISC_TC1_HAS_TAG)
-        [aDecoder decodeValueOfObjCType:@encode(int) at:&tag];
-    else
+    if (x & MISC_TC1_HAS_TAG) {
+        int tmpTag;
+        [aDecoder decodeValueOfObjCType:@encode(int) at:&tmpTag];
+        tag = tmpTag;
+    } else
         tag = 0;
     
     if (x & MISC_TC1_SELF_TEXT_COLOR)
@@ -1028,7 +1033,9 @@
     
     owner = [[aDecoder decodeObject] retain];
     
-    [aDecoder decodeValueOfObjCType:@encode(int) at:&tag];
+    int tmpTag;
+    [aDecoder decodeValueOfObjCType:@encode(int) at:&tmpTag];
+    tag = tmpTag;
     [aDecoder decodeValueOfObjCType:@encode(unsigned int) at:&x];
     
     if (x & MISC_TC1_SELF_TEXT_COLOR)
@@ -1051,7 +1058,9 @@
     
     owner = [[aDecoder decodeObject] retain];
     
-    [aDecoder decodeValueOfObjCType:@encode(int) at:&tag];
+    int tmpTag;
+    [aDecoder decodeValueOfObjCType:@encode(int) at:&tmpTag];
+    tag = tmpTag;
     [aDecoder decodeValueOfObjCType:@encode(unsigned int) at:&x];
     
     if (x & MISC_TC1_SELF_TEXT_COLOR)
@@ -1062,6 +1071,33 @@
         [self setSelectedTextColor:[aDecoder decodeObject]];
     if (x & MISC_TC1_SELF_BACKGROUND_COLOR_H)
         [self setSelectedBackgroundColor:[aDecoder decodeObject]];
+}
+
+#define MTCOwnerKey @"MTCOwner"
+#define MTCTagKey @"MTCTag"
+#define MTCFlagsKey @"MTCFlags"
+#define MTCTextColorKey @"MTCTextColor"
+#define MTCBackgroundColorKey @"MTCBackgroundColor"
+#define MTCTextColorHilightKey @"MTCTextColorHilightKey"
+#define MTCBackgroundColorHilightKey @"MTCBackgroundColorHilight"
+
+- (void)initWithCoder_v1001:(NSCoder*)aDecoder
+{
+    unsigned int x;
+    
+    owner = [[aDecoder decodeObjectForKey:MTCOwnerKey] retain];
+    
+    tag = [aDecoder decodeIntegerForKey:MTCTagKey];
+    x = [aDecoder decodeIntForKey:MTCFlagsKey];
+    
+    if (x & MISC_TC1_SELF_TEXT_COLOR)
+        [self setTextColor:[aDecoder decodeObjectForKey:MTCTextColorKey]];
+    if (x & MISC_TC1_SELF_BACKGROUND_COLOR)
+        [self setBackgroundColor:[aDecoder decodeObjectForKey:MTCBackgroundColorKey]];
+    if (x & MISC_TC1_SELF_TEXT_COLOR_H)
+        [self setSelectedTextColor:[aDecoder decodeObjectForKey:MTCTextColorHilightKey]];
+    if (x & MISC_TC1_SELF_BACKGROUND_COLOR_H)
+        [self setSelectedBackgroundColor:[aDecoder decodeObjectForKey:MTCBackgroundColorHilightKey]];
 }
 
 
@@ -1083,6 +1119,7 @@
         case MISC_TC_VERSION_0:    [self initWithCoder_v0:   aDecoder]; break;
         case MISC_TC_VERSION_1:    [self initWithCoder_v1:   aDecoder]; break;
         case MISC_TC_VERSION_1000: [self initWithCoder_v1000:aDecoder]; break;
+        case MISC_TC_VERSION_1001: [self initWithCoder_v1001:aDecoder]; break;
         default:
             [NSException raise:NSGenericException
 						format:@"Cannot read: unknown version %ld", (long)ver];
@@ -1099,17 +1136,17 @@
 - (void)encodeWithCoder:(NSCoder*)aCoder
 {
     [super encodeWithCoder:aCoder];
-    [aCoder encodeConditionalObject:owner];
-    [aCoder encodeValueOfObjCType:@encode(int) at:&tag];
-    [aCoder encodeValueOfObjCType:@encode(unsigned int) at:&tc1_flags];
+    [aCoder encodeConditionalObject:owner forKey:MTCOwnerKey];
+    [aCoder encodeInteger:tag forKey:MTCTagKey];
+    [aCoder encodeInt:tc1_flags forKey:MTCFlagsKey];
     if (![self useOwnerTextColor])
-        [aCoder encodeObject:[self textColor]];
+        [aCoder encodeObject:[self textColor] forKey:MTCTextColorKey];
     if (![self useOwnerBackgroundColor])
-        [aCoder encodeObject:[self backgroundColor]];
+        [aCoder encodeObject:[self backgroundColor] forKey:MTCBackgroundColorKey];
     if (![self useOwnerSelectedTextColor])
-        [aCoder encodeObject:[self selectedTextColor]];
+        [aCoder encodeObject:[self selectedTextColor] forKey:MTCTextColorHilightKey];
     if (![self useOwnerSelectedBackgroundColor])
-        [aCoder encodeObject:[self selectedBackgroundColor]];
+        [aCoder encodeObject:[self selectedBackgroundColor] forKey:MTCBackgroundColorHilightKey];
 }
 
 @end

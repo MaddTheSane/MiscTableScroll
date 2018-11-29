@@ -134,10 +134,10 @@ MISC_TS_EXTERN_END
 
 #if defined(__cplusplus)
 #define MISC_TABLE_SCROLL_EXTERN extern "C"
-#define MISC_TABLE_SCROLL_PRIVATE_EXTERN __private_extern__
+#define MISC_TABLE_SCROLL_PRIVATE_EXTERN __attribute__((visibility("hidden")))
 #else
 #define MISC_TABLE_SCROLL_EXTERN extern
-#define MISC_TABLE_SCROLL_PRIVATE_EXTERN __private_extern__
+#define MISC_TABLE_SCROLL_PRIVATE_EXTERN __attribute__((visibility("hidden")))
 #endif
 
 #elif defined(SOLARIS)
@@ -554,5 +554,13 @@ struct MiscSlotSortInfo
     MiscEntrySortInfo const* entry_info;
     BOOL need_copy;
 };
+
+// DATA CELL PROTOCOL ---------------------------------------------------------
+@protocol MiscTableScrollDataCell <NSObject>
+- (id)tableScroll:(MiscTableScroll*)scroll
+      reviveAtRow:(NSInteger)row column:(NSInteger)col;
+- (id)tableScroll:(MiscTableScroll*)scroll
+      retireAtRow:(NSInteger)row column:(NSInteger)col;
+@end
 
 #endif // __MiscTableTypes_h

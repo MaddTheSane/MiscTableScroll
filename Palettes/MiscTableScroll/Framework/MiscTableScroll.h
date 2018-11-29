@@ -927,15 +927,6 @@ typedef struct MiscBorderInfo
 @end
 
 
-// DATA CELL PROTOCOL ---------------------------------------------------------
-@interface NSObject(MiscTableScrollDataCell)
-- (id)tableScroll:(MiscTableScroll*)scroll
-	reviveAtRow:(int)row column:(int)col;
-- (id)tableScroll:(MiscTableScroll*)scroll
-	retireAtRow:(int)row column:(int)col;
-@end
-
-
 // NOTIFICATIONS --------------------------------------------------------------
 #define MISC_NOTIFICATION(Q) \
     MISC_TABLE_SCROLL_EXTERN NSNotificationName const MiscTableScroll##Q##Notification

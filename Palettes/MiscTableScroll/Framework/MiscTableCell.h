@@ -56,27 +56,39 @@ MISC_TS_EXTERN_END
 @class NSImage, NSPasteboard;
 @class MiscTableScroll;
 
-#define MISC_TC1_HAS_TAG			(1 << 0)	// Obsolete.
-#define MISC_TC1_SELF_FONT			(1 << 1)
-#define MISC_TC1_SELF_TEXT_COLOR		(1 << 2)
-#define MISC_TC1_SELF_BACKGROUND_COLOR		(1 << 3)
-#define MISC_TC1_SELF_TEXT_COLOR_H		(1 << 4)
-#define MISC_TC1_SELF_BACKGROUND_COLOR_H	(1 << 5)
-#define MISC_TC1_IS_SELECTED			(1 << 6)
-#define MISC_TC1_SELF_DRAW			(1 << 7)	// !ownerDraw
-#define	MISC_TC1_LAST_BIT			(1 << 7)
+typedef NS_OPTIONS(unsigned int, MiscTableCellFlags) {
+    //! Obsolete.
+    MiscTableCellHasTag DEPRECATED_ATTRIBUTE = 1 << 0,
+    MiscTableCellSelfFont = 1 << 1,
+    MiscTableCellSelfTextColor = 1 << 2,
+    MiscTableCellSelfBackgroundColor = 1 << 3,
+    MiscTableCellSelfSelectedTextColor = 1 << 4,
+    MiscTableCellSelfSelectedBackgroundColor = 1 << 5,
+    MiscTableCellIsSelected = 1 << 6,
+    //! !ownerDraw
+    MiscTableCellSelfDraw = 1 << 7
+};
 
-@interface MiscTableCell : NSCell <NSCopying,NSCoding>
+#define MISC_TC1_HAS_TAG			MiscTableCellHasTag
+#define MISC_TC1_SELF_FONT			MiscTableCellSelfFont
+#define MISC_TC1_SELF_TEXT_COLOR		MiscTableCellSelfTextColor
+#define MISC_TC1_SELF_BACKGROUND_COLOR		MiscTableCellSelfBackgroundColor
+#define MISC_TC1_SELF_TEXT_COLOR_H		MiscTableCellSelfSelectedTextColor
+#define MISC_TC1_SELF_BACKGROUND_COLOR_H	MiscTableCellSelfSelectedBackgroundColor
+#define MISC_TC1_IS_SELECTED			MiscTableCellIsSelected
+#define MISC_TC1_SELF_DRAW			MiscTableCellSelfDraw
+#define	MISC_TC1_LAST_BIT			MiscTableCellSelfDraw
+
+@interface MiscTableCell : NSCell <NSCopying,NSCoding, MiscTableScrollDataCell>
 {
     id owner;
     NSInteger tag;
-    unsigned int tc1_flags;
+    MiscTableCellFlags tc1_flags;
     void* tc1_data;
 }
 
 - (id)initTextCell:(NSString*)s;
 - (id)initImageCell:(NSImage*)s;
-- (void)dealloc;
 - (id)copyWithZone:(NSZone*)zone;
 - (id)initWithCoder:(NSCoder*)coder;
 - (void)encodeWithCoder:(NSCoder*)coder;
@@ -84,10 +96,8 @@ MISC_TS_EXTERN_END
 - (void)drawInteriorWithFrame:(NSRect)r inView:(NSView*)v;
 - (void)drawWithFrame:(NSRect)r inView:(NSView*)v;
 - (void)highlight:(BOOL)flag withFrame:(NSRect)r inView:(NSView*)v;
-- (BOOL)isOpaque;
 
-- (void)setSelected:(BOOL)flag;
-- (BOOL)isSelected;
+@property (getter=isSelected) BOOL selected;
 
 @property NSInteger tag;
 
@@ -96,27 +106,19 @@ MISC_TS_EXTERN_END
 - (NSFont*)font;
 - (void)setFont:(NSFont*)obj;		// Turns off -useOwnerFont
 
-- (NSColor*)textColor;
-- (NSColor*)backgroundColor;
-- (NSColor*)selectedBackgroundColor;
-- (NSColor*)selectedTextColor;
-- (void)setTextColor:(NSColor*)c;	// All -set..Color: turn off equivalent
-- (void)setBackgroundColor:(NSColor*)c;	// -useOwner...Color flags.
-- (void)setSelectedTextColor:(NSColor*)c;
-- (void)setSelectedBackgroundColor:(NSColor*)c;
+// All ..Color: setters turn off equivalent
+// -useOwner...Color flags.
+@property (retain) NSColor *textColor;
+@property (retain) NSColor *backgroundColor;
+@property (retain) NSColor *selectedBackgroundColor;
+@property (retain) NSColor *selectedTextColor;
 
-- (BOOL)ownerDraw;
-- (BOOL)useOwnerFont;
-- (BOOL)useOwnerTextColor;
-- (BOOL)useOwnerBackgroundColor;
-- (BOOL)useOwnerSelectedTextColor;
-- (BOOL)useOwnerSelectedBackgroundColor;
-- (void)setOwnerDraw:(BOOL)flag;
-- (void)setUseOwnerFont:(BOOL)flag;
-- (void)setUseOwnerTextColor:(BOOL)flag;
-- (void)setUseOwnerBackgroundColor:(BOOL)flag;
-- (void)setUseOwnerSelectedTextColor:(BOOL)flag;
-- (void)setUseOwnerSelectedBackgroundColor:(BOOL)flag;
+@property BOOL ownerDraw;
+@property BOOL useOwnerFont;
+@property BOOL useOwnerTextColor;
+@property BOOL useOwnerBackgroundColor;
+@property BOOL useOwnerSelectedTextColor;
+@property BOOL useOwnerSelectedBackgroundColor;
 
 - (void)setOwnerFont:(NSFont*)obj;
 - (void)setOwnerTextColor:(NSColor*)c;
@@ -125,7 +127,7 @@ MISC_TS_EXTERN_END
 - (void)setOwnerSelectedBackgroundColor:(NSColor*)c;
 
 - (void*)tc1Data;
-- (unsigned int)tc1Flags;
+@property (readonly) MiscTableCellFlags tc1Flags;
 - (unsigned int)tc1DataSize;
 - (unsigned int)tc1TextColorPos;
 - (unsigned int)tc1BackgroundColorPos;
@@ -155,9 +157,9 @@ MISC_TS_EXTERN_END
 + (NSColor*)defaultSelectedBackgroundColor;
 
 - (id)tableScroll:(MiscTableScroll*)scroll
-	reviveAtRow:(int)row column:(int)col;
+	reviveAtRow:(NSInteger)row column:(NSInteger)col;
 - (id)tableScroll:(MiscTableScroll*)scroll
-	retireAtRow:(int)row column:(int)col;
+	retireAtRow:(NSInteger)row column:(NSInteger)col;
 
 @end
 
