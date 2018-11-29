@@ -3,9 +3,9 @@
     FILESTABLE = {
         BUNDLES = (); 
         CLASSES = (
-            MiscTableConnInspector.M, 
-            MiscTableScrollInspector.M, 
-            MiscTableScrollPalette.M
+            MiscTableConnInspector.mm, 
+            MiscTableScrollInspector.mm, 
+            MiscTableScrollPalette.mm
         ); 
         FRAMEWORKS = (
             MiscTableScroll.framework, 

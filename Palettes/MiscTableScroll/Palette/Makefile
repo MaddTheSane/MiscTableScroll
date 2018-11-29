@@ -20,8 +20,8 @@ GLOBAL_RESOURCES = MiscTableDimple.tiff MiscTableRightArrow.tiff\
                    MiscTableScroll.tiff CustomInfo.plist palette.table\
                    MiscTableConnector.strings
 
-CAPMFILES = MiscTableConnInspector.M MiscTableScrollInspector.M\
-            MiscTableScrollPalette.M
+CAPMFILES = MiscTableConnInspector.mm MiscTableScrollInspector.mm\
+            MiscTableScrollPalette.mm
 
 HFILES = MiscTableConnInspector.h MiscTableScrollInspector.h\
          MiscTableScrollPalette.h
