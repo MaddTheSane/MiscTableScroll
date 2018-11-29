@@ -1,3 +1,0 @@
-"MiscTableConnInspector" = {OUTLETS = (actionScroll, outletScroll); SUPERCLASS = IBInspector; };
-"MiscTableScroll" = {SUPERCLASS = NSScrollView; };
-"FirstResponder" = {CATEGORY = LocalActions; };

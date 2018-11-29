@@ -1,0 +1,24 @@
+{
+    IBClasses =     (
+                {
+            CLASS = FirstResponder;
+            LANGUAGE = ObjC;
+            SUPERCLASS = NSObject;
+        },
+                {
+            CLASS = MiscTableConnInspector;
+            LANGUAGE = ObjC;
+            OUTLETS =             {
+                actionScroll = id;
+                outletScroll = id;
+            };
+            SUPERCLASS = IBInspector;
+        },
+                {
+            CLASS = MiscTableScroll;
+            LANGUAGE = ObjC;
+            SUPERCLASS = NSScrollView;
+        }
+    );
+    IBVersion = 1;
+}

@@ -1,0 +1,28 @@
+{
+    IBClasses =     (
+                {
+            CLASS = FirstResponder;
+            LANGUAGE = ObjC;
+            SUPERCLASS = NSObject;
+        },
+                {
+            CLASS = MiscTableScroll;
+            LANGUAGE = ObjC;
+            OUTLETS =             {
+                dataDelegate = id;
+                delegate = id;
+                doubleTarget = id;
+            };
+            SUPERCLASS = NSScrollView;
+        },
+                {
+            CLASS = MiscTableScrollPalette;
+            LANGUAGE = ObjC;
+            OUTLETS =             {
+                tableScroll = id;
+            };
+            SUPERCLASS = IBPalette;
+        }
+    );
+    IBVersion = 1;
+}

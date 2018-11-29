@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		558250F521B0A1D0009B7C3D /* MiscTableConnInspector.nib in Resources */ = {isa = PBXBuildFile; fileRef = 558250DE21B0A1D0009B7C3D /* MiscTableConnInspector.nib */; };
+		558250F621B0A1D0009B7C3D /* MiscTableScroll.nib in Resources */ = {isa = PBXBuildFile; fileRef = 558250E021B0A1D0009B7C3D /* MiscTableScroll.nib */; };
+		558250F721B0A1D0009B7C3D /* MiscTableScrollInspector.nib in Resources */ = {isa = PBXBuildFile; fileRef = 558250E221B0A1D0009B7C3D /* MiscTableScrollInspector.nib */; };
+		558250FC21B0A1D0009B7C3D /* MiscTableConnector.strings in Resources */ = {isa = PBXBuildFile; fileRef = 558250E821B0A1D0009B7C3D /* MiscTableConnector.strings */; };
+		558250FD21B0A1D0009B7C3D /* MiscTableConnInspector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 558250EA21B0A1D0009B7C3D /* MiscTableConnInspector.mm */; };
+		558250FE21B0A1D0009B7C3D /* MiscTableDimple.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 558250EB21B0A1D0009B7C3D /* MiscTableDimple.tiff */; };
+		558250FF21B0A1D0009B7C3D /* MiscTableRightArrow.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 558250EC21B0A1D0009B7C3D /* MiscTableRightArrow.tiff */; };
+		5582510021B0A1D0009B7C3D /* MiscTableScroll.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 558250ED21B0A1D0009B7C3D /* MiscTableScroll.tiff */; };
+		5582510121B0A1D0009B7C3D /* MiscTableScrollInspector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 558250EF21B0A1D0009B7C3D /* MiscTableScrollInspector.mm */; };
+		5582510221B0A1D0009B7C3D /* MiscTableScrollPalette.mm in Sources */ = {isa = PBXBuildFile; fileRef = 558250F121B0A1D0009B7C3D /* MiscTableScrollPalette.mm */; };
+		5582510321B0A1D0009B7C3D /* palette.table in Resources */ = {isa = PBXBuildFile; fileRef = 558250F221B0A1D0009B7C3D /* palette.table */; };
+		5582510B21B0A2F6009B7C3D /* MiscTableScroll.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B437382179B0E4005ABAA2 /* MiscTableScroll.framework */; };
+		5582510E21B0A303009B7C3D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B99595219230F400342A80 /* Cocoa.framework */; };
 		55B4373D2179B0E4005ABAA2 /* MiscTableScroll.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B4373B2179B0E4005ABAA2 /* MiscTableScroll.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55B437482179B27E005ABAA2 /* MiscExporterAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B437452179B27D005ABAA2 /* MiscExporterAccessoryView.xib */; };
 		55B4379E2179B2AF005ABAA2 /* MiscListTracker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B437492179B2A7005ABAA2 /* MiscListTracker.mm */; };
@@ -101,10 +114,31 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		558250D421B0A171009B7C3D /* MiscTableScrollPalette.ibpalette */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiscTableScrollPalette.ibpalette; sourceTree = BUILT_PRODUCTS_DIR; };
+		558250D521B0A171009B7C3D /* MiscTableScrollPalette-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "MiscTableScrollPalette-Info.plist"; sourceTree = "<group>"; };
+		558250DF21B0A1D0009B7C3D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MiscTableConnInspector.nib; sourceTree = "<group>"; };
+		558250E121B0A1D0009B7C3D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MiscTableScroll.nib; sourceTree = "<group>"; };
+		558250E321B0A1D0009B7C3D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MiscTableScrollInspector.nib; sourceTree = "<group>"; };
+		558250E421B0A1D0009B7C3D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		558250E521B0A1D0009B7C3D /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		558250E621B0A1D0009B7C3D /* Makefile.postamble */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.postamble; sourceTree = "<group>"; };
+		558250E721B0A1D0009B7C3D /* Makefile.preamble */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.preamble; sourceTree = "<group>"; };
+		558250E821B0A1D0009B7C3D /* MiscTableConnector.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = MiscTableConnector.strings; sourceTree = "<group>"; };
+		558250E921B0A1D0009B7C3D /* MiscTableConnInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscTableConnInspector.h; sourceTree = "<group>"; };
+		558250EA21B0A1D0009B7C3D /* MiscTableConnInspector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscTableConnInspector.mm; sourceTree = "<group>"; };
+		558250EB21B0A1D0009B7C3D /* MiscTableDimple.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MiscTableDimple.tiff; sourceTree = "<group>"; };
+		558250EC21B0A1D0009B7C3D /* MiscTableRightArrow.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MiscTableRightArrow.tiff; sourceTree = "<group>"; };
+		558250ED21B0A1D0009B7C3D /* MiscTableScroll.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MiscTableScroll.tiff; sourceTree = "<group>"; };
+		558250EE21B0A1D0009B7C3D /* MiscTableScrollInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscTableScrollInspector.h; sourceTree = "<group>"; };
+		558250EF21B0A1D0009B7C3D /* MiscTableScrollInspector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscTableScrollInspector.mm; sourceTree = "<group>"; };
+		558250F021B0A1D0009B7C3D /* MiscTableScrollPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscTableScrollPalette.h; sourceTree = "<group>"; };
+		558250F121B0A1D0009B7C3D /* MiscTableScrollPalette.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscTableScrollPalette.mm; sourceTree = "<group>"; };
+		558250F221B0A1D0009B7C3D /* palette.table */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = palette.table; sourceTree = "<group>"; };
+		558250F321B0A1D0009B7C3D /* PB.project */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PB.project; sourceTree = "<group>"; };
 		55B437382179B0E4005ABAA2 /* MiscTableScroll.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MiscTableScroll.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B4373B2179B0E4005ABAA2 /* MiscTableScroll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MiscTableScroll.h; sourceTree = "<group>"; };
-		55B4373C2179B0E4005ABAA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55B437462179B27D005ABAA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MiscExporterAccessoryView.xib; sourceTree = "<group>"; };
+		55B4373C2179B0E4005ABAA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		55B437462179B27D005ABAA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.xib; name = en; path = en.lproj/MiscExporterAccessoryView.xib; sourceTree = "<group>"; };
 		55B437492179B2A7005ABAA2 /* MiscListTracker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscListTracker.mm; sourceTree = "<group>"; };
 		55B4374A2179B2A7005ABAA2 /* MiscColView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscColView.mm; sourceTree = "<group>"; };
 		55B4374B2179B2A7005ABAA2 /* MiscTableScrollIO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscTableScrollIO.mm; sourceTree = "<group>"; };
@@ -198,6 +232,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		558250D221B0A171009B7C3D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5582510B21B0A2F6009B7C3D /* MiscTableScroll.framework in Frameworks */,
+				5582510E21B0A303009B7C3D /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55B437352179B0E4005ABAA2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -209,12 +252,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		558250DC21B0A1CF009B7C3D /* Palette */ = {
+			isa = PBXGroup;
+			children = (
+				558250DE21B0A1D0009B7C3D /* MiscTableConnInspector.nib */,
+				558250E021B0A1D0009B7C3D /* MiscTableScroll.nib */,
+				558250E221B0A1D0009B7C3D /* MiscTableScrollInspector.nib */,
+				558250E421B0A1D0009B7C3D /* Info.plist */,
+				558250E521B0A1D0009B7C3D /* Makefile */,
+				558250E621B0A1D0009B7C3D /* Makefile.postamble */,
+				558250E721B0A1D0009B7C3D /* Makefile.preamble */,
+				558250E821B0A1D0009B7C3D /* MiscTableConnector.strings */,
+				558250E921B0A1D0009B7C3D /* MiscTableConnInspector.h */,
+				558250EA21B0A1D0009B7C3D /* MiscTableConnInspector.mm */,
+				558250EB21B0A1D0009B7C3D /* MiscTableDimple.tiff */,
+				558250EC21B0A1D0009B7C3D /* MiscTableRightArrow.tiff */,
+				558250ED21B0A1D0009B7C3D /* MiscTableScroll.tiff */,
+				558250EE21B0A1D0009B7C3D /* MiscTableScrollInspector.h */,
+				558250EF21B0A1D0009B7C3D /* MiscTableScrollInspector.mm */,
+				558250F021B0A1D0009B7C3D /* MiscTableScrollPalette.h */,
+				558250F121B0A1D0009B7C3D /* MiscTableScrollPalette.mm */,
+				558250F221B0A1D0009B7C3D /* palette.table */,
+				558250F321B0A1D0009B7C3D /* PB.project */,
+			);
+			name = Palette;
+			path = Palettes/MiscTableScroll/Palette;
+			sourceTree = "<group>";
+		};
 		55B4372E2179B0E4005ABAA2 = {
 			isa = PBXGroup;
 			children = (
 				55B4373A2179B0E4005ABAA2 /* MiscTableScroll */,
+				558250DC21B0A1CF009B7C3D /* Palette */,
 				55B99594219230F400342A80 /* Frameworks */,
 				55B437392179B0E4005ABAA2 /* Products */,
+				558250D521B0A171009B7C3D /* MiscTableScrollPalette-Info.plist */,
 			);
 			sourceTree = "<group>";
 			tabWidth = 8;
@@ -224,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				55B437382179B0E4005ABAA2 /* MiscTableScroll.framework */,
+				558250D421B0A171009B7C3D /* MiscTableScrollPalette.ibpalette */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -382,6 +455,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		558250D321B0A171009B7C3D /* MiscTableScrollPalette */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 558250D621B0A172009B7C3D /* Build configuration list for PBXNativeTarget "MiscTableScrollPalette" */;
+			buildPhases = (
+				558250D021B0A171009B7C3D /* Resources */,
+				558250D121B0A171009B7C3D /* Sources */,
+				558250D221B0A171009B7C3D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MiscTableScrollPalette;
+			productName = MiscTableScrollPalette;
+			productReference = 558250D421B0A171009B7C3D /* MiscTableScrollPalette.ibpalette */;
+			productType = "com.apple.product-type.bundle";
+		};
 		55B437372179B0E4005ABAA2 /* MiscTableScroll */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55B437402179B0E4005ABAA2 /* Build configuration list for PBXNativeTarget "MiscTableScroll" */;
@@ -420,6 +510,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				English,
 			);
 			mainGroup = 55B4372E2179B0E4005ABAA2;
 			productRefGroup = 55B437392179B0E4005ABAA2 /* Products */;
@@ -427,11 +518,27 @@
 			projectRoot = "";
 			targets = (
 				55B437372179B0E4005ABAA2 /* MiscTableScroll */,
+				558250D321B0A171009B7C3D /* MiscTableScrollPalette */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		558250D021B0A171009B7C3D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				558250F521B0A1D0009B7C3D /* MiscTableConnInspector.nib in Resources */,
+				558250F621B0A1D0009B7C3D /* MiscTableScroll.nib in Resources */,
+				558250F721B0A1D0009B7C3D /* MiscTableScrollInspector.nib in Resources */,
+				558250FC21B0A1D0009B7C3D /* MiscTableConnector.strings in Resources */,
+				558250FE21B0A1D0009B7C3D /* MiscTableDimple.tiff in Resources */,
+				558250FF21B0A1D0009B7C3D /* MiscTableRightArrow.tiff in Resources */,
+				5582510021B0A1D0009B7C3D /* MiscTableScroll.tiff in Resources */,
+				5582510321B0A1D0009B7C3D /* palette.table in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55B437362179B0E4005ABAA2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -456,6 +563,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		558250D121B0A171009B7C3D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				558250FD21B0A1D0009B7C3D /* MiscTableConnInspector.mm in Sources */,
+				5582510121B0A1D0009B7C3D /* MiscTableScrollInspector.mm in Sources */,
+				5582510221B0A1D0009B7C3D /* MiscTableScrollPalette.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55B437342179B0E4005ABAA2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -509,6 +626,30 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		558250DE21B0A1D0009B7C3D /* MiscTableConnInspector.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				558250DF21B0A1D0009B7C3D /* English */,
+			);
+			name = MiscTableConnInspector.nib;
+			sourceTree = "<group>";
+		};
+		558250E021B0A1D0009B7C3D /* MiscTableScroll.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				558250E121B0A1D0009B7C3D /* English */,
+			);
+			name = MiscTableScroll.nib;
+			sourceTree = "<group>";
+		};
+		558250E221B0A1D0009B7C3D /* MiscTableScrollInspector.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				558250E321B0A1D0009B7C3D /* English */,
+			);
+			name = MiscTableScrollInspector.nib;
+			sourceTree = "<group>";
+		};
 		55B437452179B27D005ABAA2 /* MiscExporterAccessoryView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -520,6 +661,66 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		558250D721B0A172009B7C3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = Palettes/MiscTableScroll/Palette/Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = MiscTableScrollPalette;
+				WRAPPER_EXTENSION = ibpalette;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		558250D821B0A172009B7C3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "MiscTableScrollPalette-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = MiscTableScrollPalette;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		55B4373E2179B0E4005ABAA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -691,6 +892,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		558250D621B0A172009B7C3D /* Build configuration list for PBXNativeTarget "MiscTableScrollPalette" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				558250D721B0A172009B7C3D /* Debug */,
+				558250D821B0A172009B7C3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		55B437322179B0E4005ABAA2 /* Build configuration list for PBXProject "MiscTableScroll" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
