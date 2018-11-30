@@ -209,7 +209,7 @@ static inline BOOL isSlop( NSEvent* e1, NSEvent* e2, float const slop )
         [self calcOrigin:&origin andOffset:&offset forImage:i inRect:r
                    atRow:row column:col downEvent:mouseDown dragEvent:dragEvent];
 
-        NSPasteboard* pb = [NSPasteboard pasteboardWithName:NSPasteboardNameDrag];
+        NSPasteboard* pb = [NSPasteboard pasteboardWithName:NSDragPboard];
         [self prepareDragPasteboard:pb atRow:row column:col];
 
         [self dragImage:i at:origin offset:offset

@@ -1785,7 +1785,7 @@ MISC_SET_COLOR_FUNC( selectedText, SelectedText )
 - (void)border:(MiscBorderType)b drawSlot:(int)n
 { if (b == MISC_COL_BORDER) [self drawColumn:n]; else [self drawRow:n]; }
 
-- (void)border:(MiscBorderType)b drawSlotTitle:(int)n	// physical position.
+- (void)border:(MiscBorderType)b drawSlotTitle:(NSInteger)n	// physical position.
 {
     MiscBorderInfo* const ip = info[b];
     if (ip->isOn)					// visual position.
