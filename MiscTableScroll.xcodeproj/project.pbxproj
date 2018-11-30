@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		550C67BF21B0B61200495431 /* MiscTableConnector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B4376F2179B2AA005ABAA2 /* MiscTableConnector.mm */; };
 		5549652321B0A86D0085AE98 /* bool.h in Headers */ = {isa = PBXBuildFile; fileRef = 5549652221B0A86D0085AE98 /* bool.h */; };
 		558250F521B0A1D0009B7C3D /* MiscTableConnInspector.nib in Resources */ = {isa = PBXBuildFile; fileRef = 558250DE21B0A1D0009B7C3D /* MiscTableConnInspector.nib */; };
 		558250F621B0A1D0009B7C3D /* MiscTableScroll.nib in Resources */ = {isa = PBXBuildFile; fileRef = 558250E021B0A1D0009B7C3D /* MiscTableScroll.nib */; };
@@ -131,7 +132,7 @@
 		558250DF21B0A1D0009B7C3D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MiscTableConnInspector.nib; sourceTree = "<group>"; };
 		558250E121B0A1D0009B7C3D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MiscTableScroll.nib; sourceTree = "<group>"; };
 		558250E321B0A1D0009B7C3D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MiscTableScrollInspector.nib; sourceTree = "<group>"; };
-		558250E421B0A1D0009B7C3D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		558250E421B0A1D0009B7C3D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
 		558250E521B0A1D0009B7C3D /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		558250E621B0A1D0009B7C3D /* Makefile.postamble */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.postamble; sourceTree = "<group>"; };
 		558250E721B0A1D0009B7C3D /* Makefile.preamble */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.preamble; sourceTree = "<group>"; };
@@ -150,8 +151,8 @@
 		5582511B21B0A42B009B7C3D /* InterfaceBuilder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InterfaceBuilder.framework; path = Library/Frameworks/InterfaceBuilder.framework; sourceTree = SYSTEM_DEVELOPER_DIR; };
 		55B437382179B0E4005ABAA2 /* MiscTableScroll.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MiscTableScroll.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B4373B2179B0E4005ABAA2 /* MiscTableScroll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MiscTableScroll.h; sourceTree = "<group>"; };
-		55B4373C2179B0E4005ABAA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55B437462179B27D005ABAA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MiscExporterAccessoryView.xib; sourceTree = "<group>"; };
+		55B4373C2179B0E4005ABAA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		55B437462179B27D005ABAA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.xib; name = en; path = en.lproj/MiscExporterAccessoryView.xib; sourceTree = "<group>"; };
 		55B437492179B2A7005ABAA2 /* MiscListTracker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscListTracker.mm; sourceTree = "<group>"; };
 		55B4374A2179B2A7005ABAA2 /* MiscColView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscColView.mm; sourceTree = "<group>"; };
 		55B4374B2179B2A7005ABAA2 /* MiscTableScrollIO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscTableScrollIO.mm; sourceTree = "<group>"; };
@@ -637,6 +638,7 @@
 				55B437D32179B2AF005ABAA2 /* MiscTableBorderIO.mm in Sources */,
 				55B437C72179B2AF005ABAA2 /* MiscRectColorList.mm in Sources */,
 				55B437D62179B2AF005ABAA2 /* MiscLineWrapper.mm in Sources */,
+				550C67BF21B0B61200495431 /* MiscTableConnector.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,17 +693,15 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(SYSTEM_DEVELOPER_DIR)/Library/PrivateFrameworks",
 					"$(inherited)",
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
 				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DEVELOPER_FRAMEWORKS_DIR)\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = Palettes/MiscTableScroll/Palette/Info.plist;
@@ -724,11 +724,10 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(SYSTEM_DEVELOPER_DIR)/Library/PrivateFrameworks",
 					"$(inherited)",
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
 				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DEVELOPER_FRAMEWORKS_DIR)\"";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -788,6 +787,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SYSTEM_DEVELOPER_DIR)/Library/Frameworks",
+					"$(inherited)",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -851,6 +854,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SYSTEM_DEVELOPER_DIR)/Library/Frameworks",
+					"$(inherited)",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -879,6 +886,10 @@
 				DYLIB_CURRENT_VERSION = 140.1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SYSTEM_DEVELOPER_DIR)/Library/Frameworks",
+					"$(inherited)",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"MISC_TABLE_SCROLL_BUILDING=1",
@@ -886,7 +897,7 @@
 				);
 				INFOPLIST_FILE = Palettes/MiscTableScroll/Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_DYLIB_INSTALL_NAME = "/Library/Frameworks/$(EXECUTABLE_PATH)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.high-speed-software.MiscTableScroll";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -904,6 +915,10 @@
 				DYLIB_CURRENT_VERSION = 140.1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SYSTEM_DEVELOPER_DIR)/Library/Frameworks",
+					"$(inherited)",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"MISC_TABLE_SCROLL_BUILDING=1",

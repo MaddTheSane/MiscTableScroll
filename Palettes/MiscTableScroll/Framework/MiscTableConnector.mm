@@ -40,9 +40,9 @@
 //  Temporarily moved affected code from MiscTableConnector.M to this file.
 //-----------------------------------------------------------------------------
 #import	"MiscTableConnector.h"
-extern "Objective-C" {
+extern "C" {
 #import <objc/objc-class.h>
-Ivar object_setInstanceVariable( id, char const* name, void const* );
+//Ivar object_setInstanceVariable( id, char const* name, void const* );
 }
 
 int const MISC_CONN_VERSION_0    = 0;	 // First NEXTSTEP 3.3 version.

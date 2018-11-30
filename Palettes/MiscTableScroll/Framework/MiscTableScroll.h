@@ -202,7 +202,7 @@ typedef struct MiscBorderInfo
 - (BOOL)sendAction:(SEL)theAction to:(id)theTarget;
 - (BOOL)sendAction;
 - (BOOL)sendActionIfEnabled;
-- (BOOL)sendDoubleAction;
+- (void)sendDoubleAction;
 - (BOOL)sendDoubleActionIfEnabled;
 
 

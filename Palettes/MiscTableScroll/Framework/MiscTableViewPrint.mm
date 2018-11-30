@@ -681,6 +681,7 @@ clip_exit:
     [img drawRepresentation:[[img representations] lastObject] inRect:r];
     }
 
+extern "C" void PSscale( float, float );
 
 //-----------------------------------------------------------------------------
 // drawPageBorderWithSize:
@@ -711,7 +712,6 @@ clip_exit:
     if (info.is_scaled)
 	{
 	float const k = info.scale_factor;
-            extern void PSscale( float, float );
 
 	PSscale( k, k );
 	bottom /= k;

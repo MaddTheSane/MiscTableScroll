@@ -971,8 +971,8 @@ static void set_sizes( MiscTableBorder* b, float const* v, float lim )
 - (BOOL)sendAction
 	{ return [self sendAction:action to:target]; }
 
-- (BOOL)sendDoubleAction
-	{ return [self sendAction:doubleAction to:doubleTarget]; }
+- (void)sendDoubleAction
+	{ [self sendAction:doubleAction to:doubleTarget]; }
 
 - (BOOL)sendActionIfEnabled
 	{

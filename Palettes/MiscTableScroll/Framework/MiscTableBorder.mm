@@ -295,7 +295,7 @@ void MiscTableBorder::destroy_slot( MiscCoord_V x, MiscCoord_P p )
 void MiscTableBorder::do_delete( void* p, int n, int i )
     {
     if (p != 0)
-	memmove( p + i * n, p + (i + 1) * n, (num_slots - i) * n );
+	memmove( (void*)((uintptr_t)p + i * n), (const void*)((uintptr_t)p + (i + 1) * n), (num_slots - i) * n );
     }
 
 
@@ -381,7 +381,7 @@ void MiscTableBorder::init_slot( MiscCoord_V x, MiscCoord_P p )
 void MiscTableBorder::do_insert( void* p, int n, int i )
     {
     if (p != 0)
-	memmove( p + (i + 1) * n, p + i * n, (num_slots - i) * n );
+	memmove( (void*)((uintptr_t)p + (i + 1) * n), (const void*)((uintptr_t)p + i * n), (num_slots - i) * n );
     }
 
 
@@ -449,9 +449,9 @@ void MiscTableBorder::do_shift( void* p, int n, int i, int j )
     {
     if (p != 0)
 	if (i < j)
-	    memmove( p + i * n, p + (i + 1) * n, (j - i) * n );
+	    memmove( (void*)((uintptr_t)p + i * n), (const void*)((uintptr_t)p + (i + 1) * n), (j - i) * n );
 	else
-	    memmove( p + (j  + 1) * n, p + j * n, (i - j) * n );
+	    memmove( (void*)((uintptr_t)p + (j  + 1) * n), (const void*)((uintptr_t)p + j * n), (i - j) * n );
     }
 
 
@@ -609,8 +609,8 @@ void* MiscTableBorder::do_remap( void* p, int n, MiscCoord_V const* new_p2v )
 	{
 	void* t = do_alloc( n );
 	for (int i = 0;	 i < num_slots;	 i++)
-	    memcpy( t + MISC_MAP(new_p2v,i) * n,
-			p + MISC_MAP(p2v,i) * n, n );
+	    memcpy( (void*)((uintptr_t)t + MISC_MAP(new_p2v,i) * n),
+                   (const void*)((uintptr_t)p + MISC_MAP(p2v,i) * n), n );
 	free( p );
 	p = t;
 	}
