@@ -1,203 +1,201 @@
-{\rtf0\ansi{\fonttbl\f0\fswiss Helvetica;\f1\ftech Symbol;\f2\fmodern Ohlfs;
-}
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf100
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\fswiss\fcharset0 Helvetica-Oblique;
+\f3\fmodern\fcharset0 Courier;}
 {\colortbl;\red255\green255\blue255;}
-\paperw10980\paperh10140
-\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\ql\qnatural
+{\*\expandedcolortbl;;}
+\vieww10740\viewh10140\viewkind0
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \f0\b\fs36 \cf0 ScrollDir\
 
-\b0\fs24 By Paul S. McCarthy and Eric Sunshine\
-Copyright 
-\f1 ã
-\f0 1995,1996,1997,1998,1999 by Paul S. McCarthy and Eric Sunshine\
+\f1\b0\fs24 By Paul S. McCarthy and Eric Sunshine\
+Copyright \'a91995,1996,1997,1998,1999 by Paul S. McCarthy and Eric Sunshine\
 April 23, 1999\
 \
 
-\b\fs28 Overview
+\f0\b\fs28 Overview
 \fs24 \
-\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\ql\qnatural
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\b0\fs12 \cf0 \
-\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\ql\qnatural
+\f1\b0\fs12 \cf0 \
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \fs24 \cf0 This program demonstrates the use of MiscTableScroll using 
-\i eager
-\i0  mode.  It is a simple directory browser which supports basic operations such as 
-\i open, delete, rename, 
-\i0 and 
-\i change directory
-\i0 .\
+\f2\i eager
+\f1\i0  mode.  It is a simple directory browser which supports basic operations such as 
+\f2\i open, delete, rename, 
+\f1\i0 and 
+\f2\i change directory
+\f1\i0 .\
 \
 \
 
-\b\fs28 Notable Features
+\f0\b\fs28 Notable Features
 \fs24 \
-\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\ql\qnatural
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\b0\fs12 \cf0 \
-\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\ql\qnatural
+\f1\b0\fs12 \cf0 \
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\b\fs24 \cf0 Eager Mode\
-\pard\tx520\tx1060\tx1600\tx2120\tx2660\tx3200\tx3720\tx4260\tx4800\tx5320\ql\qnatural
+\f0\b\fs24 \cf0 Eager Mode\
+\pard\tx520\tx1060\tx1600\tx2120\tx2660\tx3200\tx3720\tx4260\tx4800\tx5320\partightenfactor0
 
-\b0 \cf0 This example uses an 
-\i eager
-\i0  mode MiscTableScroll which creates and fills all cells immediately.  This differs from a 
-\i lazy
-\i0  mode MiscTableScroll where the data-delegate is responsible for managing the cells.  
-\i Eager
-\i0  mode is useful for fairly small data sets and data sets for which data retrieval time is small.  
-\i Eager
-\i0  mode is usually easier to program than 
-\i lazy
-\i0  mode.\
-\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\ql\qnatural
+\f1\b0 \cf0 This example uses an 
+\f2\i eager
+\f1\i0  mode MiscTableScroll which creates and fills all cells immediately.  This differs from a 
+\f2\i lazy
+\f1\i0  mode MiscTableScroll where the data-delegate is responsible for managing the cells.  
+\f2\i Eager
+\f1\i0  mode is useful for fairly small data sets and data sets for which data retrieval time is small.  
+\f2\i Eager
+\f1\i0  mode is usually easier to program than 
+\f2\i lazy
+\f1\i0  mode.\
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\b \cf0 \
+\f0\b \cf0 \
 Color
-\b0 \
+\f1\b0 \
 The example shows how cells can inherit color from the MiscTableScroll itself, as well as maintain their own colors independently.  Color swatches can be dragged from the 
-\i Color Panel
-\i0  and dropped onto the browser window.  The background of the MiscTableScroll is set to the color of the dropped swatch.  All cells which inherit their color from the MiscTableScroll 
-\i implicitly
-\i0  take the same background color.  All cells which have had their color set 
-\i explicitly
-\i0  retain their own color.\
+\f2\i Color Panel
+\f1\i0  and dropped onto the browser window.  The background of the MiscTableScroll is set to the color of the dropped swatch.  All cells which inherit their color from the MiscTableScroll 
+\f2\i implicitly
+\f1\i0  take the same background color.  All cells which have had their color set 
+\f2\i explicitly
+\f1\i0  retain their own color.\
 \
 The 
-\i highlight directories
-\i0  switch on the browser window demonstrates that cells can maintain their own colors instead of inheriting them.  When toggled 
-\i on
-\i0  the rows for directories are highlighted in a color independent of the MiscTableScroll.
-\b \
+\f2\i highlight directories
+\f1\i0  switch on the browser window demonstrates that cells can maintain their own colors instead of inheriting them.  When toggled 
+\f2\i on
+\f1\i0  the rows for directories are highlighted in a color independent of the MiscTableScroll.
+\f0\b \
 \
 Font\
 
-\b0 When the MiscTableScroll is first-responder, the 
-\i Font Panel
-\i0  can be used to change its font.  Cells which inherit their font from the MiscTableScroll display the newly selected font.
-\b \
+\f1\b0 When the MiscTableScroll is first-responder, the 
+\f2\i Font Panel
+\f1\i0  can be used to change its font.  Cells which inherit their font from the MiscTableScroll display the newly selected font.
+\f0\b \
 \
 Users Preferences\
 
-\b0 This program demonstrates how to save and restore the user's column order and width preferences.  Additionally, all other user preferences -- 
-\i font, color,
-\i0  
-\i switch settings
-\i0 , and 
-\i window size --
-\i0  are also saved and restored.\
+\f1\b0 This program demonstrates how to save and restore the user's column order and width preferences.  Additionally, all other user preferences -- 
+\f2\i font, color,
+\f1\i0  
+\f2\i switch settings
+\f1\i0 , and 
+\f2\i window size --
+\f1\i0  are also saved and restored.\
 \
 
-\b Sorting\
+\f0\b Sorting\
 
-\b0 A switch on the browser window controls whether or not rows are automatically sorted as columns are rearranged.  This demonstrates the very powerful built-in sorting capability of MiscTableScroll.  Sorting can be fine-tuned right in the 
-\i nib
-\i0  file by adjusting the criteria on a column-by-column basis.  For instance, columns may contribute 
-\i stringValue, title, intValue, tag, 
-\i0 etc. to the row-wise comparisons.\
-\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\ql\qnatural
+\f1\b0 A switch on the browser window controls whether or not rows are automatically sorted as columns are rearranged.  This demonstrates the very powerful built-in sorting capability of MiscTableScroll.  Sorting can be fine-tuned right in the 
+\f2\i nib
+\f1\i0  file by adjusting the criteria on a column-by-column basis.  For instance, columns may contribute 
+\f2\i stringValue, title, intValue, tag, 
+\f1\i0 etc. to the row-wise comparisons.\
+\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\partightenfactor0
 \cf0 \
-\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\ql\qnatural
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\b \cf0 Image Display\
+\f0\b \cf0 Image Display\
 
-\b0 One column in the browser displays the file's icon.  This demonstrates how to use 
-\i image
-\i0  columns in addition to 
-\i text
-\i0  columns.\
+\f1\b0 One column in the browser displays the file's icon.  This demonstrates how to use 
+\f2\i image
+\f1\i0  columns in addition to 
+\f2\i text
+\f1\i0  columns.\
 \
 
-\b Image Dragging\
+\f0\b Image Dragging\
 
-\b0 MiscTableScroll allows images to be dragged directly out cells.  In this example, the file's icon can be dragged directly from the directory browser into any other application which accepts 
-\i dragged filenames
-\i0 , such as File Viewer, Mail, Edit, etc.  A button controls whether or not the scaled or full-size image is used during the dragging operation.  This illustrates how the delegate can optionally substitute an image in place of the one already contained in the cell.\
+\f1\b0 MiscTableScroll allows images to be dragged directly out cells.  In this example, the file's icon can be dragged directly from the directory browser into any other application which accepts 
+\f2\i dragged filenames
+\f1\i0 , such as File Viewer, Mail, Edit, etc.  A button controls whether or not the scaled or full-size image is used during the dragging operation.  This illustrates how the delegate can optionally substitute an image in place of the one already contained in the cell.\
 \
-\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\ql\qnatural
+\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\partightenfactor0
 
-\b \cf0 Text Editing\
-\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\ql\qnatural
+\f0\b \cf0 Text Editing\
+\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\partightenfactor0
 
-\b0 \cf0 MiscTableScroll supports 
-\i in-cell
-\i0  text editing.  This example program uses the editing feature to allow the user to rename files.  Double-clicking with the mouse on the file name in the 
-\i Name
-\i0  column initiates editing.\
+\f1\b0 \cf0 MiscTableScroll supports 
+\f2\i in-cell
+\f1\i0  text editing.  This example program uses the editing feature to allow the user to rename files.  Double-clicking with the mouse on the file name in the 
+\f2\i Name
+\f1\i0  column initiates editing.\
 \
-\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\ql\qnatural
+\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\partightenfactor0
 
-\b \cf0 Buttons\
-\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\ql\qnatural
+\f0\b \cf0 Buttons\
+\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\partightenfactor0
 
-\b0 \cf0 This example illustrates how to use 
-\i ButtonCells
-\i0  with the MiscTableScroll.  One column contains a 
-\i ButtonCell
-\i0  configured as a toggle switch.  It displays a padlock in either a locked or unlocked state and clicking on it toggles its state.  The padlock indicates whether or not the file can be renamed.  When 
-\i unlocked,
-\i0  renaming is allowed, and double-clicking on the file name in the 
-\i Name
-\i0  column initiates an edit session.  When 
-\i locked,
-\i0  renaming is not allowed.  If you do not have permission to rename a file the browser displays a 
-\i locked
-\i0  icon and disables the 
-\i ButtonCell
-\i0 .\
+\f1\b0 \cf0 This example illustrates how to use 
+\f2\i ButtonCells
+\f1\i0  with the MiscTableScroll.  One column contains a 
+\f2\i ButtonCell
+\f1\i0  configured as a toggle switch.  It displays a padlock in either a locked or unlocked state and clicking on it toggles its state.  The padlock indicates whether or not the file can be renamed.  When 
+\f2\i unlocked,
+\f1\i0  renaming is allowed, and double-clicking on the file name in the 
+\f2\i Name
+\f1\i0  column initiates an edit session.  When 
+\f2\i locked,
+\f1\i0  renaming is not allowed.  If you do not have permission to rename a file the browser displays a 
+\f2\i locked
+\f1\i0  icon and disables the 
+\f2\i ButtonCell
+\f1\i0 .\
 \
-\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\ql\qnatural
+\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\partightenfactor0
 
-\b \cf0 Exporting
-\b0 \
+\f0\b \cf0 Exporting
+\f1\b0 \
 MiscTableScroll can export its contents in dBASEIII (.dbf) format and also a number of ASCII formats via the 
-\i Export
-\i0  menu item on the 
-\i Directory
-\i0  menu.\
+\f2\i Export
+\f1\i0  menu item on the 
+\f2\i Directory
+\f1\i0  menu.\
 \
 
-\b Printing
-\b0 \
+\f0\b Printing
+\f1\b0 \
 MiscTableScroll respects the various page layout options, such as shrink-to-fit, spill, crop, centering, etc.\
-\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\ql\qnatural
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 \cf0 \
 \
-\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\ql\qnatural
+\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\partightenfactor0
 
-\b\fs28 \cf0 Conclusion\
-\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\ql\qnatural
+\f0\b\fs28 \cf0 Conclusion\
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\b0\fs12 \cf0 \
-\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\ql\qnatural
+\f1\b0\fs12 \cf0 \
+\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\partightenfactor0
 
-\fs24 \cf0 ScrollDir was written by Paul S. McCarthy and Eric Sunshine and is copyright 
-\f1 ã
-\f0 1995, 1996, 1997, 1998, 1999 by Paul S. McCarthy and Eric Sunshine.  It is included in the MiscKit by permission from the authors and is governed by the MiscKit license found in the file 
-\f2\fs20 License.rtf
-\f0\fs24  in the MiscKit distribution.\
-\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\ql\qnatural
+\fs24 \cf0 ScrollDir was written by Paul S. McCarthy and Eric Sunshine and is copyright \'a91995, 1996, 1997, 1998, 1999 by Paul S. McCarthy and Eric Sunshine.  It is included in the MiscKit by permission from the authors and is governed by the MiscKit license found in the file 
+\f3\fs20 License.rtf
+\f1\fs24  in the MiscKit distribution.\
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \fs12 \cf0 \
-\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\ql\qnatural
+\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\partightenfactor0
 
 \fs24 \cf0 Please direct comments, questions, and complaints to:\
-\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\ql\qnatural
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \fs12 \cf0 \
-\pard\tx360\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\li360\fi-160\ql\qnatural
+\pard\tx360\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\li360\fi-160\partightenfactor0
 
-\fs24 \cf0 ·	Paul S. McCarthy 
-\f2\fs20 <zarnuk@zarnuk.com>
-\f0\fs24 \
-·	Eric Sunshine 
-\f2\fs20 <sunshine@sunshineco.com>
-\f0\fs24 \
-\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\ql\qnatural
+\fs24 \cf0 \'95	Paul S. McCarthy 
+\f3\fs20 <zarnuk@zarnuk.com>
+\f1\fs24 \
+\'95	Eric Sunshine 
+\f3\fs20 <sunshine@sunshineco.com>
+\f1\fs24 \
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \fs12 \cf0 \
-\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\ql\qnatural
+\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\partightenfactor0
 
 \fs24 \cf0 MIME and ASCII mail accepted.
 \fs12 \

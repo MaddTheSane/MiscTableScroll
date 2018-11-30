@@ -1,6 +1,6 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1671
-\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 LucidaGrande;
-\f3\fswiss\fcharset0 Helvetica-Oblique;\f4\fmodern\fcharset0 Courier;}
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf100
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\fswiss\fcharset0 Helvetica-Oblique;
+\f3\fmodern\fcharset0 Courier;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
 \margl120\margr120\vieww10740\viewh7500\viewkind0
@@ -11,9 +11,7 @@
 \f1\b0\fs12 \
 
 \fs24 By Paul S. McCarthy and Eric Sunshine\
-Copyright 
-\f2 \'a9
-\f1 1995, 1996, 1997, 1998, 1999 by Paul S. McCarthy and Eric Sunshine\
+Copyright \'a91995, 1996, 1997, 1998, 1999 by Paul S. McCarthy and Eric Sunshine\
 August 20, 1999\
 
 \fs12 \
@@ -29,9 +27,9 @@ August 20, 1999\
 \fs12 \
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f3\i\fs24 \cf0 WARNING
+\f2\i\fs24 \cf0 WARNING
 \f1\i0 : Users of previous releases of MiscTableScroll should read the 
-\f3\i Release Notes
+\f2\i Release Notes
 \f1\i0  section in this document.  It details changes in this version which are incompatible with previous releases.\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
@@ -72,7 +70,7 @@ August 20, 1999\
 \'95	Smart memory management \'96 you don't pay for features you don't use.\
 \'95	Simple indexed access to rows and columns regardless of visual order.\
 \'95	Uniform treatment of rows and columns \'96 referred to generically as 
-\f3\i slots
+\f2\i slots
 \f1\i0 .\
 \'95	Support for dragging images directly out of cells.\
 \'95	Extensive delegate hooks and notifications.\
@@ -91,13 +89,13 @@ August 20, 1999\
 \fs12 \
 
 \fs24 Directory organization differs between MacOS/X Server and OPENSTEP, as well as between Mach and Windows installations.  At installation time, environment variables can be used as an abstraction to overcome these differences.  The process of defining environment variables differs from shell to shell.  If you are using the C-shell then you can define an environment variable, for instance 
-\f4\fs20 MISC_DEV
+\f3\fs20 MISC_DEV
 \f1\fs24 , by typing:\
 
 \fs12 \
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\li600\fi-240\partightenfactor0
 
-\f4\fs20 \cf0 % setenv MISC_DEV "example"\
+\f3\fs20 \cf0 % setenv MISC_DEV "example"\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \f1\fs12 \cf0 \
@@ -107,22 +105,22 @@ August 20, 1999\
 \fs12 \
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\li600\fi-240\partightenfactor0
 
-\f4\fs20 \cf0 $ MISC_DEV="example"\
+\f3\fs20 \cf0 $ MISC_DEV="example"\
 $ export MISC_DEV\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \f1\fs12 \cf0 \
 
 \fs24 All of the instructions below assume that the environment variables 
-\f4\fs20 MISC_LIB
+\f3\fs20 MISC_LIB
 \f1\fs24  and 
-\f4\fs20 MISC_DEV
+\f3\fs20 MISC_DEV
 \f1\fs24  have been defined.  
-\f4\fs20 MISC_LIB
+\f3\fs20 MISC_LIB
 \f1\fs24  is the directory which contains the standard 
-\f3\i library
+\f2\i library
 \f1\i0  resources such as frameworks and documentation.  
-\f4\fs20 MISC_DEV
+\f3\fs20 MISC_DEV
 \f1\fs24  is the standard development directory which contains source code, Interface Builder palettes, and example programs.\
 
 \fs12 \
@@ -134,7 +132,7 @@ $ export MISC_DEV\
 
 \fs24 \cf0 \ul \ulc0 Variable\ulnone 	\ul Mach\ulnone 	\ul Windows\
 
-\f4\fs20 \ulnone MISC_LIB	/Local/Library	$\{NEXT_ROOT\}/Local/Library\
+\f3\fs20 \ulnone MISC_LIB	/Local/Library	$\{NEXT_ROOT\}/Local/Library\
 MISC_DEV	/Local/Developer	$\{NEXT_ROOT\}/Local/Developer\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
@@ -145,9 +143,9 @@ MISC_DEV	/Local/Developer	$\{NEXT_ROOT\}/Local/Developer\
 \fs12 \
 \pard\tx1980\tx4320\li360\partightenfactor0
 
-\fs24 \cf0 \ul \ulc0 Variable\ulnone 	\ul Mach\ulnone 	\ul Windows\
+\fs24 \cf0 \ul Variable\ulnone 	\ul Mach\ulnone 	\ul Windows\
 
-\f4\fs20 \ulnone MISC_LIB	/LocalLibrary	$\{NEXT_ROOT\}/Local/Library\
+\f3\fs20 \ulnone MISC_LIB	/LocalLibrary	$\{NEXT_ROOT\}/Local/Library\
 MISC_DEV	/LocalDeveloper	$\{NEXT_ROOT\}/Local/Developer\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
@@ -168,32 +166,36 @@ MISC_DEV	/LocalDeveloper	$\{NEXT_ROOT\}/Local/Developer\
 \'95	Compile and install framework and palette\
 \'95	Compile and install Java support\
 \'95	Compile the example programs 
-\f3\i (optional)
+\f2\i (optional)
 \f1\i0 \
 \'95	Clean up\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \fs12 \cf0 \
 \
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f0\b\fs24 Check Version Numbers\
+\f0\b\fs24 \cf0 Check Version Numbers\
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f1\b0\fs12 \
+\f1\b0\fs12 \cf0 \
 
 \fs24 If you have a previous version of MiscTableScroll for MacOS/X Server or OPENSTEP installed, check the version number of the package which you already have by looking in the 
-\f4\fs20 PACKAGE_NUMBER
+\f3\fs20 PACKAGE_NUMBER
 \f1\fs24  file in the source code directory or inside either the installed framework or palette.  Compare that number with the version number encoded in the name of the package file 
-\f4\fs20 MiscTableScroll.
+\f3\fs20 MiscTableScroll.
 \f0\b\fs24 ???.?
-\f4\b0\fs20 .gnutar.gz
+\f3\b0\fs20 .gnutar.gz
 \f1\fs24 .  This way you can tell which version is newer or older, and decide whether to proceed.\
 
 \fs12 \
 \
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f0\b\fs24 Remove Previous Version\
+\f0\b\fs24 \cf0 Remove Previous Version\
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f1\b0\fs12 \
+\f1\b0\fs12 \cf0 \
 
 \fs24 If you have a previous version of the MiscTableScroll that you want to replace with this package, then you need to remove the old version before unpacking the new version.\
 
@@ -204,7 +206,7 @@ MISC_DEV	/LocalDeveloper	$\{NEXT_ROOT\}/Local/Developer\
 \fs12 \
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\li600\fi-240\partightenfactor0
 
-\f4\fs20 \cf0 # Remove source\
+\f3\fs20 \cf0 # Remove source\
 % rm -rf $\{MISC_DEV\}/Source/MiscKit2/Palettes/MiscTableScroll \\\
 	$\{MISC_DEV\}/Source/MiscKit2/Examples/JavaScrollDir \\\
 	$\{MISC_DEV\}/Source/MiscKit2/Examples/LazyScrollDir \\\
@@ -214,7 +216,7 @@ MISC_DEV	/LocalDeveloper	$\{NEXT_ROOT\}/Local/Developer\
 \f1\fs12 \cf0 \
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\li600\fi-240\partightenfactor0
 
-\f4\fs20 \cf0 # Remove targets\
+\f3\fs20 \cf0 # Remove targets\
 % rm -rf $\{MISC_LIB\}/Frameworks/MiscTableScroll.framework \\\
 	$\{MISC_DEV\}/Palettes/MiscTableScroll.palette \\\
 	$\{MISC_DEV\}/Examples/MiscKit2/JavaScrollDir \\\
@@ -224,19 +226,21 @@ MISC_DEV	/LocalDeveloper	$\{NEXT_ROOT\}/Local/Developer\
 
 \f1\fs12 \cf0 \
 \
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f0\b\fs24 Unpack\
+\f0\b\fs24 \cf0 Unpack\
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f1\b0\fs12 \
+\f1\b0\fs12 \cf0 \
 
 \fs24 Unpack the MiscTableScroll package by choosing a convenient directory for the source code, such as 
-\f4\fs20 $\{MISC_DEV\}/Source
+\f3\fs20 $\{MISC_DEV\}/Source
 \f1\fs24 , and performing the following commands:\
 
 \fs12 \
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\li600\fi-240\partightenfactor0
 
-\f4\fs20 \cf0 % mkdir $\{MISC_DEV\}\
+\f3\fs20 \cf0 % mkdir $\{MISC_DEV\}\
 % mkdir $\{MISC_DEV\}/Source\
 % cd $\{MISC_DEV\}/Source\
 % gunzip MiscTableScroll*.gnutar.gz\
@@ -250,7 +254,7 @@ MISC_DEV	/LocalDeveloper	$\{NEXT_ROOT\}/Local/Developer\
 \fs12 \
 \pard\tx720\tx1080\tx1440\tx1800\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\li360\partightenfactor0
 
-\f4\fs20 \cf0 MiscKit2\
+\f3\fs20 \cf0 MiscKit2\
 	Examples\
 		JavaScrollDir\
 		LazyScrollDir\
@@ -266,19 +270,21 @@ MISC_DEV	/LocalDeveloper	$\{NEXT_ROOT\}/Local/Developer\
 
 \f1\fs12 \cf0 \
 \
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f0\b\fs24 Compile and Install Framework and Palette\
+\f0\b\fs24 \cf0 Compile and Install Framework and Palette\
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f1\b0\fs12 \
+\f1\b0\fs12 \cf0 \
 
 \fs24 By default, MiscTableScroll is configured to install its components in the following locations:\
 
 \fs12 \
 \pard\tx3600\li3600\fi-3240\partightenfactor0
 
-\fs24 \cf0 \ul \ulc0 Component\ulnone 	\ul Installation Location\ulnone \
+\fs24 \cf0 \ul Component\ulnone 	\ul Installation Location\ulnone \
 
-\f4\fs20 MiscTableScroll.framework	$\{MISC_LIB\}/Frameworks\
+\f3\fs20 MiscTableScroll.framework	$\{MISC_LIB\}/Frameworks\
 MiscTableScroll.palette	$\{MISC_DEV\}/Palettes\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
@@ -289,17 +295,17 @@ MiscTableScroll.palette	$\{MISC_DEV\}/Palettes\
 \fs12 \
 \pard\tx3600\li3600\fi-3240\partightenfactor0
 
-\f4\fs20 \cf0 MiscTableScroll.dll	$\{MISC_LIB\}/Executables
+\f3\fs20 \cf0 MiscTableScroll.dll	$\{MISC_LIB\}/Executables
 \f1\fs24 \
 
-\f4\fs20 MiscTableScrollJava.dll	$\{MISC_LIB\}/Executables
+\f3\fs20 MiscTableScrollJava.dll	$\{MISC_LIB\}/Executables
 \f1\fs24 \
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \fs12 \cf0 \
 
 \fs24 If these locations are inappropriate for your site, you can adjust them using Project Builder's 
-\f3\i Inspector
+\f2\i Inspector
 \f1\i0  panel.  The installation directory can be configured individually for both the framework and the palette.\
 
 \fs12 \
@@ -310,64 +316,66 @@ MiscTableScroll.palette	$\{MISC_DEV\}/Palettes\
 \pard\tx360\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\li360\fi-160\partightenfactor0
 
 \fs24 \cf0 \'95	Open the project file contained within the top-level MiscTableScroll source directory: 
-\f4\fs20 $\{MISC_DEV\}/Source/MiscKit2/Palettes/MiscTableScroll/PB.project
+\f3\fs20 $\{MISC_DEV\}/Source/MiscKit2/Palettes/MiscTableScroll/PB.project
 \f1\fs24 \
 \'95	Select the 
-\f4\fs20 install
+\f3\fs20 install
 \f1\fs24  target on the 
-\f3\i Build Options
+\f2\i Build Options
 \f1\i0  panel
-\f4\fs20 .
+\f3\fs20 .
 \f1\fs24 \
 \'95	If you wish to build the project for multiple architectures, such as PowerPC, Intel, Motorola, etc., choose the appropriate options on the 
-\f3\i Build Options
+\f2\i Build Options
 \f1\i0  panel.\
 \'95	Press the 
-\f3\i Build
+\f2\i Build
 \f1\i0  button.\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \fs12 \cf0 \
 
 \fs24 If you are using Windows 95 or NT then you must also add the framework's executable path to your system 
-\f4\fs20 PATH
+\f3\fs20 PATH
 \f1\fs24  variable.  For instance, with YellowBox, if 
-\f4\fs20 $\{NEXT_ROOT\}
+\f3\fs20 $\{NEXT_ROOT\}
 \f1\fs24  at your site is defined as 
-\f4\fs20 C:/Apple/
+\f3\fs20 C:/Apple/
 \f1\fs24 , then you should add 
-\f4\fs20 C:\\Apple\\Local\\Library\\Executables
+\f3\fs20 C:\\Apple\\Local\\Library\\Executables
 \f1\fs24  to the 
-\f4\fs20 PATH
+\f3\fs20 PATH
 \f1\fs24 .  For OPENSTEP, with 
-\f4\fs20 $\{NEXT_ROOT\}
+\f3\fs20 $\{NEXT_ROOT\}
 \f1\fs24  defined as 
-\f4\fs20 C:/NeXT/
+\f3\fs20 C:/NeXT/
 \f1\fs24 , you should add 
-\f4\fs20 C:\\NeXT\\LocalLibrary\\Executables
+\f3\fs20 C:\\NeXT\\LocalLibrary\\Executables
 \f1\fs24  to your 
-\f4\fs20 PATH
+\f3\fs20 PATH
 \f1\fs24 .  Consult the Windows documentation if you need help setting the PATH environment variable.\
 
 \fs12 \
 \
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f0\b\fs24 Compile and Install Java Support\
+\f0\b\fs24 \cf0 Compile and Install Java Support\
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f1\b0\fs12 \
+\f1\b0\fs12 \cf0 \
 
 \fs24 As of MacOS/X Server (DR2), MiscTableScroll and its supporting classes are accessible from Java.  OPENSTEP does not provide Java support, so OPENSTEP users may proceed to the next section.  Java support for MiscTableScroll is discussed in the document 
-\f4\fs20 MiscTableScroll.rtf
+\f3\fs20 MiscTableScroll.rtf
 \f1\fs24 .\
 
 \fs12 \
 
 \fs24 The MiscTableScroll Java-related resources are installed within the MiscTableScroll framework.  On Windows, an additional file, 
-\f4\fs20 MiscTableScrollJava.dll
+\f3\fs20 MiscTableScrollJava.dll
 \f1\fs24  is also installed in 
-\f4\fs20 $\{MISC_LIB\}/Executables
+\f3\fs20 $\{MISC_LIB\}/Executables
 \f1\fs24  alongside 
-\f4\fs20 MiscTableScroll.dll
+\f3\fs20 MiscTableScroll.dll
 \f1\fs24 .\
 
 \fs12 \
@@ -378,41 +386,43 @@ MiscTableScroll.palette	$\{MISC_DEV\}/Palettes\
 \pard\tx360\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\li360\fi-160\partightenfactor0
 
 \fs24 \cf0 \'95	Open the project file contained within MiscTableScroll's Java subdirectory: 
-\f4\fs20 $\{MISC_DEV\}/Source/MiscKit2/Palettes/MiscTableScroll/Java/PB.project
+\f3\fs20 $\{MISC_DEV\}/Source/MiscKit2/Palettes/MiscTableScroll/Java/PB.project
 \f1\fs24 \
 \'95	Select the 
-\f4\fs20 install
+\f3\fs20 install
 \f1\fs24  target on the 
-\f3\i Build Options
+\f2\i Build Options
 \f1\i0  panel
-\f4\fs20 .
+\f3\fs20 .
 \f1\fs24 \
 \'95	If you wish to build the Java support library for multiple architectures, such as PowerPC or Intel, choose the appropriate options on the 
-\f3\i Build Options
+\f2\i Build Options
 \f1\i0  panel.\
 \'95	Press the 
-\f3\i Build
+\f2\i Build
 \f1\i0  button.\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \fs12 \cf0 \
 \
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f0\b\fs24 Compile Example Programs 
-\f3\i\b0 (optional)
+\f0\b\fs24 \cf0 Compile Example Programs 
+\f2\i\b0 (optional)
 \f0\i0\b \
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f1\b0\fs12 \
+\f1\b0\fs12 \cf0 \
 \pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\partightenfactor0
 
 \fs24 \cf0 You can build the example programs 
-\f4\fs20 JavaScrollDir
+\f3\fs20 JavaScrollDir
 \f1\fs24 , 
-\f4\fs20 LazyScrollDir,
+\f3\fs20 LazyScrollDir,
 \f1\fs24  and 
-\f4\fs20 ScrollDir
+\f3\fs20 ScrollDir
 \f1\fs24  using Project Builder.  
-\f4\fs20 JavaScrollDir
+\f3\fs20 JavaScrollDir
 \f1\fs24  can be built for MacOS/X Server and YellowBox, but not for OPENSTEP which lacks Java support.  To build the example programs with Project Builder:\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
@@ -420,13 +430,13 @@ MiscTableScroll.palette	$\{MISC_DEV\}/Palettes\
 \pard\tx360\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\li360\fi-160\partightenfactor0
 
 \fs24 \cf0 \'95	Open the 
-\f4\fs20 PB.project
+\f3\fs20 PB.project
 \f1\fs24  file contained within the each source directory.\
 \'95	Choose the appropriate architectures from the 
-\f3\i Build Options
+\f2\i Build Options
 \f1\i0  panel.\
 \'95	Press the 
-\f3\i Build
+\f2\i Build
 \f1\i0  button.\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
@@ -439,13 +449,13 @@ MiscTableScroll.palette	$\{MISC_DEV\}/Palettes\
 \fs12 \cf0 \
 \pard\tx5040\li5040\fi-4680\partightenfactor0
 
-\f4\fs20 \cf0 $\{MISC_DEV\}/Source/MiscKit2/Examples/JavaScrollDir/PB.project
+\f3\fs20 \cf0 $\{MISC_DEV\}/Source/MiscKit2/Examples/JavaScrollDir/PB.project
 \f1\fs24 \
 
-\f4\fs20 $\{MISC_DEV\}/Source/MiscKit2/Examples/LazyScrollDir/PB.project
+\f3\fs20 $\{MISC_DEV\}/Source/MiscKit2/Examples/LazyScrollDir/PB.project
 \f1\fs24 \
 
-\f4\fs20 $\{MISC_DEV\}/Source/MiscKit2/Examples/ScrollDir/PB.project
+\f3\fs20 $\{MISC_DEV\}/Source/MiscKit2/Examples/ScrollDir/PB.project
 \f1\fs24 \
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
@@ -453,14 +463,14 @@ MiscTableScroll.palette	$\{MISC_DEV\}/Palettes\
 \pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\partightenfactor0
 
 \fs24 \cf0 Finally, if you would like to have the source code for the example programs available for perusal, you can install them in 
-\f4\fs20 $\{MISC_DEV\}/Examples/MiscKit2
+\f3\fs20 $\{MISC_DEV\}/Examples/MiscKit2
 \f1\fs24 , either by copying the directories using the File Viewer or by typing the following commands:\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \fs12 \cf0 \
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\li600\fi-240\partightenfactor0
 
-\f4\fs20 \cf0 % cd $\{MISC_DEV\}\
+\f3\fs20 \cf0 % cd $\{MISC_DEV\}\
 % rm -rf Examples/MiscKit2/JavaScrollDir Examples/MiscKit2/LazyScrollDir Examples/MiscKit2/ScrollDir\
 % mkdir Examples\
 % mkdir Examples/MiscKit2\
@@ -469,53 +479,59 @@ MiscTableScroll.palette	$\{MISC_DEV\}/Palettes\
 
 \f1\fs12 \cf0 \
 \
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f0\b\fs24 Clean Up\
+\f0\b\fs24 \cf0 Clean Up\
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f1\b0\fs12 \
+\f1\b0\fs12 \cf0 \
 
 \fs24 At this point the installation is complete.  To reclaim disk space, remove the temporary files which were created during the build process by pressing the 
-\f3\i Clean
+\f2\i Clean
 \f1\i0  button on Project Builder's 
-\f3\i Build
+\f2\i Build
 \f1\i0  panel.  Or, if you do not plan to refer back to the source code at all, then you can delete the project directory entirely:
 \fs12 \
 \
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\li600\fi-240\partightenfactor0
 
-\f4\fs20 \cf0 % rm -rf $\{MISC_DEV\}/Source/MiscKit2\
+\f3\fs20 \cf0 % rm -rf $\{MISC_DEV\}/Source/MiscKit2\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \f1\fs12 \cf0 \
 \
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f0\b\fs28 Conversion
+\f0\b\fs28 \cf0 Conversion
 \fs24 \
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f1\b0\fs12 \
+\f1\b0\fs12 \cf0 \
 
 \fs24 This package comes with a 
-\f3\i tops
+\f2\i tops
 \f1\i0  script to assist in the process of porting NEXTSTEP programs which use MiscTableScroll to MacOS/X Server and OPENSTEP.  The script should be used after running the standard 
-\f3\i NextStep to OpenStep
+\f2\i NextStep to OpenStep
 \f1\i0  conversion scripts which are supplied with OPENSTEP.  The MiscTableScroll conversion script is located within the framework at:\
 
 \fs12 \
 \pard\tx5040\li5040\fi-4680\partightenfactor0
 
-\f4\fs20 \cf0 MiscTableScroll.framework/Resources/MiscTableScroll-3.3-4.x.tops\
+\f3\fs20 \cf0 MiscTableScroll.framework/Resources/MiscTableScroll-3.3-4.x.tops\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \f1\fs12 \cf0 \
 \
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f0\b\fs28 Documentation
+\f0\b\fs28 \cf0 Documentation
 \fs24 \
+\pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f1\b0\fs12 \
+\f1\b0\fs12 \cf0 \
 
 \fs24 Documentation for the public classes is located within the framework's 
-\f4\fs20 Documentation
+\f3\fs20 Documentation
 \f1\fs24  directory in these files:\
 
 \fs12 \
@@ -529,9 +545,9 @@ MiscTableScroll.palette	$\{MISC_DEV\}/Palettes\
 \fs12 \cf0 \
 
 \fs24 A full discussion of the use of MiscTableScroll from Java is included in the document 
-\f4\fs20 MiscTableScroll.rtf
+\f3\fs20 MiscTableScroll.rtf
 \f1\fs24  in the section titled 
-\f3\i Java
+\f2\i Java
 \f1\i0 .\
 
 \fs12 \
@@ -542,57 +558,57 @@ MiscTableScroll.palette	$\{MISC_DEV\}/Palettes\
 \pard\tx360\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\li360\fi-160\partightenfactor0
 
 \fs24 \cf0 \'95	
-\f4\fs20 JavaScrollDir
+\f3\fs20 JavaScrollDir
 \f1\fs24 \
 \'95	
-\f4\fs20 LazyScrollDir
+\f3\fs20 LazyScrollDir
 \f1\fs24 \
 \'95	
-\f4\fs20 ScrollDir
+\f3\fs20 ScrollDir
 \f1\fs24 \
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \fs12 \cf0 \
 
 \fs24 The following files also provide valuable information.  Except for 
-\f4\fs20 PACKAGE_NUMBER
+\f3\fs20 PACKAGE_NUMBER
 \f1\fs24  which is located in the top-level source directory, all of the remaining files reside in the 
-\f4\fs20 Notes
+\f3\fs20 Notes
 \f1\fs24  subdirectory.\
 
 \fs12 \
 \pard\tx2880\li2880\fi-2520\partightenfactor0
 
-\f4\fs20 \cf0 PACKAGE_NUMBER
+\f3\fs20 \cf0 PACKAGE_NUMBER
 \f1\fs24 	MiscTableScroll version
-\f4\fs20 .
+\f3\fs20 .
 \f1\fs24 \
 
-\f4\fs20 HISTORY.txt
+\f3\fs20 HISTORY.txt
 \f1\fs24 	Description of changes between versions.\
 
-\f4\fs20 OPENSTEP-HISTORY.txt
+\f3\fs20 OPENSTEP-HISTORY.txt
 \f1\fs24 	Description of MacOS/X & OPENSTEP changes between versions.\
 
-\f4\fs20 TODO.txt
+\f3\fs20 TODO.txt
 \f1\fs24 	A list of future enhancements.\
 
-\f4\fs20 OPENSTEP-TODO.txt
+\f3\fs20 OPENSTEP-TODO.txt
 \f1\fs24 	A list of MacOS/X Server & OPENSTEP related future enhancements.\
 
-\f4\fs20 BUGS.txt
+\f3\fs20 BUGS.txt
 \f1\fs24 	A list of known bugs.\
 
-\f4\fs20 OPENSTEP-BUGS.txt
+\f3\fs20 OPENSTEP-BUGS.txt
 \f1\fs24 	A list of MacOS/X Server & OPENSTEP related bugs.\
 
-\f4\fs20 JAVA-TODO.txt
+\f3\fs20 JAVA-TODO.txt
 \f1\fs24 	A list of Java specific future enhancements.\
 
-\f4\fs20 JAVA-BUGS.txt
+\f3\fs20 JAVA-BUGS.txt
 \f1\fs24 	A list of Java specific bugs.\
 
-\f4\fs20 MACH-NT-4.2.txt
+\f3\fs20 MACH-NT-4.2.txt
 \f1\fs24 	Description of issues which arose when porting MiscTableScroll from OPENSTEP 4.1 for Mach to OPENSTEP 4.2 for both Mach and Microsoft Windows.\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
@@ -610,36 +626,36 @@ MiscTableScroll.palette	$\{MISC_DEV\}/Palettes\
 \f1\b0\fs12 \cf0 \
 
 \fs24 The most significant item of note in this release of MiscTableScroll is that it is now accessible from Java.  Extensive documentation detailing use of MiscTableScroll from Java is included in 
-\f4\fs20 MiscTableScroll.rtf
+\f3\fs20 MiscTableScroll.rtf
 \f1\fs24 , and is demonstrated concretely by the new example program, JavaScrollDir.\
 
 \fs12 \
 
 \fs24 To be consistent with other MacOS/X Server and OpenStep classes, MiscTableScroll now sends notifications in places where it used to solely dispatch certain delegate messages.  As with other OpenStep classes which have delegates, MiscTableScroll automatically registers its own delegates to receive these notifications if the delegates implement the appropriate messages.  Each notification-style delegate message now receives an 
-\f4\fs20 NSNotification
+\f3\fs20 NSNotification
 \f1\fs24  object as its sole argument.  The documentation in 
-\f4\fs20 MiscTableScroll.rtf
+\f3\fs20 MiscTableScroll.rtf
 \f1\fs24  lists the contents of the 
-\f4\fs20 userInfo
+\f3\fs20 userInfo
 \f1\fs24  dictionary for each notification.\
 
 \fs12 \
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
-\f3\i\fs24 \cf0 WARNING
+\f2\i\fs24 \cf0 WARNING
 \f1\i0 : A number of MiscTableScroll methods have been renamed.  Most notably, as a result of the move to notifications, the names of several delegate messages changed.  This is significant because your application may cease to work correctly, even though it compiles cleanly, since the old delegate methods are no longer called.  The delegate methods which were renamed are listed in 
-\f4\fs20 OPENSTEP-HISTORY.txt
+\f3\fs20 OPENSTEP-HISTORY.txt
 \f1\fs24 .  As a consequence of this incompatible change, the framework's version identification has been advanced from 
-\f3\i A
+\f2\i A
 \f1\i0  to 
-\f3\i B
+\f2\i B
 \f1\i0 .\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
 \fs12 \cf0 \
 
 \fs24 The final significant change is the addition of support for 
-\f3\i represented objects
+\f2\i represented objects
 \f1\i0 , which complements represented object support in NSCell.  A represented object may be associated with the entire table as well as each row and column.\
 
 \fs12 \
@@ -652,10 +668,8 @@ MiscTableScroll.palette	$\{MISC_DEV\}/Palettes\
 \f1\b0\fs12 \cf0 \
 \pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\partightenfactor0
 
-\fs24 \cf0 MiscTableScroll was written by Paul S. McCarthy and Eric Sunshine and is copyright 
-\f2 \'aa
-\f1 1995, 1996, 1997, 1998, 1999 by Paul S. McCarthy and Eric Sunshine.  It is included in the MiscKit by permission from the authors and is governed by the MiscKit license found in the file 
-\f4\fs20 License.rtf
+\fs24 \cf0 MiscTableScroll was written by Paul S. McCarthy and Eric Sunshine and is copyright \'a91995, 1996, 1997, 1998, 1999 by Paul S. McCarthy and Eric Sunshine.  It is included in the MiscKit by permission from the authors and is governed by the MiscKit license found in the file 
+\f3\fs20 License.rtf
 \f1\fs24  in the MiscKit distribution.\
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
@@ -669,10 +683,10 @@ MiscTableScroll.palette	$\{MISC_DEV\}/Palettes\
 \pard\tx360\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\li360\fi-160\partightenfactor0
 
 \fs24 \cf0 \'95	Paul S. McCarthy 
-\f4\fs20 <zarnuk@zarnuk.com>
+\f3\fs20 <zarnuk@zarnuk.com>
 \f1\fs24 \
 \'95	Eric Sunshine 
-\f4\fs20 <sunshine@sunshineco.com>
+\f3\fs20 <sunshine@sunshineco.com>
 \f1\fs24 \
 \pard\tx800\tx1600\tx2400\tx3200\tx4000\tx4800\tx5600\tx6400\tx7200\tx8000\partightenfactor0
 
