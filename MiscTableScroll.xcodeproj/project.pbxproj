@@ -72,7 +72,7 @@
 		55B437DC2179B2AF005ABAA2 /* MiscTableViewDrag.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B437872179B2AD005ABAA2 /* MiscTableViewDrag.mm */; };
 		55B437DD2179B2AF005ABAA2 /* MiscExporterDBF.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B437882179B2AD005ABAA2 /* MiscExporterDBF.mm */; };
 		55B437DE2179B2AF005ABAA2 /* MiscTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B437892179B2AD005ABAA2 /* MiscTableView.h */; };
-		55B437DF2179B2AF005ABAA2 /* NSxibConnector.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B4378A2179B2AD005ABAA2 /* NSxibConnector.h */; };
+		55B437DF2179B2AF005ABAA2 /* NSNibConnector.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B4378A2179B2AD005ABAA2 /* NSNibConnector.h */; };
 		55B437E02179B2AF005ABAA2 /* MiscRadioTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B4378B2179B2AD005ABAA2 /* MiscRadioTracker.h */; };
 		55B437E12179B2AF005ABAA2 /* MiscColorList.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B4378C2179B2AD005ABAA2 /* MiscColorList.h */; };
 		55B437E22179B2AF005ABAA2 /* MiscExporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55B4378D2179B2AD005ABAA2 /* MiscExporter.mm */; };
@@ -169,7 +169,7 @@
 		55B437872179B2AD005ABAA2 /* MiscTableViewDrag.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscTableViewDrag.mm; sourceTree = "<group>"; };
 		55B437882179B2AD005ABAA2 /* MiscExporterDBF.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscExporterDBF.mm; sourceTree = "<group>"; };
 		55B437892179B2AD005ABAA2 /* MiscTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscTableView.h; sourceTree = "<group>"; };
-		55B4378A2179B2AD005ABAA2 /* NSxibConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSxibConnector.h; sourceTree = "<group>"; };
+		55B4378A2179B2AD005ABAA2 /* NSNibConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNibConnector.h; sourceTree = "<group>"; };
 		55B4378B2179B2AD005ABAA2 /* MiscRadioTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscRadioTracker.h; sourceTree = "<group>"; };
 		55B4378C2179B2AD005ABAA2 /* MiscColorList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscColorList.h; sourceTree = "<group>"; };
 		55B4378D2179B2AD005ABAA2 /* MiscExporter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscExporter.mm; sourceTree = "<group>"; };
@@ -319,7 +319,7 @@
 				55B437652179B2A9005ABAA2 /* MiscTracer.h */,
 				55B437512179B2A8005ABAA2 /* MiscTracer.mm */,
 				55B4379C2179B2AF005ABAA2 /* MiscVertResizeCursor.tiff */,
-				55B4378A2179B2AD005ABAA2 /* NSxibConnector.h */,
+				55B4378A2179B2AD005ABAA2 /* NSNibConnector.h */,
 				55B4373C2179B0E4005ABAA2 /* Info.plist */,
 				55B99598219231DA00342A80 /* MiscTableViewPS.h */,
 				55B99599219231DA00342A80 /* MiscTableViewPS.c */,
@@ -350,7 +350,7 @@
 				55B437DE2179B2AF005ABAA2 /* MiscTableView.h in Headers */,
 				55B437D52179B2AF005ABAA2 /* MiscLineWrapper.h in Headers */,
 				55B437C12179B2AF005ABAA2 /* MiscCornerView.h in Headers */,
-				55B437DF2179B2AF005ABAA2 /* NSxibConnector.h in Headers */,
+				55B437DF2179B2AF005ABAA2 /* NSNibConnector.h in Headers */,
 				55B437F02179B2AF005ABAA2 /* MiscBorderView.h in Headers */,
 				55B437AB2179B2AF005ABAA2 /* MiscExporterPrivate.h in Headers */,
 				55B437C62179B2AF005ABAA2 /* MiscMouseTracker.h in Headers */,
